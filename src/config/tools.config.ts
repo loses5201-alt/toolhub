@@ -126,6 +126,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/bmi/Index.vue'),
   },
   {
+    id: 'tdee',
+    name: '每日熱量需求(TDEE)',
+    category: 'life',
+    description: '依身高體重年齡活動量,用 Mifflin-St Jeor 公式算出基礎代謝與每日該吃多少熱量。',
+    keywords: ['熱量', 'tdee', 'bmr', '基礎代謝', '減重', '減肥', '卡路里', '大卡', '增肌', '飲食', '代謝率'],
+    icon: '🔥',
+    loader: () => import('@/tools/tdee/Index.vue'),
+  },
+  {
     id: 'unit-convert',
     name: '單位換算',
     category: 'life',
