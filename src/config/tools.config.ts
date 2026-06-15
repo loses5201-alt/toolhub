@@ -108,6 +108,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/labor-pension-self/Index.vue'),
   },
   {
+    id: 'labor-pension-annuity',
+    name: '勞保老年年金試算',
+    category: 'finance',
+    description: '退休後勞保每月能領多少?輸入平均投保薪資與年資,兩式擇優算出月領金額,含提前/延後請領調整。',
+    keywords: ['勞保', '老年年金', '退休金', '退休', '月退', '勞保年金', '請領', '投保薪資', '年資', '老年給付', '勞保老年'],
+    icon: '👵',
+    loader: () => import('@/tools/labor-pension-annuity/Index.vue'),
+  },
+  {
     id: 'installment-apr',
     name: '分期實際利率(APR)',
     category: 'finance',
