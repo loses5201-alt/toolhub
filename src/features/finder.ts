@@ -30,12 +30,30 @@ const downloadCenter: ToolDef = {
   loader: () => Promise.reject(new Error('download-center 是頁面,不應被載入為元件')),
 }
 
+/*
+  推薦好站同樣是「頁面」而非工具元件。使用者打「推薦網站」「免費 AI」「查證謠言」
+  等可導向 /picks。Home.vue 特別處理 id === 'picks-center' 的路由。
+*/
+const picksCenter: ToolDef = {
+  id: 'picks-center',
+  name: '推薦好站',
+  category: 'picks',
+  description: '人工挑選、好用又免費的網站:AI 助手、翻譯學習、修圖設計、防詐查證,連結皆指向官方。',
+  keywords: [
+    '推薦', '好站', '網站', '免費', '好用', 'ai', '人工智慧', '聊天機器人', 'chatgpt',
+    'claude', 'gemini', '翻譯', 'deepl', '修圖', '設計', 'canva', '圖庫', '查證', '闢謠',
+    '事實查核', '謠言', '假消息', '辭典', '學習', '可汗', '維基百科', '氣象', '地圖',
+  ],
+  icon: '⭐',
+  loader: () => Promise.reject(new Error('picks-center 是頁面,不應被載入為元件')),
+}
+
 export function findTools(query: string): Match[] {
   const q = query.trim().toLowerCase()
   if (!q) return []
   const terms = q.split(/\s+/).filter(Boolean)
 
-  return [...tools, downloadCenter]
+  return [...tools, downloadCenter, picksCenter]
     .map((tool) => {
       let score = 0
       const name = tool.name.toLowerCase()

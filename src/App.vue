@@ -51,6 +51,13 @@ import { stepFont, canDecrease, canIncrease } from '@/features/fontScale'
             >
               下載
             </RouterLink>
+            <RouterLink
+              to="/picks"
+              class="rounded-lg px-2.5 sm:px-3 py-2 text-ink-700 transition hover:bg-brand-50 hover:text-brand-700"
+              active-class="!bg-brand-100 !text-brand-800"
+            >
+              推薦
+            </RouterLink>
           </nav>
         </div>
       </div>

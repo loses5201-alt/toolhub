@@ -17,6 +17,7 @@ const routes: RouteRecordRaw[] = [
   { path: '/', name: 'home', component: () => import('@/views/Home.vue') },
   { path: '/assist', name: 'assist', component: () => import('@/views/Assist.vue') },
   { path: '/downloads', name: 'downloads', component: () => import('@/views/Downloads.vue') },
+  { path: '/picks', name: 'picks', component: () => import('@/views/Picks.vue') },
   ...toolRoutes,
   { path: '/:pathMatch(.*)*', redirect: '/' },
 ]
@@ -36,6 +37,8 @@ router.afterEach((to) => {
     setMeta(tool.name, tool.description)
   } else if (to.name === 'downloads') {
     setMeta('防詐騙下載中心', '常用軟體的官方下載連結,保證官方來源、無廣告、附校驗碼,長輩也安心。')
+  } else if (to.name === 'picks') {
+    setMeta('推薦好站', '人工挑選、真的好用又免費的網站與服務,連結皆指向官方網址,含防詐查證好站。')
   } else if (to.name === 'home') {
     setMeta('所有工具', '台灣在地實用工具與防詐騙工具一覽。')
   } else {

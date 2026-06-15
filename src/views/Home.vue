@@ -61,7 +61,7 @@ const recentTools = computed(() =>
               <RouterLink
                 v-for="m in matches.slice(0, 4)"
                 :key="m.tool.id"
-                :to="m.tool.id === 'download-center' ? '/downloads' : `/tools/${m.tool.id}`"
+                :to="m.tool.id === 'download-center' ? '/downloads' : m.tool.id === 'picks-center' ? '/picks' : `/tools/${m.tool.id}`"
                 class="card flex items-center gap-4 p-4 transition hover:border-brand-300 hover:shadow-md"
               >
                 <span class="text-2xl">{{ m.tool.icon }}</span>
@@ -128,11 +128,11 @@ const recentTools = computed(() =>
       </div>
     </section>
 
-    <!-- 下載中心入口 -->
-    <section class="mt-12">
+    <!-- 下載中心 + 推薦好站入口 -->
+    <section class="mt-12 grid gap-4 lg:grid-cols-2">
       <RouterLink
         to="/downloads"
-        class="card flex flex-col sm:flex-row items-start sm:items-center gap-4 p-6 transition hover:border-brand-300 hover:shadow-md"
+        class="card flex flex-col items-start gap-3 p-6 transition hover:border-brand-300 hover:shadow-md"
       >
         <div class="text-4xl">🛡️</div>
         <div class="flex-1">
@@ -140,6 +140,21 @@ const recentTools = computed(() =>
           <div class="mt-1 text-sm text-ink-500">
             常用軟體的官方下載連結,無廣告、保證來源、附版本資訊。
             給家裡長輩裝軟體時,從這裡點最安心,不怕點到假網站。
+          </div>
+        </div>
+        <span class="btn-primary">前往看看</span>
+      </RouterLink>
+
+      <RouterLink
+        to="/picks"
+        class="card flex flex-col items-start gap-3 p-6 transition hover:border-brand-300 hover:shadow-md"
+      >
+        <div class="text-4xl">⭐</div>
+        <div class="flex-1">
+          <div class="text-lg font-bold text-ink-900">推薦好站</div>
+          <div class="mt-1 text-sm text-ink-500">
+            人工挑選、真的好用又免費的網站:AI 助手、翻譯學習、修圖設計,
+            還有最難找乾淨來源的防詐查證好站。連結皆指向官方網址。
           </div>
         </div>
         <span class="btn-primary">前往看看</span>

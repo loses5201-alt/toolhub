@@ -1,0 +1,203 @@
+{
+  "updated": "2026-06-15",
+  "picks": [
+    {
+      "id": "npa-165",
+      "name": "165 全民防騙網",
+      "category": "防詐 ‧ 查證",
+      "icon": "🚨",
+      "url": "https://165.npa.gov.tw/",
+      "tag": "政府官方",
+      "note": "內政部警政署官方反詐騙網站,可查最新詐騙手法、假投資網站黑名單、line ID 通報。接到可疑電話或訊息先來這查。"
+    },
+    {
+      "id": "tfc-taiwan",
+      "name": "台灣事實查核中心",
+      "category": "防詐 ‧ 查證",
+      "icon": "✅",
+      "url": "https://tfc-taiwan.org.tw/",
+      "tag": "非營利",
+      "note": "獨立的查核機構,專門查證瘋傳的假消息、假新聞、健康謠言。長輩群組看到「轉傳」先來搜一下標題。"
+    },
+    {
+      "id": "mygopen",
+      "name": "MyGoPen 麥擱騙",
+      "category": "防詐 ‧ 查證",
+      "icon": "🔎",
+      "url": "https://www.mygopen.com/",
+      "tag": "完全免費",
+      "note": "用台語「麥擱騙(別再騙)」命名的闢謠網站,白話拆解 LINE 常見的養生謠言、假優惠、假冒名人訊息。"
+    },
+    {
+      "id": "cofacts",
+      "name": "Cofacts 真的假的",
+      "category": "防詐 ‧ 查證",
+      "icon": "🤖",
+      "url": "https://cofacts.tw/",
+      "tag": "完全免費",
+      "note": "把可疑訊息貼給它的 LINE 機器人,馬上比對社群查核資料庫回覆真假。教長輩加好友,收到怪訊息自己就能查。"
+    },
+    {
+      "id": "claude-ai",
+      "name": "Claude",
+      "category": "AI 助手",
+      "icon": "🟣",
+      "url": "https://claude.ai/",
+      "tag": "有免費版",
+      "note": "Anthropic 的 AI 助手,中文理解與長文寫作很強。可免費註冊使用,適合問問題、整理資料、潤稿。"
+    },
+    {
+      "id": "chatgpt",
+      "name": "ChatGPT",
+      "category": "AI 助手",
+      "icon": "💬",
+      "url": "https://chatgpt.com/",
+      "tag": "有免費版",
+      "note": "OpenAI 的對話式 AI,最多人用。免費就能問問題、寫信、翻譯、查資料。認明官方網址,別點到山寨 app。"
+    },
+    {
+      "id": "gemini",
+      "name": "Gemini",
+      "category": "AI 助手",
+      "icon": "✨",
+      "url": "https://gemini.google.com/",
+      "tag": "有免費版",
+      "note": "Google 的 AI 助手,可直接整合 Gmail、文件、搜尋,用 Google 帳號即可免費使用。"
+    },
+    {
+      "id": "perplexity",
+      "name": "Perplexity",
+      "category": "AI 助手",
+      "icon": "🔵",
+      "url": "https://www.perplexity.ai/",
+      "tag": "有免費版",
+      "note": "邊查網路邊回答、附上來源連結的 AI 搜尋,想確認 AI 講的有沒有根據時特別好用。"
+    },
+    {
+      "id": "khan-academy",
+      "name": "可汗學院 Khan Academy",
+      "category": "學習 ‧ 翻譯",
+      "icon": "🎓",
+      "url": "https://zh.khanacademy.org/",
+      "tag": "完全免費",
+      "note": "非營利的免費教學平台,數學、自然、程式從頭教到大學,有中文版。學生自學或大人想補課都適合。"
+    },
+    {
+      "id": "deepl",
+      "name": "DeepL 翻譯",
+      "category": "學習 ‧ 翻譯",
+      "icon": "🌐",
+      "url": "https://www.deepl.com/translator",
+      "tag": "有免費版",
+      "note": "翻譯品質公認自然流暢,長段文章或正式信件翻起來比一般翻譯通順。免費版就很夠用。"
+    },
+    {
+      "id": "google-translate",
+      "name": "Google 翻譯",
+      "category": "學習 ‧ 翻譯",
+      "icon": "🔤",
+      "url": "https://translate.google.com/",
+      "tag": "完全免費",
+      "note": "支援語言最多,還能用相機即時翻譯路標、菜單,出國旅遊很方便。"
+    },
+    {
+      "id": "moedict",
+      "name": "教育部重編國語辭典",
+      "category": "學習 ‧ 翻譯",
+      "icon": "📖",
+      "url": "https://dict.revised.moe.edu.tw/",
+      "tag": "政府官方",
+      "note": "教育部官方線上辭典,查國字、成語、注音、釋義最正確的來源,免費無廣告。"
+    },
+    {
+      "id": "wikipedia",
+      "name": "維基百科",
+      "category": "學習 ‧ 翻譯",
+      "icon": "📚",
+      "url": "https://zh.wikipedia.org/",
+      "tag": "完全免費",
+      "note": "免費的線上百科,查人物、地名、事件的背景很快。重要資訊建議再對照條目下方的參考來源。"
+    },
+    {
+      "id": "canva",
+      "name": "Canva",
+      "category": "影像 ‧ 設計",
+      "icon": "🎨",
+      "url": "https://www.canva.com/zh_tw/",
+      "tag": "有免費版",
+      "note": "免設計底子也能做海報、簡報、社群圖、邀請卡,大量免費範本。免費版就很夠家用。"
+    },
+    {
+      "id": "photopea",
+      "name": "Photopea",
+      "category": "影像 ‧ 設計",
+      "icon": "🖌️",
+      "url": "https://www.photopea.com/",
+      "tag": "完全免費",
+      "note": "瀏覽器裡就能用、操作近似 Photoshop 的免費修圖工具,免安裝、能開 PSD 檔。"
+    },
+    {
+      "id": "unsplash",
+      "name": "Unsplash",
+      "category": "影像 ‧ 設計",
+      "icon": "📷",
+      "url": "https://unsplash.com/",
+      "tag": "完全免費",
+      "note": "高畫質照片免費下載、可商用,做簡報或部落格找配圖不怕侵權。"
+    },
+    {
+      "id": "pexels",
+      "name": "Pexels",
+      "category": "影像 ‧ 設計",
+      "icon": "🎞️",
+      "url": "https://www.pexels.com/zh-tw/",
+      "tag": "完全免費",
+      "note": "免費可商用的照片與短影片素材庫,有中文介面,找影片素材尤其好用。"
+    },
+    {
+      "id": "google-docs",
+      "name": "Google 文件 / 試算表",
+      "category": "文件 ‧ 生產力",
+      "icon": "📝",
+      "url": "https://docs.google.com/",
+      "tag": "完全免費",
+      "note": "免費的線上文書與試算表,自動雲端儲存、可多人同時編輯,用 Google 帳號即可。"
+    },
+    {
+      "id": "notion",
+      "name": "Notion",
+      "category": "文件 ‧ 生產力",
+      "icon": "🗒️",
+      "url": "https://www.notion.so/",
+      "tag": "有免費版",
+      "note": "把筆記、待辦、資料庫整合在一起的工具,個人使用免費,適合做家庭記帳、旅遊規劃、讀書筆記。"
+    },
+    {
+      "id": "cwa",
+      "name": "中央氣象署",
+      "category": "台灣在地 ‧ 生活",
+      "icon": "🌦️",
+      "url": "https://www.cwa.gov.tw/",
+      "tag": "政府官方",
+      "note": "官方氣象、地震、颱風、空氣品質資訊來源,天氣與防災以這裡為準,別信來路不明的轉傳警報。"
+    },
+    {
+      "id": "google-maps",
+      "name": "Google 地圖",
+      "category": "台灣在地 ‧ 生活",
+      "icon": "🗺️",
+      "url": "https://www.google.com/maps",
+      "tag": "完全免費",
+      "note": "導航、找店家營業時間、看評論、街景,出門前先查路線與停車最方便。"
+    },
+    {
+      "id": "archive-org",
+      "name": "Internet Archive",
+      "category": "台灣在地 ‧ 生活",
+      "icon": "🏛️",
+      "url": "https://archive.org/",
+      "tag": "完全免費",
+      "note": "非營利的網路圖書館,有大量免費電子書、老照片,還能用「時光機」看網站以前的樣子。"
+    }
+  ]
+}
