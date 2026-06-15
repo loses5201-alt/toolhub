@@ -99,6 +99,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/scam-guide/Index.vue'),
   },
   {
+    id: 'file-checksum',
+    name: '檔案校驗碼 / 完整性驗證',
+    category: 'anti-scam',
+    description: '下載安裝檔後,算出 SHA-256/SHA-1/SHA-512 雜湊值,和官方公布的校驗碼比對,確認檔案沒被掉包或植入惡意程式 —— 全程在你瀏覽器計算,檔案不上傳。',
+    keywords: ['校驗碼', '雜湊', 'hash', 'sha256', 'sha-256', 'sha1', 'sha512', '完整性', '驗證', '驗檔', '檔案指紋', '竄改', '掉包', '安裝檔', '校驗', 'checksum', '指紋', '比對'],
+    icon: '🔐',
+    loader: () => import('@/tools/file-checksum/Index.vue'),
+  },
+  {
     id: 'severance-pay',
     name: '資遣費試算',
     category: 'labor',
