@@ -2,7 +2,7 @@
   PDF 工坊共用工具 —— 全程在瀏覽器處理,不上傳任何檔案。
   合併/整理/圖片轉PDF 用 pdf-lib;PDF 轉圖片用 pdfjs-dist 渲染。
 */
-import { PDFDocument } from 'pdf-lib'
+import { PDFDocument, type PDFImage } from 'pdf-lib'
 import * as pdfjsLib from 'pdfjs-dist'
 import workerUrl from 'pdfjs-dist/build/pdf.worker.min.mjs?url'
 
@@ -102,6 +102,72 @@ export async function imagesToPdf(
     }
   }
   return await out.save()
+}
+
+export interface PdfWatermarkOpts {
+  text: string
+  colorRGB: string // 例:'220,38,38'
+  opacity: number // 0..1
+  angleDeg: number
+  density: 'sparse' | 'normal' | 'dense'
+  sizePct: number // 字級 = 頁面短邊像素 * sizePct / 100
+}
+
+const wmGapFactor: Record<string, number> = { sparse: 2.4, normal: 1.5, dense: 0.9 }
+
+// 把斜向重複的浮水印文字畫到透明畫布上,輸出 PNG bytes。
+// 用 canvas 畫文字才能支援中文(pdf-lib 內建字型不含 CJK);其餘區域透明,蓋上去不會擋住內容。
+async function renderWatermarkPng(wpt: number, hpt: number, o: PdfWatermarkOpts): Promise<Uint8Array> {
+  // 以約 2 倍點數的解析度渲染求清晰,並把最長邊上限壓在 2200px 控制記憶體
+  const scale = Math.min(2, 2200 / Math.max(wpt, hpt))
+  const w = Math.max(1, Math.round(wpt * scale))
+  const h = Math.max(1, Math.round(hpt * scale))
+  const canvas = document.createElement('canvas')
+  canvas.width = w
+  canvas.height = h
+  const ctx = canvas.getContext('2d')!
+  const fontPx = Math.max(12, Math.round(Math.min(w, h) * (o.sizePct / 100)))
+  ctx.font = `bold ${fontPx}px "Noto Sans TC", "Microsoft JhengHei", sans-serif`
+  ctx.fillStyle = `rgba(${o.colorRGB},${o.opacity})`
+  ctx.textAlign = 'center'
+  ctx.textBaseline = 'middle'
+  const gap = wmGapFactor[o.density]
+  const textW = ctx.measureText(o.text).width
+  const stepX = (textW + fontPx) * gap
+  const stepY = fontPx * 2 * gap
+  const diag = Math.sqrt(w * w + h * h)
+  ctx.translate(w / 2, h / 2)
+  ctx.rotate((o.angleDeg * Math.PI) / 180)
+  for (let y = -diag; y <= diag; y += stepY) {
+    for (let x = -diag; x <= diag; x += stepX) {
+      ctx.fillText(o.text, x, y)
+    }
+  }
+  const blob: Blob = await new Promise((res) => canvas.toBlob((b) => res(b!), 'image/png'))
+  return new Uint8Array(await blob.arrayBuffer())
+}
+
+/**
+ * 在 PDF 每一頁斜向重複加註浮水印(例:僅供○○使用),防止證件/合約影本被冒用。
+ * 浮水印以 canvas 畫成 PNG 後蓋到頁面,支援中文;相同尺寸的頁面共用同一張嵌入圖以節省檔案大小。
+ */
+export async function watermarkPdf(buffer: ArrayBuffer, o: PdfWatermarkOpts): Promise<Uint8Array> {
+  const doc = await PDFDocument.load(buffer, { ignoreEncryption: true })
+  const text = o.text.trim()
+  if (!text) return await doc.save()
+  const cache = new Map<string, PDFImage>()
+  for (const page of doc.getPages()) {
+    const { width: wpt, height: hpt } = page.getSize()
+    const key = `${Math.round(wpt)}x${Math.round(hpt)}`
+    let img = cache.get(key)
+    if (!img) {
+      const png = await renderWatermarkPng(wpt, hpt, { ...o, text })
+      img = await doc.embedPng(png)
+      cache.set(key, img)
+    }
+    page.drawImage(img, { x: 0, y: 0, width: wpt, height: hpt })
+  }
+  return await doc.save()
 }
 
 export interface RenderedPage {

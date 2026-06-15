@@ -5,6 +5,7 @@ import Merge from './Merge.vue'
 import Organize from './Organize.vue'
 import ImagesToPdf from './ImagesToPdf.vue'
 import PdfToImages from './PdfToImages.vue'
+import Watermark from './Watermark.vue'
 
 /*
   PDF 工坊 —— 合併、整理頁面、圖片↔PDF,全程在瀏覽器處理,不上傳。
@@ -15,6 +16,7 @@ const tabs = [
   { id: 'organize', label: '整理頁面', icon: '✂️', desc: '刪頁、重排、擷取頁面' },
   { id: 'img2pdf', label: '圖片轉 PDF', icon: '🖼️', desc: '多張圖合成一份 PDF' },
   { id: 'pdf2img', label: 'PDF 轉圖片', icon: '📸', desc: '每頁存成 PNG/JPG' },
+  { id: 'watermark', label: 'PDF 浮水印', icon: '🖋️', desc: '每頁加註用途防盜用' },
 ] as const
 
 const active = ref<(typeof tabs)[number]['id']>('merge')
@@ -23,7 +25,7 @@ const active = ref<(typeof tabs)[number]['id']>('merge')
 <template>
   <div class="space-y-6">
     <div class="card p-4 sm:p-6 space-y-5">
-      <div class="grid grid-cols-2 gap-2 sm:grid-cols-4">
+      <div class="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-5">
         <button
           v-for="t in tabs"
           :key="t.id"
@@ -44,6 +46,7 @@ const active = ref<(typeof tabs)[number]['id']>('merge')
       <Organize v-else-if="active === 'organize'" />
       <ImagesToPdf v-else-if="active === 'img2pdf'" />
       <PdfToImages v-else-if="active === 'pdf2img'" />
+      <Watermark v-else-if="active === 'watermark'" />
     </div>
 
     <LegalNote title="為什麼用這個,而不是網路上的免費 PDF 工具?">
