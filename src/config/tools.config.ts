@@ -108,6 +108,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/labor-pension-self/Index.vue'),
   },
   {
+    id: 'installment-apr',
+    name: '分期實際利率(APR)',
+    category: 'finance',
+    description: '「分期 0 利率」其實不便宜?輸入手續費,算出信用卡/分期付款的真實年利率。',
+    keywords: ['分期', '利率', 'APR', '手續費', '信用卡', '免利率', '零利率', '實質利率', '年利率', '分期付款', '免息'],
+    icon: '💳',
+    loader: () => import('@/tools/installment-apr/Index.vue'),
+  },
+  {
     id: 'bmi',
     name: 'BMI 計算',
     category: 'life',
