@@ -238,6 +238,40 @@ export async function pdfToImageBlobs(
   return blobs
 }
 
+export interface PageText {
+  page: number // 1-based
+  text: string
+}
+
+/**
+ * 用 pdfjs 抽出 PDF 每頁「可選取的文字」(非掃描影像才有)。
+ * 依 pdfjs 標記的換行(hasEOL)還原斷行;掃描成圖的 PDF 會抽不到字。
+ */
+export async function extractPdfText(
+  buffer: ArrayBuffer,
+  onProgress?: (done: number, total: number) => void,
+): Promise<PageText[]> {
+  const task = pdfjsLib.getDocument({ data: buffer.slice(0) })
+  const doc = await task.promise
+  const out: PageText[] = []
+  for (let i = 1; i <= doc.numPages; i++) {
+    const page = await doc.getPage(i)
+    const content = await page.getTextContent()
+    let text = ''
+    for (const item of content.items as Array<{ str?: string; hasEOL?: boolean }>) {
+      if (typeof item.str !== 'string') continue
+      text += item.str
+      if (item.hasEOL) text += '\n'
+    }
+    // 收斂多餘的連續空行,並去掉每行尾端空白
+    text = text.replace(/[ \t]+\n/g, '\n').replace(/\n{3,}/g, '\n\n').trim()
+    out.push({ page: i, text })
+    onProgress?.(i, doc.numPages)
+  }
+  await task.destroy()
+  return out
+}
+
 /** 取得圖片像素尺寸 */
 export function imageSize(url: string): Promise<{ w: number; h: number }> {
   return new Promise((resolve, reject) => {
