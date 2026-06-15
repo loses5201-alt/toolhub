@@ -32,9 +32,9 @@ export default defineConfig(() => ({
       workbox: {
         // App 殼預快取(離線可開);資料 JSON 不預快取,改用 NetworkFirst 確保更新
         globPatterns: ['**/*.{js,css,html,svg,png,ico}'],
-        // 不把肥大的 PDF 函式庫(pdf-lib/pdfjs ≈ 900KB)塞進預快取,
+        // 不把肥大的 PDF / Excel 函式庫(pdf-lib/pdfjs、SheetJS ≈ 1.3MB)塞進預快取,
         // 避免拖慢所有人的 PWA 安裝;改由下方 runtime 快取在實際用到時才存。
-        globIgnores: ['**/pdf-vendor*.js'],
+        globIgnores: ['**/pdf-vendor*.js', '**/sheet-vendor*.js'],
         runtimeCaching: [
           {
             urlPattern: ({ url }) => url.pathname.endsWith('.json'),
@@ -69,6 +69,10 @@ export default defineConfig(() => ({
         manualChunks(id: string) {
           if (id.includes('node_modules/pdf-lib') || id.includes('node_modules/pdfjs-dist')) {
             return 'pdf-vendor'
+          }
+          // SheetJS(Excel 讀寫)同樣肥大,拆獨立 chunk + 不預快取
+          if (id.includes('node_modules/xlsx')) {
+            return 'sheet-vendor'
           }
         },
       },
