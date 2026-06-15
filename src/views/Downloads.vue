@@ -63,6 +63,12 @@ const grouped = computed(() => {
       <p class="mt-2 text-sm leading-relaxed text-ink-700">
         在搜尋引擎打「LINE 下載」「Zoom 下載」,第一頁常出現假下載站、廣告農場、夾帶惡意程式的釣魚連結,長輩一裝就中招。這裡每個連結都指向軟體的官方網站,認明網域就能避開大多數陷阱。
       </p>
+      <RouterLink
+        to="/tools/link-check"
+        class="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-700 hover:underline"
+      >
+        🛡️ 收到可疑連結?用「可疑網址檢查器」先查一下 →
+      </RouterLink>
     </div>
 
     <div v-if="!data" class="card p-8 text-center text-ink-500">載入中…</div>

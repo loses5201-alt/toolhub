@@ -8,6 +8,12 @@ export interface Category {
 
 export const categories: Category[] = [
   {
+    id: 'anti-scam',
+    name: '防詐騙',
+    description: '點連結前先查一下,保護自己與家人',
+    icon: '🛡️',
+  },
+  {
     id: 'labor',
     name: '勞動權益',
     description: '依台灣勞基法/勞退條例試算,離職、加班、特休一次算清楚',

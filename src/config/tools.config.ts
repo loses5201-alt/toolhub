@@ -18,6 +18,15 @@ export interface ToolDef {
 
 export const tools: ToolDef[] = [
   {
+    id: 'link-check',
+    name: '可疑網址檢查器',
+    category: 'anti-scam',
+    description: '收到怪怪的連結?貼上來,馬上看出假冒網域、釣魚、短網址等詐騙特徵。',
+    keywords: ['詐騙', '可疑', '網址', '連結', '釣魚', '假網站', '簡訊', '安全', '查證', '假冒', '釣魚網站'],
+    icon: '🛡️',
+    loader: () => import('@/tools/link-check/Index.vue'),
+  },
+  {
     id: 'severance-pay',
     name: '資遣費試算',
     category: 'labor',
