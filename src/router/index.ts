@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory, type RouteRecordRaw } from 'vue-router'
-import { tools } from '@/config/tools.config'
+import { tools, toolMap } from '@/config/tools.config'
+import { setMeta } from '@/utils/meta'
 
 /*
   路由由 tools.config 動態產生 —— 新增工具不必改這裡。
@@ -25,4 +26,16 @@ export const router = createRouter({
   scrollBehavior() {
     return { top: 0 }
   },
+})
+
+// 依路由動態設定標題與描述(SEO / 分享預覽 / 書籤辨識)
+router.afterEach((to) => {
+  const tool = typeof to.name === 'string' ? toolMap[to.name] : undefined
+  if (tool) {
+    setMeta(tool.name, tool.description)
+  } else if (to.name === 'downloads') {
+    setMeta('防詐騙下載中心', '常用軟體的官方下載連結,保證官方來源、無廣告、附校驗碼,長輩也安心。')
+  } else {
+    setMeta()
+  }
 })

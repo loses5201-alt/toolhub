@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0f6b58"/>
+      <stop offset="1" stop-color="#137c66"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <g transform="translate(96,150)">
+    <text x="0" y="0" font-family="'Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif" font-size="40" fill="#a7e8d6" font-weight="700">🧰 ToolHub</text>
+    <text x="0" y="110" font-family="'Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif" font-size="84" fill="#ffffff" font-weight="900">台灣在地實用工具站</text>
+    <text x="0" y="200" font-family="'Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif" font-size="40" fill="#d6f5ec" font-weight="500">勞動 · 稅務 · 財務 · 防詐騙下載中心</text>
+    <text x="0" y="280" font-family="'Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif" font-size="32" fill="#a7e8d6">資料不上傳 · 在瀏覽器內運算 · 乾淨無廣告</text>
+  </g>
+</svg>
