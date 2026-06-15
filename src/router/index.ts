@@ -14,8 +14,8 @@ const toolRoutes: RouteRecordRaw[] = tools.map((tool) => ({
 }))
 
 const routes: RouteRecordRaw[] = [
-  { path: '/', name: 'assist', component: () => import('@/views/Assist.vue') },
-  { path: '/tools', name: 'home', component: () => import('@/views/Home.vue') },
+  { path: '/', name: 'home', component: () => import('@/views/Home.vue') },
+  { path: '/assist', name: 'assist', component: () => import('@/views/Assist.vue') },
   { path: '/downloads', name: 'downloads', component: () => import('@/views/Downloads.vue') },
   ...toolRoutes,
   { path: '/:pathMatch(.*)*', redirect: '/' },

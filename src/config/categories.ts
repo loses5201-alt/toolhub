@@ -8,6 +8,12 @@ export interface Category {
 
 export const categories: Category[] = [
   {
+    id: 'workshop',
+    name: '處理工坊',
+    description: '真的幫你把檔案處理完 —— 全程在你瀏覽器,不上傳、無廣告、無浮水印、可批次',
+    icon: '🛠️',
+  },
+  {
     id: 'anti-scam',
     name: '防詐騙',
     description: '點連結前先查一下,保護自己與家人',

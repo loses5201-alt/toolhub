@@ -18,6 +18,15 @@ export interface ToolDef {
 
 export const tools: ToolDef[] = [
   {
+    id: 'image-studio',
+    name: '圖片工坊',
+    category: 'workshop',
+    description: '批次轉檔(JPG/PNG/WebP)、壓縮、縮放 —— 全程在你瀏覽器處理,不上傳、無廣告、自動清掉相片定位等中繼資料。',
+    keywords: ['圖片', '照片', '轉檔', '格式', '壓縮', '縮小', '縮放', 'webp', 'jpg', 'png', '批次', '改大小', '去exif'],
+    icon: '🖼️',
+    loader: () => import('@/tools/image-studio/Index.vue'),
+  },
+  {
     id: 'link-check',
     name: '可疑網址檢查器',
     category: 'anti-scam',
