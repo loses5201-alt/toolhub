@@ -144,6 +144,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/due-date/Index.vue'),
   },
   {
+    id: 'fuel-cost',
+    name: '油錢試算',
+    category: 'life',
+    description: '輸入距離、油耗、油價,算出整趟油錢,還能直接除以人數算每人分攤。',
+    keywords: ['油錢', '油費', '汽油', '加油', '里程', '油耗', '旅程', '開車', '分攤', '高速公路', '電車', '電費'],
+    icon: '⛽',
+    loader: () => import('@/tools/fuel-cost/Index.vue'),
+  },
+  {
     id: 'split-bill',
     name: '旅費分帳',
     category: 'life',
