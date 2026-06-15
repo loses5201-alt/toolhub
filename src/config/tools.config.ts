@@ -36,6 +36,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/pdf-studio/Index.vue'),
   },
   {
+    id: 'data-convert',
+    name: '資料轉換工坊',
+    category: 'workshop',
+    description: 'CSV ↔ JSON 互轉,正確處理含逗號/換行的欄位 —— 全程在你瀏覽器,不上傳名單訂單、無廣告、不限筆數。',
+    keywords: ['csv', 'json', '轉換', '互轉', 'tsv', 'excel', '試算表', '資料', '表格', '逗號', '匯出', '格式轉換', '名單', '訂單'],
+    icon: '🔄',
+    loader: () => import('@/tools/data-convert/Index.vue'),
+  },
+  {
     id: 'link-check',
     name: '可疑網址檢查器',
     category: 'anti-scam',
