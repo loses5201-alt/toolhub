@@ -36,6 +36,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/sms-check/Index.vue'),
   },
   {
+    id: 'scam-guide',
+    name: '常見詐騙手法圖鑑',
+    category: 'anti-scam',
+    description: '解除分期、假投資、假檢警、包裹簡訊…一次看懂常見詐騙怎麼運作、破綻在哪、該怎麼做。轉給長輩看最有用。',
+    keywords: ['詐騙', '手法', '圖鑑', '防詐', '反詐騙', '165', '假投資', '假檢警', '解除分期', '包裹', '一頁式', '假交友', '人頭帳戶', '懶人包', '長輩'],
+    icon: '📖',
+    loader: () => import('@/tools/scam-guide/Index.vue'),
+  },
+  {
     id: 'severance-pay',
     name: '資遣費試算',
     category: 'labor',
