@@ -72,6 +72,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/overtime-pay/Index.vue'),
   },
   {
+    id: 'leave-deduction',
+    name: '請假扣薪試算',
+    category: 'labor',
+    description: '請事假、病假會被扣多少薪水?選假別、填天數,馬上算出應扣金額與仍可領的工資。',
+    keywords: ['請假', '扣薪', '事假', '病假', '生理假', '婚假', '喪假', '特休', '家庭照顧假', '半薪', '無薪', '日薪', '時薪', '薪水'],
+    icon: '🗓️',
+    loader: () => import('@/tools/leave-deduction/Index.vue'),
+  },
+  {
     id: 'income-tax',
     name: '綜所稅速算',
     category: 'health-tax',
