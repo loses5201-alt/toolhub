@@ -126,6 +126,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/exif-viewer/Index.vue'),
   },
   {
+    id: 'qr-decode',
+    name: 'QR Code 解碼(看網址)',
+    category: 'anti-scam',
+    description: '把含 QR Code 的截圖或照片解出裡面的內容 —— 陌生 QR 直接掃容易被導到釣魚網站,先看清楚網址再決定要不要開。全程在你瀏覽器解碼,圖片不上傳。',
+    keywords: ['qr', 'qrcode', 'qr code', '二維碼', '掃描', '解碼', '解析', '讀取', '讀qr', '看網址', '可疑', '釣魚', '停車單', '假帳單', 'decode', 'scan'],
+    icon: '📷',
+    loader: () => import('@/tools/qr-decode/Index.vue'),
+  },
+  {
     id: 'link-check',
     name: '可疑網址檢查器',
     category: 'anti-scam',

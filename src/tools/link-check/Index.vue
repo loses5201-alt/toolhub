@@ -1,9 +1,13 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import { useRoute } from 'vue-router'
 import { analyzeUrl, type Level } from '@/features/linkcheck'
 import LegalNote from '@/components/LegalNote.vue'
 
-const input = ref('')
+const route = useRoute()
+// 由其他工具(如 QR Code 解碼)用 ?u= 帶網址過來時,自動填入並檢查
+const prefill = route.query.u
+const input = ref(typeof prefill === 'string' ? prefill : '')
 const result = computed(() => (input.value.trim() ? analyzeUrl(input.value) : null))
 
 const examples = [
