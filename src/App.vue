@@ -5,6 +5,7 @@ import { stepFont, canDecrease, canIncrease } from '@/features/fontScale'
 
 <template>
   <div class="min-h-screen flex flex-col">
+    <a href="#main" class="skip-link">跳至主要內容</a>
     <!-- 頁首 -->
     <header class="sticky top-0 z-20 border-b border-line bg-paper/80 backdrop-blur-md">
       <div class="mx-auto flex max-w-5xl items-center justify-between px-5 py-3.5">
@@ -56,7 +57,7 @@ import { stepFont, canDecrease, canIncrease } from '@/features/fontScale'
     </header>
 
     <!-- 主內容 -->
-    <main class="mx-auto w-full max-w-5xl flex-1 px-5 py-8">
+    <main id="main" class="mx-auto w-full max-w-5xl flex-1 px-5 py-8">
       <RouterView v-slot="{ Component }">
         <Transition name="fade" mode="out-in">
           <component :is="Component" />

@@ -35,6 +35,43 @@ html {
   scroll-behavior: smooth;
 }
 
+/* 鍵盤操作可見的焦點框(滑鼠點擊不顯示,不干擾視覺) */
+:focus-visible {
+  outline: 3px solid var(--color-brand-400);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* 尊重使用者「減少動態效果」的系統設定(前庭敏感、無障礙) */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* 跳至主要內容(螢幕閱讀器 / 鍵盤使用者),平時隱藏、聚焦時出現 */
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -3rem;
+  z-index: 50;
+  background: var(--color-brand-600);
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 0 0 0.75rem 0.75rem;
+  transition: top 0.15s ease;
+}
+.skip-link:focus {
+  top: 0;
+}
+
 body {
   background-color: var(--color-paper);
   color: var(--color-ink-900);
