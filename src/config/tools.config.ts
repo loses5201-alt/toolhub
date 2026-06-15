@@ -54,6 +54,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/data-convert/Index.vue'),
   },
   {
+    id: 'image-crop',
+    name: '圖片裁切 / 旋轉',
+    category: 'workshop',
+    description: '把拍歪的照片轉正、裁掉多餘背景或框出重點 —— 旋轉、翻轉、拖曳裁切,全程在你瀏覽器處理,不上傳、無廣告、無浮水印,可隨時復原。',
+    keywords: ['裁切', '裁剪', '剪裁', '旋轉', '轉正', '翻轉', '鏡像', '剪掉', '去背景', '框選', '照片', '圖片', '相片', 'crop', 'rotate', '橫的', '直的', '拍歪'],
+    icon: '✂️',
+    loader: () => import('@/tools/image-crop/Index.vue'),
+  },
+  {
     id: 'image-redact',
     name: '圖片遮蔽(塗黑/馬賽克)',
     category: 'workshop',
