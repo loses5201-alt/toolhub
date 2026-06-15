@@ -9,7 +9,7 @@
       "official": "https://line.me/zh-hant/",
       "download": "https://line.me/zh-hant/download",
       "version": "",
-      "note": "認明官方網域 line.me,切勿從廣告或來路不明的下載站安裝。"
+      "note": "官方網域 line.me,切勿從廣告或來路不明的下載站安裝。"
     },
     {
       "id": "telegram",
@@ -33,6 +33,26 @@
       "note": "官方網域 discord.com。"
     },
     {
+      "id": "whatsapp",
+      "name": "WhatsApp",
+      "category": "通訊軟體",
+      "icon": "🟢",
+      "official": "https://www.whatsapp.com/",
+      "download": "https://www.whatsapp.com/download",
+      "version": "",
+      "note": "官方網域 whatsapp.com。"
+    },
+    {
+      "id": "signal",
+      "name": "Signal",
+      "category": "通訊軟體",
+      "icon": "🔒",
+      "official": "https://signal.org/",
+      "download": "https://signal.org/download/",
+      "version": "",
+      "note": "官方網域 signal.org,注重隱私的加密通訊。"
+    },
+    {
       "id": "zoom",
       "name": "Zoom",
       "category": "視訊會議",
@@ -41,6 +61,16 @@
       "download": "https://zoom.us/download",
       "version": "",
       "note": "官方網域 zoom.us;假冒網站常用近似網址,務必確認。"
+    },
+    {
+      "id": "teams",
+      "name": "Microsoft Teams",
+      "category": "視訊會議",
+      "icon": "👥",
+      "official": "https://www.microsoft.com/microsoft-teams/",
+      "download": "https://www.microsoft.com/microsoft-teams/download-app",
+      "version": "",
+      "note": "官方網域 microsoft.com。"
     },
     {
       "id": "chrome",
@@ -53,9 +83,29 @@
       "note": "只從 google.com 下載。"
     },
     {
+      "id": "edge",
+      "name": "Microsoft Edge",
+      "category": "瀏覽器",
+      "icon": "🧭",
+      "official": "https://www.microsoft.com/edge",
+      "download": "https://www.microsoft.com/edge/download",
+      "version": "",
+      "note": "官方網域 microsoft.com。"
+    },
+    {
+      "id": "firefox",
+      "name": "Mozilla Firefox",
+      "category": "瀏覽器",
+      "icon": "🦊",
+      "official": "https://www.mozilla.org/firefox/",
+      "download": "https://www.mozilla.org/firefox/new/",
+      "version": "",
+      "note": "官方網域 mozilla.org。"
+    },
+    {
       "id": "vlc",
       "name": "VLC 播放器",
-      "category": "影音工具",
+      "category": "影音娛樂",
       "icon": "🎬",
       "official": "https://www.videolan.org/vlc/",
       "download": "https://www.videolan.org/vlc/",
@@ -63,14 +113,217 @@
       "note": "官方網域 videolan.org;第三方站常綑綁廣告軟體。"
     },
     {
+      "id": "potplayer",
+      "name": "PotPlayer",
+      "category": "影音娛樂",
+      "icon": "▶️",
+      "official": "https://potplayer.daum.net/",
+      "download": "https://potplayer.daum.net/",
+      "version": "",
+      "note": "官方網域 potplayer.daum.net。"
+    },
+    {
+      "id": "spotify",
+      "name": "Spotify",
+      "category": "影音娛樂",
+      "icon": "🎵",
+      "official": "https://www.spotify.com/",
+      "download": "https://www.spotify.com/download/",
+      "version": "",
+      "note": "官方網域 spotify.com。"
+    },
+    {
+      "id": "obs",
+      "name": "OBS Studio",
+      "category": "影音娛樂",
+      "icon": "📹",
+      "official": "https://obsproject.com/",
+      "download": "https://obsproject.com/download",
+      "version": "32.1.2",
+      "github": "obsproject/obs-studio",
+      "note": "官方網域 obsproject.com,免費直播/錄影。"
+    },
+    {
+      "id": "acrobat-reader",
+      "name": "Adobe Acrobat Reader",
+      "category": "文件與辦公",
+      "icon": "📕",
+      "official": "https://www.adobe.com/acrobat/pdf-reader.html",
+      "download": "https://get.adobe.com/reader/",
+      "version": "",
+      "note": "官方下載 get.adobe.com;免費版即可看 PDF,小心安裝時取消綑綁附加元件。"
+    },
+    {
+      "id": "foxit-reader",
+      "name": "Foxit PDF Reader",
+      "category": "文件與辦公",
+      "icon": "📗",
+      "official": "https://www.foxit.com/",
+      "download": "https://www.foxit.com/pdf-reader/",
+      "version": "",
+      "note": "官方網域 foxit.com,輕量 PDF 閱讀器。"
+    },
+    {
+      "id": "libreoffice",
+      "name": "LibreOffice",
+      "category": "文件與辦公",
+      "icon": "📘",
+      "official": "https://www.libreoffice.org/",
+      "download": "https://www.libreoffice.org/download/download/",
+      "version": "",
+      "note": "官方網域 libreoffice.org,免費的文書/試算表/簡報。"
+    },
+    {
+      "id": "notion",
+      "name": "Notion",
+      "category": "文件與辦公",
+      "icon": "🗒️",
+      "official": "https://www.notion.so/",
+      "download": "https://www.notion.so/desktop",
+      "version": "",
+      "note": "官方網域 notion.so。"
+    },
+    {
       "id": "7zip",
       "name": "7-Zip 解壓縮",
-      "category": "實用工具",
+      "category": "壓縮與檔案",
       "icon": "🗜️",
       "official": "https://www.7-zip.org/",
       "download": "https://www.7-zip.org/download.html",
       "version": "",
-      "note": "官方網域 7-zip.org(注意有連字號)。"
+      "note": "官方網域 7-zip.org(注意有連字號),免費。"
+    },
+    {
+      "id": "winrar",
+      "name": "WinRAR",
+      "category": "壓縮與檔案",
+      "icon": "📦",
+      "official": "https://www.win-rar.com/",
+      "download": "https://www.win-rar.com/download.html",
+      "version": "",
+      "note": "官方網域 win-rar.com。"
+    },
+    {
+      "id": "everything",
+      "name": "Everything 檔案搜尋",
+      "category": "壓縮與檔案",
+      "icon": "🔎",
+      "official": "https://www.voidtools.com/",
+      "download": "https://www.voidtools.com/downloads/",
+      "version": "",
+      "note": "官方網域 voidtools.com,秒搜全電腦檔案。"
+    },
+    {
+      "id": "teamviewer",
+      "name": "TeamViewer 遠端遙控",
+      "category": "遠端與雲端",
+      "icon": "🖥️",
+      "official": "https://www.teamviewer.com/zhtw/",
+      "download": "https://www.teamviewer.com/zhtw/download/windows/",
+      "version": "",
+      "note": "官方網域 teamviewer.com,遠端幫長輩處理電腦很好用。"
+    },
+    {
+      "id": "anydesk",
+      "name": "AnyDesk 遠端遙控",
+      "category": "遠端與雲端",
+      "icon": "🕹️",
+      "official": "https://anydesk.com/zht",
+      "download": "https://anydesk.com/zht/downloads/windows",
+      "version": "",
+      "note": "官方網域 anydesk.com,輕量遠端連線。"
+    },
+    {
+      "id": "google-drive",
+      "name": "Google Drive 雲端硬碟",
+      "category": "遠端與雲端",
+      "icon": "☁️",
+      "official": "https://www.google.com/drive/",
+      "download": "https://www.google.com/drive/download/",
+      "version": "",
+      "note": "官方網域 google.com。"
+    },
+    {
+      "id": "dropbox",
+      "name": "Dropbox",
+      "category": "遠端與雲端",
+      "icon": "🗂️",
+      "official": "https://www.dropbox.com/",
+      "download": "https://www.dropbox.com/install",
+      "version": "",
+      "note": "官方網域 dropbox.com。"
+    },
+    {
+      "id": "malwarebytes",
+      "name": "Malwarebytes 防惡意軟體",
+      "category": "安全防護",
+      "icon": "🛡️",
+      "official": "https://www.malwarebytes.com/",
+      "download": "https://www.malwarebytes.com/mwb-download",
+      "version": "",
+      "note": "官方網域 malwarebytes.com,清除惡意/廣告程式。"
+    },
+    {
+      "id": "vscode",
+      "name": "Visual Studio Code",
+      "category": "開發工具",
+      "icon": "🧑‍💻",
+      "official": "https://code.visualstudio.com/",
+      "download": "https://code.visualstudio.com/download",
+      "version": "1.124.2",
+      "github": "microsoft/vscode",
+      "note": "官方網域 code.visualstudio.com。"
+    },
+    {
+      "id": "git",
+      "name": "Git",
+      "category": "開發工具",
+      "icon": "🌿",
+      "official": "https://git-scm.com/",
+      "download": "https://git-scm.com/downloads",
+      "version": "",
+      "note": "官方網域 git-scm.com。"
+    },
+    {
+      "id": "nodejs",
+      "name": "Node.js",
+      "category": "開發工具",
+      "icon": "🟩",
+      "official": "https://nodejs.org/",
+      "download": "https://nodejs.org/en/download",
+      "version": "26.3.0",
+      "github": "nodejs/node",
+      "note": "官方網域 nodejs.org。"
+    },
+    {
+      "id": "python",
+      "name": "Python",
+      "category": "開發工具",
+      "icon": "🐍",
+      "official": "https://www.python.org/",
+      "download": "https://www.python.org/downloads/",
+      "version": "",
+      "note": "官方網域 python.org。"
+    },
+    {
+      "id": "tax-filing",
+      "name": "財政部報稅軟體",
+      "category": "台灣政府服務",
+      "icon": "🧾",
+      "official": "https://tax.nat.gov.tw/",
+      "download": "https://tax.nat.gov.tw/",
+      "version": "",
+      "note": "官方網域 tax.nat.gov.tw,綜所稅電子申報。報稅季只認這個官網。"
+    },
+    {
+      "id": "hicos",
+      "name": "HiCOS 自然人憑證元件",
+      "category": "台灣政府服務",
+      "icon": "🪪",
+      "official": "https://moica.nat.gov.tw/",
+      "download": "https://moica.nat.gov.tw/download_2.html",
+      "version": "",
+      "note": "內政部憑證管理中心官方網域 moica.nat.gov.tw,讀卡、報稅、政府網站登入用。"
     }
   ]
 }
