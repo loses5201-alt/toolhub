@@ -1,13 +1,21 @@
 <script setup lang="ts">
-import { computed, defineAsyncComponent } from 'vue'
+import { computed, defineAsyncComponent, watch } from 'vue'
 import { RouterLink } from 'vue-router'
 import { toolMap } from '@/config/tools.config'
 import { categoryMap } from '@/config/categories'
+import { recordToolVisit } from '@/features/recentTools'
 
 // 工具外框:統一的麵包屑 + 標題,內容由 tools.config 的 loader 動態載入
 const props = defineProps<{ toolId: string }>()
 
 const tool = computed(() => toolMap[props.toolId])
+
+// 記錄到「最近使用」(置頂用);切換工具時也會重新記錄
+watch(
+  () => props.toolId,
+  (id) => recordToolVisit(id),
+  { immediate: true },
+)
 const category = computed(() =>
   tool.value ? categoryMap[tool.value.category] : undefined,
 )
