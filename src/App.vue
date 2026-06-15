@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
+import { stepFont, canDecrease, canIncrease } from '@/features/fontScale'
 </script>
 
 <template>
@@ -13,22 +14,44 @@ import { RouterLink, RouterView } from 'vue-router'
             Tool<span class="text-brand-600">Hub</span>
           </span>
         </RouterLink>
-        <nav class="flex items-center gap-1 text-sm font-medium">
-          <RouterLink
-            to="/"
-            class="rounded-lg px-3 py-2 text-ink-700 transition hover:bg-brand-50 hover:text-brand-700"
-            active-class="!bg-brand-100 !text-brand-800"
-          >
-            工具總覽
-          </RouterLink>
-          <RouterLink
-            to="/downloads"
-            class="rounded-lg px-3 py-2 text-ink-700 transition hover:bg-brand-50 hover:text-brand-700"
-            active-class="!bg-brand-100 !text-brand-800"
-          >
-            下載中心
-          </RouterLink>
-        </nav>
+        <div class="flex items-center gap-2 sm:gap-3">
+          <!-- 字級切換(長輩友善) -->
+          <div class="flex items-center rounded-lg border border-line bg-white" role="group" aria-label="調整字級">
+            <button
+              class="px-2.5 py-1.5 text-sm text-ink-600 transition hover:text-brand-700 disabled:opacity-30"
+              :disabled="!canDecrease()"
+              aria-label="縮小字級"
+              @click="stepFont(-1)"
+            >
+              A−
+            </button>
+            <span class="border-x border-line px-2 py-1.5 text-xs text-ink-400 select-none">字</span>
+            <button
+              class="px-2.5 py-1.5 text-base font-semibold text-ink-700 transition hover:text-brand-700 disabled:opacity-30"
+              :disabled="!canIncrease()"
+              aria-label="放大字級"
+              @click="stepFont(1)"
+            >
+              A+
+            </button>
+          </div>
+          <nav class="flex items-center gap-1 text-sm font-medium">
+            <RouterLink
+              to="/"
+              class="rounded-lg px-2.5 sm:px-3 py-2 text-ink-700 transition hover:bg-brand-50 hover:text-brand-700"
+              active-class="!bg-brand-100 !text-brand-800"
+            >
+              工具
+            </RouterLink>
+            <RouterLink
+              to="/downloads"
+              class="rounded-lg px-2.5 sm:px-3 py-2 text-ink-700 transition hover:bg-brand-50 hover:text-brand-700"
+              active-class="!bg-brand-100 !text-brand-800"
+            >
+              下載
+            </RouterLink>
+          </nav>
+        </div>
       </div>
     </header>
 
