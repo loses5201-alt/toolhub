@@ -27,6 +27,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/link-check/Index.vue'),
   },
   {
+    id: 'sms-check',
+    name: '詐騙簡訊檢查',
+    category: 'anti-scam',
+    description: '把可疑的簡訊或 LINE 訊息貼上來,辨識常見詐騙話術,並自動檢查裡面的連結。',
+    keywords: ['詐騙', '簡訊', 'LINE', '訊息', '話術', '可疑', '假冒', '解除分期', '包裹', '中獎', '查證'],
+    icon: '💬',
+    loader: () => import('@/tools/sms-check/Index.vue'),
+  },
+  {
     id: 'severance-pay',
     name: '資遣費試算',
     category: 'labor',
