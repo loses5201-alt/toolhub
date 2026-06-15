@@ -81,6 +81,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/text-clean/Index.vue'),
   },
   {
+    id: 'exif-viewer',
+    name: '照片隱私檢視器(EXIF)',
+    category: 'anti-scam',
+    description: '分享照片前先看它偷偷夾帶了什麼:拍攝時間、手機型號,甚至 GPS 拍攝地點 —— 含定位的照片會洩漏你家位置。全程在你瀏覽器解析,照片不上傳。',
+    keywords: ['exif', '照片', '隱私', 'gps', '定位', '地點', '拍攝資訊', '中繼資料', 'metadata', '洩漏', '位置', '跟蹤', '相機', '型號', '去exif', '檢視'],
+    icon: '📍',
+    loader: () => import('@/tools/exif-viewer/Index.vue'),
+  },
+  {
     id: 'link-check',
     name: '可疑網址檢查器',
     category: 'anti-scam',
