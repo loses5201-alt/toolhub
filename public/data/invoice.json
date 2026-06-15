@@ -1,0 +1,9 @@
+{
+  "period": "範例期別(請更新)",
+  "deadline": "",
+  "isSample": true,
+  "special": "00000000",
+  "grand": "11111111",
+  "first": ["22222222", "33333333", "44444444"],
+  "additional6": []
+}

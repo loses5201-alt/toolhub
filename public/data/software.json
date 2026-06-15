@@ -1,0 +1,76 @@
+{
+  "updated": "2026-06-15",
+  "software": [
+    {
+      "id": "line",
+      "name": "LINE",
+      "category": "通訊軟體",
+      "icon": "💬",
+      "official": "https://line.me/zh-hant/",
+      "download": "https://line.me/zh-hant/download",
+      "version": "",
+      "note": "認明官方網域 line.me,切勿從廣告或來路不明的下載站安裝。"
+    },
+    {
+      "id": "telegram",
+      "name": "Telegram Desktop",
+      "category": "通訊軟體",
+      "icon": "✈️",
+      "official": "https://telegram.org/",
+      "download": "https://desktop.telegram.org/",
+      "version": "6.9.3",
+      "github": "telegramdesktop/tdesktop",
+      "note": "官方網域 telegram.org。"
+    },
+    {
+      "id": "discord",
+      "name": "Discord",
+      "category": "通訊軟體",
+      "icon": "🎮",
+      "official": "https://discord.com/",
+      "download": "https://discord.com/download",
+      "version": "",
+      "note": "官方網域 discord.com。"
+    },
+    {
+      "id": "zoom",
+      "name": "Zoom",
+      "category": "視訊會議",
+      "icon": "🎥",
+      "official": "https://zoom.us/",
+      "download": "https://zoom.us/download",
+      "version": "",
+      "note": "官方網域 zoom.us;假冒網站常用近似網址,務必確認。"
+    },
+    {
+      "id": "chrome",
+      "name": "Google Chrome",
+      "category": "瀏覽器",
+      "icon": "🌐",
+      "official": "https://www.google.com/chrome/",
+      "download": "https://www.google.com/chrome/",
+      "version": "",
+      "note": "只從 google.com 下載。"
+    },
+    {
+      "id": "vlc",
+      "name": "VLC 播放器",
+      "category": "影音工具",
+      "icon": "🎬",
+      "official": "https://www.videolan.org/vlc/",
+      "download": "https://www.videolan.org/vlc/",
+      "version": "",
+      "note": "官方網域 videolan.org;第三方站常綑綁廣告軟體。"
+    },
+    {
+      "id": "7zip",
+      "name": "7-Zip 解壓縮",
+      "category": "實用工具",
+      "icon": "🗜️",
+      "official": "https://www.7-zip.org/",
+      "download": "https://www.7-zip.org/download.html",
+      "version": "",
+      "note": "官方網域 7-zip.org(注意有連字號)。"
+    }
+  ]
+}
