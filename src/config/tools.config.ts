@@ -45,6 +45,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/data-convert/Index.vue'),
   },
   {
+    id: 'image-redact',
+    name: '圖片遮蔽(塗黑/馬賽克)',
+    category: 'workshop',
+    description: '分享截圖前,把身分證、地址、帳號等個資塗黑或打馬賽克 —— 全程在你瀏覽器,不上傳、真的把像素塗掉、無廣告。',
+    keywords: ['遮蔽', '塗黑', '馬賽克', '打碼', '去碼', '隱私', '個資', '截圖', '遮住', '隱藏', '模糊', '身分證', '帳號', '保護'],
+    icon: '🌫️',
+    loader: () => import('@/tools/image-redact/Index.vue'),
+  },
+  {
     id: 'link-check',
     name: '可疑網址檢查器',
     category: 'anti-scam',

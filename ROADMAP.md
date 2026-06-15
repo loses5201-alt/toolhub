@@ -26,9 +26,12 @@
 - PDF 工坊(pdf-studio):合併、整理頁面(刪頁/重排/擷取)、圖片↔PDF — 2026-06-15
   - pdf-lib(合併/組頁/圖轉PDF)+ pdfjs-dist(渲染);PDF 函式庫拆 pdf-vendor chunk 不預快取(PWA 預快取 1163KB→281KB,改 runtime StaleWhileRevalidate)
 
+- 資料轉換工坊(data-convert):CSV ↔ JSON 互轉,自製解析器處理引號/換行,零相依 — 2026-06-15
+- 圖片遮蔽(image-redact):拖曳框選塗黑/馬賽克,真的把像素燒掉、不上傳,分享截圖前遮個資 — 2026-06-15
+
 ## 進行中 / 待辦(優先序)
-- [ ] 處理工坊續:評估圖片去背(@imgly/background-removal,純前端 WASM,免金鑰;依賴過重就跳過)
-- [ ] 處理工坊續:CSV/JSON/Excel 互轉、資料清理(純前端)
+- [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
+      與本專案「精簡 + 自包含」原則不符,**跳過**(未來若改自架模型再評估)
 - [ ] 持續深化防詐騙:可疑賣家/電話查證引導
 - [ ] 發票對獎接真實/半自動中獎號碼 —— ⚠️ 需可驗證的官方來源(財政部 open data),
       雲端沙盒 WebFetch 被擋無法驗證格式;寫入錯誤中獎號碼風險高,暫緩,待能驗證來源再做
