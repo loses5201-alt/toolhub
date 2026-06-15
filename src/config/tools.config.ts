@@ -54,6 +54,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/image-redact/Index.vue'),
   },
   {
+    id: 'image-watermark',
+    name: '證件浮水印加註',
+    category: 'workshop',
+    description: '交付證件影本前,斜向重複加註用途(例:僅供開戶使用)防盜用 —— 全程在你瀏覽器,文字直接燒進像素、不上傳、無廣告、可批次。',
+    keywords: ['浮水印', '證件', '影本', '加註', '防盜用', '身分證', '開戶', '門號', '租屋', '影印', '騎縫', '劃線', '保護', '批次', 'watermark'],
+    icon: '🖋️',
+    loader: () => import('@/tools/image-watermark/Index.vue'),
+  },
+  {
     id: 'link-check',
     name: '可疑網址檢查器',
     category: 'anti-scam',
