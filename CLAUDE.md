@@ -187,13 +187,15 @@ toolhub/
 **已上線:https://loses5201-alt.github.io/toolhub/**(GitHub repo: loses5201-alt/toolhub,公開)
 
 - 階段 0:Vite + Vue3 + TS + Tailwind v4、`tools.config` 單一事實來源、動態路由 ✅
-- **9 個**工具,皆附依據/說明 ✅
-  - 防詐騙:**可疑網址檢查器**(`src/features/linkcheck.ts` 啟發式引擎:假冒網域/IP/userinfo/punycode/短網址/可疑TLD/釣魚字眼,評分紅黃綠 + 詐騙紅旗教育)
+- **16 個**工具,皆附依據/說明 ✅
+  - 防詐騙:**可疑網址檢查器**(`src/features/linkcheck.ts` 啟發式引擎)、**詐騙簡訊檢查**(`src/tools/sms-check`,話術辨識 + 複用 linkcheck 分析連結)
   - 勞動:資遣費(新/舊制)、特休(§38)、加班費(§24)
-  - 財務:貸款試算(房貸/車貸,本息/本金均攤+寬限期)、勞退自提節稅
-  - 稅健:二代健保補充保費(2.11%)
-  - 生活:發票對獎(中獎號碼在 `public/data/invoice.json`,目前為範例值待更新)
+  - 財務:貸款試算(本息/本金均攤+寬限期)、定存複利、勞退自提節稅
+  - 稅健:綜所稅速算(113 年度級距)、二代健保補充保費(2.11%)
+  - 生活:BMI、旅費分帳、單位換算(坪/台斤/台尺)、預產期、發票對獎(範例值待更新)
   - 日期:民國/西元/日本年號
+  - 長輩友善:字級切換 A−/A+(`src/features/fontScale.ts`,localStorage)
+  - 接力進度看 `ROADMAP.md`
 - 防詐騙下載中心:**30 個**常用軟體官方連結(10 分類:通訊/視訊/瀏覽器/影音/辦公/壓縮/遠端雲端/安全/開發/台灣政府服務);資料 `public/data/software.json` 執行時 fetch;**版本自動更新**腳本 `scripts/fetch-versions.mjs` + 每日 Action(GitHub Releases 容錯抓取,實測抓到 Telegram/OBS/VSCode/Node 版本)✅
   - 坑:PWA 不可預快取資料 JSON(會卡舊資料),已改 NetworkFirst(`vite.config.ts` workbox runtimeCaching)
 - 階段 4:關鍵字導引(首頁搜尋框,免 LLM)✅
