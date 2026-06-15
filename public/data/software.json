@@ -50,6 +50,7 @@
       "official": "https://signal.org/",
       "download": "https://signal.org/download/",
       "version": "",
+      "github": "signalapp/Signal-Desktop",
       "note": "官方網域 signal.org,注重隱私的加密通訊。"
     },
     {
@@ -282,7 +283,8 @@
       "official": "https://git-scm.com/",
       "download": "https://git-scm.com/downloads",
       "version": "",
-      "note": "官方網域 git-scm.com。"
+      "github": "git-for-windows/git",
+      "note": "官方網域 git-scm.com;版本號取自 Git for Windows。"
     },
     {
       "id": "nodejs",
@@ -303,6 +305,7 @@
       "official": "https://www.python.org/",
       "download": "https://www.python.org/downloads/",
       "version": "",
+      "github": "python/cpython",
       "note": "官方網域 python.org。"
     },
     {
