@@ -7,8 +7,9 @@ import { fileURLToPath, URL } from 'node:url'
 // Vite 設定:Vue + Tailwind v4 + PWA(可加到主畫面、離線可用)
 // 部署到 GitHub Pages 專案頁(user.github.io/toolhub)時 base 用 /toolhub/;
 // 若改部署到根網域或 Netlify,把 base 改成 '/' 即可。
-export default defineConfig(({ command }) => ({
-  base: command === 'build' ? '/toolhub/' : '/',
+export default defineConfig(() => ({
+  // Docker 全端在根路徑 `/` 提供;GitHub Pages 由 deploy.yml 設 VITE_BASE=/toolhub/
+  base: process.env.VITE_BASE ?? '/',
   plugins: [
     vue(),
     tailwindcss(),

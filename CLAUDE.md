@@ -1,7 +1,19 @@
-# CLAUDE.md — ToolHub 個人實用工具站 開發規範
+# CLAUDE.md — ToolHub 開發規範
 
 > 本文件為 Claude Code 開發此專案的規範與規劃。每次開始新工作前先讀一次。
-> 名稱 `ToolHub` 為暫定,可隨時改。
+
+> ## ★★ 重大轉向(2026-06-16,最高指導原則)★★
+> 業主指示:ToolHub **不再是「各種計算機」**。能在現成網頁/付費 app 輕鬆做到的,沒有意義。
+> 目標是「**一般網路或付費 app 很難達成、只有這個系統能達成**」的作業。
+> **核心 = AI 助手**:接 Claude API + 網路搜尋,理解意圖、跨來源彙整、幫使用者把事辦成。
+> 架構已轉為 **Docker 全端**:`server/server.mjs`(Node:供前端 + `/api/chat` 代理 Claude + web_search,金鑰只在後端 env)、`Dockerfile`、`docker-compose.yml`。
+> 啟動:複製 `.env.example`→`.env` 填 `ANTHROPIC_API_KEY`,`docker compose up --build`,開 http://localhost:8080 。
+> 路由:`/` = AI 助手(主角,`src/views/Assist.vue`);`/tools` = 舊工具格(降為次要);`/downloads` = 防詐騙下載中心。
+> 計算機類工具仍在 repo(`/tools` 下可用)但**不是重點、不再新增**;下一步會逐步用「真正高價值、AI 驅動」的能力取代。
+> vite base 由 `VITE_BASE` 控制(Docker 用 `/`;GitHub Pages 由 deploy.yml 設 `/toolhub/`,但 Pages 無後端、AI 不會動)。
+
+---
+> (以下為轉向前的舊規劃,部分仍適用:Vue3+TS+Vite+Tailwind、工具=資料+模組、每檔<300行、不破壞線上站)
 
 ---
 

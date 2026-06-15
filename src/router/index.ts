@@ -14,7 +14,8 @@ const toolRoutes: RouteRecordRaw[] = tools.map((tool) => ({
 }))
 
 const routes: RouteRecordRaw[] = [
-  { path: '/', name: 'home', component: () => import('@/views/Home.vue') },
+  { path: '/', name: 'assist', component: () => import('@/views/Assist.vue') },
+  { path: '/tools', name: 'home', component: () => import('@/views/Home.vue') },
   { path: '/downloads', name: 'downloads', component: () => import('@/views/Downloads.vue') },
   ...toolRoutes,
   { path: '/:pathMatch(.*)*', redirect: '/' },
@@ -35,6 +36,8 @@ router.afterEach((to) => {
     setMeta(tool.name, tool.description)
   } else if (to.name === 'downloads') {
     setMeta('防詐騙下載中心', '常用軟體的官方下載連結,保證官方來源、無廣告、附校驗碼,長輩也安心。')
+  } else if (to.name === 'home') {
+    setMeta('所有工具', '台灣在地實用工具與防詐騙工具一覽。')
   } else {
     setMeta()
   }
