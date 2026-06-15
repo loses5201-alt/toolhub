@@ -207,6 +207,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/invoice-lottery/Index.vue'),
   },
   {
+    id: 'age-calc',
+    name: '年齡計算',
+    category: 'datetime',
+    description: '輸入出生日期,算出實歲、虛歲、人壽保險年齡,還有已活天數與生日倒數。',
+    keywords: ['年齡', '幾歲', '實歲', '足歲', '虛歲', '保險年齡', '生日', '倒數', '出生', '活了幾天', '歲數'],
+    icon: '🎂',
+    loader: () => import('@/tools/age-calc/Index.vue'),
+  },
+  {
     id: 'roc-year',
     name: '民國年換算',
     category: 'datetime',
