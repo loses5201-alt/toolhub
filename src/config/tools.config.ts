@@ -63,6 +63,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/image-watermark/Index.vue'),
   },
   {
+    id: 'qr-generate',
+    name: 'QR Code 產生器',
+    category: 'workshop',
+    description: '把網址、WiFi 連線、聯絡資訊做成 QR Code,可下載 PNG —— 直接編碼你的原始內容,不像多數線上產生器偷塞追蹤短網址轉址。全程在你瀏覽器,不上傳。',
+    keywords: ['qr', 'qrcode', 'qr code', '二維碼', '條碼', '產生', '製作', 'wifi', '無線網路', '聯絡', '名片', 'vcard', '網址', '連結', '掃描'],
+    icon: '🔳',
+    loader: () => import('@/tools/qr-generate/Index.vue'),
+  },
+  {
     id: 'text-clean',
     name: '文字清理工坊',
     category: 'workshop',
