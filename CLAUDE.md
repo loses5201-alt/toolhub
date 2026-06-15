@@ -182,13 +182,22 @@ toolhub/
 
 ---
 
-## 十一、目前進度(2026-06-15 自主開發)
+## 十一、目前進度(2026-06-15 自主開發,全部完成並線上驗證)
 
-已完成並通過瀏覽器驗證:
-- 階段 0:Vite + Vue3 + TS + Tailwind v4 骨架、`tools.config` 單一事實來源、動態路由 ✅
-- 階段 1-2:5 個台灣在地計算工具(資遣費新舊制、特休、加班費、二代健保、民國年),皆附法規依據 ✅
-- 階段 3:下載中心(7 個常用軟體官方連結 + 防詐騙提醒);資料在 `src/data/software.json` ✅(GitHub Actions 自動抓版本留待後續)
+**已上線:https://loses5201-alt.github.io/toolhub/**(GitHub repo: loses5201-alt/toolhub,公開)
+
+- 階段 0:Vite + Vue3 + TS + Tailwind v4、`tools.config` 單一事實來源、動態路由 ✅
+- 階段 1-2:**8 個**台灣在地工具,皆附法規依據 ✅
+  - 勞動:資遣費(新/舊制)、特休(§38)、加班費(§24)
+  - 財務:貸款試算(房貸/車貸,本息/本金均攤+寬限期)、勞退自提節稅
+  - 稅健:二代健保補充保費(2.11%)
+  - 生活:發票對獎(中獎號碼在 `public/data/invoice.json`,目前為範例值待更新)
+  - 日期:民國/西元/日本年號
+- 階段 3:防詐騙下載中心(`public/data/software.json`,執行時 fetch);**版本自動更新**腳本 `scripts/fetch-versions.mjs` + 每日 Action `update-versions.yml`(GitHub Releases 來源容錯抓取,已實測抓到 Telegram 版本)✅
 - 階段 4:關鍵字導引(首頁搜尋框,免 LLM)✅
+- PWA:`vite-plugin-pwa`,可加到主畫面 + 離線(圖示 `public/icon.svg`)✅
+- 部署:`deploy.yml`(push main 自動建置部署到 Pages);base 設為 `/toolhub/` ✅
 
-啟動:`npm run dev`(預設 5173,開發時用過 5180)。建置:`npm run build` 已通過。
-下一步可做:更多在地工具(房貸/車貸試算、發票對獎)、下載中心版本自動更新 Action、PWA、行動裝置打磨。
+啟動:`npm run dev`。建置:`npm run build`。部署:push 到 main 自動觸發。
+坑/注意:GH Pages 用 `/toolhub/` base,改部署位置要改 vite.config 的 base;hash router 免 rewrite;資料用執行時 fetch(`${BASE_URL}data/...`)所以排程更新免重建。
+下一步候選:接 Claude API 智慧 chatbot(需 serverless proxy,金鑰不進前端)、更多工具、發票中獎號碼自動更新、自訂網域。
