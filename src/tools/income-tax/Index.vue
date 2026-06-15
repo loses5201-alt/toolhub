@@ -4,7 +4,8 @@ import ResultStat from '@/components/ResultStat.vue'
 import LegalNote from '@/components/LegalNote.vue'
 import { ntd, num } from '@/utils/format'
 
-// 113 年度(2024 所得,2025 年 5 月申報)綜所稅累進級距與速算扣除額
+// 114 年度(2025 所得,2026 年 5 月申報)綜所稅累進級距與速算扣除額
+// 級距與速算扣除額自 113 年度起未調整,114 年度沿用相同數字
 const BRACKETS = [
   { upTo: 590000, rate: 0.05, deduct: 0 },
   { upTo: 1330000, rate: 0.12, deduct: 41300 },
@@ -55,7 +56,7 @@ const hasInput = computed(() => (net.value ?? 0) > 0)
         </p>
       </div>
 
-      <LegalNote title="113 年度綜所稅級距(2024 所得 / 2025 申報)">
+      <LegalNote title="114 年度綜所稅級距(2025 所得 / 2026 年 5 月申報)">
         <ul class="list-disc pl-5 space-y-0.5">
           <li>0 ~ 590,000:稅率 5%,速算扣除額 0</li>
           <li>590,001 ~ 1,330,000:12%,扣除額 41,300</li>
@@ -64,7 +65,7 @@ const hasInput = computed(() => (net.value ?? 0) > 0)
           <li>4,980,001 以上:40%,扣除額 911,700</li>
         </ul>
         <p class="text-ink-500">
-          級距金額每年會依物價指數調整,本表為 113 年度;最新數字與基本所得額(最低稅負)等請以財政部公告為準。本工具僅供概算。
+          級距金額每年依物價指數調整,本表為 114 年度(與 113 年度相同)。114 年度免稅額每人 97,000 元、標準扣除額單身 131,000 元(有配偶 262,000 元),用於計算淨額。最新數字與基本所得額(最低稅負)等請以財政部公告為準。本工具僅供概算。
         </p>
       </LegalNote>
     </div>
