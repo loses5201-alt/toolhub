@@ -63,6 +63,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/image-watermark/Index.vue'),
   },
   {
+    id: 'text-clean',
+    name: '文字清理工坊',
+    category: 'workshop',
+    description: '從 PDF/網頁/LINE 貼上的文字常夾帶看不見的零寬字元、全形英數、多餘空白 —— 一鍵清乾淨,即時統計字數。全程在你瀏覽器,不上傳、無廣告。',
+    keywords: ['文字', '清理', '整理', '去空白', '空行', '零寬', '不可見字元', '全形', '半形', '大小寫', '字數統計', '字數', '計數', '去重', '貼上', '格式化'],
+    icon: '🧹',
+    loader: () => import('@/tools/text-clean/Index.vue'),
+  },
+  {
     id: 'link-check',
     name: '可疑網址檢查器',
     category: 'anti-scam',
