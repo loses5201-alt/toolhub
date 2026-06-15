@@ -63,6 +63,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/image-crop/Index.vue'),
   },
   {
+    id: 'text-diff',
+    name: '文字差異比對',
+    category: 'workshop',
+    description: '比對合約改版、條款、規格新舊兩版,逐行加逐字標出改了哪裡 —— 全程在你瀏覽器,不上傳機密文字、無廣告。',
+    keywords: ['比對', '差異', '差別', '比較', 'diff', '兩份', '新舊', '改版', '版本', '合約', '條款', '對照', '哪裡不同', '逐字', '文字比對', 'compare', '異動'],
+    icon: '📝',
+    loader: () => import('@/tools/text-diff/Index.vue'),
+  },
+  {
     id: 'image-redact',
     name: '圖片遮蔽(塗黑/馬賽克)',
     category: 'workshop',
