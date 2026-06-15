@@ -27,6 +27,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/image-studio/Index.vue'),
   },
   {
+    id: 'pdf-studio',
+    name: 'PDF 工坊',
+    category: 'workshop',
+    description: '合併、刪頁/重排、圖片↔PDF —— 全程在你瀏覽器處理,不上傳機密文件、無廣告、無浮水印、不限檔數。',
+    keywords: ['pdf', '合併', '分割', '刪頁', '重排', '頁面', '圖片轉pdf', 'pdf轉圖片', 'pdf轉jpg', '掃描', '轉檔', '擷取', '抽頁', '組合'],
+    icon: '📄',
+    loader: () => import('@/tools/pdf-studio/Index.vue'),
+  },
+  {
     id: 'link-check',
     name: '可疑網址檢查器',
     category: 'anti-scam',

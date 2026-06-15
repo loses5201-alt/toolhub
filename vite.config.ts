@@ -32,6 +32,9 @@ export default defineConfig(() => ({
       workbox: {
         // App 殼預快取(離線可開);資料 JSON 不預快取,改用 NetworkFirst 確保更新
         globPatterns: ['**/*.{js,css,html,svg,png,ico}'],
+        // 不把肥大的 PDF 函式庫(pdf-lib/pdfjs ≈ 900KB)塞進預快取,
+        // 避免拖慢所有人的 PWA 安裝;改由下方 runtime 快取在實際用到時才存。
+        globIgnores: ['**/pdf-vendor*.js'],
         runtimeCaching: [
           {
             urlPattern: ({ url }) => url.pathname.endsWith('.json'),
@@ -41,6 +44,15 @@ export default defineConfig(() => ({
               expiration: { maxEntries: 20, maxAgeSeconds: 60 * 60 * 24 * 7 },
             },
           },
+          {
+            // 大型 JS/worker chunk(PDF 工坊):用過一次後離線也能再用
+            urlPattern: ({ url }) => /\/assets\/.*\.(js|mjs)$/.test(url.pathname),
+            handler: 'StaleWhileRevalidate',
+            options: {
+              cacheName: 'toolhub-chunks',
+              expiration: { maxEntries: 60, maxAgeSeconds: 60 * 60 * 24 * 30 },
+            },
+          },
         ],
       },
     }),
@@ -48,6 +60,18 @@ export default defineConfig(() => ({
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
+    },
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        // 把肥大的 PDF 函式庫拆成可辨識的固定檔名,方便 PWA 不預快取它
+        manualChunks(id: string) {
+          if (id.includes('node_modules/pdf-lib') || id.includes('node_modules/pdfjs-dist')) {
+            return 'pdf-vendor'
+          }
+        },
+      },
     },
   },
 }))
