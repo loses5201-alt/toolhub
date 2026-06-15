@@ -54,6 +54,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/data-convert/Index.vue'),
   },
   {
+    id: 'image-stitch',
+    name: '圖片拼接(長圖)',
+    category: 'workshop',
+    description: '把多張截圖、收據、對話接成一張長圖或長條 —— 縱向/橫向、可調間距對齊,全程在你瀏覽器合成,不上傳、無廣告、無浮水印。',
+    keywords: ['拼接', '拼圖', '長圖', '合併圖片', '接圖', '截圖', '對話', 'line對話', '收據', '併圖', '組圖', '直向', '橫向', '長截圖', '合成', 'stitch', '對比圖'],
+    icon: '🧩',
+    loader: () => import('@/tools/image-stitch/Index.vue'),
+  },
+  {
     id: 'image-crop',
     name: '圖片裁切 / 旋轉',
     category: 'workshop',
