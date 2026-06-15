@@ -198,6 +198,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/installment-apr/Index.vue'),
   },
   {
+    id: 'password-gen',
+    name: '本機密碼產生器',
+    category: 'life',
+    description: '用瀏覽器密碼學亂數產生高強度密碼,全程在你電腦、不連網、不記錄 —— 線上產生器可能偷偷記下你的密碼,這種工具就該在本機跑。',
+    keywords: ['密碼', '產生', '產生器', '亂數', '隨機', 'password', '強密碼', '安全', '帳號', '兩步驟', '隨機密碼', '長密碼'],
+    icon: '🔑',
+    loader: () => import('@/tools/password-gen/Index.vue'),
+  },
+  {
     id: 'bmi',
     name: 'BMI 計算',
     category: 'life',
