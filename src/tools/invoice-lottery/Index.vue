@@ -15,14 +15,18 @@ interface InvoiceData {
 }
 
 const data = ref<InvoiceData | null>(null)
+const status = ref<'loading' | 'ready' | 'error'>('loading')
 const input = ref('')
 
 onMounted(async () => {
   try {
     const res = await fetch(`${import.meta.env.BASE_URL}data/invoice.json`)
+    if (!res.ok) throw new Error(`HTTP ${res.status}`)
     data.value = await res.json()
+    status.value = 'ready'
   } catch {
     data.value = null
+    status.value = 'error'
   }
 })
 
@@ -73,6 +77,16 @@ const result = computed(() => {
 
 <template>
   <div class="space-y-6">
+    <div v-if="status === 'loading'" class="card p-6 text-center text-ink-500">載入中獎號碼…</div>
+
+    <div
+      v-else-if="status === 'error'"
+      class="rounded-2xl border border-amber-300 bg-amber-50 p-4 text-sm text-amber-800"
+    >
+      📡 中獎號碼暫時載入不到,請稍後重新整理,或改用
+      <a href="https://www.etax.nat.gov.tw/" target="_blank" rel="noopener noreferrer" class="underline">財政部官方對獎</a>。
+    </div>
+
     <div
       v-if="data?.isSample"
       class="rounded-2xl border border-accent/40 bg-accent/5 p-4 text-sm text-ink-700"
