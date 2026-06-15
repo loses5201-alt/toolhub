@@ -18,19 +18,38 @@ interface Data {
 }
 
 const data = ref<Data | null>(null)
+const status = ref<'loading' | 'ready' | 'error'>('loading')
+const keyword = ref('')
 
 onMounted(async () => {
   try {
     const res = await fetch(`${import.meta.env.BASE_URL}data/software.json`)
-    data.value = await res.json()
+    if (!res.ok) throw new Error(`HTTP ${res.status}`)
+    const json = await res.json()
+    if (!json || !Array.isArray(json.software)) throw new Error('資料格式不符')
+    data.value = json
+    status.value = 'ready'
   } catch {
     data.value = null
+    status.value = 'error'
   }
+})
+
+const filtered = computed(() => {
+  const all = data.value?.software ?? []
+  const k = keyword.value.trim().toLowerCase()
+  if (!k) return all
+  return all.filter(
+    (s) =>
+      s.name.toLowerCase().includes(k) ||
+      s.category.toLowerCase().includes(k) ||
+      s.note.toLowerCase().includes(k),
+  )
 })
 
 const grouped = computed(() => {
   const map = new Map<string, Software[]>()
-  for (const s of data.value?.software ?? []) {
+  for (const s of filtered.value) {
     if (!map.has(s.category)) map.set(s.category, [])
     map.get(s.category)!.push(s)
   }
@@ -71,9 +90,36 @@ const grouped = computed(() => {
       </RouterLink>
     </div>
 
-    <div v-if="!data" class="card p-8 text-center text-ink-500">載入中…</div>
+    <!-- 載入中 -->
+    <div v-if="status === 'loading'" class="card p-8 text-center text-ink-500">載入中…</div>
+
+    <!-- 資料暫缺(容錯:不讓整頁壞掉,並提醒安全要點) -->
+    <div v-else-if="status === 'error'" class="card p-8 text-center">
+      <div class="text-4xl">📡</div>
+      <p class="mt-3 font-semibold text-ink-700">下載清單暫時載入不到</p>
+      <p class="mt-1 text-sm text-ink-500">
+        可能是網路問題,請稍後重新整理。在此期間,請務必只從各軟體的<strong>官方網站</strong>下載,
+        不要點搜尋結果的廣告或來路不明的下載站。
+      </p>
+    </div>
 
     <template v-else>
+      <!-- 搜尋(項目多,方便長輩快速找到) -->
+      <div class="relative mb-6">
+        <span class="absolute left-4 top-1/2 -translate-y-1/2 text-lg text-ink-300" aria-hidden="true">🔍</span>
+        <input
+          v-model="keyword"
+          type="text"
+          placeholder="搜尋軟體名稱,例:LINE、瀏覽器、解壓縮…"
+          aria-label="搜尋軟體"
+          class="w-full rounded-2xl border border-line bg-white py-3 pl-12 pr-4 text-base shadow-sm outline-none transition focus:border-brand-400 focus:ring-4 focus:ring-brand-100"
+        />
+      </div>
+
+      <div v-if="!grouped.length" class="card p-8 text-center text-ink-500">
+        找不到「{{ keyword }}」相關的軟體,換個關鍵字試試。
+      </div>
+
       <section v-for="[cat, items] in grouped" :key="cat" class="mt-8">
         <h2 class="mb-3 text-lg font-bold text-ink-900">{{ cat }}</h2>
         <div class="grid gap-4 sm:grid-cols-2">
@@ -99,7 +145,7 @@ const grouped = computed(() => {
       </section>
 
       <p class="mt-8 text-center text-xs text-ink-500">
-        清單最後更新:{{ data.updated }} · 連結皆指向各軟體官方網站
+        清單最後更新:{{ data?.updated }} · 連結皆指向各軟體官方網站
       </p>
     </template>
   </div>
