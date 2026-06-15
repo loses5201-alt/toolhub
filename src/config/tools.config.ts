@@ -36,6 +36,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/pdf-studio/Index.vue'),
   },
   {
+    id: 'heic-convert',
+    name: 'HEIC 轉 JPG / PNG',
+    category: 'workshop',
+    description: 'iPhone 拍的 .heic 照片在 Windows、舊手機、很多網站都打不開?一鍵轉成 JPG/PNG —— 全程在你瀏覽器解碼,不上傳私密照片、無廣告、無浮水印、可批次。',
+    keywords: ['heic', 'heif', 'iphone', '蘋果', '照片', '打不開', '無法開啟', '轉檔', '轉jpg', '轉png', '格式', 'jpg', 'png', '批次', '蘋果照片', '相片'],
+    icon: '📷',
+    loader: () => import('@/tools/heic-convert/Index.vue'),
+  },
+  {
     id: 'data-convert',
     name: '資料轉換工坊',
     category: 'workshop',
