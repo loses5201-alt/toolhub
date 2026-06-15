@@ -187,16 +187,16 @@ toolhub/
 **已上線:https://loses5201-alt.github.io/toolhub/**(GitHub repo: loses5201-alt/toolhub,公開)
 
 - 階段 0:Vite + Vue3 + TS + Tailwind v4、`tools.config` 單一事實來源、動態路由 ✅
-- **16 個**工具,皆附依據/說明 ✅
-  - 防詐騙:**可疑網址檢查器**(`src/features/linkcheck.ts` 啟發式引擎)、**詐騙簡訊檢查**(`src/tools/sms-check`,話術辨識 + 複用 linkcheck 分析連結)
-  - 勞動:資遣費(新/舊制)、特休(§38)、加班費(§24)
-  - 財務:貸款試算(本息/本金均攤+寬限期)、定存複利、勞退自提節稅
-  - 稅健:綜所稅速算(113 年度級距)、二代健保補充保費(2.11%)
-  - 生活:BMI、旅費分帳、單位換算(坪/台斤/台尺)、預產期、發票對獎(範例值待更新)
-  - 日期:民國/西元/日本年號
-  - 長輩友善:字級切換 A−/A+(`src/features/fontScale.ts`,localStorage)
+- **24 個**工具,皆附依據/說明 ✅
+  - 防詐騙:**可疑網址檢查器**(`src/features/linkcheck.ts` 啟發式引擎,含危險協定/官方網域當幌子偵測 + `scripts/test-linkcheck.mjs` 回歸測試 `npm test`)、**詐騙簡訊檢查**(`src/tools/sms-check`,話術辨識 + 複用 linkcheck)、**常見詐騙手法圖鑑**(`src/features/scamGuide.ts` 10 類教育內容)
+  - 勞動:資遣費(新/舊制)、特休(§38)、加班費(§24)、請假扣薪(各假別給薪比例)、勞保老年年金(兩式擇優+提前/延後)
+  - 財務:貸款試算、定存複利、勞退自提節稅、分期實際利率 APR
+  - 稅健:綜所稅速算(114 年度級距,與 113 同)、二代健保補充保費(2.11%)
+  - 生活:BMI、TDEE、油錢試算、旅費分帳、單位換算、預產期、發票對獎(範例值待更新)
+  - 日期:民國/西元/日本年號、年齡計算(實歲/虛歲/保險年齡)
+  - 長輩友善:字級切換 A−/A+(`src/features/fontScale.ts`)、首頁「最近使用」置頂(`src/features/recentTools.ts`)、focus-visible/reduced-motion/skip-link 無障礙
   - 接力進度看 `ROADMAP.md`
-- 防詐騙下載中心:**30 個**常用軟體官方連結(10 分類:通訊/視訊/瀏覽器/影音/辦公/壓縮/遠端雲端/安全/開發/台灣政府服務);資料 `public/data/software.json` 執行時 fetch;**版本自動更新**腳本 `scripts/fetch-versions.mjs` + 每日 Action(GitHub Releases 容錯抓取,實測抓到 Telegram/OBS/VSCode/Node 版本)✅
+- 防詐騙下載中心:**32 個**常用軟體官方連結(10 分類);搜尋框 + 載入/資料暫缺容錯狀態;資料 `public/data/software.json` 執行時 fetch;**版本自動更新**腳本 `scripts/fetch-versions.mjs` + 每日 Action(GitHub Releases 容錯,github 欄位:Telegram/OBS/VSCode/Node/Signal/Git/Python)✅
   - 坑:PWA 不可預快取資料 JSON(會卡舊資料),已改 NetworkFirst(`vite.config.ts` workbox runtimeCaching)
 - 階段 4:關鍵字導引(首頁搜尋框,免 LLM)✅
 - PWA:`vite-plugin-pwa`,可加到主畫面 + 離線(圖示 `public/icon.svg`)✅
