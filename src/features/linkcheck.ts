@@ -24,10 +24,14 @@ const BRAND_KEYWORDS = [
   'line', 'google', 'facebook', 'instagram', 'apple', 'paypal', 'microsoft', 'netflix',
   'whatsapp', 'telegram', 'binance', 'max',
   'shopee', 'ruten', 'pchome', 'momo', 'amazon', 'coupang', 'books', 'lottery',
+  'rakuten', 'pinkoi', 'eslite', 'klook', 'kkday', 'foodpanda', 'pxmart', 'familymart',
   'esun', 'ctbc', 'cathay', 'fubon', 'taishin', 'mega', 'firstbank', 'hncb',
   'landbank', 'bot', 'sinopac', 'post', 'chunghwa', 'cht', 'taiwanpay', 'jkos',
+  'hsbc', 'citibank', 'standardchartered', 'kgi', 'yuanta', 'tcb', 'scsb',
   'gov', 'nat', 'etax', 'nhi', 'monitor', 'einvoice', 'twmp', 'etag', 'fetc',
+  'mvdis', 'mohw', 'bli', 'taipower', 'easycard', 'thsrc', 'railway',
   'fedex', 'dhl', 'ups', 'kerry', 't-cat', 'hct', 'seveneleven', '711', 'fmart',
+  'taiwanmobile', 'fetnet', 'fareastone',
 ]
 
 // 已知的官方/可信主域(命中可給安心訊號)
@@ -36,10 +40,17 @@ const KNOWN_GOOD = [
   'microsoft.com', 'netflix.com', 'whatsapp.com', 'telegram.org',
   'shopee.tw', 'pchome.com.tw', 'momoshop.com.tw', 'ruten.com.tw', 'books.com.tw',
   'coupang.com', 'binance.com', 'max.maicoin.com',
+  'rakuten.com.tw', 'pinkoi.com', 'eslite.com', 'klook.com', 'kkday.com',
+  'foodpanda.com.tw', 'pxmart.com.tw', 'family.com.tw',
   'gov.tw', 'nat.gov.tw', 'esunbank.com', 'ctbcbank.com', 'cathaybk.com.tw',
   'fubon.com', 'taishinbank.com.tw', 'megabank.com.tw', 'firstbank.com.tw',
   'landbank.com.tw', 'bot.com.tw', 'sinopac.com',
+  'hsbc.com.tw', 'citibank.com.tw', 'standardchartered.com.tw', 'kgibank.com',
+  'yuantabank.com.tw', 'tcb-bank.com.tw',
+  'mvdis.gov.tw', 'mohw.gov.tw', 'bli.gov.tw', 'taipower.com.tw', 'easycard.com.tw',
+  'thsrc.com.tw', 'railway.gov.tw',
   'post.gov.tw', 'youtube.com', 'amazon.com', 'fetc.net.tw', 'einvoice.nat.gov.tw',
+  'cht.com.tw', 'taiwanmobile.com', 'fetnet.net',
 ]
 
 // 短網址服務(看不到真實目的地)
@@ -62,6 +73,7 @@ const TYPO_TARGETS = [
   'netflix', 'youtube', 'whatsapp', 'telegram', 'amazon', 'binance',
   'shopee', 'pchome', 'momoshop', 'ruten', 'coupang', 'esunbank', 'ctbcbank',
   'cathaybk', 'taishinbank', 'megabank', 'firstbank', 'sinopac', 'fubon',
+  'rakuten', 'foodpanda', 'pinkoi', 'klook', 'kkday', 'easycard',
 ]
 
 // 詐騙網站偏好的便宜/冷門 TLD
@@ -73,7 +85,12 @@ const RISKY_TLDS = [
 const SUSPICIOUS_PATH = [
   'verify', 'login', 'signin', 'account', 'secure', 'update', 'confirm', 'wallet',
   'unlock', 'gift', 'reward', 'bonus', 'invoice', 'delivery', 'customs', 'refund', 'otp',
+  'package', 'tracking', 'shipping', 'expired', 'suspend', 'suspended', 'claim', 'coupon',
+  'reactivate', 'validate', 'authorize', 'redeem', 'recharge',
 ]
+
+// 危險的網址協定(非 http/https,可能執行程式碼或內嵌偽裝內容)
+const DANGEROUS_SCHEMES = /^\s*(javascript|data|vbscript|file|blob):/i
 
 // 編輯距離(Levenshtein),用來偵測拼字相近的假冒網域
 function editDistance(a: string, b: string): number {
@@ -118,6 +135,19 @@ function normalize(raw: string): URL | null {
 }
 
 export function analyzeUrl(raw: string): Analysis {
+  // 危險協定:在解析前先攔截(javascript:/data: 等不會有正常 hostname)
+  if (DANGEROUS_SCHEMES.test(raw)) {
+    return {
+      ok: true,
+      level: 'danger',
+      host: '',
+      findings: [{
+        level: 'danger',
+        text: '這不是一般網頁連結,而是可能直接執行程式或內嵌偽裝內容的特殊連結(如 javascript:、data:),正派網站不會這樣寄給你,請勿點擊。',
+      }],
+    }
+  }
+
   const url = normalize(raw)
   if (!url) {
     return { ok: false, level: 'warn', host: '', findings: [] }
@@ -167,6 +197,17 @@ export function analyzeUrl(raw: string): Analysis {
     const hit = BRAND_KEYWORDS.find((b) => host.includes(b))
     if (hit) {
       add('danger', `主機名含「${hit}」卻不是該品牌的官方網域,高度疑似假冒。`)
+    }
+  }
+
+  // 6b. 把完整官方網域放在前面當幌子(如 cathaybk.com.tw.login-secure.xyz)
+  if (!isKnownGood) {
+    const embedded = KNOWN_GOOD.find(
+      (d) => host.includes('.' + d + '.') || host.startsWith(d + '.'),
+    )
+    if (embedded) {
+      const real = host.split('.').slice(-2).join('.')
+      add('danger', `網址把官方網域「${embedded}」放在前面當幌子,但真正前往的是「${real}」,這是典型的釣魚偽裝。`)
     }
   }
 

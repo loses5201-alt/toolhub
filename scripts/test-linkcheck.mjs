@@ -39,6 +39,19 @@ const cases = [
   ['https://random-blog.netlify.app', 'warn', '免費平台無品牌'],
   // 短網址 / 風險 TLD
   ['https://reurl.cc/abc', 'warn', '短網址'],
+  // 新增可信網站不應誤判
+  ['https://www.foodpanda.com.tw', 'safe', '正常 foodpanda'],
+  ['https://mvdis.gov.tw', 'safe', '正常監理服務網'],
+  ['https://www.thsrc.com.tw', 'safe', '正常高鐵'],
+  ['https://www.rakuten.com.tw', 'safe', '正常樂天'],
+  // 官方網域當幌子(真正網域在後面)
+  ['https://cathaybk.com.tw.login-secure.xyz', 'danger', '官方網域當幌子'],
+  ['http://line.me.verify-account.cc/x', 'danger', 'line.me 放前面當幌子'],
+  // 危險協定
+  ['javascript:alert(document.cookie)', 'danger', 'javascript 協定'],
+  ['data:text/html,<script>bad()</script>', 'danger', 'data 協定'],
+  // 新增品牌假冒
+  ['http://foodpanda-tw-coupon.xyz/claim', 'danger', '假冒 foodpanda'],
 ]
 
 let fail = 0
