@@ -187,13 +187,15 @@ toolhub/
 **已上線:https://loses5201-alt.github.io/toolhub/**(GitHub repo: loses5201-alt/toolhub,公開)
 
 - 階段 0:Vite + Vue3 + TS + Tailwind v4、`tools.config` 單一事實來源、動態路由 ✅
-- 階段 1-2:**8 個**台灣在地工具,皆附法規依據 ✅
+- **9 個**工具,皆附依據/說明 ✅
+  - 防詐騙:**可疑網址檢查器**(`src/features/linkcheck.ts` 啟發式引擎:假冒網域/IP/userinfo/punycode/短網址/可疑TLD/釣魚字眼,評分紅黃綠 + 詐騙紅旗教育)
   - 勞動:資遣費(新/舊制)、特休(§38)、加班費(§24)
   - 財務:貸款試算(房貸/車貸,本息/本金均攤+寬限期)、勞退自提節稅
   - 稅健:二代健保補充保費(2.11%)
   - 生活:發票對獎(中獎號碼在 `public/data/invoice.json`,目前為範例值待更新)
   - 日期:民國/西元/日本年號
-- 階段 3:防詐騙下載中心(`public/data/software.json`,執行時 fetch);**版本自動更新**腳本 `scripts/fetch-versions.mjs` + 每日 Action `update-versions.yml`(GitHub Releases 來源容錯抓取,已實測抓到 Telegram 版本)✅
+- 防詐騙下載中心:**30 個**常用軟體官方連結(10 分類:通訊/視訊/瀏覽器/影音/辦公/壓縮/遠端雲端/安全/開發/台灣政府服務);資料 `public/data/software.json` 執行時 fetch;**版本自動更新**腳本 `scripts/fetch-versions.mjs` + 每日 Action(GitHub Releases 容錯抓取,實測抓到 Telegram/OBS/VSCode/Node 版本)✅
+  - 坑:PWA 不可預快取資料 JSON(會卡舊資料),已改 NetworkFirst(`vite.config.ts` workbox runtimeCaching)
 - 階段 4:關鍵字導引(首頁搜尋框,免 LLM)✅
 - PWA:`vite-plugin-pwa`,可加到主畫面 + 離線(圖示 `public/icon.svg`)✅
 - 部署:`deploy.yml`(push main 自動建置部署到 Pages);base 設為 `/toolhub/` ✅
