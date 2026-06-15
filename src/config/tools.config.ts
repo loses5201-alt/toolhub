@@ -198,6 +198,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/installment-apr/Index.vue'),
   },
   {
+    id: 'tw-id-check',
+    name: '身分證字號檢核',
+    category: 'life',
+    description: '用內政部檢查碼規則驗算身分證字號是否格式正確,抓出打錯一碼或亂編的假號碼,並顯示初領縣市。全程本機計算、不上傳、不儲存。',
+    keywords: ['身分證', '字號', '檢核', '驗證', '檢查碼', '格式', '真假', '假號碼', '初領', '縣市', 'id', '身份證', '檢查'],
+    icon: '🪪',
+    loader: () => import('@/tools/tw-id-check/Index.vue'),
+  },
+  {
     id: 'password-gen',
     name: '本機密碼產生器',
     category: 'life',
