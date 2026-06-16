@@ -93,6 +93,13 @@
   回歸測試 scripts/test-cryptobox.mjs(9 筆:來回/隨機性/錯密碼/竄改/格式,併入 npm test);
   明確警示「忘記密碼無法救回」。零三方相依;type-check + test + build 通過 — 2026-06-16
 
+- PDF 簽名(pdf-studio 新增「PDF 簽名」分頁,Sign.vue + lib.signPdf/renderPageDataUrl/dataUrlToBytes):
+  手寫(canvas pointer 繪製、透明背景)或上傳簽名圖(可一鍵把接近白色背景轉透明,讓白底簽名照也能蓋上不擋內容),
+  在頁面預覽上拖曳定位 + 大小滑桿,蓋到任一頁後下載「已簽名」新檔。不用印出再掃描;線上簽名站要上傳機密合約,
+  本工具全程瀏覽器處理、不上傳。定位以「頁面比例」傳給 pdf-lib(與顯示解析度無關,所見即所得);
+  座標由上而下轉 PDF 由下而上。明確告知:僅疊上圖像,非具法律效力的數位憑證簽章。
+  零新相依(複用 pdf-lib 嵌 PNG + pdfjs 渲染預覽);type-check + build + 既有測試通過 — 2026-06-16
+
 ## 防詐騙(續)
 - 文字個資遮蔽(text-redact,category=anti-scam):貼上對話/單據文字,自動找出身分證、手機、
   信用卡、Email 並打碼;轉貼客服對話、分享截圖文字前先遮個資。引擎 src/features/piiMask.ts
