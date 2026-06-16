@@ -90,6 +90,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/id-photo/Index.vue'),
   },
   {
+    id: 'subtitle-studio',
+    name: '字幕工坊(SRT/VTT)',
+    category: 'workshop',
+    description: 'SRT ↔ WebVTT 互轉、整體平移對時(字幕快/慢幾秒)、速率縮放、自動重新編號 —— 全程在你瀏覽器處理,字幕內容不上傳、無廣告、免註冊。',
+    keywords: ['字幕', 'srt', 'vtt', 'webvtt', '字幕轉檔', '字幕格式', '對時', '平移', '時間軸', '同步', '不同步', '快了', '慢了', '延遲', '影片字幕', '電影字幕', '轉換', '字幕檔'],
+    icon: '🎬',
+    loader: () => import('@/tools/subtitle-studio/Index.vue'),
+  },
+  {
     id: 'text-diff',
     name: '文字差異比對',
     category: 'workshop',
