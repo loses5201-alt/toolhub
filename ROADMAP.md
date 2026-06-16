@@ -77,6 +77,13 @@
   WEBVTT 標頭/NOTE/STYLE 與 cue 設定、支援逗號/點與省略小時),含回歸測試 scripts/test-subtitle.mjs
   (23 筆,併入 npm test);上傳檔自動依副檔名切換輸出格式、即時統計句數與時間範圍、複製/下載/範例。
   type-check + test + build 通過 — 2026-06-16
+- 網站圖示 / Favicon 產生器(favicon-gen,category=workshop):上傳一張圖,輸出 favicon.ico
+  (canvas 各尺寸 PNG → 自製 ICO 容器包 16/32/48)、apple-touch-icon(180)、PWA 圖示(192/512),
+  附可直接貼上的 HTML。線上 favicon 站要上傳尚未公開的 logo、夾廣告、有的綁追蹤,本工具全程瀏覽器
+  canvas 處理、不上傳。縮放完整/填滿 + 背景(透明/白/黑/品牌色)可選、即時預覽。
+  零相依:ICO 組裝引擎 src/features/ico.ts(純函式 little-endian,256 尺寸欄位寫 0),含回歸測試
+  scripts/test-ico.mjs(16 筆,驗證標頭/entry/offset/影像放置,併入 npm test)。
+  type-check + test + build 通過 — 2026-06-16
 
 ## 可信策展(2026-06:延續下載中心模式,資料 public/data/*.json + 容錯視圖)
 - 推薦好站(/picks,views/Picks.vue + public/data/picks.json):人工挑選、免費好用、連結皆指向官方;

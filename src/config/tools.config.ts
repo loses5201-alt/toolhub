@@ -90,6 +90,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/id-photo/Index.vue'),
   },
   {
+    id: 'favicon-gen',
+    name: '網站圖示 / Favicon 產生器',
+    category: 'workshop',
+    description: '上傳一張圖,輸出 favicon.ico(內含 16/32/48 多尺寸)、apple-touch-icon 與 PWA 圖示(192/512),附可直接貼上的 HTML —— 全程在你瀏覽器處理,logo 不上傳、無廣告、不綁追蹤。',
+    keywords: ['favicon', 'ico', '網站圖示', '圖示', 'icon', '網站小圖', '分頁圖示', 'apple-touch-icon', 'pwa', '網站logo', 'logo轉ico', '製作favicon', '圖轉ico', '網頁圖示'],
+    icon: '🌐',
+    loader: () => import('@/tools/favicon-gen/Index.vue'),
+  },
+  {
     id: 'subtitle-studio',
     name: '字幕工坊(SRT/VTT)',
     category: 'workshop',
