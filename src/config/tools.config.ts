@@ -81,6 +81,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/image-crop/Index.vue'),
   },
   {
+    id: 'id-photo',
+    name: '證件照排版(4×6)',
+    category: 'workshop',
+    description: '把一張大頭照排成一張 4×6 相片紙的多張一吋/二吋證件照,300 DPI 可直接拿去沖洗 —— 全程在你瀏覽器處理,臉部照片不上傳、無廣告、無浮水印,免上傳到陌生網站或花錢請相館。',
+    keywords: ['證件照', '大頭照', '一吋', '二吋', '證件', '護照照片', '身分證照片', '排版', '相片紙', '4x6', '4×6', '沖洗', '沖印', '大頭貼', '駕照照片', '履歷照', 'id photo', '證件相'],
+    icon: '📸',
+    loader: () => import('@/tools/id-photo/Index.vue'),
+  },
+  {
     id: 'text-diff',
     name: '文字差異比對',
     category: 'workshop',
