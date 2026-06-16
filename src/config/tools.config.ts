@@ -207,6 +207,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/sms-check/Index.vue'),
   },
   {
+    id: 'email-check',
+    name: '郵件來源檢視 / 防冒名',
+    category: 'anti-scam',
+    description: '貼上可疑信件的郵件原始碼/標頭,解析寄件網域、回覆地址與 SPF/DKIM/DMARC 驗證,標出冒名詐騙破綻。全程在你瀏覽器判讀、不上傳。',
+    keywords: ['email', '郵件', '信件', '電子郵件', '標頭', 'header', '原始碼', '寄件者', '冒名', '偽冒', '釣魚', 'phishing', 'spf', 'dkim', 'dmarc', '網域', '退信', '回覆地址', '詐騙信', '假信'],
+    icon: '📧',
+    loader: () => import('@/tools/email-check/Index.vue'),
+  },
+  {
     id: 'scam-guide',
     name: '常見詐騙手法圖鑑',
     category: 'anti-scam',

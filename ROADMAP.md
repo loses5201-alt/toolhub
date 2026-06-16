@@ -138,6 +138,14 @@
   明確警示「忘記密碼無法救回」。零三方相依;type-check + test + build 通過 — 2026-06-16
 
 ## 防詐騙(續)
+- 郵件來源檢視 / 防冒名(email-check,category=anti-scam):貼上可疑信件的「郵件原始碼/標頭」,
+  解析 From / Reply-To / Return-Path 與 SPF/DKIM/DMARC 驗證結果,比對寄件網域是否對得上,標出冒名釣魚
+  常見破綻:顯示名稱藏別網域、回覆地址跑到別處(BEC 變更匯款)、退信來源不符、驗證失敗、免費信箱卻自稱機構。
+  分 高風險/注意/參考 三級並白話解釋,明確聲明「標頭可偽冒、非詐騙判定」並導向官方查證 + 165。
+  引擎 src/features/emailHeader.ts(splitHeaders 還原 RFC5322 折行、parseAddress、rootDomain 處理 com.tw 等
+  台灣二級網域、analyzeHeaders;純函式無 DOM 可 Node 測)+ 回歸測試 scripts/test-emailheader.mjs
+  (19 筆:折行/網域根/各冒名情境/驗證失敗,併入 npm test,全 181 筆通過)。零三方相依、不上傳;
+  type-check + test + build 通過 — 2026-06-16
 - 文字個資遮蔽(text-redact,category=anti-scam):貼上對話/單據文字,自動找出身分證、手機、
   信用卡、Email 並打碼;轉貼客服對話、分享截圖文字前先遮個資。引擎 src/features/piiMask.ts
   (純規則,身分證用內政部檢查碼、信用卡用 Luhn 驗證才遮,降誤判;重疊去重;保留分隔符)。
