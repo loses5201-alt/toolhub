@@ -180,6 +180,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/scam-guide/Index.vue'),
   },
   {
+    id: 'phone-check',
+    name: '電話號碼檢視 / 防詐',
+    category: 'anti-scam',
+    description: '接到陌生來電?貼上號碼,看清楚它是手機、市話、免付費還是「付費語音」,並標出常見詐騙警訊(國際來電卻自稱國內機構、回撥被收高額費用等)。全程在你瀏覽器判讀、不上傳,附 165 官方查證連結。',
+    keywords: ['電話', '號碼', '來電', '陌生來電', '可疑電話', '詐騙電話', '騷擾', '手機', '市話', '0204', '付費語音', '0800', '+886', '國際來電', '回撥', '查號', '165', '防詐'],
+    icon: '📞',
+    loader: () => import('@/tools/phone-check/Index.vue'),
+  },
+  {
     id: 'file-checksum',
     name: '檔案校驗碼 / 完整性驗證',
     category: 'anti-scam',

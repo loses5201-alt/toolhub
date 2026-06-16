@@ -8,7 +8,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "type-check": "vue-tsc --noEmit",
-    "test": "node scripts/test-linkcheck.mjs && node scripts/test-textdiff.mjs && node scripts/test-cryptobox.mjs && node scripts/test-piimask.mjs && node scripts/test-vatcheck.mjs"
+    "test": "node scripts/test-linkcheck.mjs && node scripts/test-textdiff.mjs && node scripts/test-cryptobox.mjs && node scripts/test-piimask.mjs && node scripts/test-vatcheck.mjs && node scripts/test-phonecheck.mjs"
   },
   "dependencies": {
     "exifr": "^7.1.3",
