@@ -297,6 +297,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/tw-id-check/Index.vue'),
   },
   {
+    id: 'tw-vat-check',
+    name: '統一編號檢核',
+    category: 'life',
+    description: '依財政部檢查碼規則,驗算公司統一編號(8 碼)是否正確 —— 抓出打錯一碼或亂編的假統編(假發票、人頭公司常見),可批次整理名單。全程本機計算、不上傳,並附財政部官方查詢連結。',
+    keywords: ['統一編號', '統編', '營業稅籍', '公司', '行號', '檢核', '驗證', '檢查碼', '發票', '假發票', '人頭公司', '對帳', '廠商', 'vat', '8碼', '營利事業', '稅籍'],
+    icon: '🏢',
+    loader: () => import('@/tools/tw-vat-check/Index.vue'),
+  },
+  {
     id: 'password-gen',
     name: '本機密碼產生器',
     category: 'life',
