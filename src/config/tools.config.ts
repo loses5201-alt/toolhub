@@ -36,6 +36,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/pdf-studio/Index.vue'),
   },
   {
+    id: 'secure-box',
+    name: '本機加密保險箱',
+    category: 'workshop',
+    description: '替文字或檔案上密碼(AES-GCM 256),把加密結果寄出、另以電話告知密碼,對方才解得開 —— 加密、解密、密碼全程在你瀏覽器,不上傳;線上加密網站可能偷記你的內容與密碼。',
+    keywords: ['加密', '解密', '密碼', '保護', '機密', '檔案加密', '文字加密', 'aes', '加密檔案', '上密碼', 'encrypt', 'decrypt', '保險箱', '隱私', '安全傳檔'],
+    icon: '🔐',
+    loader: () => import('@/tools/secure-box/Index.vue'),
+  },
+  {
     id: 'heic-convert',
     name: 'HEIC 轉 JPG / PNG',
     category: 'workshop',
