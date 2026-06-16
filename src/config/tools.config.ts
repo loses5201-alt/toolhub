@@ -99,6 +99,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/image-redact/Index.vue'),
   },
   {
+    id: 'text-redact',
+    name: '文字個資遮蔽',
+    category: 'anti-scam',
+    description: '貼上對話/單據文字,自動找出身分證、手機、信用卡、Email 並打碼 —— 轉貼客服對話、分享截圖文字前先遮個資。全程在你瀏覽器以規則比對,不上傳;身分證/信用卡會驗證檢查碼避免誤判。',
+    keywords: ['個資', '遮蔽', '打碼', '去識別', '隱私', '身分證', '手機', '信用卡', '卡號', 'email', '電子郵件', '遮個資', '對話', '客服', '截圖文字', '保護個資', '去除個資', '罩'],
+    icon: '🕵️',
+    loader: () => import('@/tools/text-redact/Index.vue'),
+  },
+  {
     id: 'image-watermark',
     name: '證件浮水印加註',
     category: 'workshop',
