@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-15",
+  "updated": "2026-06-16",
   "software": [
     {
       "id": "line",
@@ -49,7 +49,7 @@
       "icon": "🔒",
       "official": "https://signal.org/",
       "download": "https://signal.org/download/",
-      "version": "",
+      "version": "8.14.0",
       "github": "signalapp/Signal-Desktop",
       "note": "官方網域 signal.org,注重隱私的加密通訊。"
     },
@@ -282,7 +282,7 @@
       "icon": "🌿",
       "official": "https://git-scm.com/",
       "download": "https://git-scm.com/downloads",
-      "version": "",
+      "version": "2.54.0.windows.1",
       "github": "git-for-windows/git",
       "note": "官方網域 git-scm.com;版本號取自 Git for Windows。"
     },
