@@ -267,6 +267,47 @@ export async function addPageNumbers(
   return await doc.save()
 }
 
+export interface CompressOpts {
+  scale: number // 渲染倍率(越小越糊越小檔),約 1.0~1.6
+  quality: number // JPEG 品質 0..1
+}
+
+/**
+ * 壓縮 PDF:把每頁用 pdfjs 渲染成 JPEG 再重組成新 PDF。
+ * 對「手機掃描/圖片很多」的 PDF(最常見寄不出去的情況)能大幅縮小;
+ * 代價是文字會變成影像、無法再選取/搜尋。維持原頁面尺寸(pt)。
+ */
+export async function compressPdfViaRaster(
+  buffer: ArrayBuffer,
+  o: CompressOpts,
+  onProgress?: (done: number, total: number) => void,
+): Promise<Uint8Array> {
+  const task = pdfjsLib.getDocument({ data: buffer.slice(0) })
+  const doc = await task.promise
+  const out = await PDFDocument.create()
+  for (let i = 1; i <= doc.numPages; i++) {
+    const page = await doc.getPage(i)
+    const vp1 = page.getViewport({ scale: 1 }) // 原始頁面尺寸(pt)
+    const viewport = page.getViewport({ scale: o.scale })
+    const canvas = document.createElement('canvas')
+    canvas.width = Math.max(1, Math.ceil(viewport.width))
+    canvas.height = Math.max(1, Math.ceil(viewport.height))
+    const ctx = canvas.getContext('2d')!
+    ctx.fillStyle = '#fff' // JPEG 無透明,先鋪白底
+    ctx.fillRect(0, 0, canvas.width, canvas.height)
+    await page.render({ canvas, canvasContext: ctx, viewport }).promise
+    const blob: Blob = await new Promise((res) =>
+      canvas.toBlob((b) => res(b!), 'image/jpeg', o.quality),
+    )
+    const jpg = await out.embedJpg(new Uint8Array(await blob.arrayBuffer()))
+    const p = out.addPage([vp1.width, vp1.height])
+    p.drawImage(jpg, { x: 0, y: 0, width: vp1.width, height: vp1.height })
+    onProgress?.(i, doc.numPages)
+  }
+  await task.destroy()
+  return await out.save()
+}
+
 export interface RenderedPage {
   index: number // 0-based
   dataUrl: string // 縮圖
