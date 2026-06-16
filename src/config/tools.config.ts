@@ -63,6 +63,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/data-convert/Index.vue'),
   },
   {
+    id: 'zip-studio',
+    name: 'ZIP 工坊',
+    category: 'workshop',
+    description: '把多個檔案打包成一個 .zip,或把收到的 .zip 在本機解開檢視/取檔 —— 全程在你瀏覽器,不上傳、無廣告、不限檔數大小。',
+    keywords: ['zip', '壓縮', '解壓', '解壓縮', '打包', '封存', 'archive', 'compress', 'extract', 'unzip', '附件', '多檔', '資料夾', '合併檔案'],
+    icon: '🗜️',
+    loader: () => import('@/tools/zip-studio/Index.vue'),
+  },
+  {
     id: 'image-stitch',
     name: '圖片拼接(長圖)',
     category: 'workshop',

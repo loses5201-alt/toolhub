@@ -35,7 +35,15 @@
 - 資料轉換工坊(data-convert):CSV ↔ JSON 互轉,自製解析器處理引號/換行,零相依 — 2026-06-15
   - 升級:加入 Excel(.xlsx)三方互轉(CSV/JSON/Excel),from→to 格式選擇 UI,
     統一以物件陣列為中介;SheetJS 動態 import + sheet-vendor chunk(424KB)不預快取 — 2026-06-15
-- 圖片遮蔽(image-redact):拖曳框選塗黑/馬賽克,真的把像素燒掉、不上傳,分享截圖前遮個資 — 2026-06-15
+- ZIP 工坊(zip-studio,category=workshop):把多個檔案/資料夾打包成一個 .zip 好寄出/上傳,
+  或把收到的 .zip 在本機解開、逐檔檢視與下載。線上壓縮/解壓站要把可能含機密的檔案上傳到別人伺服器、
+  滿廣告又限大小/檔數;本工具用 JSZip(純 JS + pako,無 WASM、不連網)全程在瀏覽器處理、不上傳。
+  壓縮三段強度(STORE/標準/最大)、檔名可改(含 / 建資料夾)、同名自動加序號不覆蓋、顯示壓縮比;
+  解壓列出全部項目逐檔下載。引擎 src/features/zipStudio.ts(buildZip/readZip/normalizeName 純位元組進出、
+  與環境無關故可 Node 測,normalizeName 擋 .. 跳脫)+ 回歸測試 scripts/test-zipstudio.mjs(17 筆:來回一致、
+  中文/二進位、同名改名、STORE vs DEFLATE、非 ZIP 報錯,以 esbuild 打包含 jszip 後跑,併入 npm test)。
+  JSZip 動態 import + zip-vendor chunk(gzip 45KB)不預快取;不支援密碼加密 ZIP(引導用 secure-box)。
+  type-check + test(全 162 筆)+ build 通過 — 2026-06-16拖曳框選塗黑/馬賽克,真的把像素燒掉、不上傳,分享截圖前遮個資 — 2026-06-15
 - 證件浮水印加註(image-watermark):交付證件影本前斜向重複加註用途(防盜用,內政部宣導作法),
   canvas 把文字燒進像素、密度/顏色/角度可調、不上傳、可批次;與 image-redact 互補 — 2026-06-15
 - 文字清理工坊(text-clean):清掉貼上時夾帶的零寬/不可見字元、全形↔半形、多餘空白/空行、
