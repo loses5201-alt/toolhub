@@ -93,6 +93,18 @@
   scripts/test-ico.mjs(16 筆,驗證標頭/entry/offset/影像放置,併入 npm test)。
   type-check + test + build 通過 — 2026-06-16
 
+- 檔案分割 / 合併(file-split,category=workshop):大檔寄不出去(email/LINE/雲端有大小限制)時,
+  把任何檔案切成小份分批傳,收到後再合併還原。線上分割站要把可能很大又含機密的檔案整個上傳到別人伺服器、
+  滿廣告又限大小;本工具用 Blob.slice(惰性、不需整檔讀進記憶體)切割、new Blob([...parts]) 合併,
+  全程瀏覽器不上傳。分割檔用標準 .001 .002 命名(與 7-Zip/HJSplit 一致),對方就算沒有本工具也能用內建
+  copy /b(Windows)/ cat(Mac/Linux)指令合併;合併會依檔名序號自動排序並偵測缺份/重複避免合出損壞檔。
+  引擎 src/features/fileSplit.ts(planChunks 切點規劃 + 份數上限保護、partName 補零命名、partIndexOf/baseNameOf、
+  orderParts 排序+序列檢查、joinBytes 供測試驗證來回一致;純函式無 DOM)+ 回歸測試 scripts/test-filesplit.mjs
+  (26 筆:切點/整除/單份/錯誤/命名/序號/排序缺份重複/位元組來回一致含中文,併入 npm test)。零三方相依、不上傳。
+  ⚠️ 本環境 npm registry 被網路政策擋(403)無法裝 node_modules,改用 node --experimental-strip-types
+  直跑引擎驗證(26 筆全過);.vue 無法本機 build/type-check,靠細讀 + 既有 image-redact 模式 + 部署 Action
+  的真實 build 把關(deploy needs build,build 失敗不會發佈,線上站安全)— 2026-06-16
+
 ## 可信策展(2026-06:延續下載中心模式,資料 public/data/*.json + 容錯視圖)
 - 推薦好站(/picks,views/Picks.vue + public/data/picks.json):人工挑選、免費好用、連結皆指向官方;
   旗艦收錄「防詐查證」(165/事實查核/MyGoPen/Cofacts)貼合本站 DNA;另含 AI 助手/翻譯學習/修圖設計/台灣在地。

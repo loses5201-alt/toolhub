@@ -72,6 +72,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/zip-studio/Index.vue'),
   },
   {
+    id: 'file-split',
+    name: '檔案分割 / 合併',
+    category: 'workshop',
+    description: '大檔寄不出去?把任何檔案切成小份分批傳(email/LINE/雲端有大小限制),收到後再合併還原 —— 全程在你瀏覽器處理,不上傳、無廣告。用標準 .001 命名,對方也能用內建指令合併。',
+    keywords: ['分割', '切割', '合併', '切檔', '分檔', '大檔', '檔案太大', '太大', '寄不出去', '上傳限制', '附件太大', 'split', 'join', 'merge', '001', 'hjsplit', '分卷', '拆檔', '影片太大', '備份'],
+    icon: '🪓',
+    loader: () => import('@/tools/file-split/Index.vue'),
+  },
+  {
     id: 'image-stitch',
     name: '圖片拼接(長圖)',
     category: 'workshop',
