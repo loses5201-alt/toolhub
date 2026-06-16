@@ -410,6 +410,69 @@ export async function extractPdfText(
   return out
 }
 
+/** 渲染單一頁面成 JPEG dataUrl(給簽名定位的背景預覽用),並回傳頁面點數尺寸與總頁數 */
+export async function renderPageDataUrl(
+  buffer: ArrayBuffer,
+  pageIndex: number,
+  maxEdge = 560,
+): Promise<{ dataUrl: string; wpt: number; hpt: number; count: number }> {
+  const task = pdfjsLib.getDocument({ data: buffer.slice(0) })
+  const doc = await task.promise
+  const count = doc.numPages
+  const idx = Math.min(Math.max(0, pageIndex), count - 1)
+  const page = await doc.getPage(idx + 1)
+  const vp1 = page.getViewport({ scale: 1 })
+  const scale = maxEdge / Math.max(vp1.width, vp1.height)
+  const viewport = page.getViewport({ scale })
+  const canvas = document.createElement('canvas')
+  canvas.width = Math.ceil(viewport.width)
+  canvas.height = Math.ceil(viewport.height)
+  const ctx = canvas.getContext('2d')!
+  ctx.fillStyle = '#fff'
+  ctx.fillRect(0, 0, canvas.width, canvas.height)
+  await page.render({ canvas, canvasContext: ctx, viewport }).promise
+  const dataUrl = canvas.toDataURL('image/jpeg', 0.85)
+  await task.destroy()
+  return { dataUrl, wpt: vp1.width, hpt: vp1.height, count }
+}
+
+export interface SignPlacement {
+  pageIndex: number // 0-based
+  xPct: number // 簽名框左緣 / 頁寬 (0..1)
+  yPct: number // 簽名框上緣 / 頁高,由「上」往下 (0..1)
+  wPct: number // 簽名框寬 / 頁寬
+  hPct: number // 簽名框高 / 頁高
+}
+
+/**
+ * 把簽名圖(透明 PNG bytes)蓋到指定頁的指定位置。
+ * 位置以「頁面比例」表示,與預覽顯示解析度無關,所以畫面上看到的位置=輸出位置。
+ */
+export async function signPdf(
+  buffer: ArrayBuffer,
+  pngBytes: Uint8Array,
+  place: SignPlacement,
+): Promise<Uint8Array> {
+  const doc = await PDFDocument.load(buffer, { ignoreEncryption: true })
+  const pages = doc.getPages()
+  const page = pages[place.pageIndex]
+  if (!page) throw new Error('頁面不存在')
+  const { width: pw, height: ph } = page.getSize()
+  const img = await doc.embedPng(pngBytes)
+  const w = place.wPct * pw
+  const h = place.hPct * ph
+  const x = place.xPct * pw
+  const y = ph - place.yPct * ph - h // 由上而下的座標轉成 PDF 由下而上
+  page.drawImage(img, { x, y, width: w, height: h })
+  return await doc.save()
+}
+
+/** 把 data URL 轉成位元組(供簽名 PNG 嵌入用) */
+export async function dataUrlToBytes(dataUrl: string): Promise<Uint8Array> {
+  const res = await fetch(dataUrl)
+  return new Uint8Array(await res.arrayBuffer())
+}
+
 /** 取得圖片像素尺寸 */
 export function imageSize(url: string): Promise<{ w: number; h: number }> {
   return new Promise((resolve, reject) => {
