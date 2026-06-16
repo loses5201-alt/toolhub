@@ -170,6 +170,103 @@ export async function watermarkPdf(buffer: ArrayBuffer, o: PdfWatermarkOpts): Pr
   return await doc.save()
 }
 
+export interface PageNumberOpts {
+  template: string // 含 {n}(頁碼)與 {total}(總頁數)兩種代號
+  position:
+    | 'bottom-center'
+    | 'bottom-left'
+    | 'bottom-right'
+    | 'top-center'
+    | 'top-left'
+    | 'top-right'
+  startAt: number // 起始頁碼(預設 1)
+  skipFirst: boolean // 第一頁不標(封面常見)
+  sizePct: number // 字級 = 頁面短邊像素 * sizePct / 100
+  colorRGB: string // 例:'55,65,81'
+  marginPt: number // 與頁緣距離(pt)
+}
+
+// 把一段頁碼文字畫成「貼齊文字範圍」的透明 PNG,回傳 bytes 與邏輯尺寸(pt)。
+// 用 canvas 畫才能支援中文(pdf-lib 內建字型不含 CJK);周圍透明,蓋上去不會擋住內容。
+async function renderLabelPng(
+  text: string,
+  fontPx: number,
+  colorRGB: string,
+): Promise<{ bytes: Uint8Array; wpt: number; hpt: number }> {
+  const scale = 2 // 2 倍解析度求清晰,放回頁面時除回去
+  const px = Math.max(1, Math.round(fontPx * scale))
+  const measure = document.createElement('canvas').getContext('2d')!
+  const font = `bold ${px}px "Noto Sans TC", "Microsoft JhengHei", sans-serif`
+  measure.font = font
+  const tw = Math.ceil(measure.measureText(text).width)
+  const padX = Math.ceil(px * 0.25)
+  const cw = Math.max(1, tw + padX * 2)
+  const ch = Math.max(1, Math.ceil(px * 1.35))
+  const canvas = document.createElement('canvas')
+  canvas.width = cw
+  canvas.height = ch
+  const ctx = canvas.getContext('2d')!
+  ctx.font = font
+  ctx.fillStyle = `rgb(${colorRGB})`
+  ctx.textAlign = 'center'
+  ctx.textBaseline = 'middle'
+  ctx.fillText(text, cw / 2, ch / 2)
+  const blob: Blob = await new Promise((res) => canvas.toBlob((b) => res(b!), 'image/png'))
+  return {
+    bytes: new Uint8Array(await blob.arrayBuffer()),
+    wpt: cw / scale,
+    hpt: ch / scale,
+  }
+}
+
+/**
+ * 在 PDF 每頁加上頁碼(第 X 頁、X / Y 等),交付合約/報告前自動編號,免上傳機密文件。
+ * 頁碼以 canvas 畫成 PNG 後蓋到頁面指定角落,支援中文。{total} = 最後一頁印出的號碼。
+ */
+export async function addPageNumbers(
+  buffer: ArrayBuffer,
+  o: PageNumberOpts,
+): Promise<Uint8Array> {
+  const doc = await PDFDocument.load(buffer, { ignoreEncryption: true })
+  const pages = doc.getPages()
+  const total = pages.length
+  // 會被標號的頁數:略過封面則少一頁
+  const numbered = o.skipFirst ? Math.max(0, total - 1) : total
+  if (numbered === 0) return await doc.save()
+  const totalShown = o.startAt + numbered - 1 // 最後一頁印出的號碼
+  const cache = new Map<string, { img: PDFImage; wpt: number; hpt: number }>()
+  let k = 0 // 第幾個被標號的頁(0-based)
+  for (let i = 0; i < total; i++) {
+    if (o.skipFirst && i === 0) continue
+    const page = pages[i]
+    const { width: pw, height: ph } = page.getSize()
+    const n = o.startAt + k
+    k++
+    const label = o.template
+      .replace(/\{n\}/g, String(n))
+      .replace(/\{total\}/g, String(totalShown))
+      .trim()
+    if (!label) continue
+    const fontPx = Math.max(8, Math.round(Math.min(pw, ph) * (o.sizePct / 100)))
+    const key = `${label}|${fontPx}`
+    let entry = cache.get(key)
+    if (!entry) {
+      const r = await renderLabelPng(label, fontPx, o.colorRGB)
+      entry = { img: await doc.embedPng(r.bytes), wpt: r.wpt, hpt: r.hpt }
+      cache.set(key, entry)
+    }
+    const m = o.marginPt
+    const isTop = o.position.startsWith('top')
+    let x: number
+    if (o.position.endsWith('left')) x = m
+    else if (o.position.endsWith('right')) x = pw - m - entry.wpt
+    else x = (pw - entry.wpt) / 2
+    const y = isTop ? ph - m - entry.hpt : m
+    page.drawImage(entry.img, { x, y, width: entry.wpt, height: entry.hpt })
+  }
+  return await doc.save()
+}
+
 export interface RenderedPage {
   index: number // 0-based
   dataUrl: string // 縮圖
