@@ -153,6 +153,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/qr-decode/Index.vue'),
   },
   {
+    id: 'url-clean',
+    name: '網址清理器',
+    category: 'anti-scam',
+    description: '把 Google/Facebook/Outlook 的「轉址跳板」還原成真正的目的地,點之前先看清楚要去哪;順手刪掉 utm_/fbclid 等追蹤參數。全程在你瀏覽器,不上傳、可批次。',
+    keywords: ['網址', '連結', '清理', '追蹤', '追蹤參數', 'utm', 'fbclid', 'gclid', '轉址', '跳轉', '還原', '真正網址', '目的地', '短網址', '乾淨', '去追蹤', '隱私', '分享連結', '安全連結', 'safelinks', 'url', 'tracking', '參數'],
+    icon: '🧼',
+    loader: () => import('@/tools/url-clean/Index.vue'),
+  },
+  {
     id: 'link-check',
     name: '可疑網址檢查器',
     category: 'anti-scam',

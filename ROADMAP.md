@@ -110,6 +110,14 @@
 - 檔案校驗碼 / 完整性驗證(file-checksum,category=anti-scam):Web Crypto crypto.subtle.digest
   算 SHA-256/SHA-1/SHA-512,拖放/多選、貼上官方校驗碼自動比對(✓相符/✗不相符 + 警示),
   全程本機不上傳。貼合下載中心「附校驗碼」防掉包 DNA,連回 /downloads — 2026-06-15
+- 網址清理器(url-clean,category=anti-scam):兩件事 ——(1)還原轉址跳板:把 Google 搜尋結果/
+  Facebook(l.facebook.com)/Outlook 安全連結等「先導到中介站再跳轉」的網址逐層還原成真正目的地,
+  點之前看清楚要去哪(防釣魚);(2)移除追蹤參數:刪掉 utm_*/fbclid/gclid/si 等只用來追蹤的參數。
+  引擎 src/features/urlClean.ts(零相依純函式:已知轉址站白名單避免把正常 ?next= 誤判、追蹤參數
+  前綴+完全比對兩表、最多 5 層還原、未變動回原字串避免 %20↔+ 重新編碼、無 scheme 自動補 https);
+  UI 可多行批次、逐筆顯示還原鏈與移除參數、複製單筆/全部。回歸測試 scripts/test-urlclean.mjs(21 筆,
+  併入 npm test);與可疑網址檢查器互補。type-check + test + build 通過 — 2026-06-16
+  📌 依遠端環境工作流以分支 feat/url-clean + 草稿 PR #1 提交(不直接 push main),待業主合併即自動部署上線
 
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
