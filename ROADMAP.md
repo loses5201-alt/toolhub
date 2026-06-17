@@ -61,6 +61,15 @@
   (reencodeToBytes/fixOnce/suspicionScore/fixMojibake 純函式無 DOM)+ 回歸測試 scripts/test-mojibake.mjs
   (26 筆:歐語符號/中文/中英混合/emoji/雙重亂碼/正常文字不破壞/逆推與分數,以 latin1 還原程序產生樣本,
   併入 npm test)。零三方相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-17
+- 表格合併 / VLOOKUP(table-merge,category=workshop):把兩份表格依「對應欄(key)」併成一張,
+  等同 Excel VLOOKUP / SQL JOIN(例:左=客戶名單、右=訂單金額,依 Email 對起來)。支援 left join
+  (保留所有左列、對不到留空)與 inner join(只留對到的列);右表同 key 取第一筆(VLOOKUP 行為)並回報重複數;
+  key 預設忽略英文大小寫+去前後空白(僅 key 正規化,資料值原樣保留);右表欄名與左表衝突自動加「(2)」不覆蓋;
+  可選是否帶入右表 key 欄。回報 matched/unmatched/rightDuplicates 統計。與 table-clean(單表清理)、
+  list-compare(集合比對)、data-convert(格式互轉)互補。引擎 src/features/tableMerge.ts(純函式無 DOM,
+  複用 tableClean 的 Table/parseTable/toCSV)+ 回歸測試 scripts/test-tablemerge.mjs(20 筆:left/inner、
+  填值留空、計數、大小寫/去空白 key、重複 key 取第一、欄名衝突改名、多欄、空右表、序列化整合,
+  以 esbuild 多入口打包後跑,併入 npm test)。含個資名單不上傳;type-check + 全測試 + build 通過 — 2026-06-17
 - 證件浮水印加註(image-watermark):交付證件影本前斜向重複加註用途(防盜用,內政部宣導作法),
   canvas 把文字燒進像素、密度/顏色/角度可調、不上傳、可批次;與 image-redact 互補 — 2026-06-15
 - 文字清理工坊(text-clean):清掉貼上時夾帶的零寬/不可見字元、全形↔半形、多餘空白/空行、

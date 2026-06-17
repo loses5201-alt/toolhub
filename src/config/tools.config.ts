@@ -117,6 +117,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/mojibake-fix/Index.vue'),
   },
   {
+    id: 'table-merge',
+    name: '表格合併 / VLOOKUP',
+    category: 'workshop',
+    description: '把兩份名單依共同欄位(Email、學號、統編)對起來併成一張,等同 Excel VLOOKUP,免寫公式 —— 全程在你瀏覽器,含個資的名單不上傳。',
+    keywords: ['表格合併', '合併', 'vlookup', 'join', '對應', '比對合併', '兩個表格', '兩張表', 'csv', 'excel', '名單', '對起來', '查表', 'lookup', 'merge', '關聯'],
+    icon: '🔗',
+    loader: () => import('@/tools/table-merge/Index.vue'),
+  },
+  {
     id: 'table-clean',
     name: '表格清理工坊',
     category: 'workshop',
