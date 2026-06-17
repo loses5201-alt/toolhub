@@ -45,6 +45,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/color-tools/Index.vue'),
   },
   {
+    id: 'image-ocr',
+    name: '圖片文字辨識(OCR)',
+    category: 'workshop',
+    description: '把截圖、照片、掃描檔裡的文字抓成可編輯文字,支援繁中+英 —— 全程在你瀏覽器辨識,圖片不上傳(一般 OCR 網站都要你上傳)。',
+    keywords: ['ocr', '文字辨識', '圖片轉文字', '截圖轉文字', '照片轉文字', '掃描', '辨識', '抓文字', '擷取文字', '圖轉文字', '繁體', '辨識文字', 'image to text'],
+    icon: '🔠',
+    loader: () => import('@/tools/image-ocr/Index.vue'),
+  },
+  {
     id: 'pdf-studio',
     name: 'PDF 工坊',
     category: 'workshop',
