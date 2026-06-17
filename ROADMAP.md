@@ -67,6 +67,13 @@
   兩=2、〇/零、簡體 万亿、阿拉伯混用(5萬)、小數「點/点」逐字串接;無法辨識字/多個小數點回錯誤。
   回歸測試 test-amountchinese.mjs +26 筆(十/二十三/一百零五/兩百零五/億萬完整 123456789/兆/混用/小數/
   錯誤處理/與正向 amountToChinese 來回一致),併入既有 npm test。零新相依;type-check + 全測試 + build 通過 — 2026-06-17
+- JSON 攤平轉表格(json-flatten,category=workshop):把巢狀 JSON(物件裡有物件/陣列)壓平成路徑鍵
+  (a.b、a[0].c),頂層陣列→一元素一列、頂層物件→單列,缺欄自動補空,輸出 CSV/JSON 丟進 Excel。
+  補足 data-convert「只吃扁平物件陣列」的缺口(巢狀 API 回傳)。boolean→true/false、null→空、空物件/空陣列
+  保留鍵避免整列消失、頂層純值用 value 鍵。引擎 src/features/jsonFlatten.ts(flattenInto/flattenOne/
+  flattenJson/flattenedToCSV 純函式無 DOM,複用 data-convert 的 objectsToCSV 做欄位聯集+引號逸出)+ 回歸測試
+  scripts/test-jsonflatten.mjs(23 筆:巢狀路徑/陣列索引/型別/頂層純值/空物件陣列/多列聯集/CSV 逸出/真實範例,
+  併入 npm test)。零新相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-17
 - 表格統計 / 樞紐(table-stats,category=workshop):把一份明細「依某欄分組,對另一欄做統計」
   (等同 Excel 樞紐分析 / SQL GROUP BY):支援 count/sum/avg/min/max/distinct 六種聚合,可選不分組(全部一組);
   數值自動吃千分位逗號+去空白、非數值在 sum/avg/min/max 時略過(全組無數值回空字串),avg 分母只算有效數值;

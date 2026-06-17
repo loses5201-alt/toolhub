@@ -117,6 +117,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/mojibake-fix/Index.vue'),
   },
   {
+    id: 'json-flatten',
+    name: 'JSON 攤平轉表格',
+    category: 'workshop',
+    description: '把巢狀 JSON(物件裡有物件、陣列)壓平成路徑欄位(addr.city、tags[0]),一列一筆轉成 CSV 丟進 Excel —— 全程在你瀏覽器,不上傳。',
+    keywords: ['json', '攤平', '扁平化', 'flatten', '巢狀', 'json轉csv', 'json轉excel', 'json轉表格', 'api', '展開', '結構', '轉表格', 'unnest'],
+    icon: '🪺',
+    loader: () => import('@/tools/json-flatten/Index.vue'),
+  },
+  {
     id: 'table-stats',
     name: '表格統計 / 樞紐',
     category: 'workshop',
