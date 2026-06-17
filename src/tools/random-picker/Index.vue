@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import LegalNote from '@/components/LegalNote.vue'
+import { shuffle, drawWinners, makeGroupsByCount } from '@/features/randomDraw'
 
 /*
-  抽籤 / 分組 / 隨機排序 —— 用 crypto.getRandomValues 做公平洗牌(不是可預測的 Math.random)。
+  抽籤 / 分組 / 隨機排序 —— 用瀏覽器密碼學亂數(crypto.getRandomValues)+ 拒絕取樣做公平洗牌,
+  消除取模偏差,機率真正均等(不是可預測的 Math.random)。引擎為共用、可測試的 src/features/randomDraw.ts。
   全程在瀏覽器。聚餐誰請客、分組、抽獎、決定順序都好用。
 */
 type Mode = 'pick' | 'group' | 'shuffle'
@@ -21,30 +23,15 @@ const items = computed(() =>
     .filter(Boolean),
 )
 
-// 加密級亂數的 Fisher–Yates 洗牌
-function shuffle<T>(arr: T[]): T[] {
-  const a = arr.slice()
-  for (let i = a.length - 1; i > 0; i--) {
-    const r = crypto.getRandomValues(new Uint32Array(1))[0] / 2 ** 32
-    const j = Math.floor(r * (i + 1))
-    ;[a[i], a[j]] = [a[j], a[i]]
-  }
-  return a
-}
-
 function run() {
   const list = items.value
   if (!list.length) return
-  const s = shuffle(list)
   if (mode.value === 'pick') {
-    result.value = [s.slice(0, Math.max(1, Math.min(pickN.value, list.length)))]
+    result.value = [drawWinners(list, pickN.value)]
   } else if (mode.value === 'shuffle') {
-    result.value = [s]
+    result.value = [shuffle(list)]
   } else {
-    const g = Math.max(2, Math.min(groupN.value, list.length))
-    const groups: string[][] = Array.from({ length: g }, () => [])
-    s.forEach((item, i) => groups[i % g].push(item))
-    result.value = groups
+    result.value = makeGroupsByCount(list, Math.max(2, groupN.value))
   }
   picked.value = true
 }
