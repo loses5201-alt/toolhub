@@ -2,12 +2,14 @@
 import { ref, computed } from 'vue'
 import { renderThumbnails, buildFromOrder, downloadBlob, type RenderedPage } from './lib'
 
-// 整理頁面 —— 渲染每頁縮圖,可刪除、重排、只擷取選取頁,再匯出新 PDF
+// 整理頁面 —— 渲染每頁縮圖,可刪除、重排、旋轉、只擷取選取頁,再匯出新 PDF
 const fileName = ref('')
 let buffer: ArrayBuffer | null = null
 const pages = ref<RenderedPage[]>([])
 // order = 目前要輸出的頁面(以原始 0-based index 表示),順序即輸出順序
 const order = ref<number[]>([])
+// rot = 與 order 等長的每頁額外旋轉角度(0/90/180/270),掃描歪頁可轉正
+const rot = ref<number[]>([])
 const loading = ref(false)
 const busy = ref(false)
 const error = ref('')
@@ -24,6 +26,7 @@ async function onFile(e: Event) {
     buffer = await f.arrayBuffer()
     pages.value = await renderThumbnails(buffer)
     order.value = pages.value.map((p) => p.index)
+    rot.value = pages.value.map(() => 0)
   } catch (err) {
     error.value = '無法讀取此 PDF,可能損毀或受密碼保護:' + (err as Error).message
   } finally {
@@ -35,15 +38,20 @@ const thumbOf = (idx: number) => pages.value.find((p) => p.index === idx)
 
 function removeAt(pos: number) {
   order.value.splice(pos, 1)
+  rot.value.splice(pos, 1)
 }
 function move(pos: number, dir: -1 | 1) {
   const j = pos + dir
   if (j < 0 || j >= order.value.length) return
-  const arr = order.value
-  ;[arr[pos], arr[j]] = [arr[j], arr[pos]]
+  ;[order.value[pos], order.value[j]] = [order.value[j], order.value[pos]]
+  ;[rot.value[pos], rot.value[j]] = [rot.value[j], rot.value[pos]]
+}
+function rotate(pos: number, dir: -1 | 1) {
+  rot.value[pos] = ((rot.value[pos] + dir * 90) % 360 + 360) % 360
 }
 function reset() {
   order.value = pages.value.map((p) => p.index)
+  rot.value = pages.value.map(() => 0)
 }
 
 const removedCount = computed(() => pages.value.length - order.value.length)
@@ -53,7 +61,7 @@ async function run() {
   busy.value = true
   error.value = ''
   try {
-    const bytes = await buildFromOrder(buffer, order.value)
+    const bytes = await buildFromOrder(buffer, order.value, rot.value)
     const base = fileName.value.replace(/\.pdf$/i, '')
     downloadBlob(new Blob([bytes as BlobPart], { type: 'application/pdf' }), base + '_整理.pdf')
   } catch (e) {
@@ -69,7 +77,7 @@ async function run() {
     <div>
       <label class="field-label">選擇一個 PDF</label>
       <input type="file" accept="application/pdf" class="field-input" @change="onFile" />
-      <p class="field-hint">載入後可刪除不要的頁、拖動順序,最後匯出新檔。原檔不會被改動,也不會上傳。</p>
+      <p class="field-hint">載入後可刪除不要的頁、調整順序、把掃描歪的頁轉正(↺ ↻),最後匯出新檔。原檔不會被改動,也不會上傳。</p>
     </div>
 
     <p v-if="loading" class="text-ink-500">正在渲染頁面預覽…</p>
@@ -87,12 +95,22 @@ async function run() {
           :key="pos + '-' + idx"
           class="group relative rounded-xl border border-line bg-white p-2"
         >
-          <img v-if="thumbOf(idx)" :src="thumbOf(idx)!.dataUrl" alt="" class="mx-auto max-h-44 w-auto" />
+          <div class="flex h-44 items-center justify-center overflow-hidden">
+            <img
+              v-if="thumbOf(idx)"
+              :src="thumbOf(idx)!.dataUrl"
+              alt=""
+              class="max-h-44 w-auto transition-transform"
+              :style="{ transform: `rotate(${rot[pos]}deg)` }"
+            />
+          </div>
           <div class="mt-1 flex items-center justify-between text-xs text-ink-500">
             <span>第 {{ pos + 1 }} 頁<span class="text-ink-300"> (原 P{{ idx + 1 }})</span></span>
-            <span class="flex gap-1">
+            <span class="flex gap-0.5">
               <button class="px-1 hover:text-brand-700 disabled:opacity-30" :disabled="pos === 0" aria-label="前移" @click="move(pos, -1)">◀</button>
               <button class="px-1 hover:text-brand-700 disabled:opacity-30" :disabled="pos === order.length - 1" aria-label="後移" @click="move(pos, 1)">▶</button>
+              <button class="px-1 hover:text-brand-700" aria-label="逆時針旋轉" title="逆時針轉 90°" @click="rotate(pos, -1)">↺</button>
+              <button class="px-1 hover:text-brand-700" aria-label="順時針旋轉" title="順時針轉 90°" @click="rotate(pos, 1)">↻</button>
               <button class="px-1 text-red-400 hover:text-red-600" aria-label="刪除此頁" @click="removeAt(pos)">✕</button>
             </span>
           </div>

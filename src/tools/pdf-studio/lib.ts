@@ -2,7 +2,7 @@
   PDF 工坊共用工具 —— 全程在瀏覽器處理,不上傳任何檔案。
   合併/整理/圖片轉PDF 用 pdf-lib;PDF 轉圖片用 pdfjs-dist 渲染。
 */
-import { PDFDocument, type PDFImage } from 'pdf-lib'
+import { PDFDocument, degrees, type PDFImage } from 'pdf-lib'
 import * as pdfjsLib from 'pdfjs-dist'
 import workerUrl from 'pdfjs-dist/build/pdf.worker.min.mjs?url'
 
@@ -51,14 +51,26 @@ export async function getPageCount(buffer: ArrayBuffer): Promise<number> {
  * 依指定的頁碼順序(0-based,可重複/省略)產生新 PDF。
  * 刪除 = 不放進 order;重排 = 改變 order 順序;擷取 = 只放部分。
  */
+/**
+ * 依指定順序(以原始 0-based 頁碼表示)重組 PDF;可選 rotations 為與 order 等長的
+ * 額外旋轉角度(度,通常 0/90/180/270),會疊加到該頁原本的旋轉上。
+ */
 export async function buildFromOrder(
   buffer: ArrayBuffer,
   order: number[],
+  rotations?: number[],
 ): Promise<Uint8Array> {
   const src = await PDFDocument.load(buffer, { ignoreEncryption: true })
   const out = await PDFDocument.create()
   const copied = await out.copyPages(src, order)
-  copied.forEach((p) => out.addPage(p))
+  copied.forEach((p, i) => {
+    const delta = rotations?.[i]
+    if (delta) {
+      const base = p.getRotation().angle
+      p.setRotation(degrees(((base + delta) % 360 + 360) % 360))
+    }
+    out.addPage(p)
+  })
   return await out.save()
 }
 
