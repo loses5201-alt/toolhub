@@ -108,6 +108,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/list-compare/Index.vue'),
   },
   {
+    id: 'vcard-maker',
+    name: 'vCard 聯絡人產生器',
+    category: 'workshop',
+    description: '把單筆聯絡人,或一份 Excel/CSV 通訊錄,做成 .vcf 檔,直接匯入 iPhone / Android / Google / Apple / Outlook 聯絡人 —— 線上轉換器要你上傳含姓名電話的個資名單,本工具全程在你瀏覽器處理、不上傳。',
+    keywords: ['vcard', 'vcf', '聯絡人', '通訊錄', '名片', '電話簿', '匯入聯絡人', 'contacts', '聯絡資訊', '匯入手機', 'google聯絡人', 'iphone聯絡人', 'csv轉vcard', 'excel轉聯絡人', '批次', '名單', '電話', '同學會', '社團'],
+    icon: '👤',
+    loader: () => import('@/tools/vcard-maker/Index.vue'),
+  },
+  {
     id: 'mail-merge',
     name: '合併列印 / 套印',
     category: 'workshop',

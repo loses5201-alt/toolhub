@@ -241,6 +241,16 @@
   全程在裝置上發聲、文字不上傳、免帳號。UI-only(瀏覽器 API 無純邏輯可單元測,雲端無瀏覽器,靠 type-check + 細讀
   + 功能偵測與 graceful degradation 確保安全);零三方相依;type-check + build 通過 — 2026-06-17
 
+- vCard 聯絡人產生器(vcard-maker,category=workshop):把單筆聯絡人,或一份 Excel/CSV 通訊錄(第一列欄位名)
+  做成標準 vCard 3.0 的 .vcf,直接匯入 iPhone/Android/Google/Apple/Outlook 聯絡人,免逐筆手動新增。線上 CSV→vCard
+  轉換器要把含姓名電話的個資名單上傳他人伺服器,本工具全程瀏覽器、不上傳(延續 mail-merge/data-convert/event-ics
+  「不上傳含個資名單」DNA)。單筆表單 + 批次貼 Excel 兩模式;欄位名同義詞自動對應(姓名/手機/市話/Email/公司/職稱/
+  地址/生日/網址/備註,中英文皆可,同欄位重複取第一個、其餘列未對應)。引擎 src/features/vcard.ts(純函式無 DOM:
+  escapeText 依 RFC 6350 逸出反斜線/逗號/分號/換行、buildVCard/buildVCards、tableToContacts;CRLF 行尾、為免折行截斷
+  中文不做 line folding、N/FN 顯示名 fallback、TEL CELL/HOME、ADR 街道欄、URL/BDAY 不逸出)+ 回歸測試
+  scripts/test-vcard.mjs(43 筆:逸出/結構/姓名分合/全欄位/批次略過空白/表格對應/英文大小寫/重複欄/端到端,
+  併入 npm test)。本環境 npm registry 已可安裝,實際跑通 type-check + 全測試 + build。零三方相依、不上傳 — 2026-06-17
+
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
       與本專案「精簡 + 自包含」原則不符,**跳過**(未來若改自架模型再評估)
