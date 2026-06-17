@@ -55,6 +55,40 @@ export function isWeekend(ymd: YMD): boolean {
   return w === 0 || w === 6
 }
 
+/**
+ * 工作日選項:
+ * - holidays:額外視為「放假」的日期(YYYY-MM-DD),例如國定假日、公司行事曆休假日,
+ *   即使落在平日也不算工作日。
+ * - workdays:強制視為「上班」的日期(YYYY-MM-DD),例如颱風補班、補行上班日,
+ *   即使落在週末也算工作日(優先於 holidays 與週末)。
+ */
+export interface BusinessOpts {
+  holidays?: Set<string>
+  workdays?: Set<string>
+}
+
+/** 從一段文字(每行或逗號分隔)抽出所有 YYYY-MM-DD 合法日期,回傳 Set。 */
+export function parseDateList(text: string): Set<string> {
+  const set = new Set<string>()
+  if (!text) return set
+  for (const token of text.split(/[\s,、，;；]+/)) {
+    const ymd = parseDate(token)
+    if (ymd) set.add(formatYMD(ymd))
+  }
+  return set
+}
+
+/**
+ * 判斷某天是否為工作日。優先序:補班日 > 假日清單 > 週末。
+ * 沒有提供 opts 時,等同「平日(非週六日)即工作日」。
+ */
+export function isWorkday(ymd: YMD, opts: BusinessOpts = {}): boolean {
+  const key = formatYMD(ymd)
+  if (opts.workdays?.has(key)) return true
+  if (opts.holidays?.has(key)) return false
+  return !isWeekend(ymd)
+}
+
 /** b 減 a 的天數(b 在後為正)。 */
 export function daysBetween(a: YMD, b: YMD): number {
   return Math.round((toUTC(b).getTime() - toUTC(a).getTime()) / MS_PER_DAY)
@@ -68,26 +102,26 @@ export function addDays(base: YMD, n: number): YMD {
 }
 
 /**
- * 從 base 起算 n 個工作日(跳過週六、週日)。
+ * 從 base 起算 n 個工作日(預設跳過週六、週日;可用 opts 加扣假日/加計補班日)。
  * n 為正往後、為負往前;base 當天不計入,從隔(工作)日開始數。
  */
-export function addBusinessDays(base: YMD, n: number): YMD {
+export function addBusinessDays(base: YMD, n: number, opts: BusinessOpts = {}): YMD {
   let count = Math.trunc(n)
   const step = count >= 0 ? 1 : -1
   let cur = base
   count = Math.abs(count)
   while (count > 0) {
     cur = addDays(cur, step)
-    if (!isWeekend(cur)) count--
+    if (isWorkday(cur, opts)) count--
   }
   return cur
 }
 
 /**
- * 計算 a 到 b(含起訖兩端)之間的工作日數(排除週末)。
+ * 計算 a 到 b(含起訖兩端)之間的工作日數(預設排除週末;可用 opts 加扣假日/加計補班日)。
  * 自動處理 a、b 先後順序,回傳非負整數。
  */
-export function businessDaysBetween(a: YMD, b: YMD): number {
+export function businessDaysBetween(a: YMD, b: YMD, opts: BusinessOpts = {}): number {
   let start = a
   let end = b
   if (daysBetween(start, end) < 0) [start, end] = [end, start]
@@ -95,7 +129,7 @@ export function businessDaysBetween(a: YMD, b: YMD): number {
   let cur = start
   const total = daysBetween(start, end)
   for (let i = 0; i <= total; i++) {
-    if (!isWeekend(cur)) count++
+    if (isWorkday(cur, opts)) count++
     cur = addDays(cur, 1)
   }
   return count

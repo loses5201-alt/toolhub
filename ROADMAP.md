@@ -251,6 +251,14 @@
   scripts/test-vcard.mjs(43 筆:逸出/結構/姓名分合/全欄位/批次略過空白/表格對應/英文大小寫/重複欄/端到端,
   併入 npm test)。本環境 npm registry 已可安裝,實際跑通 type-check + 全測試 + build。零三方相依、不上傳 — 2026-06-17
 
+- 日期計算機升級工作天試算(date-calc):工作日模式新增「放假日 / 補班日」自填(進階面板 CustomDays.vue),
+  把交期/請款的工作天算準 —— 扣掉國定假日/公司休假、加回颱風補班/補行上班。引擎 dateCalc.ts 新增 BusinessOpts
+  (holidays/workdays Set)、isWorkday(優先序:補班 > 假日 > 週末)、parseDateList(從文字抽合法 YYYY-MM-DD、去重濾無效);
+  addBusinessDays/businessDaysBetween 接受 opts 且不帶 opts 時與舊行為完全相同(向後相容)。
+  刻意**不內建台灣國定假日**(假日年年不同、雲端沙盒無法驗證官方來源,寫死易誤導)→ 改由使用者依人事行政總處
+  辦公日曆表自填、附官方連結,延續「資料可驗證」原則。回歸測試 test-datecalc.mjs +13 筆(parseDateList/isWorkday
+  優先序/加扣假日/計補班/無 opts 向後相容)。零新相依;type-check + 全測試 + build 通過 — 2026-06-17
+
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
       與本專案「精簡 + 自包含」原則不符,**跳過**(未來若改自架模型再評估)

@@ -1,14 +1,17 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import LegalNote from '@/components/LegalNote.vue'
+import CustomDays from './CustomDays.vue'
 import {
-  parseDate, formatYMD, weekdayName,
+  parseDate, formatYMD, weekdayName, parseDateList,
   daysBetween, addDays, addBusinessDays, businessDaysBetween,
+  type BusinessOpts,
 } from '@/features/dateCalc'
 
 /*
   日期計算機 —— 三種模式:①算兩日期相差幾天 ②從某天加/減 N 天得到日期(可只算工作日)
   ③兩日期間有幾個上班日。常用於契約/退貨鑑賞期/繳費/活動倒數的到期日推算。不上傳。
+  工作日模式可自填「放假日(國定假日/公司休假)」與「補班日」,把交期/請款的工作天算準。
 */
 type Mode = 'diff' | 'add' | 'business'
 const mode = ref<Mode>('diff')
@@ -18,6 +21,19 @@ const dateB = ref('')
 const baseDate = ref('')
 const offset = ref(7)
 const onlyBusiness = ref(false)
+
+// 自訂放假日 / 補班日(每行或逗號分隔的 YYYY-MM-DD),工作日模式共用。
+const holidaysText = ref('')
+const workdaysText = ref('')
+const showCustomDays = ref(false)
+const bizOpts = computed<BusinessOpts>(() => ({
+  holidays: parseDateList(holidaysText.value),
+  workdays: parseDateList(workdaysText.value),
+}))
+const customCount = computed(() => ({
+  holidays: bizOpts.value.holidays!.size,
+  workdays: bizOpts.value.workdays!.size,
+}))
 
 const pA = computed(() => parseDate(dateA.value))
 const pB = computed(() => parseDate(dateB.value))
@@ -34,16 +50,19 @@ const diffResult = computed(() => {
 const addResult = computed(() => {
   if (!pBase.value) return null
   const n = Math.trunc(offset.value || 0)
-  const target = onlyBusiness.value ? addBusinessDays(pBase.value, n) : addDays(pBase.value, n)
+  const target = onlyBusiness.value
+    ? addBusinessDays(pBase.value, n, bizOpts.value)
+    : addDays(pBase.value, n)
   return { date: formatYMD(target), weekday: weekdayName(target) }
 })
 
 // 模式三:工作日數
 const businessResult = computed(() => {
   if (!pA.value || !pB.value) return null
-  const work = businessDaysBetween(pA.value, pB.value)
+  const work = businessDaysBetween(pA.value, pB.value, bizOpts.value)
+  const plain = businessDaysBetween(pA.value, pB.value)
   const total = Math.abs(daysBetween(pA.value, pB.value)) + 1
-  return { work, total, weekend: total - work }
+  return { work, plain, total, weekend: total - work }
 })
 
 const modes: { key: Mode; label: string }[] = [
@@ -91,9 +110,20 @@ const modes: { key: Mode; label: string }[] = [
           </p>
         </div>
 
+        <CustomDays
+          v-if="mode === 'business'"
+          v-model:show="showCustomDays"
+          v-model:holidays="holidaysText"
+          v-model:workdays="workdaysText"
+          :count="customCount"
+        />
+
         <div v-if="mode === 'business' && businessResult" class="rounded-2xl border border-brand-200 bg-brand-50/50 p-5 space-y-1">
           <p class="text-2xl font-bold text-ink-900">{{ businessResult.work }} 個工作日</p>
-          <p class="text-sm text-ink-500">含起訖兩端、排除週六日;區間共 {{ businessResult.total }} 天,其中週末 {{ businessResult.weekend }} 天。</p>
+          <p class="text-sm text-ink-500">含起訖兩端、排除週六日;區間共 {{ businessResult.total }} 天,其中非工作日 {{ businessResult.weekend }} 天。</p>
+          <p v-if="businessResult.work !== businessResult.plain" class="text-sm text-ink-500">
+            (只看週末則為 {{ businessResult.plain }} 個;已套用你填的放假/補班日)
+          </p>
         </div>
       </template>
 
@@ -114,6 +144,14 @@ const modes: { key: Mode; label: string }[] = [
           只算工作日(跳過週六、週日)
         </label>
 
+        <CustomDays
+          v-if="onlyBusiness"
+          v-model:show="showCustomDays"
+          v-model:holidays="holidaysText"
+          v-model:workdays="workdaysText"
+          :count="customCount"
+        />
+
         <div v-if="addResult" class="rounded-2xl border border-brand-200 bg-brand-50/50 p-5">
           <p class="text-2xl font-bold text-ink-900">{{ addResult.date }}</p>
           <p class="mt-1 text-sm text-ink-500">{{ addResult.weekday }}</p>
@@ -125,8 +163,9 @@ const modes: { key: Mode; label: string }[] = [
       <ul class="list-disc pl-5 space-y-1">
         <li><strong>相差幾天</strong>:兩日期間隔的天數(預設不含頭尾;另標示「含頭尾」的天數供參考)。</li>
         <li><strong>加減天數</strong>:從某天起算多少天後/前是哪一天 —— 算繳費、退貨鑑賞期、契約到期日很方便;勾選「只算工作日」會跳過週末。</li>
-        <li><strong>工作日數</strong>:兩日期之間(含起訖)有幾個上班日,排除週六日。</li>
-        <li>⚠️ 工作日<strong>只排除週末,未扣除國定假日</strong>(假日年年不同);正式期限請再對照政府行事曆。</li>
+        <li><strong>工作日數</strong>:兩日期之間(含起訖)有幾個上班日,預設排除週六日。</li>
+        <li><strong>放假日 / 補班日</strong>:展開「進階」可自填國定假日、公司休假日(視為放假),或颱風補班、補行上班日(視為上班);算交期、請款天數時把假日扣掉、補班加回,結果才準。</li>
+        <li>⚠️ 本工具<strong>不內建國定假日</strong>(假日年年不同、易出錯);請依<a class="text-brand-600 underline" href="https://www.dgpa.gov.tw/typh/daily/calendar.html" target="_blank" rel="noopener noreferrer">人事行政總處政府行政機關辦公日曆表</a>自行填入,以官方公告為準。</li>
         <li>本工具<strong>不連網、不上傳</strong>,全部在你的瀏覽器計算。</li>
       </ul>
     </LegalNote>
