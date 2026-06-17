@@ -117,6 +117,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/mojibake-fix/Index.vue'),
   },
   {
+    id: 'table-stats',
+    name: '表格統計 / 樞紐',
+    category: 'workshop',
+    description: '依某欄分組,馬上算出各組的筆數、加總、平均、最大最小 —— 等同 Excel 樞紐分析,免拉樞紐表;全程在你瀏覽器,資料不上傳。',
+    keywords: ['樞紐', '樞紐分析', '統計', '分組', 'group by', '加總', '小計', '平均', '計數', '筆數', '彙總', '彙整', 'pivot', 'sum', 'count', 'csv', 'excel', '業績', '報表'],
+    icon: '📊',
+    loader: () => import('@/tools/table-stats/Index.vue'),
+  },
+  {
     id: 'table-merge',
     name: '表格合併 / VLOOKUP',
     category: 'workshop',

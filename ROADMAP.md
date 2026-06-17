@@ -61,6 +61,14 @@
   (reencodeToBytes/fixOnce/suspicionScore/fixMojibake 純函式無 DOM)+ 回歸測試 scripts/test-mojibake.mjs
   (26 筆:歐語符號/中文/中英混合/emoji/雙重亂碼/正常文字不破壞/逆推與分數,以 latin1 還原程序產生樣本,
   併入 npm test)。零三方相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-17
+- 表格統計 / 樞紐(table-stats,category=workshop):把一份明細「依某欄分組,對另一欄做統計」
+  (等同 Excel 樞紐分析 / SQL GROUP BY):支援 count/sum/avg/min/max/distinct 六種聚合,可選不分組(全部一組);
+  數值自動吃千分位逗號+去空白、非數值在 sum/avg/min/max 時略過(全組無數值回空字串),avg 分母只算有效數值;
+  分組維持首次出現順序;結果兩欄(分組欄/「全部」+ 統計欄),可下載 CSV/JSON。與 table-clean/table-merge/
+  list-compare/data-convert 構成資料工具家族。引擎 src/features/tableStats.ts(parseNum/formatNum 整數不帶小數、
+  其餘最多 4 位去尾零 / aggregate / computeStats 純函式無 DOM,複用 tableClean 的 Table)+ 回歸測試
+  scripts/test-tablestats.mjs(28 筆:六種聚合、空值處理、不分組、千分位、全非數值、首次順序、parseNum/formatNum,
+  esbuild 多入口打包後跑,併入 npm test)。資料不上傳;type-check + 全測試 + build 通過 — 2026-06-17
 - 表格合併 / VLOOKUP(table-merge,category=workshop):把兩份表格依「對應欄(key)」併成一張,
   等同 Excel VLOOKUP / SQL JOIN(例:左=客戶名單、右=訂單金額,依 Email 對起來)。支援 left join
   (保留所有左列、對不到留空)與 inner join(只留對到的列);右表同 key 取第一筆(VLOOKUP 行為)並回報重複數;
