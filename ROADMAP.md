@@ -67,6 +67,13 @@
   兩=2、〇/零、簡體 万亿、阿拉伯混用(5萬)、小數「點/点」逐字串接;無法辨識字/多個小數點回錯誤。
   回歸測試 test-amountchinese.mjs +26 筆(十/二十三/一百零五/兩百零五/億萬完整 123456789/兆/混用/小數/
   錯誤處理/與正向 amountToChinese 來回一致),併入既有 npm test。零新相依;type-check + 全測試 + build 通過 — 2026-06-17
+- CSV ↔ Markdown 表格(markdown-table,category=workshop):把 CSV/Excel 表格轉成 GitHub/Notion 風格的
+  Markdown 表格(依顯示寬度對齊、CJK 全形算 2 格),或把 Markdown 表格轉回 CSV。寫 README/issue/Notion/HackMD
+  時免手刻表格。儲存格內 | 自動逸出 \|、換行轉空白;可指定靠左/置中/靠右(分隔列 :--- / :--: / --:);
+  解析容許有無外框管線、偵測對齊、短列補空長列裁切、找不到分隔列報錯。引擎 src/features/markdownTable.ts
+  (displayWidth/tableToMarkdown/splitRow/markdownToTable 純函式無 DOM,複用 tableClean 的 Table)+ 回歸測試
+  scripts/test-markdowntable.mjs(22 筆:行數/分隔列/逸出/換行/對齊/無外框/對齊偵測/還原/補裁/報錯/往返一致含中文,
+  esbuild 多入口打包後跑,併入 npm test)。補足 data-convert 不含 Markdown 的缺口;不上傳;type-check + 全測試 + build 通過 — 2026-06-17
 - 文字資料抽取(data-extract,category=workshop):從一大段雜亂文字(轉寄信、文件、PDF 複製文字、貼上網頁)
   一次抓出 Email、網址、台灣手機、有效統一編號,各自去重(email 忽略大小寫、手機正規化成 09 開頭 10 碼)。
   統編複用既有 isValidVat 做檢查碼驗證 → 高精度不誤抓;網址只吃 RFC 3986 ASCII 安全字元(遇中文即停)

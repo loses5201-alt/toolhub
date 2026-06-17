@@ -117,6 +117,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/mojibake-fix/Index.vue'),
   },
   {
+    id: 'markdown-table',
+    name: 'CSV ↔ Markdown 表格',
+    category: 'workshop',
+    description: '把 CSV/Excel 表格轉成 GitHub/Notion 風格的 Markdown 表格(欄位自動對齊),或把 Markdown 表格轉回 CSV —— 全程在你瀏覽器,不上傳。',
+    keywords: ['markdown', 'md', '表格', 'table', 'csv轉markdown', 'markdown表格', 'github', 'notion', 'hackmd', 'readme', '文件', '對齊', '管線', 'pipe', '轉表格'],
+    icon: '📋',
+    loader: () => import('@/tools/markdown-table/Index.vue'),
+  },
+  {
     id: 'data-extract',
     name: '文字資料抽取',
     category: 'workshop',
