@@ -36,6 +36,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/signature-maker/Index.vue'),
   },
   {
+    id: 'color-tools',
+    name: '色彩工坊',
+    category: 'workshop',
+    description: 'HEX/RGB/HSL 色碼互轉,還能從上傳的照片或 logo 抽出主色調色盤 —— 全程在你瀏覽器,圖片不上傳。',
+    keywords: ['顏色', '色碼', '色彩', 'hex', 'rgb', 'hsl', '調色盤', '配色', '取色', '吸管', '主色', 'logo', '色票', 'color'],
+    icon: '🎨',
+    loader: () => import('@/tools/color-tools/Index.vue'),
+  },
+  {
     id: 'pdf-studio',
     name: 'PDF 工坊',
     category: 'workshop',
