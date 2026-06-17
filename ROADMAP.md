@@ -67,6 +67,14 @@
   兩=2、〇/零、簡體 万亿、阿拉伯混用(5萬)、小數「點/点」逐字串接;無法辨識字/多個小數點回錯誤。
   回歸測試 test-amountchinese.mjs +26 筆(十/二十三/一百零五/兩百零五/億萬完整 123456789/兆/混用/小數/
   錯誤處理/與正向 amountToChinese 來回一致),併入既有 npm test。零新相依;type-check + 全測試 + build 通過 — 2026-06-17
+- 文字資料抽取(data-extract,category=workshop):從一大段雜亂文字(轉寄信、文件、PDF 複製文字、貼上網頁)
+  一次抓出 Email、網址、台灣手機、有效統一編號,各自去重(email 忽略大小寫、手機正規化成 09 開頭 10 碼)。
+  統編複用既有 isValidVat 做檢查碼驗證 → 高精度不誤抓;網址只吃 RFC 3986 ASCII 安全字元(遇中文即停)
+  並去尾端標點;手機用 (?:\+?886|0)9... 樣式且過濾市話/不足碼;統編用 lookbehind/lookahead 取獨立 8 碼不從長數字誤抓。
+  與 text-redact(遮蔽個資)互補(本工具是抽出)。引擎 src/features/dataExtract.ts(extractEmails/Urls/Mobiles/Vats/
+  normalizeMobile/extractAll 純函式無 DOM,import vatCheck.isValidVat)+ 回歸測試 scripts/test-dataextract.mjs
+  (23 筆:各類抽取/去重/尾端標點/+886 正規化/市話不誤抓/統編檢查碼過濾/長數字不誤抓/整合/空輸入,併入 npm test)。
+  零新相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-17
 - JSON 攤平轉表格(json-flatten,category=workshop):把巢狀 JSON(物件裡有物件/陣列)壓平成路徑鍵
   (a.b、a[0].c),頂層陣列→一元素一列、頂層物件→單列,缺欄自動補空,輸出 CSV/JSON 丟進 Excel。
   補足 data-convert「只吃扁平物件陣列」的缺口(巢狀 API 回傳)。boolean→true/false、null→空、空物件/空陣列

@@ -117,6 +117,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/mojibake-fix/Index.vue'),
   },
   {
+    id: 'data-extract',
+    name: '文字資料抽取',
+    category: 'workshop',
+    description: '從一大段文字裡一次抓出所有 Email、網址、台灣手機、有效統一編號(統編經檢查碼驗證),自動去重 —— 全程在你瀏覽器,不上傳。',
+    keywords: ['抽取', '擷取', '抓', 'email', '信箱', '電子郵件', '網址', 'url', '連結', '手機', '電話', '統編', '統一編號', '名單', '整理', '撈', 'extract', '蒐集'],
+    icon: '🧲',
+    loader: () => import('@/tools/data-extract/Index.vue'),
+  },
+  {
     id: 'json-flatten',
     name: 'JSON 攤平轉表格',
     category: 'workshop',
