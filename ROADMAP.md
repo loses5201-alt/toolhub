@@ -215,6 +215,14 @@
   2/30 等假日期、閏年判斷正確。引擎 src/features/dateCalc.ts(純函式)+ 回歸測試 scripts/test-datecalc.mjs(28 筆,
   併入 npm test)。明確標示「只排週末未扣國定假日」。零三方相依;type-check + test + build 通過 — 2026-06-17
 
+- 檔案真實類型檢測(file-type,category=anti-scam):讀檔案開頭「魔術位元組」判斷實際格式,與副檔名比對。
+  抓出詐騙常見的「副檔名造假」—— 名為 照片.jpg 實為 Windows 執行檔(PE/MZ)會標🚫danger;類型不符標 mismatch、
+  辨識不出標 unknown、相符標 ok。支援 PDF/PNG/JPEG/GIF/BMP/WebP、ZIP(含 docx/xlsx/apk 等 ZIP 封裝視為相符)、
+  RAR/7z/gzip、舊 OLE Office、MP3/WAV/MP4/AVI、EXE/ELF/Mach-O 等;RIFF 系列與 MP4 offset 4 特判。
+  明確聲明「非防毒、相符≠安全」,與 file-checksum 交叉連結。引擎 src/features/fileType.ts(純函式:detectType/
+  getExtension/checkFile)+ 回歸測試 scripts/test-filetype.mjs(27 筆,併入 npm test)。只讀前 32 bytes、不上傳。
+  零三方相依;type-check + test + build 通過 — 2026-06-17
+
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
       與本專案「精簡 + 自包含」原則不符,**跳過**(未來若改自架模型再評估)

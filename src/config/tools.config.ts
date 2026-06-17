@@ -297,6 +297,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/phone-check/Index.vue'),
   },
   {
+    id: 'file-type',
+    name: '檔案真實類型檢測',
+    category: 'anti-scam',
+    description: '讀檔頭「魔術位元組」判斷檔案實際是什麼格式,並和副檔名比對 —— 抓出把惡意程式改名成 .jpg、.pdf 的偽裝(詐騙常見手法)。副檔名能亂改,檔頭騙不了人。全程在你瀏覽器讀取,不上傳檔案。',
+    keywords: ['檔案類型', '副檔名', '偽裝', '假檔', '惡意程式', '病毒', 'exe', '改副檔名', '魔術位元組', 'magic number', '真實格式', '附件', '可疑檔案', '掉包', '騙', '辨識檔案', 'file type'],
+    icon: '🔬',
+    loader: () => import('@/tools/file-type/Index.vue'),
+  },
+  {
     id: 'file-checksum',
     name: '檔案校驗碼 / 完整性驗證',
     category: 'anti-scam',
