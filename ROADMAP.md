@@ -230,6 +230,12 @@
   merge,內含最小 CSV/TSV 解析器)+ 回歸測試 scripts/test-mailmerge.mjs(23 筆,併入 npm test)。
   零三方相依;type-check + test + build 通過 — 2026-06-17
 
+- 工時時數表(work-hours,category=labor):加總多段班別工時,自動處理跨午夜夜班(下班<=上班 → +24h)、
+  扣除休息分鐘(休息≥工時則 0 不為負)、可選填時薪估算「原始工資」(時數×時薪,明示未含加班加成,連結 overtime-pay)。
+  打工/排班族對帳薪資、報工時用。引擎 src/features/workHours.ts(純函式:parseTime/shiftMinutes/totalMinutes/
+  formatHM/toDecimalHours/estimatePay)+ 回歸測試 scripts/test-workhours.mjs(24 筆,併入 npm test)。
+  零三方相依;type-check + test + build 通過 — 2026-06-17
+
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
       與本專案「精簡 + 自包含」原則不符,**跳過**(未來若改自架模型再評估)

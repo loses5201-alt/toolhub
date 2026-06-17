@@ -351,6 +351,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/overtime-pay/Index.vue'),
   },
   {
+    id: 'work-hours',
+    name: '工時時數表',
+    category: 'labor',
+    description: '加總多段班別的工時,自動處理跨午夜夜班、扣除休息時間,可選填時薪估算原始工資 —— 打工/排班族對帳薪資、報工時用。全程在你瀏覽器計算,不上傳班表。',
+    keywords: ['工時', '時數', '上班時間', '打卡', '排班', '班表', '加總', '幾小時', '夜班', '跨午夜', '休息', '打工', '兼職', '時薪', '報工時', '上班', '下班', '工作時間'],
+    icon: '⏱️',
+    loader: () => import('@/tools/work-hours/Index.vue'),
+  },
+  {
     id: 'leave-deduction',
     name: '請假扣薪試算',
     category: 'labor',
