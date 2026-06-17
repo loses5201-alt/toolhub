@@ -52,6 +52,15 @@
   (純函式無 DOM,複用 data-convert 的 parseCSV/rowsToCSV,以第一列定欄數補齊/裁切短長列、數值比較吃千分位逗號)
   + 回歸測試 scripts/test-tableclean.mjs(43 筆:解析/TSV/引號/補齊裁切/各清理動作/篩選 10 運算子/數值與穩定排序/
   選欄越界/序列化/端到端管線,併入 npm test)。零新相依;type-check + 全測試 + build 通過 — 2026-06-17
+- 亂碼修復(mojibake-fix,category=workshop):修復最常見且可還原的一類亂碼 —— 原文是 UTF-8 卻被當成
+  西歐編碼(Latin-1 / Windows-1252)讀,導致「中文」變 ä¸­æ–‡、é 變 Ã©、彎引號變 â€™。做法:把畫面上的
+  亂碼字元逆推回原始位元組(0x00–0xFF 直接對應 + Windows-1252 在 0x80–0x9F 的可見特殊字反查表),
+  再用 TextDecoder('utf-8',{fatal}) 重新解讀;以「亂碼嫌疑分數」是否下降決定是否接受,最多 5 輪
+  (處理雙重/三重亂碼),且偵測到「修了反而更糟」會自動保持原狀不破壞正常文字。誠實揭露限制:含 �(U+FFFD)
+  代表位元組已遺失不可還原、Big5 被當 UTF-8 的反向亂碼也無法救。引擎 src/features/mojibake.ts
+  (reencodeToBytes/fixOnce/suspicionScore/fixMojibake 純函式無 DOM)+ 回歸測試 scripts/test-mojibake.mjs
+  (26 筆:歐語符號/中文/中英混合/emoji/雙重亂碼/正常文字不破壞/逆推與分數,以 latin1 還原程序產生樣本,
+  併入 npm test)。零三方相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-17
 - 證件浮水印加註(image-watermark):交付證件影本前斜向重複加註用途(防盜用,內政部宣導作法),
   canvas 把文字燒進像素、密度/顏色/角度可調、不上傳、可批次;與 image-redact 互補 — 2026-06-15
 - 文字清理工坊(text-clean):清掉貼上時夾帶的零寬/不可見字元、全形↔半形、多餘空白/空行、

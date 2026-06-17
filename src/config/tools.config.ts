@@ -108,6 +108,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/data-convert/Index.vue'),
   },
   {
+    id: 'mojibake-fix',
+    name: '亂碼修復',
+    category: 'workshop',
+    description: '把「中文變成 ä¸­æ–‡、é 變 Ã©」這類 UTF-8 被誤當西歐編碼的亂碼還原成正常文字 —— 全程在你瀏覽器,文字不上傳。',
+    keywords: ['亂碼', '亂碼修復', '解碼', '編碼', 'utf-8', 'utf8', 'big5', 'latin', 'ansi', '問號', '火星文', '錯字', 'æ', 'ä', 'Ã', 'mojibake', '中文亂碼', '匯出亂碼', 'csv 亂碼'],
+    icon: '🔣',
+    loader: () => import('@/tools/mojibake-fix/Index.vue'),
+  },
+  {
     id: 'table-clean',
     name: '表格清理工坊',
     category: 'workshop',
