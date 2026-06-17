@@ -54,6 +54,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/image-ocr/Index.vue'),
   },
   {
+    id: 'random-picker',
+    name: '抽籤 / 分組',
+    category: 'life',
+    description: '貼上名單,隨機抽出、隨機分組或隨機排序 —— 用加密級亂數,比一般網頁公平。聚餐誰請客、分組、抽獎都好用,名單不上傳。',
+    keywords: ['抽籤', '抽獎', '分組', '隨機', '洗牌', '排序', '誰請客', '決定', '隨機選', '分隊', '抽人', '亂數', '公平', 'random', '抽號碼'],
+    icon: '🎲',
+    loader: () => import('@/tools/random-picker/Index.vue'),
+  },
+  {
     id: 'pdf-studio',
     name: 'PDF 工坊',
     category: 'workshop',
