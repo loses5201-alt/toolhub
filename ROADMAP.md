@@ -61,6 +61,12 @@
   (reencodeToBytes/fixOnce/suspicionScore/fixMojibake 純函式無 DOM)+ 回歸測試 scripts/test-mojibake.mjs
   (26 筆:歐語符號/中文/中英混合/emoji/雙重亂碼/正常文字不破壞/逆推與分數,以 latin1 還原程序產生樣本,
   併入 npm test)。零三方相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-17
+- 金額大寫互轉升級:num-to-chinese 新增「中文數字 → 阿拉伯數字」反向模式(模式切換分頁),
+  讀支票/合約大寫或老文件時核對。引擎 amountChinese.ts 新增 chineseToNumber:加性解析器
+  (個位 number、小單位十百千/拾佰仟、大單位萬億兆分節結算 total/section/number),支援大寫與一般、
+  兩=2、〇/零、簡體 万亿、阿拉伯混用(5萬)、小數「點/点」逐字串接;無法辨識字/多個小數點回錯誤。
+  回歸測試 test-amountchinese.mjs +26 筆(十/二十三/一百零五/兩百零五/億萬完整 123456789/兆/混用/小數/
+  錯誤處理/與正向 amountToChinese 來回一致),併入既有 npm test。零新相依;type-check + 全測試 + build 通過 — 2026-06-17
 - 表格統計 / 樞紐(table-stats,category=workshop):把一份明細「依某欄分組,對另一欄做統計」
   (等同 Excel 樞紐分析 / SQL GROUP BY):支援 count/sum/avg/min/max/distinct 六種聚合,可選不分組(全部一組);
   數值自動吃千分位逗號+去空白、非數值在 sum/avg/min/max 時略過(全組無數值回空字串),avg 分母只算有效數值;

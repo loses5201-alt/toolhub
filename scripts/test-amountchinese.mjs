@@ -14,7 +14,7 @@ await build({
   outfile: out,
   logLevel: 'silent',
 })
-const { amountToChinese } = await import('file://' + out)
+const { amountToChinese, chineseToNumber } = await import('file://' + out)
 
 let fail = 0
 function eq(note, input, field, expect) {
@@ -81,6 +81,38 @@ check('負數報錯', amountToChinese('-5').ok === false)
 check('非數字報錯', amountToChinese('abc').ok === false)
 check('超大數(17位)報錯', amountToChinese('1' + '0'.repeat(16)).ok === false)
 check('兆級可表示(16位)', amountToChinese('9' + '0'.repeat(15)).ok === true)
+
+// --- 反向:中文數字 → 阿拉伯數字 ---
+const cnEq = (note, input, expect) => check(`中→數 ${note}`, chineseToNumber(input).value === expect)
+cnEq('個位 五', '五', 5)
+cnEq('十', '十', 10)
+cnEq('十二', '十二', 12)
+cnEq('二十', '二十', 20)
+cnEq('二十三', '二十三', 23)
+cnEq('一百', '一百', 100)
+cnEq('一百零五', '一百零五', 105)
+cnEq('一百二十三', '一百二十三', 123)
+cnEq('兩百零五', '兩百零五', 205)
+cnEq('一千零一', '一千零一', 1001)
+cnEq('三萬', '三萬', 30000)
+cnEq('一萬零五百', '一萬零五百', 10500)
+cnEq('十萬', '十萬', 100000)
+cnEq('大寫 壹佰貳拾參', '壹佰貳拾參', 123)
+cnEq('大寫整段 1.23億', '壹億貳仟參佰肆拾伍萬陸仟柒佰捌拾玖', 123456789)
+cnEq('億萬完整', '一億二千三百四十五萬六千七百八十九', 123456789)
+cnEq('兆級', '一兆', 1e12)
+cnEq('阿拉伯混用 5萬', '5萬', 50000)
+cnEq('簡體 万亿', '一亿', 1e8)
+cnEq('〇 當零', '〇', 0)
+cnEq('零', '零', 0)
+cnEq('小數 三點一四', '三點一四', 3.14)
+cnEq('小數 大寫 拾點伍', '拾點伍', 10.5)
+cnEq('前後空白', '  二十  ', 20)
+check('中→數 空字串報錯', chineseToNumber('').ok === false)
+check('中→數 無法辨識字報錯', chineseToNumber('二十蘋果').ok === false)
+check('中→數 兩個點報錯', chineseToNumber('三點一點四').ok === false)
+check('中→數 與正向一致(38500)', chineseToNumber(amountToChinese('38500').digits).value === 38500)
+check('中→數 與正向一致(1234567)', chineseToNumber(amountToChinese('1234567').digits).value === 1234567)
 
 if (fail) {
   console.error(`\n${fail} 個測試未通過`)

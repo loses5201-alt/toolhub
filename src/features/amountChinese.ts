@@ -120,3 +120,84 @@ export function amountToChinese(input: string): AmountResult {
 
   return { ok: true, normalized, currency, digits }
 }
+
+/* ────────────────────────────────────────────────────────────
+   反向:中文數字 → 阿拉伯數字
+   支援大寫(壹貳參…拾佰仟)與一般(一二三…十百千)、兩=2、〇/零=0、
+   萬/万、億/亿、兆,以及阿拉伯數字混用(如「5萬」)、小數「點/点」。
+   讀支票/合約大寫金額或老文件時用,核對是否與阿拉伯數字一致。
+   ──────────────────────────────────────────────────────────── */
+const CN_DIGIT: Record<string, number> = {
+  零: 0, 〇: 0, 一: 1, 壹: 1, 二: 2, 貳: 2, 两: 2, 兩: 2, 三: 3, 參: 3, 叁: 3,
+  四: 4, 肆: 4, 五: 5, 伍: 5, 六: 6, 陸: 6, 七: 7, 柒: 7, 八: 8, 捌: 8, 九: 9, 玖: 9,
+}
+const CN_SMALL_UNIT: Record<string, number> = { 十: 10, 拾: 10, 百: 100, 佰: 100, 千: 1000, 仟: 1000 }
+const CN_BIG_UNIT: Record<string, number> = { 萬: 1e4, 万: 1e4, 億: 1e8, 亿: 1e8, 兆: 1e12 }
+
+export interface ParseChineseResult {
+  ok: boolean
+  error?: string
+  value: number // 解析出的數字
+}
+
+/** 解析整數部分的中文數字(不含小數)。回傳 number 或丟錯。 */
+function parseChineseInteger(s: string): number {
+  let total = 0 // 已結算(含 萬/億/兆 節)的總和
+  let section = 0 // 目前 < 萬 的節內累計
+  let number = 0 // 待結算的個位數字
+  let sawAny = false
+  for (const ch of s) {
+    if (ch in CN_DIGIT) {
+      number = CN_DIGIT[ch]
+      sawAny = true
+    } else if (/[0-9]/.test(ch)) {
+      number = Number(ch)
+      sawAny = true
+    } else if (ch in CN_SMALL_UNIT) {
+      const u = CN_SMALL_UNIT[ch]
+      if (number === 0) number = 1 // 「十」「拾」開頭視為 1×
+      section += number * u
+      number = 0
+      sawAny = true
+    } else if (ch in CN_BIG_UNIT) {
+      section = (section + number) * CN_BIG_UNIT[ch]
+      total += section
+      section = 0
+      number = 0
+      sawAny = true
+    } else {
+      throw new Error(`無法辨識的字:「${ch}」`)
+    }
+  }
+  if (!sawAny) throw new Error('沒有可解析的數字')
+  return total + section + number
+}
+
+/**
+ * 中文數字字串 → 阿拉伯數字。
+ * 接受前後空白;支援「點/点」帶一段小數(逐字數字,如 三點一四 = 3.14)。
+ */
+export function chineseToNumber(input: string): ParseChineseResult {
+  const fail = (error: string): ParseChineseResult => ({ ok: false, error, value: 0 })
+  const clean = (input ?? '').trim().replace(/[\s　]/g, '')
+  if (clean === '') return fail('請輸入中文數字')
+
+  const parts = clean.split(/[點点]/)
+  if (parts.length > 2) return fail('小數點(點)只能有一個')
+
+  try {
+    const intPart = parts[0] === '' ? 0 : parseChineseInteger(parts[0])
+    if (parts.length === 1) return { ok: true, value: intPart }
+    // 小數部分:逐字當數字串接
+    let frac = ''
+    for (const ch of parts[1]) {
+      if (ch in CN_DIGIT) frac += String(CN_DIGIT[ch])
+      else if (/[0-9]/.test(ch)) frac += ch
+      else return fail(`小數部分無法辨識的字:「${ch}」`)
+    }
+    if (frac === '') return fail('小數點後沒有數字')
+    return { ok: true, value: Number(`${intPart}.${frac}`) }
+  } catch (e) {
+    return fail((e as Error).message)
+  }
+}

@@ -1,14 +1,22 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import LegalNote from '@/components/LegalNote.vue'
-import { amountToChinese } from '@/features/amountChinese'
+import { amountToChinese, chineseToNumber } from '@/features/amountChinese'
 
 /*
-  金額轉國字大寫 —— 把阿拉伯數字金額轉成中文大寫(壹貳參…元角分整),
-  用於支票、本票、合約、收據,讓金額不易被竄改。全程在你的瀏覽器計算,不上傳。
+  金額大寫互轉 —— 阿拉伯數字 → 中文大寫(壹貳參…元角分整,支票/合約防竄改);
+  以及反向中文數字 → 阿拉伯數字(核對大寫金額、讀老文件)。全程瀏覽器,不上傳。
 */
+type Mode = 'toCN' | 'toNum'
+const mode = ref<Mode>('toCN')
 const input = ref('')
-const result = computed(() => (input.value.trim() ? amountToChinese(input.value) : null))
+
+const result = computed(() => (mode.value === 'toCN' && input.value.trim() ? amountToChinese(input.value) : null))
+const parsed = computed(() => (mode.value === 'toNum' && input.value.trim() ? chineseToNumber(input.value) : null))
+const parsedDisplay = computed(() => {
+  if (!parsed.value || !parsed.value.ok) return ''
+  return parsed.value.value.toLocaleString('en-US', { maximumFractionDigits: 6 })
+})
 
 const copied = ref<string | null>(null)
 function copy(text: string, tag: string) {
@@ -16,14 +24,34 @@ function copy(text: string, tag: string) {
   copied.value = tag
   setTimeout(() => (copied.value = null), 1500)
 }
+function switchMode(m: Mode) {
+  if (m === mode.value) return
+  mode.value = m
+  input.value = ''
+}
 
 const examples = ['38500', '1234.56', '1000000', '100.05']
+const cnExamples = ['壹佰貳拾參萬肆仟', '一百二十三', '兩千零五十', '三點一四']
 </script>
 
 <template>
   <div class="space-y-6">
     <div class="card p-6 space-y-4">
-      <div>
+      <!-- 模式切換 -->
+      <div class="grid grid-cols-2 gap-1.5">
+        <button
+          class="rounded-lg border px-3 py-2.5 text-sm font-semibold transition"
+          :class="mode === 'toCN' ? 'border-brand-500 bg-brand-50 ring-1 ring-brand-300 text-ink-900' : 'border-line bg-white text-ink-600 hover:bg-stone-50'"
+          @click="switchMode('toCN')"
+        >123 → 中文大寫</button>
+        <button
+          class="rounded-lg border px-3 py-2.5 text-sm font-semibold transition"
+          :class="mode === 'toNum' ? 'border-brand-500 bg-brand-50 ring-1 ring-brand-300 text-ink-900' : 'border-line bg-white text-ink-600 hover:bg-stone-50'"
+          @click="switchMode('toNum')"
+        >中文數字 → 123</button>
+      </div>
+
+      <div v-if="mode === 'toCN'">
         <label class="field-label">輸入金額(阿拉伯數字)</label>
         <input
           v-model="input"
@@ -34,17 +62,41 @@ const examples = ['38500', '1234.56', '1000000', '100.05']
         />
         <p class="field-hint">可含千分位逗號,小數會四捨五入到「分」。全程在你的瀏覽器計算,不會上傳。</p>
       </div>
+      <div v-else>
+        <label class="field-label">輸入中文數字</label>
+        <input
+          v-model="input"
+          type="text"
+          placeholder="例:壹佰貳拾參萬 或 一百二十三"
+          class="field-input text-lg"
+        />
+        <p class="field-hint">支援大寫(壹貳參拾佰仟)與一般(一二三十百千)、萬億兆、兩=2,可核對支票/合約大寫。</p>
+      </div>
 
       <div class="flex flex-wrap gap-2 text-sm">
         <span class="text-ink-500">試試:</span>
         <button
-          v-for="ex in examples"
+          v-for="ex in (mode === 'toCN' ? examples : cnExamples)"
           :key="ex"
           class="rounded-lg border border-line bg-white px-2.5 py-1 font-mono text-ink-600 hover:bg-stone-50"
           @click="input = ex"
         >
           {{ ex }}
         </button>
+      </div>
+
+      <!-- 反向:中文 → 數字 結果 -->
+      <div v-if="parsed && !parsed.ok" class="rounded-xl border border-amber-200 bg-amber-50/60 p-4 text-sm text-amber-800">
+        ⚠️ {{ parsed.error }}
+      </div>
+      <div v-else-if="parsed && parsed.ok" class="rounded-2xl border border-brand-200 bg-brand-50/50 p-5">
+        <div class="mb-1 flex items-center gap-3">
+          <span class="text-sm font-medium text-ink-500">阿拉伯數字</span>
+          <button class="text-sm text-brand-700 underline hover:text-brand-800" @click="copy(String(parsed.value), 'num')">
+            {{ copied === 'num' ? '已複製 ✓' : '複製' }}
+          </button>
+        </div>
+        <p class="text-2xl font-bold leading-relaxed tracking-wide text-ink-900">{{ parsedDisplay }}</p>
       </div>
 
       <div v-if="result && !result.ok" class="rounded-xl border border-amber-200 bg-amber-50/60 p-4 text-sm text-amber-800">
