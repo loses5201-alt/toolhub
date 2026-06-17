@@ -495,6 +495,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/invoice-lottery/Index.vue'),
   },
   {
+    id: 'num-to-chinese',
+    name: '金額轉國字大寫',
+    category: 'life',
+    description: '把數字金額轉成中文大寫(壹貳參…元角分整),支票、本票、合約、收據填寫用,防止金額被竄改。全程在你瀏覽器換算,不上傳。',
+    keywords: ['大寫', '國字', '金額', '數字轉中文', '中文數字', '支票', '本票', '合約', '收據', '壹貳參', '元角分', '整', '銀行', '票據', '萬', '億', '阿拉伯數字', 'capital'],
+    icon: '💴',
+    loader: () => import('@/tools/num-to-chinese/Index.vue'),
+  },
+  {
     id: 'age-calc',
     name: '年齡計算',
     category: 'datetime',
