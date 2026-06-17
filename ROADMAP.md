@@ -31,6 +31,12 @@
   - 新增「PDF 浮水印」分頁(Watermark.vue):每頁斜向重複加註用途(防盜用,與 image-watermark 互補,但對象是 PDF 文件);
     因 pdf-lib 內建字型不含中文,改用 canvas 把浮水印畫成透明 PNG 再蓋上每頁(支援中文),相同尺寸頁面共用嵌入圖省檔案;
     顏色/密度/透明度/字級/角度可調,常見用途一鍵帶入;零新相依(複用既有 pdf-lib)— 2026-06-15
+  - 「整理頁面」分頁加入頁面旋轉:每頁可向右轉 90°(疊加,掃描側躺/歪掉的頁一鍵轉正),
+    縮圖即時 CSS rotate 預覽 + ↻角度標示;與刪頁/重排/擷取同一畫面一次處理,匯出時用 pdf-lib
+    setRotation 疊加到原始 /Rotate。把純 pdf-lib 邏輯抽到 src/tools/pdf-studio/edit.ts
+    (buildEdited/addAngle,不 import pdfjs worker 故 Node 可測)+ 回歸測試 scripts/test-pdf-rotate.mjs
+    (16 筆:角度正規化/疊加非覆蓋/刪除重排旋轉並用/360 視同不轉,esbuild 打包後跑,併入 npm test)。
+    零新相依;type-check + test + build 通過 — 2026-06-17
 
 - 資料轉換工坊(data-convert):CSV ↔ JSON 互轉,自製解析器處理引號/換行,零相依 — 2026-06-15
   - 升級:加入 Excel(.xlsx)三方互轉(CSV/JSON/Excel),from→to 格式選擇 UI,

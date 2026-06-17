@@ -16,7 +16,7 @@ import Compress from './Compress.vue'
 */
 const tabs = [
   { id: 'merge', label: '合併 PDF', icon: '🔗', desc: '多個 PDF 串成一份' },
-  { id: 'organize', label: '整理頁面', icon: '✂️', desc: '刪頁、重排、擷取頁面' },
+  { id: 'organize', label: '整理頁面', icon: '✂️', desc: '刪頁、重排、旋轉、擷取' },
   { id: 'img2pdf', label: '圖片轉 PDF', icon: '🖼️', desc: '多張圖合成一份 PDF' },
   { id: 'pdf2img', label: 'PDF 轉圖片', icon: '📸', desc: '每頁存成 PNG/JPG' },
   { id: 'extract', label: '取出文字', icon: '📝', desc: '抽出可選取文字複製' },
