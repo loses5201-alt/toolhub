@@ -34,7 +34,7 @@ export default defineConfig(() => ({
         globPatterns: ['**/*.{js,css,html,svg,png,ico}'],
         // 不把肥大的 PDF / Excel 函式庫(pdf-lib/pdfjs、SheetJS ≈ 1.3MB)塞進預快取,
         // 避免拖慢所有人的 PWA 安裝;改由下方 runtime 快取在實際用到時才存。
-        globIgnores: ['**/pdf-vendor*.js', '**/sheet-vendor*.js', '**/exif-vendor*.js', '**/heic-vendor*.js', '**/qr-vendor*.js', '**/zip-vendor*.js'],
+        globIgnores: ['**/pdf-vendor*.js', '**/sheet-vendor*.js', '**/exif-vendor*.js', '**/heic-vendor*.js', '**/qr-vendor*.js', '**/zip-vendor*.js', '**/bg-vendor*.js', '**/ocr-vendor*.js'],
         runtimeCaching: [
           {
             urlPattern: ({ url }) => url.pathname.endsWith('.json'),
@@ -89,6 +89,14 @@ export default defineConfig(() => ({
           // JSZip(+ pako 壓縮)拆獨立 chunk + 不預快取(用到才載)
           if (id.includes('node_modules/jszip') || id.includes('node_modules/pako')) {
             return 'zip-vendor'
+          }
+          // @imgly 去背(WASM/ONNX)~大,拆獨立 chunk + 不預快取(用到才載)
+          if (id.includes('node_modules/@imgly')) {
+            return 'bg-vendor'
+          }
+          // tesseract.js(OCR)拆獨立 chunk + 不預快取(用到才載)
+          if (id.includes('node_modules/tesseract.js')) {
+            return 'ocr-vendor'
           }
         },
       },

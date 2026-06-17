@@ -63,6 +63,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/random-picker/Index.vue'),
   },
   {
+    id: 'bg-remove',
+    name: '圖片去背',
+    category: 'workshop',
+    description: '自動去掉照片背景、輸出透明 PNG,做商品圖、大頭貼最方便 —— 全程在你瀏覽器用 AI 處理,照片不上傳;remove.bg 等服務要付費又要上傳。',
+    keywords: ['去背', '去背景', '退底', '透明背景', '摳圖', '商品圖', '大頭貼', 'removebg', 'remove bg', '背景移除', '人像去背', 'png', '退地'],
+    icon: '🪄',
+    loader: () => import('@/tools/bg-remove/Index.vue'),
+  },
+  {
     id: 'pdf-studio',
     name: 'PDF 工坊',
     category: 'workshop',
