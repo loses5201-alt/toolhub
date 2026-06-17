@@ -175,6 +175,13 @@
   算 SHA-256/SHA-1/SHA-512,拖放/多選、貼上官方校驗碼自動比對(✓相符/✗不相符 + 警示),
   全程本機不上傳。貼合下載中心「附校驗碼」防掉包 DNA,連回 /downloads — 2026-06-15
 
+- 名單比對 / 去重(list-compare,category=workshop):對帳、整名單最常見的兩件事 —— ①一份名單去重
+  (找出重複幾次、留乾淨一份)②比對兩份名單算交集/只在A/只在B/聯集(如「全體」減「已繳」=還沒繳的人)。
+  比對選項可忽略大小寫/全形半形/頭尾或多餘空白(避免「看似相同卻被當不同」),輸出保留首次出現原始樣子。
+  與 data-convert(格式互轉)、text-diff(逐行逐字 diff)互補;線上同類工具要把含個資名單上傳他人伺服器,
+  此工具全程瀏覽器、不上傳。引擎 src/features/listCompare.ts(純函式無 DOM:normalizeKey/parseList/dedupe/compare)
+  + 回歸測試 scripts/test-listcompare.mjs(27 筆,併入 npm test)。零三方相依;type-check + test + build 通過 — 2026-06-17
+
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
       與本專案「精簡 + 自包含」原則不符,**跳過**(未來若改自架模型再評估)

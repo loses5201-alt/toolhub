@@ -81,6 +81,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/data-convert/Index.vue'),
   },
   {
+    id: 'list-compare',
+    name: '名單比對 / 去重',
+    category: 'workshop',
+    description: '一份名單去重(找出重複幾次),或比對兩份名單的交集 / 差集 —— 對帳、找「誰還沒繳」最實用。全程在你瀏覽器,不上傳含個資的名單。',
+    keywords: ['名單', '去重', '重複', '比對', '比較', '交集', '差集', '聯集', '對帳', '清單', 'email', '去除重複', '兩份', '找不同', '差異', '誰沒繳', '核對', 'dedupe', 'diff', '集合'],
+    icon: '🗂️',
+    loader: () => import('@/tools/list-compare/Index.vue'),
+  },
+  {
     id: 'zip-studio',
     name: 'ZIP 工坊',
     category: 'workshop',
