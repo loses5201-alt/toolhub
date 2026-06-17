@@ -223,6 +223,13 @@
   getExtension/checkFile)+ 回歸測試 scripts/test-filetype.mjs(27 筆,併入 npm test)。只讀前 32 bytes、不上傳。
   零三方相依;type-check + test + build 通過 — 2026-06-17
 
+- 合併列印 / 套印(mail-merge,category=workshop):一份範本(內含 {{欄位}} 佔位符)+ 一份名單(第一列欄位名,
+  自動偵測逗號或 Tab、支援引號內逗號/換行/跳脫雙引號,可直接貼 Excel),幫每筆各產生填好內容的文字 —— 年節祝福、
+  開會通知、繳費提醒、邀請函免逐一改名。回報範本欄位 / 缺漏欄位(缺者留空),逐筆或一次複製。線上套印服務常要上傳
+  含個資名單,本工具全程瀏覽器、不上傳不寄送。引擎 src/features/mailMerge.ts(純函式:extractPlaceholders/parseTable/
+  merge,內含最小 CSV/TSV 解析器)+ 回歸測試 scripts/test-mailmerge.mjs(23 筆,併入 npm test)。
+  零三方相依;type-check + test + build 通過 — 2026-06-17
+
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
       與本專案「精簡 + 自包含」原則不符,**跳過**(未來若改自架模型再評估)

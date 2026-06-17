@@ -108,6 +108,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/list-compare/Index.vue'),
   },
   {
+    id: 'mail-merge',
+    name: '合併列印 / 套印',
+    category: 'workshop',
+    description: '一份範本({{姓名}} 等佔位符)+ 一份名單,幫每個人各產生一段填好內容的文字 —— 年節祝福、開會通知、繳費提醒、邀請函不用一個個改名字。可直接貼 Excel,全程在你瀏覽器,名單不上傳。',
+    keywords: ['合併列印', '套印', '範本', '樣板', '佔位符', '群發', '批次', '通知', '祝福', '邀請函', '名單', '客製', 'mail merge', 'template', '個人化', '繳費提醒', 'excel'],
+    icon: '📨',
+    loader: () => import('@/tools/mail-merge/Index.vue'),
+  },
+  {
     id: 'zip-studio',
     name: 'ZIP 工坊',
     category: 'workshop',
