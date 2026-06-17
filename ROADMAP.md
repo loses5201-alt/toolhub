@@ -209,6 +209,12 @@
   採浮動本地時間。引擎 src/features/icsEvent.ts(純函式、uid/dtstamp 可注入故可測)+ 回歸測試 scripts/test-icsevent.mjs
   (27 筆,併入 npm test)。零三方相依;type-check + test + build 通過 — 2026-06-17
 
+- 日期計算機(date-calc,category=datetime):①兩日期相差幾天(另標含頭尾)②從某天加/減 N 天(可勾「只算工作日」
+  跳過週末)③兩日期間工作日數(含起訖、排週末)。用於契約/退貨鑑賞期/繳費/活動倒數到期日推算;與 age-calc(年齡)、
+  roc-year(年制換算)、due-date(預產期)互補,專做一般日期算術。以 UTC 為基準避免 DST 誤差;parseDate 回推驗證擋
+  2/30 等假日期、閏年判斷正確。引擎 src/features/dateCalc.ts(純函式)+ 回歸測試 scripts/test-datecalc.mjs(28 筆,
+  併入 npm test)。明確標示「只排週末未扣國定假日」。零三方相依;type-check + test + build 通過 — 2026-06-17
+
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
       與本專案「精簡 + 自包含」原則不符,**跳過**(未來若改自架模型再評估)

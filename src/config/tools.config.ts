@@ -530,6 +530,15 @@ export const tools: ToolDef[] = [
     icon: '📆',
     loader: () => import('@/tools/roc-year/Index.vue'),
   },
+  {
+    id: 'date-calc',
+    name: '日期計算機',
+    category: 'datetime',
+    description: '算兩個日期相差幾天、從某天加減 N 天是哪天(可只算工作日)、兩日期間有幾個上班日 —— 契約、退貨鑑賞期、繳費、活動倒數到期日推算。全程在你瀏覽器計算,不上傳。',
+    keywords: ['日期', '天數', '相差', '幾天', '倒數', '到期日', '加天數', '減天數', '工作日', '上班日', '週末', '契約', '退貨', '鑑賞期', '繳費期限', '幾天後', '幾天前', 'date', '日數', '推算'],
+    icon: '🗓️',
+    loader: () => import('@/tools/date-calc/Index.vue'),
+  },
 ]
 
 export const toolMap: Record<string, ToolDef> = Object.fromEntries(
