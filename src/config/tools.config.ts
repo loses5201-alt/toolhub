@@ -27,6 +27,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/image-studio/Index.vue'),
   },
   {
+    id: 'signature-maker',
+    name: '手寫簽名製作',
+    category: 'workshop',
+    description: '在螢幕上簽名,匯出透明背景 PNG,直接貼進 PDF/Word/簡報電子簽名,免印出再掃 —— 全程在你瀏覽器,簽名不上傳。',
+    keywords: ['簽名', '手寫', '電子簽名', '簽章', '簽名檔', '透明背景', 'png', '簽文件', '簽合約', 'signature', '簽名製作'],
+    icon: '✍️',
+    loader: () => import('@/tools/signature-maker/Index.vue'),
+  },
+  {
     id: 'pdf-studio',
     name: 'PDF 工坊',
     category: 'workshop',
