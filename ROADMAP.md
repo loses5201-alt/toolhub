@@ -44,6 +44,14 @@
   中文/二進位、同名改名、STORE vs DEFLATE、非 ZIP 報錯,以 esbuild 打包含 jszip 後跑,併入 npm test)。
   JSZip 動態 import + zip-vendor chunk(gzip 45KB)不預快取;不支援密碼加密 ZIP(引導用 secure-box)。
   type-check + test(全 162 筆)+ build 通過 — 2026-06-16拖曳框選塗黑/馬賽克,真的把像素燒掉、不上傳,分享截圖前遮個資 — 2026-06-15
+- 表格清理工坊(table-clean,category=workshop):貼上 CSV/TSV(或從 Excel/Google 試算表複製整塊貼上),
+  做去空白、刪空白列、去重複(整列或指定欄、可忽略大小寫)、篩選(包含/等於/開頭/數值大小/空白等 10 種運算子)、
+  排序(文字 localeCompare 繁中、或當數字排且非數值排最後、穩定排序)、選欄,再匯出 CSV/JSON。管線固定順序
+  trim→刪空→去重→篩選→排序→選欄。與 data-convert(格式互轉)、list-compare(兩份清單比對)互補。
+  含個資的名單全程瀏覽器處理、不上傳(線上 CSV 清理站都要上傳)。引擎 src/features/tableClean.ts
+  (純函式無 DOM,複用 data-convert 的 parseCSV/rowsToCSV,以第一列定欄數補齊/裁切短長列、數值比較吃千分位逗號)
+  + 回歸測試 scripts/test-tableclean.mjs(43 筆:解析/TSV/引號/補齊裁切/各清理動作/篩選 10 運算子/數值與穩定排序/
+  選欄越界/序列化/端到端管線,併入 npm test)。零新相依;type-check + 全測試 + build 通過 — 2026-06-17
 - 證件浮水印加註(image-watermark):交付證件影本前斜向重複加註用途(防盜用,內政部宣導作法),
   canvas 把文字燒進像素、密度/顏色/角度可調、不上傳、可批次;與 image-redact 互補 — 2026-06-15
 - 文字清理工坊(text-clean):清掉貼上時夾帶的零寬/不可見字元、全形↔半形、多餘空白/空行、

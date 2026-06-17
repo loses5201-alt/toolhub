@@ -108,6 +108,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/data-convert/Index.vue'),
   },
   {
+    id: 'table-clean',
+    name: '表格清理工坊',
+    category: 'workshop',
+    description: '貼上 CSV/Excel 名單,一鍵去重複、刪空白列、篩選、排序、只留需要的欄,再匯出 CSV/JSON —— 全程在你瀏覽器,含個資的名單不上傳。',
+    keywords: ['表格', '清理', 'csv', 'tsv', 'excel', '名單', '去重複', '重複', '篩選', '排序', '刪欄', '選欄', '整理', '去空白', '空列', '資料清理', 'dedupe', 'clean'],
+    icon: '🧹',
+    loader: () => import('@/tools/table-clean/Index.vue'),
+  },
+  {
     id: 'list-compare',
     name: '名單比對 / 去重',
     category: 'workshop',
