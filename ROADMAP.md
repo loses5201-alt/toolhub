@@ -259,6 +259,12 @@
   辦公日曆表自填、附官方連結,延續「資料可驗證」原則。回歸測試 test-datecalc.mjs +13 筆(parseDateList/isWorkday
   優先序/加扣假日/計補班/無 opts 向後相容)。零新相依;type-check + 全測試 + build 通過 — 2026-06-17
 
+- PDF 工坊「整理頁面」支援逐頁旋轉(pdf-studio/Organize):每頁新增順/逆時針 90° 旋轉鈕,縮圖即時
+  CSS transform 預覽,匯出時把旋轉燒進 PDF。lib.ts buildFromOrder 新增 rotations 參數(與 order 等長),
+  用 pdf-lib getRotation().angle + delta 正規化後 setRotation(degrees);Organize 以 rot 陣列與 order 同步維護
+  (刪除/移動/復原一起 splice/swap)。解決手機/掃描器拍歪的文件要轉正的常見痛點;零新相依(複用既有 pdf-lib)。
+  type-check + 全測試 + build 通過 — 2026-06-17
+
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
       與本專案「精簡 + 自包含」原則不符,**跳過**(未來若改自架模型再評估)
