@@ -189,6 +189,14 @@
   scripts/test-randomdraw.mjs(注入確定性 rand 驗輸出 + 6 萬次取樣驗範圍與均勻度,併入 npm test)。
   零三方相依;type-check + test + build 通過 — 2026-06-17
 
+- 網址清理 / 看穿轉址(url-clean,category=anti-scam):①看穿轉址 —— 把 google.com/url?q=、
+  Facebook l.php?u=、Outlook safelinks、l.instagram.com 等轉址包裝一層層拆開(含多層巢狀、迴圈/深度保護、
+  通用強參數名 url/u/q/target… 偵測),先看清楚連結最後落點主機再決定點不點(詐騙常用包裝藏釣魚連結);
+  ②清理追蹤 —— 移除 utm_*/pk_/mc_… 前綴與 fbclid/gclid/msclkid/igshid… 追蹤參數(大小寫不敏感),
+  分享連結更乾淨更短不洩漏來源。與 link-check(風險啟發式)互補並交叉連結。引擎 src/features/urlClean.ts
+  (純函式、只用標準 URL:cleanUrl/unwrapRedirect/processUrl)+ 回歸測試 scripts/test-urlclean.mjs
+  (24 筆:清理/大小寫/多層巢狀/safelinks/自指不誤拆/整合,併入 npm test)。零三方相依;type-check + test + build 通過 — 2026-06-17
+
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
       與本專案「精簡 + 自包含」原則不符,**跳過**(未來若改自架模型再評估)

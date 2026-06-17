@@ -252,6 +252,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/link-check/Index.vue'),
   },
   {
+    id: 'url-clean',
+    name: '網址清理 / 看穿轉址',
+    category: 'anti-scam',
+    description: '把 google.com/url、Facebook l.php、Outlook safelinks 等「轉址包裝」一層層拆開,先看清楚連結最後連去哪;順手清掉 utm、fbclid 等追蹤參數讓分享連結更乾淨。全程在你瀏覽器,不連網、不上傳。',
+    keywords: ['網址', '連結', '轉址', '跳轉', '重新導向', '看穿', '真正連到', '追蹤', '追蹤碼', 'utm', 'fbclid', 'gclid', '清理', '乾淨', '縮網址', '展開', '參數', '隱私', 'redirect', '釣魚', '安全連結'],
+    icon: '🔗',
+    loader: () => import('@/tools/url-clean/Index.vue'),
+  },
+  {
     id: 'sms-check',
     name: '詐騙簡訊檢查',
     category: 'anti-scam',
