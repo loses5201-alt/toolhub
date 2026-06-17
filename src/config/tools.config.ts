@@ -414,6 +414,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/password-gen/Index.vue'),
   },
   {
+    id: 'random-draw',
+    name: '公平抽籤 / 分組',
+    category: 'life',
+    description: '尾牙抽獎抽中獎者、把人隨機分組、隨機排出場順序 —— 用密碼學亂數保證機率均等、不作弊、無廣告,全程在你電腦執行,名單不上傳。',
+    keywords: ['抽籤', '抽獎', '尾牙', '中獎', '分組', '隨機', '亂數', '洗牌', '排序', '做決定', '猜拳', '點名', '分隊', '誰先', 'random', 'draw', '抽人', '公平', '轉盤'],
+    icon: '🎲',
+    loader: () => import('@/tools/random-draw/Index.vue'),
+  },
+  {
     id: 'bmi',
     name: 'BMI 計算',
     category: 'life',

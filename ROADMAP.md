@@ -182,6 +182,13 @@
   此工具全程瀏覽器、不上傳。引擎 src/features/listCompare.ts(純函式無 DOM:normalizeKey/parseList/dedupe/compare)
   + 回歸測試 scripts/test-listcompare.mjs(27 筆,併入 npm test)。零三方相依;type-check + test + build 通過 — 2026-06-17
 
+- 公平抽籤 / 分組(random-draw,category=life):尾牙抽獎抽中獎者、把人隨機分組(分成 N 組 / 每組 N 人)、
+  隨機排出場順序。用 crypto.getRandomValues + 拒絕取樣消除取模偏差,機率真正均等;線上轉盤可能暗中加權或滿廣告。
+  分組採「先洗牌再 round-robin 發牌」確保各組人數最多差 1。引擎 src/features/randomDraw.ts(純函式、亂數來源可注入
+  故可確定性測試:cryptoRandInt/shuffle/drawWinners/makeGroupsByCount/makeGroupsBySize)+ 回歸測試
+  scripts/test-randomdraw.mjs(注入確定性 rand 驗輸出 + 6 萬次取樣驗範圍與均勻度,併入 npm test)。
+  零三方相依;type-check + test + build 通過 — 2026-06-17
+
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
       與本專案「精簡 + 自包含」原則不符,**跳過**(未來若改自架模型再評估)
