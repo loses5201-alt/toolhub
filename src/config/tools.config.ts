@@ -234,6 +234,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/text-clean/Index.vue'),
   },
   {
+    id: 'text-speech',
+    name: '文字朗讀',
+    category: 'life',
+    description: '把貼上的文字用語音唸出來,給視力不便、眼睛累或想「用聽的」的長輩與家人 —— 用瀏覽器內建語音,全程在你的裝置發聲,文字不上傳、免帳號。速度音調可調。',
+    keywords: ['朗讀', '唸出來', '念出來', '語音', '讀文章', '聽', '文字轉語音', 'tts', '報讀', '視障', '老花', '長輩', '念', '發音', 'speak', 'text to speech', '有聲'],
+    icon: '🔊',
+    loader: () => import('@/tools/text-speech/Index.vue'),
+  },
+  {
     id: 'exif-viewer',
     name: '照片隱私檢視器(EXIF)',
     category: 'anti-scam',

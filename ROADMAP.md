@@ -236,6 +236,11 @@
   formatHM/toDecimalHours/estimatePay)+ 回歸測試 scripts/test-workhours.mjs(24 筆,併入 npm test)。
   零三方相依;type-check + test + build 通過 — 2026-06-17
 
+- 文字朗讀(text-speech,category=life,長輩友善):用瀏覽器內建 Web Speech API(speechSynthesis)把貼上的文字唸出來,
+  給視力不便/眼睛累/想用聽的長輩與家人。中文語音優先排序、速度/音調可調、播放/暫停/繼續/停止、不支援時優雅降級提示。
+  全程在裝置上發聲、文字不上傳、免帳號。UI-only(瀏覽器 API 無純邏輯可單元測,雲端無瀏覽器,靠 type-check + 細讀
+  + 功能偵測與 graceful degradation 確保安全);零三方相依;type-check + build 通過 — 2026-06-17
+
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
       與本專案「精簡 + 自包含」原則不符,**跳過**(未來若改自架模型再評估)
