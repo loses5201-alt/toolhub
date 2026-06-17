@@ -203,6 +203,12 @@
   與「純數字大寫」兩種。引擎 src/features/amountChinese.ts(純函式)+ 回歸測試 scripts/test-amountchinese.mjs
   (37 筆:整數零處理 / 角分 / 四捨五入跨整數進位 / 千分位 / 溢位,併入 npm test)。零三方相依;type-check + test + build 通過 — 2026-06-17
 
+- 行事曆事件 .ics 產生器(event-ics,category=life):填活動標題/時間/地點/備註/連結/提醒,產生符合 RFC 5545 的
+  .ics 下載,直接匯入 Google/Apple/Outlook —— 不必像活動邀請服務那樣授權存取你的行事曆。支援定時(未填結束預設 +1 小時、
+  跨日進位)與全日(DTEND 取隔天排他)、VALARM 事前提醒、RFC 文字逸出(逗號/分號/換行/反斜線)、CRLF 行尾、檔名去非法字元。
+  採浮動本地時間。引擎 src/features/icsEvent.ts(純函式、uid/dtstamp 可注入故可測)+ 回歸測試 scripts/test-icsevent.mjs
+  (27 筆,併入 npm test)。零三方相依;type-check + test + build 通過 — 2026-06-17
+
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
       與本專案「精簡 + 自包含」原則不符,**跳過**(未來若改自架模型再評估)

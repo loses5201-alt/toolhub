@@ -504,6 +504,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/num-to-chinese/Index.vue'),
   },
   {
+    id: 'event-ics',
+    name: '行事曆事件產生',
+    category: 'life',
+    description: '填好活動時間地點,下載 .ics 檔直接匯入 Google / Apple / Outlook 行事曆 —— 不必授權任何 App 存取你的行事曆。全程在你瀏覽器產生,不上傳。',
+    keywords: ['行事曆', '日曆', '活動', '事件', 'ics', 'icalendar', '提醒', '邀請', 'google calendar', 'outlook', '匯入', '加到行事曆', '約會', '會議', '生日', '備忘', 'event', 'calendar'],
+    icon: '📅',
+    loader: () => import('@/tools/event-ics/Index.vue'),
+  },
+  {
     id: 'age-calc',
     name: '年齡計算',
     category: 'datetime',
