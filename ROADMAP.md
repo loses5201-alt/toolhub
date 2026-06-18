@@ -559,6 +559,15 @@
   根層級/compareJSON 解析錯誤兩側/摘要計數/preview,esbuild 打包後跑,併入 npm test)。零新相依、不上傳;
   type-check + 全測試(323)+ build 通過 — 2026-06-18
 
+- JSON 轉 TypeScript 型別(json-to-ts,category=workshop):貼上 JSON,自動推斷出對應的 TS interface。
+  巢狀物件各自產生具名 interface(依鍵 PascalCase、衝突自動加序號);陣列內多筆物件「合併」成一個型別 ——
+  鍵聯集、缺漏鍵標可選(?)、同鍵不同型別合成聯集(a | b);陣列元素 interface 用單數命名(items→Item);
+  不合法識別字鍵(連字號/數字開頭/中文)自動加引號;根為陣列或基本值改用 type 別名;空陣列→unknown[]。
+  quicktype 太重又多在線上;這支輕量、不上傳。引擎 src/features/jsonToTs.ts(typeForValues/mergeObjects 互遞迴、
+  pascalCase/singular/uniqueName 純函式無 DOM、零相依)+ 回歸測試 scripts/test-jsontots.mjs(32 筆:
+  基本型別/null/陣列/混合聯集/巢狀具名/陣列合併與可選/同鍵聯集/特殊字元鍵/根陣列與基本值/名稱衝突/空值/
+  錯誤處理/深層巢狀,esbuild 打包後跑,併入 npm test)。零新相依、不上傳;type-check + 全測試(355)+ build 通過 — 2026-06-18
+
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
       與本專案「精簡 + 自包含」原則不符,**跳過**(未來若改自架模型再評估)

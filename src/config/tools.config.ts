@@ -225,6 +225,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/json-diff/Index.vue'),
   },
   {
+    id: 'json-to-ts',
+    name: 'JSON 轉 TypeScript 型別',
+    category: 'workshop',
+    description: '貼上 API 回應或任何 JSON,自動推斷出對應的 TypeScript interface —— 巢狀物件具名、陣列合併欄位、缺漏鍵標可選。寫前端/Node 免手刻型別。全程在你瀏覽器,含密鑰回應不上傳。',
+    keywords: ['json', 'typescript', 'ts', '型別', 'interface', 'type', '轉型別', 'json轉ts', '產生型別', 'api', '回應', '定義', 'd.ts', '前端', 'node', '型別定義'],
+    icon: '🧬',
+    loader: () => import('@/tools/json-to-ts/Index.vue'),
+  },
+  {
     id: 'big5-convert',
     name: 'Big5 ↔ UTF-8 文字檔轉換',
     category: 'workshop',
