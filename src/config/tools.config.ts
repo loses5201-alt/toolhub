@@ -261,6 +261,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/markdown-table/Index.vue'),
   },
   {
+    id: 'jwt-decode',
+    name: 'JWT 解碼 / 檢視',
+    category: 'workshop',
+    description: '把 JSON Web Token 解開看標頭與內容、判斷是否過期,並可用密鑰在本機驗證 HMAC 簽章 —— 別再把正式環境的 token 貼到 jwt.io 等線上網站(等於外洩登入憑證),這支全程在你瀏覽器、不上傳。',
+    keywords: ['jwt', 'json web token', 'token', '權杖', '解碼', '解析', '檢視', 'decode', 'oauth', 'bearer', '登入', '授權', 'access token', 'id token', 'payload', 'header', '簽章', 'hmac', 'hs256', 'rs256', 'exp', '過期', '驗證', 'jwt解碼', 'jwt.io'],
+    icon: '🪙',
+    loader: () => import('@/tools/jwt-decode/Index.vue'),
+  },
+  {
     id: 'json-yaml',
     name: 'JSON ↔ YAML 互轉',
     category: 'workshop',
