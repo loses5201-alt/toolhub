@@ -549,6 +549,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/char-inspect/Index.vue'),
   },
   {
+    id: 'text-stats',
+    name: '文字統計 / 字數統計',
+    category: 'workshop',
+    description: '貼上文章,正確算出中文字數(逐字計,不像多數工具用空白切詞而把中文算錯)、英文單字、字元、行/段/句、UTF-8 位元組與預估閱讀時間,還能設字數上限即時倒數 —— 作文、自傳、書審、貼文字數限制好用。全程在你瀏覽器,不上傳。',
+    keywords: ['字數', '字數統計', '文字統計', '算字數', '計字數', '幾個字', '字數限制', '字數上限', '中文字數', '英文單字', 'word count', '字元數', '行數', '段落', '句數', '閱讀時間', '作文', '自傳', '書審', '報告', '貼文', '字數計算', '統計字數'],
+    icon: '🔢',
+    loader: () => import('@/tools/text-stats/Index.vue'),
+  },
+  {
     id: 'text-speech',
     name: '文字朗讀',
     category: 'life',

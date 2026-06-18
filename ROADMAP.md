@@ -591,6 +591,17 @@
   控制字元/西里爾與希臘形近字/區塊命名/clean 各選項與並用/空字串,esbuild 打包後跑,併入 npm test)。
   零新相依、不上傳;type-check + 全測試(428)+ build 通過 — 2026-06-18
 
+- 文字統計 / 字數統計(text-stats,category=workshop):貼上文章,正確算出中文字數(逐字計漢字,不像多數
+  英文邏輯的線上工具用空白切詞而把「你好世界」算成 0 或 1)、英文單字、字元(含/不含空白)、數字串、標點、
+  行/非空行/段落/句數、UTF-8 位元組、預估默讀/朗讀時間;並可選計算依據(總字數/中文字/含空白字元/不含空白)
+  設字數上限即時倒數,超過提醒 —— 作文、自傳、書審資料、社群貼文的字數限制好用,敏感草稿不上傳。
+  引擎 src/features/textStats.ts(analyzeText/formatDuration 純函式無 DOM:漢字用 \p{Script=Han} 逐碼位、
+  英文詞用 [A-Za-z]+ 允許 '/- 連接、數字串吃小數與千分位、句末標點以 lookaround 排除小數點、UTF-8 用
+  TextEncoder、閱讀時間中文 5 字/秒英文 3.3 詞/秒估算)+ 回歸測試 scripts/test-textstats.mjs(41 筆:空字串/
+  純中文逐字與位元組/純英文與縮寫連字號/中英混合/數字串與小數不誤判句號/標點/行段落含空行/全形空白/emoji 碼位/
+  多種句末標點/閱讀時間單調/formatDuration,esbuild 打包後跑,併入 npm test)。零新相依、不上傳;
+  與 text-clean(清理)、char-inspect(逐字檢視)互補,這支著重整篇字數統計;type-check + 全測試 + build 通過 — 2026-06-18
+
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
       與本專案「精簡 + 自包含」原則不符,**跳過**(未來若改自架模型再評估)
