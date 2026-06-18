@@ -391,6 +391,16 @@
   置中座標/畫面往下對應 pdf y 變小/clampBox 夾邊界後不超出上下左右/寬度上下限,esbuild 打包後跑,併入 npm test)。
   零新相依(複用既有 pdf-lib + pdfjs-dist);type-check + 全測試 + build 通過 — 2026-06-18
 
+- 影片轉 GIF(video-gif,category=workshop):把一小段影片(MP4/WebM/MOV…)轉成會動的 GIF ——
+  用 <video> 逐點 seek + Canvas drawImage 取 RGBA + 既有 gifenc 編碼,全程在瀏覽器、影片不上傳、
+  無廣告、無浮水印、不限時長。零新相依(複用 gifStudio.ts 的 encodeGif/planCanvasSize/fpsToDelay)。
+  UI:內嵌 <video controls> 可拖到位置,一鍵「設為開始/結束」裁時間區間;寬度/fps/顏色數/循環可調;
+  即時顯示預計影格數,超過 MAX_FRAMES=300 提示縮短區間。取樣規劃抽成純函式 planVideoFrameTimes
+  (起點起以 1/fps 等間隔取樣到結束前、超上限截斷、四捨五入到毫秒;與 DOM 無關可 Node 測),
+  併入 scripts/test-gifstudio.mjs +18 筆(影格數/起點偏移/遞增/截斷/極短至少 1 張/錯誤處理/fps 夾限)。
+  seek 以 'seeked' 事件 + 1.5s 逾時保險;getContext willReadFrequently。與 gif-studio(多張圖片→GIF)
+  互補。type-check + 全測試 + build 通過 — 2026-06-18
+
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
       與本專案「精簡 + 自包含」原則不符,**跳過**(未來若改自架模型再評估)

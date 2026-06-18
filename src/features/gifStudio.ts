@@ -87,6 +87,48 @@ export function fpsToDelay(fps: number): number {
   return Math.max(20, Math.round(1000 / f / 10) * 10)
 }
 
+export interface VideoFramePlan {
+  /** 要從影片擷取的時間點(秒),由開始往結束等間隔取樣 */
+  times: number[]
+  /** 因超過影格上限而被截斷(實際只取到 maxFrames 張) */
+  truncated: boolean
+  /** 取樣間隔(秒)= 1 / fps */
+  interval: number
+}
+
+/**
+ * 規劃「影片轉 GIF」要在哪些時間點擷取影格(純計算、與 DOM 無關,方便 Node 測)。
+ * 從 startSec 起,以 1/fps 為間隔取樣到 endSec 前;超過 maxFrames 即截斷。
+ */
+export function planVideoFrameTimes(
+  startSec: number,
+  endSec: number,
+  fps: number,
+  maxFrames = 300,
+): VideoFramePlan {
+  if (!Number.isFinite(startSec) || !Number.isFinite(endSec)) {
+    throw new Error('時間點不正確')
+  }
+  const s = Math.max(0, startSec)
+  if (!(endSec > s)) throw new Error('結束時間需大於開始時間')
+  const f = clampNum(fps, 1, 50)
+  const cap = Math.max(1, Math.floor(maxFrames))
+  const interval = 1 / f
+  const dur = endSec - s
+  let count = Math.max(1, Math.floor(dur * f))
+  let truncated = false
+  if (count > cap) {
+    count = cap
+    truncated = true
+  }
+  const times: number[] = []
+  for (let i = 0; i < count; i++) {
+    // 四捨五入到毫秒,避免浮點誤差讓 currentTime 抖動
+    times.push(Math.round((s + i * interval) * 1000) / 1000)
+  }
+  return { times, truncated, interval }
+}
+
 function clampInt(n: number, lo: number, hi: number): number {
   return Math.max(lo, Math.min(hi, Math.round(n)))
 }

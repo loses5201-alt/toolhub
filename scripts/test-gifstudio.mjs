@@ -16,7 +16,7 @@ await build({
   outfile: out,
   logLevel: 'silent',
 })
-const { encodeGif, planCanvasSize, fpsToDelay } = await import('file://' + out)
+const { encodeGif, planCanvasSize, fpsToDelay, planVideoFrameTimes } = await import('file://' + out)
 
 let fail = 0
 function check(note, cond) {
@@ -120,6 +120,39 @@ check('5 FPS = 200ms', fpsToDelay(5) === 200)
 check('FPS 下限夾 1', fpsToDelay(0) === 1000)
 check('FPS 上限夾 50(>=20ms)', fpsToDelay(999) === 20)
 check('delay 對齊 10ms', fpsToDelay(3) % 10 === 0)
+
+// ── planVideoFrameTimes(影片轉 GIF 取樣規劃) ──
+const p1 = planVideoFrameTimes(0, 2, 8)
+check('2 秒 @8fps 取 16 張', p1.times.length === 16)
+check('第一張在開始時間', p1.times[0] === 0)
+check('間隔為 1/fps', Math.abs(p1.interval - 1 / 8) < 1e-9)
+check('未截斷', p1.truncated === false)
+check('最後一張落在區間內', p1.times[p1.times.length - 1] < 2)
+const p2 = planVideoFrameTimes(1.5, 3.5, 10)
+check('指定起點偏移正確', p2.times[0] === 1.5)
+check('2 秒 @10fps 取 20 張', p2.times.length === 20)
+check('時間遞增', p2.times.every((t, i) => i === 0 || t > p2.times[i - 1]))
+const p3 = planVideoFrameTimes(0, 100, 30, 50)
+check('超過上限被截斷', p3.truncated === true && p3.times.length === 50)
+const p4 = planVideoFrameTimes(0, 0.05, 8)
+check('極短片段至少 1 張', p4.times.length === 1)
+check('時間四捨五入到毫秒', planVideoFrameTimes(0, 1, 3).times.every((t) => Number.isInteger(Math.round(t * 1000))))
+threw = false
+try {
+  planVideoFrameTimes(2, 1, 8)
+} catch {
+  threw = true
+}
+check('結束<=開始丟錯', threw)
+threw = false
+try {
+  planVideoFrameTimes(NaN, 5, 8)
+} catch {
+  threw = true
+}
+check('時間 NaN 丟錯', threw)
+const p5 = planVideoFrameTimes(0, 5, 999)
+check('fps 上限夾 50', Math.abs(p5.interval - 1 / 50) < 1e-9)
 
 if (fail) {
   console.error(`\n${fail} 個測試未通過`)
