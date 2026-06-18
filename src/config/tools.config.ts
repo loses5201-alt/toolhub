@@ -72,6 +72,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/image-annotate/Index.vue'),
   },
   {
+    id: 'screen-record',
+    name: '螢幕錄影',
+    category: 'workshop',
+    description: '錄製整個螢幕、視窗或分頁成影片(可含聲音),做操作教學、把畫面問題錄給人看 —— 全程在你電腦錄製,影片不上傳、無浮水印、不限時長。',
+    keywords: ['螢幕錄影', '錄影', '錄製', '錄螢幕', '畫面錄製', '教學錄影', '錄畫面', 'screen record', 'recorder', '錄製教學', '操作錄影', '螢幕錄製'],
+    icon: '⏺️',
+    loader: () => import('@/tools/screen-record/Index.vue'),
+  },
+  {
     id: 'bg-remove',
     name: '圖片去背',
     category: 'workshop',
