@@ -441,6 +441,17 @@
   PDF 匯出走既有 pdf-lib 動態 import(pdf-vendor chunk,不預快取),零新相依;type-check + 全測試(1017 筆)
   + build 通過 — 2026-06-18
 
+- 批次 QR Code(qr-batch,category=workshop):一份清單(每行一筆)一次做成很多個 QR ——
+  兩種輸出:(1)打包成 ZIP(每筆一張 512px PNG,檔名取自標籤或內容),(2)排成可直接列印的 A4 標籤頁 PDF
+  (自訂每頁欄列數、QR 下方可印英數標籤)。可勾選「逗號/Tab 分標籤,內容」讓每筆帶名稱。活動桌號、座位、
+  財產編號、商品/菜單/問卷連結用得上。全程在瀏覽器以 qrcode 函式庫產生,清單不上傳、直接編碼原始內容不轉址不追蹤
+  (有別於會偷換短網址的線上產生器)。引擎 src/features/qrBatch.ts(parseEntries/safeName/planSheet 純函式無 DOM,
+  planSheet 以左上原點算格子、呼叫端換成 pdf-lib 左下原點)+ 回歸測試 scripts/test-qrbatch.mjs(28 筆:
+  多行解析/空行/逗號與 Tab 分隔/只切第一個分隔符/檔名清理去路徑字元收斂底線去前後點夾長度/版面數量與換頁
+  不超界格寬計算/欄數 0 與邊界過大報錯,esbuild 打包後跑,併入 npm test)。複用既有 zipStudio.buildZip 打包、
+  pdf-lib 動態 import,零新相依;PDF 內建字型不含中文,中文標籤在 PDF 上略過(QR 與 ZIP 檔名仍完整支援中文)。
+  與單張「QR Code 產生器」互補。type-check + 全測試(1044 筆)+ build 通過 — 2026-06-18
+
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
       與本專案「精簡 + 自包含」原則不符,**跳過**(未來若改自架模型再評估)

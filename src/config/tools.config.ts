@@ -414,6 +414,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/qr-generate/Index.vue'),
   },
   {
+    id: 'qr-batch',
+    name: '批次 QR Code',
+    category: 'workshop',
+    description: '一份清單一次做成很多個 QR Code(每行一筆),打包成 ZIP 圖片或排成可直接列印的 A4 標籤頁 —— 活動桌號、財產編號、商品連結用。全程在你瀏覽器產生,清單不上傳、不轉址、不追蹤。',
+    keywords: ['qr', 'qrcode', 'qr code', '二維碼', '批次', '大量', '一次', '清單', '名單', '桌號', '座位', '財產編號', '標籤', '列印', 'a4', '貼紙', '菜單', '問卷', 'batch', '多個', '產生'],
+    icon: '🔳',
+    loader: () => import('@/tools/qr-batch/Index.vue'),
+  },
+  {
     id: 'barcode-generate',
     name: '條碼產生器',
     category: 'workshop',
