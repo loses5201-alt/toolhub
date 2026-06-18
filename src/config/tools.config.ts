@@ -540,6 +540,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/text-clean/Index.vue'),
   },
   {
+    id: 'char-inspect',
+    name: '隱形字元 / Unicode 檢視器',
+    category: 'workshop',
+    description: '貼上文字,逐字揪出看不見的零寬字元、異常空白、文字方向控制字元,以及長得像 ASCII 的形近字(釣魚網址、假冒帳號常用)—— 解決「兩個字串看起來一樣卻不相等」,也能防冒名。全程在你瀏覽器,不上傳。',
+    keywords: ['隱形字元', '看不見的字元', '零寬', 'zero width', '零寬字元', 'unicode', '碼位', 'codepoint', '字元', '形近字', '混淆', 'confusable', '同形異字', 'homograph', '釣魚', '假冒', '冒名', '方向字元', 'bidi', 'rlo', '亂碼', '比對', '不相等', '隱藏字元', '全形空格', 'nbsp', '不斷行空格', '字數', '檢視', '檢測'],
+    icon: '🔎',
+    loader: () => import('@/tools/char-inspect/Index.vue'),
+  },
+  {
     id: 'text-speech',
     name: '文字朗讀',
     category: 'life',
