@@ -409,6 +409,18 @@
   相鄰無縫接續/postOrder 排列/錯誤處理,esbuild 打包後跑,併入 npm test)。預覽框即時顯示保留範圍與格線;
   JPG/PNG、品質可調;打包 ZIP 動態 import 既有 buildZip(STORE)。零新相依;type-check + 全測試 + build 通過 — 2026-06-18
 
+- 表格拆分(table-split,category=workshop):把一份大 CSV/Excel 表格拆成多份 —— 兩種模式:
+  (1)按列數平均切(每 N 列一份,表頭帶進每份),(2)按某欄的值分組(同值歸一份,檔名=該欄值,
+  可選忽略大小寫、可選輸出時移除分組欄)。匯出可打包 ZIP(每份一個 CSV/JSON,複用 zipStudio.buildZip)
+  或匯出單一多工作表 Excel(xlsx.ts 新增 sheetsToExcelBlob,工作表名清非法字元/夾 31 字/去重)。
+  Excel 讀檔走既有 data-convert/xlsx 動態 import(sheet-vendor chunk,不預快取)。引擎
+  src/features/tableSplit.ts(safeFileName/splitByRows/splitByColumn/uniqueFileNames 純函式無 DOM,
+  Table 型別複用 tableClean;splitByColumn 以首見順序穩定分組、空值歸一組)+ 回歸測試
+  scripts/test-tablesplit.mjs(40 筆:檔名清理/補零份號/不漏列/邊界、首見順序/空值/dropKeyColumn/
+  大小寫/欄超界、唯一檔名加序號,esbuild 打包後跑,併入 npm test)。與 table-clean(清理)、
+  data-convert(格式互轉)、list-compare(比對)互補,補上「一份拆多份」的缺口;不上傳。
+  零新相依;type-check + 全測試 + build 通過 — 2026-06-18
+
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
       與本專案「精簡 + 自包含」原則不符,**跳過**(未來若改自架模型再評估)

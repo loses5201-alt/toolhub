@@ -234,6 +234,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/table-clean/Index.vue'),
   },
   {
+    id: 'table-split',
+    name: '表格拆分',
+    category: 'workshop',
+    description: '把一份大 CSV/Excel 名單拆成多份:按每 N 列平均切,或按某欄的值分組(依區域、業務、月份各自一份)—— 打包成 ZIP 或匯出單一多工作表 Excel。全程在你瀏覽器,含個資的名單不上傳。',
+    keywords: ['表格', '拆分', '分割', '切割', '拆開', '分檔', '分組', '分群', 'csv', 'excel', 'xlsx', '名單', '訂單', '按欄位', '依欄位', '分區', '分業務', '每n列', '切成多份', 'split', '大檔', '分批'],
+    icon: '📑',
+    loader: () => import('@/tools/table-split/Index.vue'),
+  },
+  {
     id: 'list-compare',
     name: '名單比對 / 去重',
     category: 'workshop',

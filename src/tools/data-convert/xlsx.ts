@@ -34,3 +34,27 @@ export function objectsToExcelBlob(
     type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
   })
 }
+
+/** 多組資料 → 單一 .xlsx,每組一個工作表(供表格拆分輸出)。 */
+export function sheetsToExcelBlob(
+  sheets: { name: string; records: Record<string, unknown>[] }[],
+): Blob {
+  const wb = XLSX.utils.book_new()
+  const used = new Set<string>()
+  sheets.forEach((s, i) => {
+    // Excel 工作表名:長度上限 31、不可含 []:*?/\、需唯一
+    let base = (s.name || `工作表${i + 1}`).replace(/[[\]:*?/\\]/g, '_').slice(0, 31) || `工作表${i + 1}`
+    let name = base
+    let n = 2
+    while (used.has(name.toLowerCase())) {
+      const suffix = ` (${n++})`
+      name = base.slice(0, 31 - suffix.length) + suffix
+    }
+    used.add(name.toLowerCase())
+    XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(s.records), name)
+  })
+  const out = XLSX.write(wb, { type: 'array', bookType: 'xlsx' }) as ArrayBuffer
+  return new Blob([out], {
+    type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+  })
+}
