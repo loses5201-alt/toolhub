@@ -452,6 +452,17 @@
   pdf-lib 動態 import,零新相依;PDF 內建字型不含中文,中文標籤在 PDF 上略過(QR 與 ZIP 檔名仍完整支援中文)。
   與單張「QR Code 產生器」互補。type-check + 全測試(1044 筆)+ build 通過 — 2026-06-18
 
+- 色盲友善檢測(color-blind,category=workshop):上傳圖表/簡報/網頁截圖/地圖,左右並排顯示「原圖 vs 色覺障礙者看到的樣子」,
+  檢查紅綠等配色是否仍分得出來(台灣約每 12 位男性 1 位紅綠色覺異常)。四型別:綠色盲(deuteranopia,最常見)、
+  紅色盲(protanopia)、藍色盲(tritanopia)、全色盲(achromatopsia,灰階);程度 0–100 以「原色↔全模擬」線性混合模擬色弱。
+  採 Machado, Oliveira & Fielding (2009) 廣用的 sRGB 色彩矩陣(severity=1.0),直接作用於 gamma 編碼 sRGB(實務近似);
+  全色盲走 Rec.601 luma。線上模擬站(如 Coblis)要上傳圖片;本工具全程瀏覽器 Canvas + 純像素運算、不上傳、可下載模擬 PNG。
+  引擎 src/features/colorBlind.ts(clamp255/luma/simulateColor/simulatePixels/colorDistance 純函式無 DOM,
+  simulatePixels 不更動輸入、alpha 原樣保留)+ 回歸測試 scripts/test-colorblind.mjs(35 筆:夾值/luma 權重/severity 0 回原色/
+  灰與黑白在各型別維持/全色盲三通道相等=luma/紅綠在綠盲紅盲下距離縮小/severity 中間值介於原色與全模擬/距離對稱/
+  像素長度與 alpha 保留與不更動輸入,esbuild 打包後跑,併入 npm test)。零新相依;與 contrast-check 互補(對比 vs 色相);
+  type-check + 全測試 + build 通過 — 2026-06-18
+
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
       與本專案「精簡 + 自包含」原則不符,**跳過**(未來若改自架模型再評估)
