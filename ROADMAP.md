@@ -472,6 +472,15 @@
   帶引號版本維持字串,esbuild 打包後跑,併入 npm test)。js-yaml 動態 import + yaml-vendor chunk 不預快取(已驗證未進
   precache);補足 data-convert/json-flatten/markdown-table 不含 YAML 的缺口;type-check + 全測試 + build 通過 — 2026-06-18
 
+- 照片壓到指定大小(image-fit-size,category=workshop):台灣報名/考試/政府/公司上傳系統常規定「照片不得超過 ○○ KB」,
+  一般工具只有品質滑桿要自己反覆試;本工具用二分搜尋自動找出「大小上限內、JPEG 畫質最高」的品質設定,
+  可一併限制最長邊(px),支援多檔逐張壓到同一上限。若連最低品質都還超標,會逐步縮小尺寸(×0.82,最多 8 輪、不縮到 ≤200px)
+  再試,並如實標示「已達標 / 已是最小仍略大」。透明背景填白(JPG 無透明)。搜尋演算法 src/features/imageFit.ts
+  (fmtSize/fitScale/searchQuality 純函式無 DOM,searchQuality 以注入的 measure 回呼編碼、與瀏覽器無關;maxQ 已達標只量一次、
+  連 minQ 都超標回 underTarget=false)+ 回歸測試 scripts/test-imagefit.mjs(21 筆:大小格式化/縮放比例/線性與非線性編碼器找最高達標品質/
+  邊界相等視為達標/maxQ 早停只量一次/壓不下回 minQ/async measure,esbuild 打包後跑,併入 npm test)。
+  與 image-studio(固定品質)、id-photo(固定沖洗尺寸)互補,補上「壓到指定 KB」缺口;零新相依;type-check + 全測試 + build 通過 — 2026-06-18
+
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
       與本專案「精簡 + 自包含」原則不符,**跳過**(未來若改自架模型再評估)
