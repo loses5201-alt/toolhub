@@ -477,6 +477,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/file-checksum/Index.vue'),
   },
   {
+    id: 'card-check',
+    name: '信用卡卡號檢核',
+    category: 'anti-scam',
+    description: '用 Luhn 檢查碼驗證信用卡/金融卡卡號有沒有打對(抓少打、多打、錯一碼),並判斷發卡組織(Visa/Mastercard/JCB…)。全程本機計算、不上傳、不儲存,並提醒卡號+期限+末三碼湊齊就會被盜刷。',
+    keywords: ['信用卡', '卡號', '金融卡', '檢核', '驗證', 'luhn', '檢查碼', '打錯', 'visa', 'mastercard', '萬事達', 'jcb', '美國運通', 'amex', '銀聯', 'unionpay', '卡別', '盜刷', '發卡組織', 'card'],
+    icon: '💳',
+    loader: () => import('@/tools/card-check/Index.vue'),
+  },
+  {
     id: 'severance-pay',
     name: '資遣費試算',
     category: 'labor',
