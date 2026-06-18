@@ -45,6 +45,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/color-tools/Index.vue'),
   },
   {
+    id: 'contrast-check',
+    name: '顏色可讀性檢測',
+    category: 'workshop',
+    description: '輸入文字色與背景色,依國際無障礙標準(WCAG)算出對比比值,判斷在一般字/大字下清不清楚、達不達 AA/AAA —— 做簡報、海報、網頁、長輩友善文件選色用。全程在你瀏覽器計算,不上傳。',
+    keywords: ['對比', '對比度', '色彩對比', '顏色對比', '可讀性', '看不清楚', 'wcag', 'aa', 'aaa', '無障礙', '配色', '文字顏色', '背景色', '對比比值', 'contrast', 'a11y', '長輩', '弱視', '簡報配色'],
+    icon: '🌗',
+    loader: () => import('@/tools/contrast-check/Index.vue'),
+  },
+  {
     id: 'gif-studio',
     name: '動圖工坊',
     category: 'workshop',
