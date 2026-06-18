@@ -171,6 +171,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/secure-box/Index.vue'),
   },
   {
+    id: 'image-fit-size',
+    name: '照片壓到指定大小(KB)',
+    category: 'workshop',
+    description: '報名/考試/上傳系統限制「照片不得超過 ○○ KB」?自動壓到上限內、畫質最高,可一併限制最長邊 —— 全程在你瀏覽器處理,照片不上傳、無廣告、可批次。',
+    keywords: ['壓縮', '縮小', '照片', '大頭照', '證件照', 'kb', '大小限制', '檔案太大', '上傳', '報名', '考試', '國考', '學測', '限制大小', '不超過', '壓到', '指定大小', '2mb', '100kb', '500kb', '減肥', '縮檔', 'compress', '上傳照片'],
+    icon: '🗜️',
+    loader: () => import('@/tools/image-fit-size/Index.vue'),
+  },
+  {
     id: 'heic-convert',
     name: 'HEIC 轉 JPG / PNG',
     category: 'workshop',
