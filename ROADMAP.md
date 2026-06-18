@@ -360,6 +360,17 @@
   (刪除/移動/復原一起 splice/swap)。解決手機/掃描器拍歪的文件要轉正的常見痛點;零新相依(複用既有 pdf-lib)。
   type-check + 全測試 + build 通過 — 2026-06-17
 
+- 音訊裁剪工坊(audio-trim,category=workshop):載入音檔(MP3/WAV/M4A/OGG/FLAC…依瀏覽器解碼能力),
+  裁出片段、可加線性淡入/淡出,匯出無損 WAV。用瀏覽器內建 AudioContext.decodeAudioData 解碼,各聲道複製成
+  Float32 後在本機處理 —— 剪鈴聲、擷取訪談/會議/歌曲片段、錄音去頭去尾。線上音訊剪輯站要把(常含隱私的)
+  錄音上傳別人伺服器、滿廣告又限時長;本工具全程瀏覽器、不上傳。輸出選 WAV 因無損且所有播放器都吃、
+  無需任何第三方編碼器(自包含)。波形 canvas 顯示峰值 + 選取區間底色,range 拉桿調起訖即時重畫並使上次輸出失效;
+  產生後先試聽再下載。引擎 src/features/wavEncode.ts(timeToSample/sliceChannels/applyFade/encodeWav/wavByteSize
+  純函式無 DOM:16-bit PCM RIFF 標頭手刻、float→int16 四捨五入並夾住不溢位、淡入淡出重疊自動縮放、不等長取最短)
+  + 回歸測試 scripts/test-wavencode.mjs(45 筆:時間換樣本夾界/四捨五入、擷取與不改動輸入/立體聲、淡入淡出遞增遞減
+  與重疊不爆 NaN、WAV 各標頭欄位/byteRate/blockAlign/dataSize、樣本量化值/滿幅/夾住、立體聲交錯、空輸入仍有 44byte
+  標頭,esbuild 打包後跑,併入 npm test)。零三方相依、不上傳;type-check + 全測試(207 筆)+ build 通過 — 2026-06-18
+
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
       與本專案「精簡 + 自包含」原則不符,**跳過**(未來若改自架模型再評估)

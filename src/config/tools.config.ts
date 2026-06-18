@@ -117,6 +117,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/voice-recorder/Index.vue'),
   },
   {
+    id: 'audio-trim',
+    name: '音訊裁剪工坊',
+    category: 'workshop',
+    description: '載入音檔(MP3/WAV/M4A/OGG…),裁出想要的片段、可加淡入淡出,匯出無損 WAV —— 剪鈴聲、擷取訪談/會議/歌曲片段、錄音去頭去尾。全程在你瀏覽器處理,音檔不上傳、無廣告、不限時長、免註冊。與錄音機/螢幕錄影互補。',
+    keywords: ['音訊', '剪輯', '裁剪', '剪音樂', '剪歌', '剪鈴聲', '鈴聲', '擷取', '片段', '淡入', '淡出', '去頭去尾', '剪音檔', 'mp3', 'wav', 'audio', 'trim', 'cut', '音檔處理', '線上剪輯', '音訊剪輯'],
+    icon: '✂️',
+    loader: () => import('@/tools/audio-trim/Index.vue'),
+  },
+  {
     id: 'bg-remove',
     name: '圖片去背',
     category: 'workshop',
