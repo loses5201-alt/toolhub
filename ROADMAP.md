@@ -106,6 +106,15 @@
   複用 tableClean 的 Table/parseTable/toCSV)+ 回歸測試 scripts/test-tablemerge.mjs(20 筆:left/inner、
   填值留空、計數、大小寫/去空白 key、重複 key 取第一、欄名衝突改名、多欄、空右表、序列化整合,
   以 esbuild 多入口打包後跑,併入 npm test)。含個資名單不上傳;type-check + 全測試 + build 通過 — 2026-06-17
+- 動圖工坊(gif-studio,category=workshop):把多張圖片做成會動的 GIF —— 線上 GIF 製作站多半要上傳照片、
+  滿廣告又加浮水印;本工具全程在瀏覽器用 Canvas + gifenc(純 JS、無 WASM/worker)編碼、不上傳。可調輸出寬度
+  (高度依第一張比例自動算,最長邊上限 1200px)、播放速度(1–24 張/秒)、縮放方式(完整顯示留白/填滿裁切/拉伸)、
+  底色、顏色數(8–256,每張各自量化最佳調色盤畫質較佳)、循環次數(無限/1/3/5,首張寫 repeat 旗標);拖放/多次加入/
+  上下移調序/移除;編碼分影格 await 讓進度可更新。引擎 src/features/gifStudio.ts(encodeGif/planCanvasSize/
+  fpsToDelay 純函式,像素進、GIF 位元組出,與環境無關)+ 回歸測試 scripts/test-gifstudio.mjs(23 筆:GIF89a 檔頭/
+  邏輯螢幕寬高/結尾 0x3B/NETSCAPE2.0 循環擴充/maxColors/空影格與像素數不符與尺寸錯誤、planCanvasSize 等比與最長邊上限、
+  fpsToDelay 夾限與 10ms 對齊,以 esbuild 打包含 gifenc 後跑,併入 npm test)。gifenc 動態 import + gif-vendor chunk
+  (gzip 3.2KB)不預快取;gifenc 無型別宣告於 env.d.ts 補上;type-check + 全測試 + build 通過 — 2026-06-18
 - 證件浮水印加註(image-watermark):交付證件影本前斜向重複加註用途(防盜用,內政部宣導作法),
   canvas 把文字燒進像素、密度/顏色/角度可調、不上傳、可批次;與 image-redact 互補 — 2026-06-15
 - 文字清理工坊(text-clean):清掉貼上時夾帶的零寬/不可見字元、全形↔半形、多餘空白/空行、

@@ -45,6 +45,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/color-tools/Index.vue'),
   },
   {
+    id: 'gif-studio',
+    name: '動圖工坊',
+    category: 'workshop',
+    description: '把多張圖片做成會動的 GIF,可調速度、尺寸、循環 —— 全程在你瀏覽器編碼,不上傳、無廣告、無浮水印(線上 GIF 站多半要上傳照片又加浮水印)。',
+    keywords: ['gif', '動圖', '動畫', '會動的圖', '動態圖', '圖片變動畫', '製作gif', '做gif', '連續圖', '逐格', '動態貼圖', 'animated', '影格', '動圖製作'],
+    icon: '🎞️',
+    loader: () => import('@/tools/gif-studio/Index.vue'),
+  },
+  {
     id: 'image-ocr',
     name: '圖片文字辨識(OCR)',
     category: 'workshop',
