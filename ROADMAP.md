@@ -380,6 +380,17 @@
   各 preset 方向/格線/退回 2-up、格子位置與邊界、換列、fitInto 置中與維持寬高比/邊界不超出/零尺寸不爆,
   esbuild 打包後跑,併入 npm test)。零新相依(複用既有 pdf-lib);type-check + 全測試 + build 通過 — 2026-06-18
 
+- PDF 工坊新增「簽名 / 蓋章」分頁(pdf-studio/SignStamp):把簽名檔或印章圖片直接蓋到 PDF 頁面上 ——
+  在頁面預覽圖(pdfjs renderThumbnails maxEdge 1100)上拖曳定位、滑桿調大小,可只蓋當前頁或勾選「每一頁都蓋」
+  (印章/騎縫)。閉合既有流程:用本站「手寫簽名製作」做透明背景 PNG → 在此蓋到合約,全程不上傳。
+  與「PDF 浮水印」(整頁重複加註防盜)互補,這支是「在指定位置簽一次名/蓋一個章」。座標幾何抽成純函式
+  signLayout.ts(clamp/heightFrac/clampBox/centerBox/imagePlacement:畫面左上原點比例 → pdf-lib 左下原點 pt,
+  維持原圖長寬比、夾在頁內;無 pdf-lib、無 DOM 可 Node 測);lib.ts 新增 stampImageOnPdf(embedPng/Jpg + drawImage)
+  與 getPageRotations(供 UI 提醒旋轉頁會偏移)。限制:pdf-lib 在 MediaBox(未套 /Rotate)作圖,旋轉頁位置會偏,
+  偵測到即提示先用「整理頁面」轉正。回歸測試 scripts/test-signlayout.mjs(23 筆:clamp/heightFrac/左上與右下與
+  置中座標/畫面往下對應 pdf y 變小/clampBox 夾邊界後不超出上下左右/寬度上下限,esbuild 打包後跑,併入 npm test)。
+  零新相依(複用既有 pdf-lib + pdfjs-dist);type-check + 全測試 + build 通過 — 2026-06-18
+
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
       與本專案「精簡 + 自包含」原則不符,**跳過**(未來若改自架模型再評估)

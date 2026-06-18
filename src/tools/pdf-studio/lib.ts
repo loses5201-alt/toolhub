@@ -6,6 +6,7 @@ import { PDFDocument, degrees, type PDFImage } from 'pdf-lib'
 import * as pdfjsLib from 'pdfjs-dist'
 import workerUrl from 'pdfjs-dist/build/pdf.worker.min.mjs?url'
 import { sheetLayout, cellBox, fitInto } from './nupLayout'
+import { imagePlacement, type Box } from './signLayout'
 
 // pdfjs 需要 worker;用 Vite 的 ?url 取得 bundle 後的路徑
 pdfjsLib.GlobalWorkerOptions.workerSrc = workerUrl
@@ -346,6 +347,42 @@ export async function compressPdfViaRaster(
   }
   await task.destroy()
   return await out.save()
+}
+
+export interface StampSpec {
+  imageBytes: ArrayBuffer
+  imageType: string // 'image/png' | 'image/jpeg'
+  pages: number[] // 要蓋章的頁(0-based)
+  box: Box // 畫面座標的圖章框(左上原點,佔頁比例)
+  imgAspect: number // 圖高 / 圖寬,維持原比例
+}
+
+/**
+ * 把一張簽名/印章圖片蓋到 PDF 指定頁面上,全程在瀏覽器處理、不上傳。
+ * 位置以畫面座標(左上原點、佔頁比例)表示,經 imagePlacement 轉成 pdf-lib 繪圖座標。
+ * 注意:pdf-lib 在頁面 MediaBox(未套 /Rotate)座標系作圖,旋轉過的頁面位置會偏;
+ * 旋轉頁建議先用「整理頁面」轉正(UI 已提示)。
+ */
+export async function stampImageOnPdf(buffer: ArrayBuffer, spec: StampSpec): Promise<Uint8Array> {
+  const doc = await PDFDocument.load(buffer, { ignoreEncryption: true })
+  const img = spec.imageType.includes('png')
+    ? await doc.embedPng(spec.imageBytes)
+    : await doc.embedJpg(spec.imageBytes)
+  const pages = doc.getPages()
+  for (const idx of spec.pages) {
+    const page = pages[idx]
+    if (!page) continue
+    const { width, height } = page.getSize()
+    const r = imagePlacement(width, height, spec.box, spec.imgAspect)
+    page.drawImage(img, { x: r.x, y: r.y, width: r.width, height: r.height })
+  }
+  return await doc.save()
+}
+
+/** 讀每頁的旋轉角度(0/90/180/270),供 UI 提醒旋轉頁蓋章會偏移 */
+export async function getPageRotations(buffer: ArrayBuffer): Promise<number[]> {
+  const doc = await PDFDocument.load(buffer, { ignoreEncryption: true })
+  return doc.getPages().map((p) => (((p.getRotation().angle % 360) + 360) % 360))
 }
 
 export interface RenderedPage {

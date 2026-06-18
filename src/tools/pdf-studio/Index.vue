@@ -6,6 +6,7 @@ import Organize from './Organize.vue'
 import ImagesToPdf from './ImagesToPdf.vue'
 import PdfToImages from './PdfToImages.vue'
 import ExtractText from './ExtractText.vue'
+import SignStamp from './SignStamp.vue'
 import Watermark from './Watermark.vue'
 import PageNumbers from './PageNumbers.vue'
 import NUp from './NUp.vue'
@@ -21,6 +22,7 @@ const tabs = [
   { id: 'img2pdf', label: '圖片轉 PDF', icon: '🖼️', desc: '多張圖合成一份 PDF' },
   { id: 'pdf2img', label: 'PDF 轉圖片', icon: '📸', desc: '每頁存成 PNG/JPG' },
   { id: 'extract', label: '取出文字', icon: '📝', desc: '抽出可選取文字複製' },
+  { id: 'sign', label: '簽名 / 蓋章', icon: '✒️', desc: '把簽名/印章蓋到頁面' },
   { id: 'watermark', label: 'PDF 浮水印', icon: '🖋️', desc: '每頁加註用途防盜用' },
   { id: 'pagenum', label: 'PDF 頁碼', icon: '🔢', desc: '每頁加上頁碼編號' },
   { id: 'nup', label: '併頁省紙', icon: '🗂️', desc: '每張放 2/4/6/9 頁' },
@@ -55,6 +57,7 @@ const active = ref<(typeof tabs)[number]['id']>('merge')
       <ImagesToPdf v-else-if="active === 'img2pdf'" />
       <PdfToImages v-else-if="active === 'pdf2img'" />
       <ExtractText v-else-if="active === 'extract'" />
+      <SignStamp v-else-if="active === 'sign'" />
       <Watermark v-else-if="active === 'watermark'" />
       <PageNumbers v-else-if="active === 'pagenum'" />
       <NUp v-else-if="active === 'nup'" />
