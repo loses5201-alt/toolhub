@@ -33,3 +33,27 @@ declare module 'gifenc' {
     format?: PaletteFormat,
   ): Uint8Array
 }
+
+// JsBarcode 套件雖附 jsbarcode.d.ts,但 package.json 未宣告 types 欄位,
+// TS(moduleResolution: bundler)找不到 → 在此補上條碼工坊用到的最小宣告。
+declare module 'jsbarcode' {
+  interface BarcodeOptions {
+    format?: string
+    width?: number
+    height?: number
+    displayValue?: boolean
+    text?: string
+    fontSize?: number
+    textMargin?: number
+    margin?: number
+    background?: string
+    lineColor?: string
+    valid?: (valid: boolean) => void
+  }
+  function JsBarcode(
+    element: SVGElement | HTMLCanvasElement | string,
+    data: string,
+    options?: BarcodeOptions,
+  ): void
+  export default JsBarcode
+}

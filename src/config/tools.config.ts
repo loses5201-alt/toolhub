@@ -342,6 +342,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/qr-generate/Index.vue'),
   },
   {
+    id: 'barcode-generate',
+    name: '條碼產生器',
+    category: 'workshop',
+    description: '把料號、商品編號、書本 ISBN 做成一維條碼(CODE128 / EAN-13 / EAN-8 / UPC / CODE39 / ITF-14),可下載向量 SVG 或高解析 PNG 印標籤 —— 全程在你瀏覽器產生,不上傳、無廣告、不偷塞追蹤,輸入少打檢查碼自動補上。',
+    keywords: ['條碼', '一維條碼', 'barcode', 'code128', 'ean', 'ean13', 'ean-13', 'ean8', 'upc', 'code39', 'itf', '商品條碼', '料號', '貨號', '標籤', '印標籤', 'isbn', '書號', '產生條碼', '製作條碼', '檢查碼'],
+    icon: '🏷️',
+    loader: () => import('@/tools/barcode-generate/Index.vue'),
+  },
+  {
     id: 'text-clean',
     name: '文字清理工坊',
     category: 'workshop',
