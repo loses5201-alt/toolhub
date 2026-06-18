@@ -297,6 +297,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/image-crop/Index.vue'),
   },
   {
+    id: 'image-grid',
+    name: 'IG 九宮格切圖',
+    category: 'workshop',
+    description: '把一張大圖切成九宮格,依序發到 Instagram 主頁就拼成一整張大圖牆 —— 自動算好發文順序、置中裁切,全程在你瀏覽器處理,圖片不上傳、無廣告、無浮水印。',
+    keywords: ['九宮格', '切圖', '切割', 'ig', 'instagram', '主頁', '大圖', 'banner', '拼圖', '網格', 'grid', '分割圖片', '一張切多張', '版面', '個人檔案', '照片牆', '切九宮格'],
+    icon: '⊞',
+    loader: () => import('@/tools/image-grid/Index.vue'),
+  },
+  {
     id: 'id-photo',
     name: '證件照排版(4×6)',
     category: 'workshop',

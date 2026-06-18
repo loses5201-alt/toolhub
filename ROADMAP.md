@@ -401,6 +401,14 @@
   seek 以 'seeked' 事件 + 1.5s 逾時保險;getContext willReadFrequently。與 gif-studio(多張圖片→GIF)
   互補。type-check + 全測試 + build 通過 — 2026-06-18
 
+- IG 九宮格切圖(image-grid,category=workshop):把一張大圖切成 cols×rows 格,依序發到 Instagram
+  主頁拼成一整張大圖牆。純 Canvas 裁切、圖片不上傳、無廣告、無浮水印。幾何抽成純函式 imageGrid.ts
+  (computeCoverCrop 以中心 cover 裁切到 cols:rows 比例;planGridTiles 回每格來源矩形 + displayIndex +
+  postOrder——IG 新貼文排最前故 postOrder=total−displayIndex+1,先貼右下、主頁才由左上拼起;無 DOM 可 Node 測)
+  + 回歸測試 scripts/test-imagegrid.mjs(24 筆:寬/高圖裁切置中、3:1/3:2 比例、裁切不超界、格數/面積總和/
+  相鄰無縫接續/postOrder 排列/錯誤處理,esbuild 打包後跑,併入 npm test)。預覽框即時顯示保留範圍與格線;
+  JPG/PNG、品質可調;打包 ZIP 動態 import 既有 buildZip(STORE)。零新相依;type-check + 全測試 + build 通過 — 2026-06-18
+
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
       與本專案「精簡 + 自包含」原則不符,**跳過**(未來若改自架模型再評估)
