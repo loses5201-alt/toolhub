@@ -72,6 +72,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/image-annotate/Index.vue'),
   },
   {
+    id: 'timezone',
+    name: '時區換算 / 世界時鐘',
+    category: 'life',
+    description: '看現在各地幾點,或把某地某時間換算到全球各時區 —— 自動處理日光節約,跟國外家人朋友、客戶約時間不算錯。純前端。',
+    keywords: ['時區', '時差', '世界時鐘', '換算', '幾點', '國外時間', '日光節約', '約時間', '會議', 'utc', 'gmt', '紐約', '東京', '倫敦', '美國時間', 'timezone'],
+    icon: '🌏',
+    loader: () => import('@/tools/timezone/Index.vue'),
+  },
+  {
     id: 'screen-record',
     name: '螢幕錄影',
     category: 'workshop',
