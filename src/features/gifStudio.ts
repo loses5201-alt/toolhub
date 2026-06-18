@@ -87,6 +87,46 @@ export function fpsToDelay(fps: number): number {
   return Math.max(20, Math.round(1000 / f / 10) * 10)
 }
 
+export interface FramePlan {
+  /** 要從影片擷取的時間點(秒),含起點與終點、平均分布 */
+  times: number[]
+  /** 每張影格停留毫秒數(已對齊到 10ms);總長 ≈ 所選片段長度 */
+  delayMs: number
+}
+
+/**
+ * 規劃「影片轉 GIF」要擷取哪些時間點。
+ * 以 fps 當「目標流暢度」算出張數,但受 maxFrames 上限保護(避免做出超大檔/當機);
+ * 不論是否觸頂,影格都平均分布在 [start, end] 全段(含頭尾),
+ * 並把每張停留時間設成讓 GIF 總長 ≈ 所選片段長度,播放速度才自然。
+ */
+export function planFrameTimes(
+  startSec: number,
+  endSec: number,
+  fps: number,
+  maxFrames = 150,
+): FramePlan {
+  if (![startSec, endSec, fps].every((n) => Number.isFinite(n))) {
+    throw new Error('時間或速度數值不正確')
+  }
+  if (startSec < 0) startSec = 0
+  const span = endSec - startSec
+  if (span <= 0) throw new Error('結束時間需大於開始時間')
+
+  const f = clampNum(fps, 1, 50)
+  const cap = Math.max(2, Math.floor(maxFrames))
+  const desired = Math.round(span * f)
+  const count = clampInt(desired, 2, cap)
+
+  const times: number[] = []
+  for (let i = 0; i < count; i++) {
+    times.push(startSec + (span * i) / (count - 1))
+  }
+  // 每張停留 = 總長 / 張數,對齊到 10ms、至少 20ms(GIF 單位為 1/100 秒)
+  const delayMs = Math.max(20, Math.round((span * 1000) / count / 10) * 10)
+  return { times, delayMs }
+}
+
 function clampInt(n: number, lo: number, hi: number): number {
   return Math.max(lo, Math.min(hi, Math.round(n)))
 }

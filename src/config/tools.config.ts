@@ -63,6 +63,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/gif-studio/Index.vue'),
   },
   {
+    id: 'video-to-gif',
+    name: '影片轉 GIF',
+    category: 'workshop',
+    description: '把一段影片(或其中一小段)轉成會動的 GIF,做成 LINE/社群可貼的動圖 —— 全程在你瀏覽器逐格擷取編碼,影片不上傳、無廣告、無浮水印、不限時長大小。',
+    keywords: ['影片轉gif', '影片轉動圖', 'gif', '動圖', '影片', '片段', '轉檔', 'mp4轉gif', 'mp4', 'webm', 'mov', 'video to gif', '截取', '剪片', 'line貼圖', '梗圖', '會動的圖'],
+    icon: '🎥',
+    loader: () => import('@/tools/video-to-gif/Index.vue'),
+  },
+  {
     id: 'image-ocr',
     name: '圖片文字辨識(OCR)',
     category: 'workshop',

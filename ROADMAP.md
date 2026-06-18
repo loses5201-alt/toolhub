@@ -359,6 +359,14 @@
   用 pdf-lib getRotation().angle + delta 正規化後 setRotation(degrees);Organize 以 rot 陣列與 order 同步維護
   (刪除/移動/復原一起 splice/swap)。解決手機/掃描器拍歪的文件要轉正的常見痛點;零新相依(複用既有 pdf-lib)。
   type-check + 全測試 + build 通過 — 2026-06-17
+- 影片轉 GIF(video-to-gif,category=workshop):把一段影片或其中一小段轉成會動的 GIF(LINE/社群梗圖、操作示範)。
+  與「動圖工坊」(多張圖片→GIF)互補,改吃影片。複用 gifStudio.ts 的 encodeGif/planCanvasSize;新增純函式
+  planFrameTimes(start,end,fps,maxFrames):以 fps 當目標流暢度算張數、受 maxFrames 上限保護(預設 150,避免做出
+  超大檔/當機),影格平均分布在 [start,end] 全段(含頭尾),delay 設成讓 GIF 總長 ≈ 所選片段長(觸頂時自動拉長
+  每張停留)。元件用 <video>(muted/playsinline/preload=auto,需在 DOM 中才可解碼)逐格 seek→drawImage(contain
+  置中、黑底)→getImageData,seekTo 等 'seeked' 事件 + 8s 逾時保護。全程瀏覽器、不上傳、無廣告無浮水印、不限時長大小。
+  回歸測試併入 test-gifstudio.mjs +17 筆(張數/頭尾/遞增/範圍/總長 delay/maxFrames 觸頂/偏移起點/極短片段≥2 張/
+  fps 夾住/start=end、end<start、NaN 報錯)。零新相依(gifenc 既有);type-check + 全測試 + build 通過 — 2026-06-18
 
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
