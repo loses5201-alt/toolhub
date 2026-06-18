@@ -198,6 +198,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/data-convert/Index.vue'),
   },
   {
+    id: 'big5-convert',
+    name: 'Big5 ↔ UTF-8 文字檔轉換',
+    category: 'workshop',
+    description: '早年 Windows 記事本存的 Big5/ANSI .txt 在 Mac、手機、網頁變亂碼?一鍵轉成 UTF-8(或反向轉回 Big5)—— 自動判斷來源編碼,全程在你瀏覽器轉換,檔案不上傳。',
+    keywords: ['big5', 'utf-8', 'utf8', 'ansi', '編碼', '亂碼', '轉碼', '文字檔', 'txt', '記事本', '繁體', '中文亂碼', '檔案亂碼', '轉換', '編碼轉換', 'big5轉utf8', 'utf8轉big5', '舊檔', 'mac', '打不開', 'csv亂碼', 'srt亂碼'],
+    icon: '🈯',
+    loader: () => import('@/tools/big5-convert/Index.vue'),
+  },
+  {
     id: 'mojibake-fix',
     name: '亂碼修復',
     category: 'workshop',
