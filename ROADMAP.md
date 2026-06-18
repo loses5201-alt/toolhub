@@ -360,6 +360,17 @@
   (刪除/移動/復原一起 splice/swap)。解決手機/掃描器拍歪的文件要轉正的常見痛點;零新相依(複用既有 pdf-lib)。
   type-check + 全測試 + build 通過 — 2026-06-17
 
+- 音訊工坊(audio-studio,category=workshop):載入音檔(mp3/m4a/wav/ogg/aac…),裁剪片段、淡入淡出、
+  音量增減(dB)、峰值正規化、轉單聲道,匯出無失真 16-bit PCM WAV。做手機鈴聲、剪訪談/會議前後空白、
+  截一段音訊都好用。與「錄音機」「螢幕錄影」(擷取)互補(這支是編輯)。解碼交給瀏覽器
+  AudioContext.decodeAudioData(支援格式依瀏覽器),其餘為純前端運算。處理管線:裁剪→淡化→增益→正規化→單聲道。
+  引擎 src/features/audioStudio.ts(encodeWav/decodeWav/sliceAudio/applyGain/applyFade/normalize/mixToMono/
+  duration/estimateWavBytes 純函式無 DOM:WAV 為手寫 DataView header + 交錯 16-bit、-1/+1 對稱映射,
+  decodeWav 掃 chunk 找 fmt/data 供測試讀回)+ 回歸測試 scripts/test-audiostudio.mjs(26 筆:量測/WAV 編解碼
+  來回誤差在量化精度內/非 WAV 報錯/裁剪夾範圍與空段/增益夾不破音/淡入淡出端點為 0 中點半值/正規化峰值≈0.99
+  與全靜音不爆 NaN/轉單聲道為平均,以 esbuild 打包後跑,併入 npm test)。零新相依、音檔不上傳;
+  type-check + 全測試 + build 通過 — 2026-06-18
+
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
       與本專案「精簡 + 自包含」原則不符,**跳過**(未來若改自架模型再評估)

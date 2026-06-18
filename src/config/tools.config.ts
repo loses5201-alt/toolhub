@@ -306,6 +306,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/favicon-gen/Index.vue'),
   },
   {
+    id: 'audio-studio',
+    name: '音訊工坊',
+    category: 'workshop',
+    description: '載入音檔,裁剪片段(做鈴聲)、淡入淡出、調音量、轉單聲道,匯出無失真 WAV —— 全程在你瀏覽器,音檔不上傳、無廣告、無浮水印、不限時長。',
+    keywords: ['音訊', '音樂', '音檔', '聲音', '剪輯', '裁剪', '剪音樂', '剪歌', '鈴聲', '來電鈴聲', '截取', '淡入', '淡出', '音量', '正規化', '轉單聲道', 'mp3', 'wav', 'm4a', '剪音訊', '音訊剪輯', 'audio', 'trim'],
+    icon: '🎵',
+    loader: () => import('@/tools/audio-studio/Index.vue'),
+  },
+  {
     id: 'subtitle-studio',
     name: '字幕工坊(SRT/VTT)',
     category: 'workshop',
