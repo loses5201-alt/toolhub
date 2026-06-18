@@ -187,6 +187,14 @@
   輸入不上傳。qrcode 動態 import,precache +33KB(可接受,未拆 vendor)— 2026-06-15
 
 ## 處理工坊(續 2)
+- 條碼產生器(barcode-generate,category=workshop):把料號、商品編號、書本 ISBN 做成一維條碼
+  (CODE128/EAN-13/EAN-8/UPC-A/CODE39/ITF-14),可下載向量 SVG 或 3× 高解析 PNG 印標籤,與 QR Code 產生器
+  (二維)互補。線上條碼站常滿廣告/限量/偷塞追蹤;本工具用 JsBarcode 在瀏覽器產生、不上傳。
+  純函式引擎 src/features/barcode.ts:GS1 檢查碼(EAN-13/EAN-8/UPC-A/ITF-14 共用「由右交替乘 3、1」)
+  + 各格式輸入驗證/正規化(少打檢查碼自動補上並提示、CODE39 自動轉大寫、CODE128 擋中文),與 DOM 無關可 Node 測。
+  回歸測試 scripts/test-barcode.mjs(22 筆:以已知真實條碼核算檢查碼/補碼/檢查碼錯誤提示/長度字元驗證/空輸入,
+  併入 npm test,全 761 筆通過)。JsBarcode 動態 import + barcode-vendor chunk(68KB)不預快取;
+  套件未宣告 types 欄位於 env.d.ts 補最小宣告。type-check + 全測試 + build 通過 — 2026-06-18
 - 文字差異比對(text-diff,category=workshop):比對合約改版/條款/規格新舊兩版,
   逐行 + 行內逐字標出改了哪裡(綠＋紅－、配對修改行做詞層級 LCS)。線上 diff 工具多半要把
   可能機密的文字送他人伺服器,此工具全程瀏覽器計算、不上傳。零相依:引擎 src/features/textDiff.ts
