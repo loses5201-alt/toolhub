@@ -622,6 +622,15 @@
   不合法 pattern 與 flags 報錯/email 樣式/matchAll 全域與群組與具名與 i 旗標與零寬,esbuild 打包後跑,併入 npm test)。
   零新相依、不上傳;與 cron-explain/json-* 等開發者工具叢集互補;type-check + 全測試 + build 通過 — 2026-06-18
 
+- Unix 時間戳記轉換(timestamp-convert,category=workshop):雙向(時間戳記→日期 / 日期→時間戳記)。
+  輸入純數字自動依數值大小判斷單位(秒 <1e11 / 毫秒 <1e14 / 微秒),免自己數位數乘除 1000;
+  同時輸出「你的時區/台灣 UTC+8/UTC/ISO 8601」與白話相對時間,點任一格可複製;首頁含每秒更新的現在時間戳記、
+  一鍵帶入。引擎 src/features/timestampConvert.ts(parseEpoch/parseDateString/epochInUnit/formatInOffset 以
+  UTC 平移實作任意時區牆上時間/toISO/relativeFromNow 純函式無 DOM、now 可注入)+ 回歸測試
+  scripts/test-timestampconvert.mjs(30 筆:秒/毫秒/微秒判斷與還原/0/負數/千分位/空白/非數字與小數報錯/
+  ISO 與空格分隔解析/台灣與 UTC 與負偏移跨日格式/星期/toISO/相對時間各級距,esbuild 打包後跑,併入 npm test)。
+  零新相依、不上傳;與 timezone(世界時鐘)互補,這支專做 epoch↔日期;type-check + 全測試 + build 通過 — 2026-06-18
+
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
       與本專案「精簡 + 自包含」原則不符,**跳過**(未來若改自架模型再評估)

@@ -270,6 +270,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/regex-tester/Index.vue'),
   },
   {
+    id: 'timestamp-convert',
+    name: 'Unix 時間戳記轉換',
+    category: 'workshop',
+    description: '把 log/資料庫/API 裡的 Unix 時間戳記(自動分辨秒/毫秒/微秒)轉成看得懂的日期,同時給台灣時間、UTC、ISO 8601 與相對時間 —— 全程在你瀏覽器,不上傳。',
+    keywords: ['unix', 'timestamp', '時間戳記', '時間戳', 'epoch', '紀元', '秒數', '毫秒', '微秒', '時間轉換', '日期轉換', '轉時間', 'iso8601', 'iso 8601', 'utc', '時間轉日期', '日期轉時間', 'log時間', '1970', '時區'],
+    icon: '🕐',
+    loader: () => import('@/tools/timestamp-convert/Index.vue'),
+  },
+  {
     id: 'jwt-decode',
     name: 'JWT 解碼 / 檢視',
     category: 'workshop',
