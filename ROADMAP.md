@@ -568,6 +568,19 @@
   基本型別/null/陣列/混合聯集/巢狀具名/陣列合併與可選/同鍵聯集/特殊字元鍵/根陣列與基本值/名稱衝突/空值/
   錯誤處理/深層巢狀,esbuild 打包後跑,併入 npm test)。零新相依、不上傳;type-check + 全測試(355)+ build 通過 — 2026-06-18
 
+- JWT 解碼 / 檢視(jwt-decode,category=workshop):把 JSON Web Token 解開成標頭(header)與內容(payload),
+  整理 iss/sub/aud/exp/nbf/iat/jti 等註冊宣告(附友善說明),把 exp/iat/nbf 的 Unix 秒數翻成本地+UTC 可讀時間,
+  並直接判斷 Token 是否已過期、尚未生效或有效中(綠/紅/琥珀狀態列)。可在本機用密鑰驗證 HMAC(HS256/384/512)
+  簽章 —— 用 Web Crypto subtle 算 HMAC 後與第三段比對(timing-safe),確認沒被竄改;RS/ES 非對稱簽章需公鑰,不處理。
+  核心價值 = 安全:很多工程師習慣把「正式環境的存取權杖」貼進 jwt.io 等線上網站,等於把可登入系統的憑證交給第三方;
+  本工具全程在瀏覽器、不連網、不上傳。並提醒 payload 只是 Base64 編碼、非加密,任何人都讀得到。
+  支援去掉 Bearer 前綴、偵測 JWE 五段式(內容已加密無法解)。引擎 src/features/jwt.ts
+  (base64UrlToString/decodeJwt/tokenStatus/humanizeDuration/formatUnix/verifyHmac,純函式 + Web Crypto)+
+  回歸測試 scripts/test-jwt.mjs(37 筆:base64url 中文/經典 token 各欄位/Bearer 前綴/空字串/段數/JWE 五段/
+  非 base64url/payload 非 JSON/含空白等錯誤/有效期過期-生效-無 exp/nbf 優先/humanize/formatUnix/
+  HS256-384-512 正確與錯誤密鑰來回驗證/RS256 不支援,esbuild 打包後跑,併入 npm test)。
+  零新相依、不上傳;type-check + 全測試(392)+ build 通過 — 2026-06-18
+
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
       與本專案「精簡 + 自包含」原則不符,**跳過**(未來若改自架模型再評估)
