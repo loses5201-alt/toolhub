@@ -187,6 +187,11 @@
   輸入不上傳。qrcode 動態 import,precache +33KB(可接受,未拆 vendor)— 2026-06-15
 
 ## 處理工坊(續 2)
+- 錄音機(voice-recorder,category=workshop):用麥克風錄語音備忘/訪談/會議/長輩口述,
+  可暫停/繼續、即時音量計(AnalyserNode getByteTimeDomainData 算 peak)確認有收音、試聽後下載音檔。
+  getUserMedia + MediaRecorder 全程在裝置錄製、聲音不上傳;mime 自動挑選(opus/webm→mp4→ogg)決定副檔名;
+  收尾統一 cleanupStream(停軌道/關 AudioContext/取消 rAF)避免麥克風一直亮。與螢幕錄影(錄畫面)互補。
+  UI-only 無純邏輯可單元測,比照 screen-record 由部署 build 把關;type-check + build 通過 — 2026-06-18
 - 條碼產生器(barcode-generate,category=workshop):把料號、商品編號、書本 ISBN 做成一維條碼
   (CODE128/EAN-13/EAN-8/UPC-A/CODE39/ITF-14),可下載向量 SVG 或 3× 高解析 PNG 印標籤,與 QR Code 產生器
   (二維)互補。線上條碼站常滿廣告/限量/偷塞追蹤;本工具用 JsBarcode 在瀏覽器產生、不上傳。
