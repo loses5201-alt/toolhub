@@ -611,6 +611,17 @@
   四種引號與逸出/前後綴/編號位置/連接/外框/六個 preset/空字串,esbuild 打包後跑,併入 npm test)。零新相依、不上傳;
   與 list-compare(比對去重)、table-clean(表格清理)互補,這支專做把一欄值串成可貼清單;type-check + 全測試 + build 通過 — 2026-06-18
 
+- 正規表達式測試器(regex-tester,category=workshop):即時用底色標示 pattern 在測試文字裡比對到哪些片段
+  (whitespace-pre-wrap 切段標示、零寬比對防無限迴圈),並列出每處的擷取群組與具名群組;同時把整串 pattern
+  逐段拆成「原始片段 + 白話中文說明」(錨點/字元類/量詞/群組/字元集合/跳脫/交替/回溯參照,依 kind 上色)——
+  延續 cron-explain「把符號翻成中文」的價值,不只是又一個 regex 測試站。flags 用核取方塊(g/i/m/s/u 附說明)。
+  引擎 src/features/regexExplain.ts(explainRegex 手寫 tokenizer 走訪 pattern、合併連續字面、處理 [...] 集合與
+  範圍/否定/開頭]、(?: (?= (?<= 等群組前綴、\d \b 簡寫、\1 與 \k<name> 回溯、{n,m} 量詞與惰性 ?;matchAll
+  包原生 RegExp 供 UI;純函式無 DOM,以 new RegExp 驗證合法性)+ 回歸測試 scripts/test-regexexplain.mjs
+  (38 筆:字面合併/各類字元類與錨點/量詞含惰性/字元集合範圍與否定/各種群組與具名/數字與具名回溯/交替/跳脫/
+  不合法 pattern 與 flags 報錯/email 樣式/matchAll 全域與群組與具名與 i 旗標與零寬,esbuild 打包後跑,併入 npm test)。
+  零新相依、不上傳;與 cron-explain/json-* 等開發者工具叢集互補;type-check + 全測試 + build 通過 — 2026-06-18
+
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
       與本專案「精簡 + 自包含」原則不符,**跳過**(未來若改自架模型再評估)

@@ -261,6 +261,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/markdown-table/Index.vue'),
   },
   {
+    id: 'regex-tester',
+    name: '正規表達式測試器',
+    category: 'workshop',
+    description: '即時標示正規表達式比對到哪些文字,並把那串符號逐段翻成白話中文 —— 看懂、驗證、抓擷取群組。全程在你瀏覽器,測試文字不上傳。',
+    keywords: ['正規表達式', '正則', '正規式', 'regex', 'regexp', '規則', '比對', '測試', '解讀', '說明', '驗證', '擷取', '群組', '比對文字', 'pattern', '樣式', '字串比對', '匹配', '正則表達式', '正規表示式'],
+    icon: '🔤',
+    loader: () => import('@/tools/regex-tester/Index.vue'),
+  },
+  {
     id: 'jwt-decode',
     name: 'JWT 解碼 / 檢視',
     category: 'workshop',
