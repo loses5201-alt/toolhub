@@ -99,6 +99,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/screen-record/Index.vue'),
   },
   {
+    id: 'voice-recorder',
+    name: '錄音機',
+    category: 'workshop',
+    description: '用麥克風錄語音備忘、訪談、會議、長輩口述,可暫停/繼續、試聽後下載音檔 —— 全程在你的裝置錄製,聲音不上傳、無廣告、不限時長、免註冊。與螢幕錄影互補(這支只錄聲音)。',
+    keywords: ['錄音', '錄音機', '語音', '麥克風', '收音', '語音備忘', '訪談', '會議', '口述', '錄聲音', '配音', 'voice', 'recorder', 'audio', '音檔', '錄製聲音', '線上錄音'],
+    icon: '🎙️',
+    loader: () => import('@/tools/voice-recorder/Index.vue'),
+  },
+  {
     id: 'bg-remove',
     name: '圖片去背',
     category: 'workshop',
