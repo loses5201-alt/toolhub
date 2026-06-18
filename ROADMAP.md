@@ -430,6 +430,17 @@
   前後綴負值 step0/組合/keepExtension/去重含大小寫與取代衝突/邊界空清單與空主檔名,esbuild 打包後跑,併入 npm test)。
   零新相依(複用既有 jszip);type-check + 全測試 + build 通過 — 2026-06-18
 
+- 文件掃描美化(doc-scan,category=workshop):把手機拍的文件照片處理成像掃描機掃出來的乾淨檔 ——
+  三種模式:彩色增強(自動對比拉伸 + 提亮背景,保留印章/螢光筆顏色)、灰階、黑白(自適應門檻二值化,
+  用積分圖 O(1) 算局部平均對抗不均勻光照,把字變純黑、紙變純白、檔案最小)。可多張排序、合併成多頁 PDF
+  或各頁匯出 JPG。CamScanner 等手機掃描 App 要付費訂閱、輸出加浮水印又夾廣告,且把私密合約/單據上傳;
+  本工具全程在瀏覽器以 Canvas + 純像素演算法處理、不上傳、無浮水印、免註冊。引擎 src/features/docScan.ts
+  (luma/toGray/percentileBounds/adaptiveThreshold/applyScan 純函式無 DOM,applyScan 不更動輸入像素以便反覆套用)
+  + 回歸測試 scripts/test-docscan.mjs(24 筆:luma 權重/灰階/直方圖百分位界與裁切/全相同回退/積分圖自適應門檻
+  均勻全白與暗點判黑/輸出僅 0-255/三模式輸出格式與不破壞原圖/對比拉伸/強度夾住,esbuild 打包後跑,併入 npm test)。
+  PDF 匯出走既有 pdf-lib 動態 import(pdf-vendor chunk,不預快取),零新相依;type-check + 全測試(1017 筆)
+  + build 通過 — 2026-06-18
+
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
       與本專案「精簡 + 自包含」原則不符,**跳過**(未來若改自架模型再評估)

@@ -144,6 +144,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/pdf-studio/Index.vue'),
   },
   {
+    id: 'doc-scan',
+    name: '文件掃描美化',
+    category: 'workshop',
+    description: '把手機拍的文件照片變成像掃描機掃出來的乾淨檔 —— 自動拉對比、提亮背景,可轉黑白/灰階,合併成 PDF —— 全程在你瀏覽器處理,合約單據不上傳、無廣告、無浮水印(CamScanner 等要付費又加浮水印)。',
+    keywords: ['掃描', '文件掃描', '掃描器', '拍文件', '文件變掃描', 'camscanner', '掃描app', '合約', '單據', '收據', '筆記', '白板', '黑白', '自適應', '二值化', '提亮', '對比', '拍照轉pdf', '照片轉pdf', '文件轉pdf', 'scan', 'scanner', '去背景', '紙變白'],
+    icon: '🖨️',
+    loader: () => import('@/tools/doc-scan/Index.vue'),
+  },
+  {
     id: 'secure-box',
     name: '本機加密保險箱',
     category: 'workshop',
