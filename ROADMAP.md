@@ -463,6 +463,15 @@
   像素長度與 alpha 保留與不更動輸入,esbuild 打包後跑,併入 npm test)。零新相依;與 contrast-check 互補(對比 vs 色相);
   type-check + 全測試 + build 通過 — 2026-06-18
 
+- JSON ↔ YAML 互轉(json-yaml,category=workshop):雙向轉換,k8s / docker-compose / GitHub Actions / 應用設定檔
+  常含 API 金鑰、密碼、內部網址,線上轉換器要上傳;本工具全程瀏覽器轉換、不上傳,可選 2/4 空格縮排或 JSON 壓成一行、
+  複製/下載、「拿結果反向驗證」(把結果搬回輸入並對調方向確認來回一致)。解析序列化交給成熟 js-yaml(避免自刻 parser
+  把設定轉錯),薄包裝負責統一錯誤訊息(含行號)、擋多份文件(---)給清楚提示、空輸入提示。引擎 src/features/jsonYaml.ts
+  (jsonToYaml/yamlToJson 純函式無 DOM,回 {ok,output,error} 不丟例外)+ 回歸測試 scripts/test-jsonyaml.mjs(27 筆:
+  基本/巢狀/陣列/來回一致含中文與含冒號井號字串/縮排選項/空與註解 null/無效 JSON 與 YAML 不丟例外/多份文件提示/
+  帶引號版本維持字串,esbuild 打包後跑,併入 npm test)。js-yaml 動態 import + yaml-vendor chunk 不預快取(已驗證未進
+  precache);補足 data-convert/json-flatten/markdown-table 不含 YAML 的缺口;type-check + 全測試 + build 通過 — 2026-06-18
+
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
       與本專案「精簡 + 自包含」原則不符,**跳過**(未來若改自架模型再評估)
