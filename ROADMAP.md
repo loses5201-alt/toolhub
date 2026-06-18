@@ -529,6 +529,17 @@
   0~兆級整數/連字號/hundred 無 and/小數 fraction 與 words 模式/單數 cent/幣別大寫/進位/逗號/錯誤處理,
   esbuild 打包後跑,併入 npm test)。零新相依、不上傳;type-check + 全測試(197)+ build 通過 — 2026-06-18
 
+- SQL 語法產生器(sql-insert,category=workshop):把 Excel/CSV/試算表(第一列為欄位名)一鍵轉成 INSERT 語句,
+  可一併產生 CREATE TABLE。難點在「乾淨正確」:字串單引號跳脫(' → '')、MySQL 額外跳脫反斜線、空欄轉 NULL、
+  數字不加引號,但「開頭是 0 的整數」(電話/統編/郵遞區號)與超過 18 位整數一律保留為字串避免掉開頭/失精度;
+  整欄推斷型別(int/decimal/bool/string),布林依方言輸出 1/0 或 TRUE/FALSE;識別字引號 MySQL 反引號、
+  其餘雙引號(皆跳脫);多列合併一句(可設 batchSize 切句)或每列一句;支援 MySQL/PostgreSQL/SQLite/標準 SQL。
+  線上轉 SQL 服務常要上傳可能含個資的整份資料;本工具全程在瀏覽器、不上傳。引擎 src/features/sqlInsert.ts
+  (parseTable/inferColumnType/inferTypes/quoteIdent/formatValue/generateInserts/generateCreateTable/generateSQL
+  純函式無 DOM,複用 data-convert 的 parseCSV)+ 回歸測試 scripts/test-sqlinsert.mjs(57 筆:解析/TSV/型別推斷含
+  前導0與過長整數/各方言引號與布林/引號跳脫/空值NULL與emptyAsNull/多列與每列與batch/CREATE型別/中文表名/
+  端到端,esbuild 打包後跑,併入 npm test)。零新相依、不上傳;type-check + 全測試(254)+ build 通過 — 2026-06-18
+
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
       與本專案「精簡 + 自包含」原則不符,**跳過**(未來若改自架模型再評估)

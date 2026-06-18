@@ -198,6 +198,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/data-convert/Index.vue'),
   },
   {
+    id: 'sql-insert',
+    name: 'SQL 語法產生器',
+    category: 'workshop',
+    description: '把 Excel / CSV / 試算表資料一鍵轉成 INSERT(可一併 CREATE TABLE)—— 自動跳脫引號、空欄轉 NULL、前導 0 的電話統編保留為文字,支援 MySQL/PostgreSQL/SQLite。全程在你瀏覽器,資料不上傳。',
+    keywords: ['sql', 'insert', 'create table', '資料庫', 'mysql', 'postgresql', 'postgres', 'sqlite', '匯入', 'csv轉sql', 'excel轉sql', '建表', '語法', '產生', '塞資料', 'seed', '匯入資料庫', 'db', 'tsv'],
+    icon: '🗄️',
+    loader: () => import('@/tools/sql-insert/Index.vue'),
+  },
+  {
     id: 'big5-convert',
     name: 'Big5 ↔ UTF-8 文字檔轉換',
     category: 'workshop',
