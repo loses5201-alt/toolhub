@@ -486,6 +486,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/exif-viewer/Index.vue'),
   },
   {
+    id: 'exif-strip',
+    name: '照片個資清除(去 EXIF)',
+    category: 'anti-scam',
+    description: '不重新壓縮、畫質完全不變,直接移除照片夾帶的 EXIF/GPS 定位/拍攝時間/相機型號 —— 上傳社群或二手交易前先清掉,避免洩漏住家位置。全程在你瀏覽器處理,照片不上傳、可批次。',
+    keywords: ['exif', '去exif', '去除exif', '個資', '隱私', 'gps', '定位', '位置', '住家', '中繼資料', 'metadata', '拍攝資訊', '清除', '移除', '照片', '相片', 'jpg', 'png', '二手', '社群', '洩漏', 'xmp', '不壓縮', '畫質不變', '批次'],
+    icon: '🧹',
+    loader: () => import('@/tools/exif-strip/Index.vue'),
+  },
+  {
     id: 'qr-decode',
     name: 'QR Code 解碼(看網址)',
     category: 'anti-scam',
