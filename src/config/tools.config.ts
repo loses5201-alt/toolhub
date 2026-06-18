@@ -351,6 +351,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/file-split/Index.vue'),
   },
   {
+    id: 'screenshot-beautify',
+    name: '截圖美化',
+    category: 'workshop',
+    description: '幫螢幕截圖加上漸層背景、圓角、陰影與 Mac 風格視窗列,貼進簡報、社群、部落格立刻變專業 —— 可直接 Ctrl+V 貼上,選好輸出比例(IG/YT 縮圖)。全程在你瀏覽器合成,圖片不上傳、無廣告、無浮水印。',
+    keywords: ['截圖', '美化', '截圖美化', '背景', '漸層', '圓角', '陰影', '視窗列', '產品圖', '社群', 'ig', 'instagram', '簡報', '封面', '縮圖', 'mockup', 'beautify', 'screenshot', '加背景', '邊框', '截圖加框'],
+    icon: '🖼️',
+    loader: () => import('@/tools/screenshot-beautify/Index.vue'),
+  },
+  {
     id: 'image-stitch',
     name: '圖片拼接(長圖)',
     category: 'workshop',
