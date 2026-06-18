@@ -819,6 +819,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/num-to-chinese/Index.vue'),
   },
   {
+    id: 'amount-english',
+    name: '英文金額大寫',
+    category: 'life',
+    description: '把金額轉成英文文字寫法(例:USD ONE THOUSAND TWO HUNDRED THIRTY-FOUR AND 56/100 ONLY),供外銷發票、外幣支票、信用狀、英文合約使用 —— 與中文金額大寫互補。全程在你瀏覽器換算,不上傳。',
+    keywords: ['英文金額', '金額英文', '大寫', '支票', 'cheque', 'check', '發票', 'invoice', '外銷', '出口', '信用狀', 'lc', '英文合約', 'dollars', 'cents', 'usd', '美金', '數字轉英文', 'amount in words', 'say', 'only'],
+    icon: '💵',
+    loader: () => import('@/tools/amount-english/Index.vue'),
+  },
+  {
     id: 'event-ics',
     name: '行事曆事件產生',
     category: 'life',

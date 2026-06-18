@@ -519,6 +519,16 @@
   純前端零新相依(內建 9 組漸層 + roundRect 自繪);記憶體保護:輸出最長邊上限 6000px 超過則整體等比縮小;
   透明背景輸出 PNG、預覽區用棋盤格底襯托。type-check + 全測試(162)+ build 通過 — 2026-06-18
 
+- 英文金額大寫(amount-english,category=life):把金額轉成英文文字寫法,供外銷發票(commercial invoice)、
+  外幣支票、信用狀(L/C)、英文合約使用(金額一律要並列英文文字防竄改)。輸出兩種:支票/發票寫法
+  (幣別 + 全大寫英文 + AND NN/100 + ONLY,如 USD ONE THOUSAND TWO HUNDRED THIRTY-FOUR AND 56/100 ONLY)、
+  純文字小寫;小數可選 56/100(支票常見)或 fifty-six cents 文字。幣別選單 USD/NT DOLLARS/EUR/JPY 等。
+  與 num-to-chinese(中文金額大寫)互補。引擎 src/features/amountEnglish.ts(integerToEnglish 美式短級數
+  thousand/million/billion/trillion 至 quadrillion、threeDigitsToWords、amountToEnglish 純函式無 DOM,
+  四捨五入到分、千分位逗號容錯、負數/非數字丟錯)+ 回歸測試 scripts/test-amountenglish.mjs(35 筆:
+  0~兆級整數/連字號/hundred 無 and/小數 fraction 與 words 模式/單數 cent/幣別大寫/進位/逗號/錯誤處理,
+  esbuild 打包後跑,併入 npm test)。零新相依、不上傳;type-check + 全測試(197)+ build 通過 — 2026-06-18
+
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
       與本專案「精簡 + 自包含」原則不符,**跳過**(未來若改自架模型再評估)
