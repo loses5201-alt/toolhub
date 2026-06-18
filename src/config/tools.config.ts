@@ -207,6 +207,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/sql-insert/Index.vue'),
   },
   {
+    id: 'cron-explain',
+    name: 'Cron 表達式解讀',
+    category: 'workshop',
+    description: '排程那串「30 9 * * 1-5」到底多久跑一次?用白話中文說明,還直接算出接下來 5 次執行時間 —— 設 crontab/GitHub Actions/排程不再猜。全程在你瀏覽器計算,不上傳。',
+    keywords: ['cron', 'crontab', '排程', '定時', '定時任務', 'schedule', '表達式', '解讀', '翻譯', '下次執行', 'github actions', 'cronjob', '每天', '每小時', '每分鐘', '週期', '定期'],
+    icon: '⏰',
+    loader: () => import('@/tools/cron-explain/Index.vue'),
+  },
+  {
     id: 'big5-convert',
     name: 'Big5 ↔ UTF-8 文字檔轉換',
     category: 'workshop',

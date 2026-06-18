@@ -540,6 +540,16 @@
   前導0與過長整數/各方言引號與布林/引號跳脫/空值NULL與emptyAsNull/多列與每列與batch/CREATE型別/中文表名/
   端到端,esbuild 打包後跑,併入 npm test)。零新相依、不上傳;type-check + 全測試(254)+ build 通過 — 2026-06-18
 
+- Cron 表達式解讀(cron-explain,category=workshop):輸入 5 欄位 cron(分 時 日 月 週),用白話中文說明,
+  並算出接下來 5 次實際執行時間(本機時區)。crontab.guru 很好用但只有英文;這裡中文解讀 + 下次執行時間,
+  設 crontab/GitHub Actions/CronJob 排程不再猜。支援 * , - */n、範圍加步進(0-30/10)、a/n 至上限、
+  月份/星期英文名(jan、mon-fri)、週日 7=0、@daily/@hourly 等捷徑;正確處理 cron 的「日與週同時限定時任一符合即執行」
+  OR 語意。nextRuns 用欄位逐級跳轉(月→日→時→分)快速收斂、有迴圈上限保護,遇不存在的日期組合(2月30)回空陣列。
+  引擎 src/features/cron.ts(parseCron/describeCron/nextRuns/dayMatches 純函式無 DOM,零相依)+ 回歸測試
+  scripts/test-cron.mjs(39 筆:各種欄位語法/英文名/捷徑/5 種錯誤處理/描述關鍵字/nextRuns 每分鐘/每天/每週一/
+  每月15/只在2月/dom+dow OR/每15分,以固定基準日 + 相對關係驗證避免時區依賴,esbuild 打包後跑,併入 npm test)。
+  零新相依、不上傳;type-check + 全測試(293)+ build 通過 — 2026-06-18
+
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
       與本專案「精簡 + 自包含」原則不符,**跳過**(未來若改自架模型再評估)
