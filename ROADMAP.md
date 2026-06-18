@@ -500,6 +500,18 @@
   UTF-8 往返與位元組數/looksLikeUtf8 對 UTF-8 與 Big5 與 ASCII 判定/空輸入,esbuild 打包後跑,併入 npm test)。
   type-check + 全測試 + build 通過 — 2026-06-18
 
+- 測試假資料產生器(fake-data,category=workshop):一鍵產生大量「擬真但完全虛構」的台灣個資樣本
+  (姓名、性別、身分證、生日、手機、市話、Email、地址、公司、統一編號),給開發/測試/教學/示範填表單用 ——
+  開發測試不該拿真客戶個資去測系統。重點:身分證字號與統一編號都帶「正確檢查碼」,能通過一般系統格式驗證,
+  但隨機湊出、不對應任何真人或真公司(檢查碼正確 ≠ 真實存在)。可填「種子」重現同一批(同種子=同結果),
+  匯出 CSV(加 BOM 防 Excel 中文亂碼)/JSON。引擎 src/features/fakeData.ts(mulberry32 可重現亂數 + seedFromString +
+  genTwId/genVat/genMobile/genLandline/genName/genEmail/genBirthday/genAddress/genCompany + generate/rowsToCsv 純函式無 DOM;
+  身分證末碼權重 1 反推使加權和被 10 整除、統編末碼選使位元乘積數字和被 5 整除)。為共用而新增 src/features/twId.ts
+  (抽出 LETTER/REGION 對照表 + isValidTwId,未改動既有 tw-id-check)。回歸測試 scripts/test-fakedata.mjs(24 筆:
+  2000 筆身分證/統編分別餵獨立驗證器 isValidTwId/isValidVat 全通過、性別碼與身分證一致、同種子可重現/異種子不同、
+  各欄位格式與年齡範圍、CSV 表頭/逗號引號跳脫/空資料、seedFromString 穩定,esbuild 打包後跑,併入 npm test)。
+  零新相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-18
+
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
       與本專案「精簡 + 自包含」原則不符,**跳過**(未來若改自架模型再評估)

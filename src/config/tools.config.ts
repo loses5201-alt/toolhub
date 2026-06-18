@@ -306,6 +306,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/vcard-maker/Index.vue'),
   },
   {
+    id: 'fake-data',
+    name: '測試假資料產生器',
+    category: 'workshop',
+    description: '一鍵產生大量「擬真但完全虛構」的台灣個資(姓名、身分證、統編、手機、地址、Email…),身分證/統編檢查碼正確、能過格式驗證,但不對應任何真人 —— 開發測試別再拿真客戶資料,全程在你瀏覽器產生、不上傳,可指定種子重現、匯出 CSV/JSON。',
+    keywords: ['假資料', '測試資料', '假個資', '假身分證', '假統編', '隨機資料', '範例資料', '示範資料', '亂數姓名', '產生器', '填表測試', 'mock', 'fake', 'dummy', 'test data', 'sample', '身分證產生', '假名單', '塞資料', '測資'],
+    icon: '🧪',
+    loader: () => import('@/tools/fake-data/Index.vue'),
+  },
+  {
     id: 'mail-merge',
     name: '合併列印 / 套印',
     category: 'workshop',
