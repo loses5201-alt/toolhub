@@ -54,6 +54,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/contrast-check/Index.vue'),
   },
   {
+    id: 'color-blind',
+    name: '色盲友善檢測',
+    category: 'workshop',
+    description: '上傳圖表、簡報、網頁截圖,模擬色盲/色弱使用者看到的樣子,檢查紅綠配色是否還分得出來 —— 全程在你瀏覽器處理,圖片不上傳。',
+    keywords: ['色盲', '色弱', '色覺', '紅綠色盲', '色覺障礙', '色盲模擬', '色盲友善', '無障礙', 'a11y', '配色', '圖表配色', '簡報配色', '色彩', 'deuteranopia', 'protanopia', 'tritanopia', '色盲檢測', '色盲測試', 'colorblind', '色弱模擬'],
+    icon: '👁️',
+    loader: () => import('@/tools/color-blind/Index.vue'),
+  },
+  {
     id: 'gif-studio',
     name: '動圖工坊',
     category: 'workshop',
