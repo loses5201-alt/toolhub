@@ -187,6 +187,11 @@
   輸入不上傳。qrcode 動態 import,precache +33KB(可接受,未拆 vendor)— 2026-06-15
 
 ## 處理工坊(續 2)
+- 顏色可讀性檢測(contrast-check,category=workshop):輸入文字色與背景色,依 WCAG 2.1 算對比比值,
+  判斷一般字/大字下達不達 AA/AAA,即時預覽實際配色。做簡報/海報/網頁/長輩友善文件選色用,與色彩工坊互補。
+  純函式引擎 src/features/contrast.ts(parseColor 吃 #RGB/#RRGGBB/rgb()、relativeLuminance、contrastRatio、
+  grade 一般/大字 AA/AAA + UI),回歸測試 scripts/test-contrast.mjs(23 筆:解析/黑白=21/同色=1/
+  #767676 vs #777777 AA 臨界/各灰階門檻邊界,併入 npm test 全 784 筆)。零相依、不上傳;type-check + build 通過 — 2026-06-18
 - 錄音機(voice-recorder,category=workshop):用麥克風錄語音備忘/訪談/會議/長輩口述,
   可暫停/繼續、即時音量計(AnalyserNode getByteTimeDomainData 算 peak)確認有收音、試聽後下載音檔。
   getUserMedia + MediaRecorder 全程在裝置錄製、聲音不上傳;mime 自動挑選(opus/webm→mp4→ogg)決定副檔名;
