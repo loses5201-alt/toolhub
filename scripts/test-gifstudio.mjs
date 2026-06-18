@@ -16,7 +16,7 @@ await build({
   outfile: out,
   logLevel: 'silent',
 })
-const { encodeGif, planCanvasSize, fpsToDelay } = await import('file://' + out)
+const { encodeGif, planCanvasSize, fpsToDelay, planFrameTimes } = await import('file://' + out)
 
 let fail = 0
 function check(note, cond) {
@@ -120,6 +120,46 @@ check('5 FPS = 200ms', fpsToDelay(5) === 200)
 check('FPS 下限夾 1', fpsToDelay(0) === 1000)
 check('FPS 上限夾 50(>=20ms)', fpsToDelay(999) === 20)
 check('delay 對齊 10ms', fpsToDelay(3) % 10 === 0)
+
+// ── planFrameTimes(影片轉 GIF 取樣規劃) ──
+const p1 = planFrameTimes(0, 2, 10, 150)
+check('2 秒 10fps → 20 張', p1.times.length === 20)
+check('首張為起點', p1.times[0] === 0)
+check('末張為終點', Math.abs(p1.times[p1.times.length - 1] - 2) < 1e-9)
+check('影格時間遞增', p1.times.every((t, i) => i === 0 || t > p1.times[i - 1]))
+check('時間皆在 [start,end] 內', p1.times.every((t) => t >= 0 && t <= 2 + 1e-9))
+check('總長 ≈ 片段長(20×100ms=2s)', p1.delayMs === 100)
+
+// maxFrames 上限保護:長片段不會爆量
+const p2 = planFrameTimes(0, 60, 15, 150)
+check('觸頂時夾在 maxFrames', p2.times.length === 150)
+check('觸頂仍涵蓋全段到終點', Math.abs(p2.times[p2.times.length - 1] - 60) < 1e-9)
+check('觸頂時 delay 拉長維持總長', Math.abs(p2.delayMs - 400) < 11) // 60000/150=400ms
+
+// 非零起點片段
+const p3 = planFrameTimes(5, 6, 8, 150)
+check('起點偏移正確', p3.times[0] === 5)
+check('終點正確', Math.abs(p3.times[p3.times.length - 1] - 6) < 1e-9)
+
+// 至少 2 張(極短片段)
+const p4 = planFrameTimes(0, 0.05, 1, 150)
+check('極短片段至少 2 張', p4.times.length === 2)
+check('delay 至少 20ms', p4.delayMs >= 20)
+
+// fps 上限夾住張數不超過合理量
+const p5 = planFrameTimes(0, 1, 999, 150)
+check('fps 過高被夾(<=50→上限保護)', p5.times.length <= 150 && p5.times.length >= 2)
+
+// 錯誤處理
+threw = false
+try { planFrameTimes(2, 2, 10) } catch { threw = true }
+check('start=end 丟錯', threw)
+threw = false
+try { planFrameTimes(5, 3, 10) } catch { threw = true }
+check('end<start 丟錯', threw)
+threw = false
+try { planFrameTimes(NaN, 3, 10) } catch { threw = true }
+check('NaN 丟錯', threw)
 
 if (fail) {
   console.error(`\n${fail} 個測試未通過`)
