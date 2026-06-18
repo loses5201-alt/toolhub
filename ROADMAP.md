@@ -420,6 +420,15 @@
   大小寫/欄超界、唯一檔名加序號,esbuild 打包後跑,併入 npm test)。與 table-clean(清理)、
   data-convert(格式互轉)、list-compare(比對)互補,補上「一份拆多份」的缺口;不上傳。
   零新相依;type-check + 全測試 + build 通過 — 2026-06-18
+- 批次檔案改名(batch-rename,category=workshop):一次替整批檔案改名 —— 尋找取代(字面比對、可忽略大小寫、
+  取代全部出現)、主檔名大小寫轉換、加前/後綴、加流水號(起始/遞增/補零/前後位置/分隔字串)。即時預覽舊→新,
+  打包成 ZIP 下載(瀏覽器無法直接改寫硬碟檔名,以 zipStudio.buildZip level 0 STORE 重新打包)。選檔時以
+  localeCompare numeric 自然排序,讓流水號順序符合直覺;副檔名(最後一個點後)預設保留不被規則動到;算出同名
+  自動加「(2)」不覆蓋(忽略大小寫比對對應 Win/mac 檔案系統)。規則順序:取代→大小寫→前後綴→流水號→補唯一。
+  引擎 src/features/batchRename.ts(splitExtension/computeNewNames 純函式無 DOM,escapeRegExp 讓特殊字元字面比對)
+  + 回歸測試 scripts/test-batchrename.mjs(30 筆:拆副檔名/前後綴/取代各情境/大小寫只動主檔名/流水號補零起始遞增
+  前後綴負值 step0/組合/keepExtension/去重含大小寫與取代衝突/邊界空清單與空主檔名,esbuild 打包後跑,併入 npm test)。
+  零新相依(複用既有 jszip);type-check + 全測試 + build 通過 — 2026-06-18
 
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,

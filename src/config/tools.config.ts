@@ -279,6 +279,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/zip-studio/Index.vue'),
   },
   {
+    id: 'batch-rename',
+    name: '批次檔案改名',
+    category: 'workshop',
+    description: '一次替整批照片/文件改名:加前後綴、流水號(可補零)、改大小寫、把檔名裡某段文字換掉 —— 即時預覽舊→新,打包成 ZIP 下載。全程在你瀏覽器,檔案不上傳。',
+    keywords: ['改名', '重新命名', '批次改名', '檔名', '重命名', '改檔名', '流水號', '編號', '序號', '前綴', '後綴', '取代', '大小寫', '照片改名', 'rename', 'batch', '一次改', '整批', '相片命名'],
+    icon: '🔤',
+    loader: () => import('@/tools/batch-rename/Index.vue'),
+  },
+  {
     id: 'file-split',
     name: '檔案分割 / 合併',
     category: 'workshop',
