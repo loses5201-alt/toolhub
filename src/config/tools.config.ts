@@ -261,6 +261,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/markdown-table/Index.vue'),
   },
   {
+    id: 'regex-test',
+    name: '正規表達式測試',
+    category: 'workshop',
+    description: '即時測試 regex、標出所有命中與捕獲群組,還把 pattern 用白話中文一段段解釋 —— 附台灣在地樣式庫(手機/身分證/統編/車牌)。全程在你瀏覽器,測試文字不上傳。',
+    keywords: ['regex', '正規表達式', '正則', '正規式', '規則運算式', '比對', '樣式', 'pattern', '匹配', '抓取', '驗證格式', '取代', 'replace', '群組', '捕獲', '解釋', 'regex101', '測試', '手機格式', '身分證格式', '統編格式', 'match', '搜尋取代'],
+    icon: '🔣',
+    loader: () => import('@/tools/regex-test/Index.vue'),
+  },
+  {
     id: 'jwt-decode',
     name: 'JWT 解碼 / 檢視',
     category: 'workshop',

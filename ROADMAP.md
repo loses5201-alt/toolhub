@@ -610,6 +610,16 @@
   (processLines/applyQuote/PRESETS 純函式無 DOM)+ 回歸測試 scripts/test-linetools.mjs(28 筆:trim/刪空白/去重順序/
   四種引號與逸出/前後綴/編號位置/連接/外框/六個 preset/空字串,esbuild 打包後跑,併入 npm test)。零新相依、不上傳;
   與 list-compare(比對去重)、table-clean(表格清理)互補,這支專做把一欄值串成可貼清單;type-check + 全測試 + build 通過 — 2026-06-18
+- 正規表達式測試(regex-test,category=workshop):即時以瀏覽器內建 RegExp 比對,標出所有命中(含長度 0 的零寬命中
+  以 ∅ 顯示)、列出編號與具名捕獲群組,支援 i/m/s/u 旗標(g 一律隱含以列出全部)與「取代」($1/$<name>)。
+  差異化重點:**白話中文解釋器**——把 pattern 一段段拆開講中文(\d、量詞 *+?{n,m} 含惰性/佔有、字元集合與範圍/否定、
+  各式群組 (?: (?= (?! (?<= (?<! 與具名、^ $ . | 與跳脫字面),群組以縮排表現深度,量詞自動併入前一原子;regex101 多半只有英文。
+  附台灣在地樣式庫(Email/URL/手機/市話/身分證/統編/車牌/郵遞區號/日期/時間/IPv4/HEX色碼/中文字/HTML標籤,點一下帶入 pattern+範例)。
+  引擎 src/features/regexTest.ts(runRegex/applyReplace/normalizeFlags/explainPattern/LIBRARY 純函式無 DOM,
+  matchAll 靠 JS 內建機制處理零寬命中不無限迴圈,guard 上限 10 萬)+ 回歸測試 scripts/test-regextest.mjs
+  (44 筆:命中/位置/編號與具名群組/旗標/語法錯誤/零寬/中文、取代換位與全域、解釋器各構造、樣式庫 14 筆皆可編譯且命中各自範例,
+  esbuild 打包後跑,併入 npm test)。樣式庫只驗格式不驗檢查碼(導向 tw-id-check/tw-vat-check);零新相依、不上傳;
+  type-check + 全測試(共約 800+ 筆)+ build 通過 — 2026-06-18
 
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
