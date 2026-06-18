@@ -481,6 +481,15 @@
   邊界相等視為達標/maxQ 早停只量一次/壓不下回 minQ/async measure,esbuild 打包後跑,併入 npm test)。
   與 image-studio(固定品質)、id-photo(固定沖洗尺寸)互補,補上「壓到指定 KB」缺口;零新相依;type-check + 全測試 + build 通過 — 2026-06-18
 
+- 照片個資清除 / 去 EXIF(exif-strip,category=anti-scam):不重新編碼、畫質完全不變,直接移除 JPEG/PNG 夾帶的
+  EXIF/GPS 定位/XMP/IPTC/拍攝時間/相機型號/註解 —— 上傳社群、二手交易、論壇前先清掉,避免洩漏住家或公司位置。
+  與 exif-viewer(只「看」夾帶什麼)、image-studio(靠重新壓縮順便去 EXIF 但會壓損畫質/改格式)互補:這支保留原始影像位元與
+  ICC 色彩設定檔、原格式,只刪中繼資料段。引擎 src/features/exifStrip.ts(detectType/stripJpeg/stripPng/stripMetadata 純位元組
+  無 DOM:JPEG 走標記掃描刪 APP1/APP13/COM、遇 SOS 後整段複製、解析異常原樣回傳不破壞;PNG 刪 tEXt/zTXt/iTXt/eXIf/tIME/dSIG
+  chunk、IEND 後截斷)+ 回歸測試 scripts/test-exifstrip.mjs(21 筆:類型偵測/移除 Exif+COM 保留 JFIF+ICC+掃描資料/位元組數正確/
+  等冪/無隱私段不變/截斷與超長段不破壞/PNG 移除 tEXt+eXIf 保留 iCCP+IDAT+IEND/IEND 後垃圾丟棄/派發與非影像回傳,esbuild 打包後跑,
+  併入 npm test)。零新相依、不上傳、可批次;type-check + 全測試 + build 通過 — 2026-06-18
+
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
       與本專案「精簡 + 自包含」原則不符,**跳過**(未來若改自架模型再評估)
