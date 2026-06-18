@@ -581,6 +581,16 @@
   HS256-384-512 正確與錯誤密鑰來回驗證/RS256 不支援,esbuild 打包後跑,併入 npm test)。
   零新相依、不上傳;type-check + 全測試(392)+ build 通過 — 2026-06-18
 
+- 隱形字元 / Unicode 檢視器(char-inspect,category=workshop):貼上文字,逐「字元」(以碼位計,正確處理
+  emoji/代理對)攤開,標出零寬/格式類看不見字元、非半形空白(NBSP/全形)、文字方向控制字元(bidi,可視覺
+  倒置偽造副檔名)、形近字(西里爾 а/希臘 ο 冒充拉丁 a/o,釣魚網址與假冒帳號常用,並指出它在模仿哪個 ASCII)。
+  解決「兩字串看起來一樣卻不相等」除錯、防冒名;可一鍵清理(刪隱形字元/正規化空白/還原形近字)。顯示碼位數/
+  UTF-16 長度/UTF-8 位元組三種計數。與 text-clean(批次清理)互補,這支著重逐字檢視辨識。引擎
+  src/features/charInspect.ts(inspect/clean 純函式無 DOM,含形近字對照表 CONFUSABLES、bidi/零寬/異常空白集合、
+  區塊命名)+ 回歸測試 scripts/test-charinspect.mjs(36 筆:計數/emoji 碼位與位元組/零寬/BOM/NBSP 與全形/RLO/
+  控制字元/西里爾與希臘形近字/區塊命名/clean 各選項與並用/空字串,esbuild 打包後跑,併入 npm test)。
+  零新相依、不上傳;type-check + 全測試(428)+ build 通過 — 2026-06-18
+
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
       與本專案「精簡 + 自包含」原則不符,**跳過**(未來若改自架模型再評估)
