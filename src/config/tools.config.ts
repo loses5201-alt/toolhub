@@ -63,6 +63,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/random-picker/Index.vue'),
   },
   {
+    id: 'image-annotate',
+    name: '圖片標註編輯器',
+    category: 'workshop',
+    description: '在截圖/照片上畫箭頭、框重點、畫筆、打字,做教學步驟、回報問題、圈重點 —— 全程在你瀏覽器,圖片不上傳。',
+    keywords: ['標註', '截圖', '畫箭頭', '框起來', '圈重點', '畫重點', '註記', '打字', '畫筆', '編輯圖片', '線上編圖', '修圖', '教學', '說明圖', 'annotate', 'markup', '圖片編輯'],
+    icon: '🖍️',
+    loader: () => import('@/tools/image-annotate/Index.vue'),
+  },
+  {
     id: 'bg-remove',
     name: '圖片去背',
     category: 'workshop',
