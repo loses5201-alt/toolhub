@@ -490,6 +490,16 @@
   等冪/無隱私段不變/截斷與超長段不破壞/PNG 移除 tEXt+eXIf 保留 iCCP+IDAT+IEND/IEND 後垃圾丟棄/派發與非影像回傳,esbuild 打包後跑,
   併入 npm test)。零新相依、不上傳、可批次;type-check + 全測試 + build 通過 — 2026-06-18
 
+- Big5 ↔ UTF-8 文字檔轉換(big5-convert,category=workshop):早年 Windows 記事本以預設(ANSI=Big5)存的 .txt/.csv/.srt,
+  拿到 Mac、手機、上傳網站或新程式打開中文變整片亂碼;本工具兩種編碼互轉、自動判斷來源編碼(looksLikeUtf8:能以 fatal UTF-8
+  解碼即推測 UTF-8,否則當 Big5)、預覽偵測殘留 �、轉成 Big5 時回報無法表示的字。解碼用內建 TextDecoder('big5')(瀏覽器與
+  Node 22 full-ICU 皆支援);UTF-8→Big5 編碼以「fatal Big5 解碼器逐一反建反查表(lead 0x81–0xFE × trail 0x40–7E/A1–FE,取最小碼位)」
+  即時產生 Big5 編碼器,零相依、確定性,無法表示字以 '?' 代替並列出。與 mojibake-fix(救「UTF-8 被當西歐編碼」的 ä¸­æ–‡ 亂碼)
+  互補:這支處理「整個檔案就是某編碼」的轉換。引擎 src/features/big5.ts(decodeBig5/decodeUtf8/encodeUtf8/encodeBig5/looksLikeUtf8
+  純函式)+ 回歸測試 scripts/test-big5.mjs(19 筆:中文/ASCII 解編碼/round-trip/換行 tab 保留/emoji 與簡體字列 unmapped 並以 ? 代替/
+  UTF-8 往返與位元組數/looksLikeUtf8 對 UTF-8 與 Big5 與 ASCII 判定/空輸入,esbuild 打包後跑,併入 npm test)。
+  type-check + 全測試 + build 通過 — 2026-06-18
+
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
       與本專案「精簡 + 自包含」原則不符,**跳過**(未來若改自架模型再評估)
