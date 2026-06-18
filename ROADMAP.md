@@ -239,6 +239,12 @@
   明確警示「忘記密碼無法救回」。零三方相依;type-check + test + build 通過 — 2026-06-16
 
 ## 防詐騙(續)
+- 信用卡卡號檢核(card-check,category=anti-scam):用 Luhn 檢查碼驗證卡號有沒有打對(少打/多打/錯一碼),
+  依 IIN/BIN 開頭與長度判斷發卡組織(Visa/Mastercard/AmEx/JCB/UnionPay/Discover/Diners)。本機計算、不上傳、不儲存;
+  明確聲明「檢查碼正確 ≠ 真有此卡」並衛教卡號+期限+末三碼/OTP 湊齊即遭盜刷、假客服話術與 165。
+  純函式引擎 src/features/cardCheck.ts(luhnValid/detectBrand 規則順序處理 62/6011 專一前綴與 MC 2221–2720 新號段/
+  formatCardNumber AmEx 4-6-5/checkCard 長度核對)+ 回歸測試 scripts/test-cardcheck.mjs(25 筆:公開測試卡號、
+  Luhn 正反例、2720/2721 邊界、分組、整合,併入 npm test 全 809 筆)。零相依;type-check + 全測試 + build 通過 — 2026-06-18
 - 郵件來源檢視 / 防冒名(email-check,category=anti-scam):貼上可疑信件的「郵件原始碼/標頭」,
   解析 From / Reply-To / Return-Path 與 SPF/DKIM/DMARC 驗證結果,比對寄件網域是否對得上,標出冒名釣魚
   常見破綻:顯示名稱藏別網域、回覆地址跑到別處(BEC 變更匯款)、退信來源不符、驗證失敗、免費信箱卻自稱機構。
