@@ -270,6 +270,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/file-split/Index.vue'),
   },
   {
+    id: 'screenshot-beauty',
+    name: '截圖美化',
+    category: 'workshop',
+    description: '替截圖加上漸層/純色背景、留白、圓角、陰影,一鍵做成簡報、社群貼文、作品集裡好看的成品圖,可選 1:1 / 9:16 / 16:9 版位 —— 全程在你瀏覽器合成,不上傳、無廣告、無浮水印(Shots/Pika 等線上工具常要上傳或付費)。',
+    keywords: ['截圖', '美化', '背景', '漸層', '陰影', '圓角', '留白', '簡報', '社群', 'ig', '限動', '貼文', '作品集', '產品圖', 'mockup', '邊框', 'beautify', 'screenshot', '美化截圖', '截圖加背景', '好看'],
+    icon: '🖼️',
+    loader: () => import('@/tools/screenshot-beauty/Index.vue'),
+  },
+  {
     id: 'image-stitch',
     name: '圖片拼接(長圖)',
     category: 'workshop',
