@@ -207,6 +207,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/markdown-table/Index.vue'),
   },
   {
+    id: 'json-yaml',
+    name: 'JSON ↔ YAML 互轉',
+    category: 'workshop',
+    description: 'JSON 與 YAML 雙向互轉,k8s / docker-compose / GitHub Actions 等設定檔常含密鑰 —— 全程在你瀏覽器轉換,不上傳機密設定、無廣告。',
+    keywords: ['json', 'yaml', 'yml', '轉換', '互轉', '設定檔', 'config', 'kubernetes', 'k8s', 'docker', 'docker-compose', 'compose', 'github actions', 'ci', '密鑰', '金鑰', '格式轉換', 'json轉yaml', 'yaml轉json'],
+    icon: '🧾',
+    loader: () => import('@/tools/json-yaml/Index.vue'),
+  },
+  {
     id: 'data-extract',
     name: '文字資料抽取',
     category: 'workshop',
