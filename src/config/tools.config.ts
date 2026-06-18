@@ -558,6 +558,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/text-stats/Index.vue'),
   },
   {
+    id: 'line-tools',
+    name: '清單加工(每行轉清單)',
+    category: 'workshop',
+    description: '把貼上的一欄資料(每行一筆,常從 Excel 複製)變成可直接貼用的清單:SQL IN 清單 (\'a\',\'b\')、逗號清單、JSON 字串陣列、Markdown/編號清單 —— 可去空白行、去重、加引號(自動逸出)、加前後綴。全程在你瀏覽器,不上傳內部名單/ID。',
+    keywords: ['清單', '每行', '一欄', '逗號清單', 'sql in', 'in 清單', '陣列', 'json 陣列', '加引號', '前綴', '後綴', '編號', 'markdown 清單', '去重', '換行', '串成一行', '逗號分隔', '一行一筆', '貼上', '加工', 'list'],
+    icon: '📋',
+    loader: () => import('@/tools/line-tools/Index.vue'),
+  },
+  {
     id: 'text-speech',
     name: '文字朗讀',
     category: 'life',

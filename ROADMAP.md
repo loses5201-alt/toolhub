@@ -602,6 +602,15 @@
   多種句末標點/閱讀時間單調/formatDuration,esbuild 打包後跑,併入 npm test)。零新相依、不上傳;
   與 text-clean(清理)、char-inspect(逐字檢視)互補,這支著重整篇字數統計;type-check + 全測試 + build 通過 — 2026-06-18
 
+- 清單加工(line-tools,category=workshop):把貼上的一欄資料(每行一筆,常從 Excel 複製)變成可直接貼用的
+  清單 —— SQL IN 清單 ('a','b')、逗號清單、JSON 字串陣列、Markdown/編號清單;支援逐行去空白、刪空白行、去重
+  (保留首次)、每行加引號(single 用 SQL 慣例把 ' 逸出成 ''、double/backtick 用反斜線逸出)、加前後綴、加編號
+  (起始可調)、自訂連接字元、整體外框((...) [...])。6 個一鍵範本。解決工程師/行政把一欄值快速變成能貼進
+  SQL/程式/表單清單的痛點,線上「逗號清單產生器」常滿廣告又要你貼上內部 ID。引擎 src/features/lineTools.ts
+  (processLines/applyQuote/PRESETS 純函式無 DOM)+ 回歸測試 scripts/test-linetools.mjs(28 筆:trim/刪空白/去重順序/
+  四種引號與逸出/前後綴/編號位置/連接/外框/六個 preset/空字串,esbuild 打包後跑,併入 npm test)。零新相依、不上傳;
+  與 list-compare(比對去重)、table-clean(表格清理)互補,這支專做把一欄值串成可貼清單;type-check + 全測試 + build 通過 — 2026-06-18
+
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
       與本專案「精簡 + 自包含」原則不符,**跳過**(未來若改自架模型再評估)
