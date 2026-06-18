@@ -8,6 +8,7 @@ import PdfToImages from './PdfToImages.vue'
 import ExtractText from './ExtractText.vue'
 import Watermark from './Watermark.vue'
 import PageNumbers from './PageNumbers.vue'
+import NUp from './NUp.vue'
 import Compress from './Compress.vue'
 
 /*
@@ -22,6 +23,7 @@ const tabs = [
   { id: 'extract', label: '取出文字', icon: '📝', desc: '抽出可選取文字複製' },
   { id: 'watermark', label: 'PDF 浮水印', icon: '🖋️', desc: '每頁加註用途防盜用' },
   { id: 'pagenum', label: 'PDF 頁碼', icon: '🔢', desc: '每頁加上頁碼編號' },
+  { id: 'nup', label: '併頁省紙', icon: '🗂️', desc: '每張放 2/4/6/9 頁' },
   { id: 'compress', label: '壓縮 PDF', icon: '🗜️', desc: '掃描檔縮小好寄信' },
 ] as const
 
@@ -55,6 +57,7 @@ const active = ref<(typeof tabs)[number]['id']>('merge')
       <ExtractText v-else-if="active === 'extract'" />
       <Watermark v-else-if="active === 'watermark'" />
       <PageNumbers v-else-if="active === 'pagenum'" />
+      <NUp v-else-if="active === 'nup'" />
       <Compress v-else-if="active === 'compress'" />
     </div>
 

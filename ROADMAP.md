@@ -371,6 +371,15 @@
   與全靜音不爆 NaN/轉單聲道為平均,以 esbuild 打包後跑,併入 npm test)。零新相依、音檔不上傳;
   type-check + 全測試 + build 通過 — 2026-06-18
 
+- PDF 工坊新增「併頁省紙(N-up)」分頁(pdf-studio/NUp):把多頁 PDF 縮排到每張 A4 放 2/4/6/9 頁
+  (2-up 橫式並排、4/6/9 直式格線),印講義、校稿、省紙最實用 —— 線上 N-up 工具多半要上傳檔案。
+  來源頁面等比例縮放、置中塞格不變形;不足一張的最後幾格留白。版面幾何抽成純函式 nupLayout.ts
+  (A4/sheetLayout/cellBox 由左到右上到下、PDF 左下原點/fitInto 等比置中,無 pdf-lib、無 DOM 可 Node 測);
+  lib.ts 新增 nUpPdf 用 pdf-lib embedPages + drawPage 把幾何畫成實體頁。限制:pdf-lib 嵌入頁不套來源
+  /Rotate,旋轉頁建議先用「整理頁面」轉正(UI 已提示)。回歸測試 scripts/test-pdfnup.mjs(32 筆:
+  各 preset 方向/格線/退回 2-up、格子位置與邊界、換列、fitInto 置中與維持寬高比/邊界不超出/零尺寸不爆,
+  esbuild 打包後跑,併入 npm test)。零新相依(複用既有 pdf-lib);type-check + 全測試 + build 通過 — 2026-06-18
+
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
       與本專案「精簡 + 自包含」原則不符,**跳過**(未來若改自架模型再評估)

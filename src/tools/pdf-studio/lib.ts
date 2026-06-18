@@ -5,6 +5,7 @@
 import { PDFDocument, degrees, type PDFImage } from 'pdf-lib'
 import * as pdfjsLib from 'pdfjs-dist'
 import workerUrl from 'pdfjs-dist/build/pdf.worker.min.mjs?url'
+import { sheetLayout, cellBox, fitInto } from './nupLayout'
 
 // pdfjs 需要 worker;用 Vite 的 ?url 取得 bundle 後的路徑
 pdfjsLib.GlobalWorkerOptions.workerSrc = workerUrl
@@ -82,6 +83,33 @@ export interface ImageInput {
 }
 
 export type PageSize = 'fit' | 'a4'
+
+/**
+ * N-up 併頁:把多頁 PDF 縮排到每張 A4 放 2/4/6/9 頁,省紙、印講義用。
+ * 來源頁面等比例縮放、置中塞進格子;不足一張的最後幾格留白。
+ * 注意:pdf-lib 嵌入頁面不會套用來源頁的 /Rotate,旋轉過的頁面建議先在「整理頁面」轉正。
+ */
+export async function nUpPdf(
+  buffer: ArrayBuffer,
+  perSheet: number,
+  margin = 28,
+  gap = 10,
+): Promise<Uint8Array> {
+  const src = await PDFDocument.load(buffer, { ignoreEncryption: true })
+  const out = await PDFDocument.create()
+  const embedded = await out.embedPages(src.getPages())
+  const lay = sheetLayout(perSheet)
+  const per = lay.perSheet
+  for (let i = 0; i < embedded.length; i += per) {
+    const sheet = out.addPage([lay.sheetW, lay.sheetH])
+    for (let j = 0; j < per && i + j < embedded.length; j++) {
+      const ep = embedded[i + j]
+      const fit = fitInto(ep.width, ep.height, cellBox(j, lay, margin, gap))
+      sheet.drawPage(ep, { x: fit.x, y: fit.y, width: fit.w, height: fit.h })
+    }
+  }
+  return await out.save()
+}
 
 /** 圖片轉 PDF:每張一頁。fit = 頁面同圖片大小;a4 = A4 並置中縮放 */
 export async function imagesToPdf(
