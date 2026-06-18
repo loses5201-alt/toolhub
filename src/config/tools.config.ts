@@ -216,6 +216,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/cron-explain/Index.vue'),
   },
   {
+    id: 'json-diff',
+    name: 'JSON 結構比對',
+    category: 'workshop',
+    description: '貼上兩份 JSON,列出新增/刪除/變更的欄位與路徑 —— 物件鍵不分順序、排版差異自動忽略,比逐行 diff 更準。比對兩次 API 回應或兩版設定檔超實用。全程在你瀏覽器,含密鑰資料不上傳。',
+    keywords: ['json', '比對', '比較', 'diff', '差異', '差別', '結構', 'compare', 'api', '回應', '設定檔', '版本', '變更', '哪裡不一樣', '物件', '欄位差異'],
+    icon: '🔬',
+    loader: () => import('@/tools/json-diff/Index.vue'),
+  },
+  {
     id: 'big5-convert',
     name: 'Big5 ↔ UTF-8 文字檔轉換',
     category: 'workshop',

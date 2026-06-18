@@ -550,6 +550,15 @@
   每月15/只在2月/dom+dow OR/每15分,以固定基準日 + 相對關係驗證避免時區依賴,esbuild 打包後跑,併入 npm test)。
   零新相依、不上傳;type-check + 全測試(293)+ build 通過 — 2026-06-18
 
+- JSON 結構比對(json-diff,category=workshop):貼上兩份 JSON,列出新增/刪除/變更的欄位與完整路徑
+  (user.tags[1]、特殊字元鍵用 ["a-b"])。做「語意層級」比對:物件鍵不分順序、排版差異忽略,
+  不像逐行 diff(text-diff)易被格式干擾;陣列依索引比、型別改變(數字↔字串、物件↔陣列、null↔0)算 changed。
+  比對兩次 API 回應、兩版設定檔差在哪很實用。引擎 src/features/jsonDiff.ts(deepEqual/diffValues/compareJSON/
+  preview 純函式無 DOM、零相依;diffValues 遞迴物件鍵聯集 + 陣列補長 + 葉節點型別比)+ 回歸測試
+  scripts/test-jsondiff.mjs(30 筆:相同/鍵序無關/巢狀路徑/新增刪除/陣列增刪改/型別變更/特殊字元與中文鍵/
+  根層級/compareJSON 解析錯誤兩側/摘要計數/preview,esbuild 打包後跑,併入 npm test)。零新相依、不上傳;
+  type-check + 全測試(323)+ build 通過 — 2026-06-18
+
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
       與本專案「精簡 + 自包含」原則不符,**跳過**(未來若改自架模型再評估)
