@@ -22,6 +22,12 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
+- CSS 漸層產生器(gradient-maker,category=workshop):視覺化調出線性/放射/圓錐漸層,多色標、角度、
+  圓心位置即時預覽,一鍵複製可直接用的 CSS;補齊色彩工坊系列(色碼互轉/色階/對比/色盲)缺的漸層需求。
+  引擎 src/features/gradientMaker.ts 純函式(stopsToString 依位置排序+位置夾 0–100+四捨五入、buildGradient
+  三型別與角度正規化、buildCSS、distributeStops 均勻分布、reverseStops 鏡射),不依賴 DOM 故可 Node 測。
+  回歸測試 scripts/test-gradientmaker.mjs(17 筆:排序/夾值/角度正規化含負值與>360/三種漸層字串/分布/反轉,
+  併入 npm test)。零新相依;type-check + 全測試 + build 通過 — 2026-06-19
 - 社群文字卡 / 語錄圖(text-card,category=workshop):把一段文字做成漂亮的圖片卡片(IG 貼文/限動、
   Threads、FB、公告、金句),取代開 Canva 做圖。Canvas 繪製:漸層/純色背景、黑/明體、置中/靠左、留白、
   粗體、文字色依背景亮度自動擇黑白;尺寸預設 1:1/4:5/9:16/16:9/3:4 對應各社群版位,輸出 1080~1920px PNG,

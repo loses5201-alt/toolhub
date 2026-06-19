@@ -54,6 +54,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/color-tools/Index.vue'),
   },
   {
+    id: 'gradient-maker',
+    name: 'CSS 漸層產生器',
+    category: 'workshop',
+    description: '視覺化調出線性 / 放射 / 圓錐漸層,多色標、角度、圓心位置即時預覽,一鍵複製可直接用的 CSS —— 全程在你瀏覽器計算,不連網、不上傳。與色彩工坊、色階產生器互補。',
+    keywords: ['漸層', '漸變', 'gradient', 'css漸層', 'linear-gradient', 'radial-gradient', 'conic-gradient', '線性漸層', '放射漸層', '圓錐漸層', '背景', 'background', '配色', '色標', '色彩', 'css', '網頁', '按鈕', '漸層背景', '產生器'],
+    icon: '🌈',
+    loader: () => import('@/tools/gradient-maker/Index.vue'),
+  },
+  {
     id: 'contrast-check',
     name: '顏色可讀性檢測',
     category: 'workshop',
