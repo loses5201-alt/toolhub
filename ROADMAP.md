@@ -809,6 +809,12 @@
   空陣列 none;buildCss;純函式無 DOM)+ 回歸測試 scripts/test-boxshadow.mjs(27 筆:顏色各情境/單層多層/inset/
   負位移/模糊夾 0/none/完整宣告,esbuild 打包後跑,併入 npm test)。補齊 gradient-maker/color-scale 視覺工坊系列;
   零新相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-19
+- 網址代稱 / Slug 產生器(slugify,category=workshop):把文章標題/任意文字洗成適合放網址的 slug ——
+  去重音(NFD 正規化後刪 U+0300–036F,café→cafe)、標點/空白轉分隔符、收斂多重分隔、去頭尾;可選小寫、
+  保留中文/其他文字(\p{L}\p{N},否則只留 a-z0-9)、分隔符 -/_、長度上限(切斷後再去尾端分隔)。支援多行批次。
+  引擎 src/features/slugify.ts(stripDiacritics/slugify 純函式無 DOM)+ 回歸測試 scripts/test-slugify.mjs
+  (28 筆:標點/多空白/重音/大小寫/分隔符/中文日文保留與 ASCII 移除/長度上限/綜合,esbuild 打包後跑,併入 npm test)。
+  與 case-convert(命名慣例)、line-tools 區隔(這支標題→網址);零新相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-19
 
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
