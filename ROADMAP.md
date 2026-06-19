@@ -951,6 +951,16 @@
   Inf/-Inf/NaN/-0、最小 subnormal 含有效數字、exactDecimal 直測、多值 round-trip、parseHex 含 0x/空白/超長/非法、
   bitsToNumber,併入 npm test)。與 base-convert(整數進位)、hex-view(位元組)互補;零新相依、不上傳;
   type-check + 全測試 + build 通過 — 2026-06-19
+- CSS 選擇器優先級計算器(css-specificity,category=workshop):貼上一或多個 CSS 選擇器(每行一個或逗號分隔),
+  算出每個的 (a, b, c) 優先級並由高到低排名(三色標示 ID/class/型別),看清「為什麼這條 CSS 沒套用、誰覆蓋誰」。
+  正確處理 :is()/:not()/:has() 取引數中最高優先級、:where() 永遠 0、虛擬元素(::before)算 c 而虛擬類別(:hover)
+  算 b、舊式單冒號虛擬元素、屬性 [attr] 算 b、通用 * 與組合子不計分、命名空間分隔。引擎 src/features/specificity.ts
+  (specificityOne 逐字元解析、matchParen 巢狀括號、splitTop 頂層逗號切分(括號/中括號內不切)、
+  :is/:not/:has 遞迴取 maxSpec、compareSpec 三欄比較、rankSelectors 排序並指派同分同名次;純函式無 DOM)+ 回歸測試
+  scripts/test-specificity.mjs(W3C/MDN 經典向量:*、li、ul li、ul ol+li、h1+*[rel=up]、li.red.level、#x34y、
+  #s12:not(FOO)、.foo :is(.bar,#baz)、:where、虛擬元素/類別、巢狀 :not/:has、複雜混合、連續 class/ID;
+  compareSpec、splitTop 括號內逗號不切、rankSelectors 排序與同名次與逗號展開,併入 npm test)。零新相依、不上傳;
+  type-check + 全測試 + build 通過 — 2026-06-19
 
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
