@@ -117,6 +117,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/timezone/Index.vue'),
   },
   {
+    id: 'find-replace',
+    name: '尋找取代工坊',
+    category: 'workshop',
+    description: '批次尋找/取代文字,支援正規表達式與忽略大小寫,可用 $1 引用群組 —— 整理名單、批次改格式很快,全程在你瀏覽器,文字不上傳。',
+    keywords: ['尋找', '取代', '替換', '搜尋取代', 'find', 'replace', '批次', '正則', '正規表達式', 'regex', '文字處理', '整理', '取代字串', '換字'],
+    icon: '🔁',
+    loader: () => import('@/tools/find-replace/Index.vue'),
+  },
+  {
     id: 'screen-record',
     name: '螢幕錄影',
     category: 'workshop',
