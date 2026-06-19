@@ -22,6 +22,14 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
+- HMAC / Webhook 簽章驗證(hmac,category=workshop):用密鑰對訊息算 HMAC-SHA1/256/512(輸出十六進位
+  + Base64),驗證 webhook 是否真來自服務方(GitHub X-Hub-Signature-256 / Stripe / LINE Messaging API)。
+  可貼收到的簽章定時比對(safeEqualHex 常數時間、大小寫不敏感、自動忽略 sha256= 前綴)。引擎
+  src/features/hmacText.ts(bytesToBase64 純函式、hmacBytes/hmacHex/hmacBase64 用 crypto.subtle、safeEqualHex;
+  複用 hashText 的 bytesToHex/utf8Bytes)+ 回歸測試 scripts/test-hmactext.mjs(46 筆:base64 已知值、
+  RFC 2202 HMAC-SHA1 與 RFC 4231 HMAC-SHA256 官方向量、15 組訊息×演算法與 Node crypto 交叉驗證含中文/空/
+  超過 block size 金鑰、safeEqualHex,併入 npm test)。與 text-hash(無密鑰雜湊)互補;
+  零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-19
 - TOTP 兩步驟驗證碼產生器(totp,category=workshop):輸入 2FA 設定金鑰(base32)或 otpauth:// 連結,
   在本機即時算出當下一次性驗證碼與倒數秒數(RFC 6238,等同 Google Authenticator/Authy),可選 6/7/8 位、
   30/60 秒週期、SHA-1/256/512。貼上 otpauth:// 自動帶入參數;每秒刷新進度條(≤5 秒轉紅)、點數字複製。
