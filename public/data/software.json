@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-18",
+  "updated": "2026-06-19",
   "software": [
     {
       "id": "line",
@@ -345,7 +345,7 @@
       "icon": "📄",
       "official": "https://notepad-plus-plus.org/",
       "download": "https://notepad-plus-plus.org/downloads/",
-      "version": "",
+      "version": "8.9.6.4",
       "note": "免費的純文字/程式碼編輯器,開大檔、轉編碼、批次取代很方便。官方網域 notepad-plus-plus.org,別從廣告下載站安裝。",
       "github": "notepad-plus-plus/notepad-plus-plus"
     },
@@ -366,7 +366,7 @@
       "icon": "🎬",
       "official": "https://handbrake.fr/",
       "download": "https://handbrake.fr/downloads.php",
-      "version": "",
+      "version": "1.11.2",
       "note": "免費開源的影片轉檔工具,壓縮影片、轉成 MP4 給手機或電視播放。官方網域 handbrake.fr。",
       "github": "HandBrake/HandBrake"
     },
@@ -377,7 +377,7 @@
       "icon": "🎵",
       "official": "https://www.audacityteam.org/",
       "download": "https://www.audacityteam.org/download/",
-      "version": "",
+      "version": "Audacity-3.7.8",
       "note": "免費開源的錄音與音訊編輯軟體,剪音檔、去雜訊、轉格式都行。官方網域 audacityteam.org,別裝到夾廣告的仿冒版。",
       "github": "audacity/audacity"
     },
