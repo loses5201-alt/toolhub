@@ -396,6 +396,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/json-repair/Index.vue'),
   },
   {
+    id: 'unicode-normalize',
+    name: 'Unicode 正規化 / 比對',
+    category: 'workshop',
+    description: '解決「兩段文字看起來一樣卻不相等」—— 同一個字可能由單一碼點或基底字＋組合符號組成。提供 NFC/NFD/NFKC/NFKD 四種正規化、兩段文字比對找出在哪種形式下相等與第一個差異點,並統計組合符/全形/零寬字元。全程在你瀏覽器,不上傳。',
+    keywords: ['unicode', '正規化', 'normalize', 'nfc', 'nfd', 'nfkc', 'nfkd', '組合字', '附加符號', 'combining', '全形', '半形', '相容字', '比對', '不相等', '看起來一樣', '碼點', 'codepoint', '零寬', '正規化比對'],
+    icon: '🔤',
+    loader: () => import('@/tools/unicode-normalize/Index.vue'),
+  },
+  {
     id: 'url-parse',
     name: '網址解析 / 查詢字串編輯',
     category: 'workshop',
