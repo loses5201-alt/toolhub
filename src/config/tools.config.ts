@@ -1336,6 +1336,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/num-to-chinese/Index.vue'),
   },
   {
+    id: 'roman-numeral',
+    name: '羅馬數字轉換',
+    category: 'life',
+    description: '阿拉伯數字(1–3999)↔ 標準羅馬數字雙向轉換,採減法記號(IV/IX/XL/XC/CD/CM)。讀懂時鐘、書本章節、版權年(MMXXIV=2024);解析時嚴格驗證,擋下 IIII、IC 等非規範寫法。全程在你瀏覽器,不上傳。',
+    keywords: ['羅馬數字', 'roman', 'roman numeral', '羅馬', '數字轉換', 'mmxxiv', 'i v x l c d m', '減法記號', '章節', '時鐘', '版權年', '大綱編號', '轉換'],
+    icon: 'Ⅶ',
+    loader: () => import('@/tools/roman-numeral/Index.vue'),
+  },
+  {
     id: 'amount-english',
     name: '英文金額大寫',
     category: 'life',
