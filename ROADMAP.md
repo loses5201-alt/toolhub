@@ -1014,6 +1014,14 @@
   scripts/test-baseencode.mjs(Base32 RFC 4648 七組官方向量 ""/f/fo/foo/foob/fooba/foobar、往返含中文、大小寫與
   空白容忍、非法字元 null、Base58 Hello World!→2NEpo7TZRRrLZSi2U 與 hello→Cn8eVZg 與前導零→112、往返、非法 null、
   hex 輔助 hexToBytes/bytesToHex 與透過 hex 編碼,併入 npm test)。零新相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-19
+- UUID 檢視器(uuid-inspect,category=workshop):貼上 UUID 判斷版本(v1–v8)與變體(NCS/RFC/Microsoft),
+  並對含時間的版本還原內嵌建立時間:v1/v6(60 位元、單位 100 奈秒、自 1582-10-15 起算)與 v7(前 48 位元 Unix
+  毫秒、time-ordered RFC 9562)。接受連字號/無連字號/urn:uuid:/大括號格式,辨識 Nil(全零)與 Max(全 F)。
+  與 id-gen(產生)互補,這支專做反查;純位元解析不查詢任何資料。引擎 src/features/uuidInspect.ts
+  (normalizeUuid、formatCanonical、inspectUuid 取版本/變體並依版本以 BigInt 還原時間戳並扣格里曆 offset、
+  v7TimePrefix;純函式無 DOM)+ 回歸測試 scripts/test-uuidinspect.mjs(normalize 各格式與長度/非 hex/空、
+  v4 版本變體且無時間、v1 由 ms=0 組出→1970-01-01、v7 前 48 位元 1700000000000 與固定字串 iso、v6 重排序時間→1970、
+  Nil/Max special、變體 NCS/Microsoft 判定、非法 null,併入 npm test)。零新相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-19
 
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
