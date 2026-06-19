@@ -1022,6 +1022,14 @@
   v7TimePrefix;純函式無 DOM)+ 回歸測試 scripts/test-uuidinspect.mjs(normalize 各格式與長度/非 hex/空、
   v4 版本變體且無時間、v1 由 ms=0 組出→1970-01-01、v7 前 48 位元 1700000000000 與固定字串 iso、v6 重排序時間→1970、
   Nil/Max special、變體 NCS/Microsoft 判定、非法 null,併入 npm test)。零新相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-19
+- User-Agent 解析器(ua-parser,category=workshop):貼上 UA 字串拆出瀏覽器/版本/排版引擎/作業系統/裝置類型
+  (桌機/手機/平板/爬蟲),看 server log、分析流量、debug 相容性常用,可一鍵帶入自己的瀏覽器。偵測順序由特殊到通用
+  (Edg→Opera→Samsung→Firefox/FxiOS→CriOS→Chrome→Safari→IE),正確處理 iOS 上所有瀏覽器強制 WebKit、
+  Chrome 含 Safari/AppleWebKit 的幌子、Windows 10.0 同時對應 10/11、macOS 行銷代號、Googlebot/curl 等爬蟲。
+  引擎 src/features/uaParser.ts(detectBrowser/detectEngine/detectOS/detectDevice、windowsName/macName 對照、
+  BOT_RE 爬蟲庫;純函式無 DOM)+ 回歸測試 scripts/test-uaparser.mjs(Chrome/Safari/Firefox/Edge/Opera/Samsung/
+  iPhone/iPad/Android 手機與平板/CriOS/FxiOS/IE11/Googlebot/curl/空輸入/去空白,併入 npm test)。
+  零相依、不上傳;type-check + build 通過 — 2026-06-19
 
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
