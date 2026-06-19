@@ -1006,6 +1006,14 @@
   半透明黑/紅疊白已知值、不透明蓋過、全透明回背景、疊不透明 a=1、半透明疊半透明 a=0.75、色階,併入 npm test)。
   補齊 color-tools/color-scale/gradient-maker 色彩工坊系列(這支專做混色與疊色);零新相依、不上傳;
   type-check + 全測試 + build 通過 — 2026-06-19
+- Base32 / Base58 編解碼(base32-58,category=workshop):把位元組串(文字或 hex)與 Base32(RFC 4648)/
+  Base58(Bitcoin/IPFS 字母表)互轉。Base32 用於 TOTP 兩步驟驗證金鑰、檔名安全字串(含 = 補位、解碼大小寫不敏感);
+  Base58 去掉易混淆的 0/O/I/l、前導零位元組編成 1,用於錢包位址、IPFS CID。與 base-convert(數字 2–36 進位)區隔
+  ——這支處理位元組編碼。可文字/hex 輸入、編/解碼切換、結果一鍵當輸入(往返)。引擎 src/features/baseEncode.ts
+  (utf8/hex 互轉、base32Encode/Decode 位元緩衝、base58Encode/Decode 用 BigInt 大數除法;純函式無 DOM)+ 回歸測試
+  scripts/test-baseencode.mjs(Base32 RFC 4648 七組官方向量 ""/f/fo/foo/foob/fooba/foobar、往返含中文、大小寫與
+  空白容忍、非法字元 null、Base58 Hello World!→2NEpo7TZRRrLZSi2U 與 hello→Cn8eVZg 與前導零→112、往返、非法 null、
+  hex 輔助 hexToBytes/bytesToHex 與透過 hex 編碼,併入 npm test)。零新相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-19
 
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
