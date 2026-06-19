@@ -22,6 +22,14 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
+- Hex 檢視器(hex-view,category=workshop):把檔案或文字攤開成「位移 + 十六進位 + ASCII」三欄
+  (像 xxd / hexdump),看清檔頭魔術位元組、編碼、夾帶內容;三模式 —— 讀取檔案(只讀前 256KB、
+  maxBytes 截斷保護)、貼上文字(UTF-8 編碼後看位元組)、十六進位還原(parseHex 容許空白/換行/0x/逗號,
+  奇數位數或非 hex 報錯,並還原成 UTF-8 文字)。每列位元組數(8/16/32)與大小寫可調,結果可複製/下載 .txt。
+  引擎 src/features/hexView.ts(byteToHex/offsetToHex/byteToAscii/hexDump 排版補空白對齊+分組空白/
+  dumpToText/textToBytes/parseHex 純函式無 DOM)+ 回歸測試 scripts/test-hexview.mjs(52 筆:各轉換/
+  16 與 17 位元組換列/分組/大小寫/自訂每列/maxBytes 截斷/空輸入/parseHex 容錯與往返/中文 UTF-8,併入 npm test)。
+  與 file-type(魔術位元組判型)、char-inspect(碼點)互補。零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-19
 - CSS 漸層產生器(gradient-maker,category=workshop):視覺化調出線性/放射/圓錐漸層,多色標、角度、
   圓心位置即時預覽,一鍵複製可直接用的 CSS;補齊色彩工坊系列(色碼互轉/色階/對比/色盲)缺的漸層需求。
   引擎 src/features/gradientMaker.ts 純函式(stopsToString 依位置排序+位置夾 0–100+四捨五入、buildGradient
