@@ -74,6 +74,13 @@
   (displayWidth/tableToMarkdown/splitRow/markdownToTable 純函式無 DOM,複用 tableClean 的 Table)+ 回歸測試
   scripts/test-markdowntable.mjs(22 筆:行數/分隔列/逸出/換行/對齊/無外框/對齊偵測/還原/補裁/報錯/往返一致含中文,
   esbuild 多入口打包後跑,併入 npm test)。補足 data-convert 不含 Markdown 的缺口;不上傳;type-check + 全測試 + build 通過 — 2026-06-17
+- 網址解析 / 查詢字串編輯(url-parse,category=workshop):把網址用標準 URL API 拆成協定/主機/埠/路徑/錨點,
+  查詢字串自製解析器拆成鍵值對(保留順序與重複、'+' 轉空白、壞 %XX 退回原字串不丟例外、旗標型參數記 flag),
+  表格可直接編輯/新增/刪除,改完用 buildUrl 即時組回;沒寫協定自動補 https://(記 assumedProtocol);
+  一鍵清掉 utm_/fbclid/gclid/igshid 等追蹤碼。與 url-clean(拆轉址包裝)互補:這支著重看清結構與重組。
+  引擎 src/features/urlParse.ts(parseUrl/buildUrl/parseQuery/buildQuery/decodeComponent 純函式,URL 為標準全域)
+  + 回歸測試 scripts/test-urlparse.mjs(40 筆:各部位/自動補協定/錯誤/解碼編碼/重複鍵/旗標/來回一致/清追蹤碼,
+  併入 npm test)。零三方相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-19
 - 進位轉換器(base-convert,category=workshop):二/八/十/十六進位一次互轉 + 任意 2–36 進位,用 BigInt 運算,
   64 位元以上超大整數不像 parseInt 失準(64 位元全 1 = 18446744073709551615 實測正確)。parseInBase 容許開頭
   正負號、字串中空白/底線分組、與該進位相符的 0b/0o/0x 前綴,任一字元超界即報錯;toBase 用 BigInt 除餘輸出小寫

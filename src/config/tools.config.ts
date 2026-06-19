@@ -288,6 +288,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/base-convert/Index.vue'),
   },
   {
+    id: 'url-parse',
+    name: '網址解析 / 查詢字串編輯',
+    category: 'workshop',
+    description: '把網址拆成協定、主機、路徑、查詢參數,參數自動解碼列成表格可直接編輯,改完即時組回 —— 一鍵清掉 utm/fbclid 等追蹤碼。全程在你瀏覽器解析,不連網、不上傳。',
+    keywords: ['網址', 'url', '解析', '查詢字串', 'query string', '參數', 'parameter', 'querystring', '編碼', '解碼', 'urldecode', 'urlencode', 'utm', 'fbclid', 'gclid', '追蹤碼', '拆解', '網址參數', '編輯', '組網址', 'parse'],
+    icon: '🔗',
+    loader: () => import('@/tools/url-parse/Index.vue'),
+  },
+  {
     id: 'timestamp-convert',
     name: 'Unix 時間戳記轉換',
     category: 'workshop',
