@@ -342,6 +342,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/cidr-calc/Index.vue'),
   },
   {
+    id: 'chmod-calc',
+    name: 'chmod 權限計算機',
+    category: 'workshop',
+    description: '把 Unix 檔案權限的八進位(755)和符號表示(rwxr-xr-x)雙向對照,勾選讀/寫/執行即時看到指令,支援 setuid/setgid/sticky 並附白話說明。不必死背 chmod 數字;全程在你瀏覽器計算,不上傳。',
+    keywords: ['chmod', '權限', '檔案權限', 'permission', 'permissions', 'rwx', '755', '644', 'octal', '八進位', '符號', 'symbolic', 'setuid', 'setgid', 'sticky', 'umask', 'linux', 'unix', 'ls -l', '讀寫執行', 'mode'],
+    icon: '🔐',
+    loader: () => import('@/tools/chmod-calc/Index.vue'),
+  },
+  {
     id: 'url-parse',
     name: '網址解析 / 查詢字串編輯',
     category: 'workshop',
