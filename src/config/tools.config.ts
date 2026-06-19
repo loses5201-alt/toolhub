@@ -315,6 +315,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/base-convert/Index.vue'),
   },
   {
+    id: 'hex-view',
+    name: 'Hex 檢視器',
+    category: 'workshop',
+    description: '把檔案或文字攤開成「位移 + 十六進位 + ASCII」三欄,像 xxd / hexdump,看清檔頭魔術位元組、編碼、夾帶內容;也能把十六進位字串還原成文字。全程在你瀏覽器讀取排版,不上傳。',
+    keywords: ['hex', 'hexdump', 'xxd', '十六進位', '檢視', '檢視器', 'hex viewer', 'hex editor', '位元組', 'byte', 'bytes', '檔頭', '魔術位元組', 'magic', 'binary', '二進位檔', 'ascii', 'dump', '十六進位還原', '看檔案', '原始位元組', 'raw'],
+    icon: '🔣',
+    loader: () => import('@/tools/hex-view/Index.vue'),
+  },
+  {
     id: 'url-parse',
     name: '網址解析 / 查詢字串編輯',
     category: 'workshop',
