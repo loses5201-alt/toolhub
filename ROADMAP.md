@@ -941,6 +941,16 @@
   scripts/test-clampcss.mjs(經典 16px@320→24px@1280 字串、px 單位、自訂 root 20、resolveAt 兩端中點與
   上下夾限、截距 0 只留 vw、同寬度退化、遞減與顛倒警告,併入 npm test)。補齊漸層/陰影/緩動視覺工坊系列;
   零新相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-19
+- IEEE 754 浮點數位元檢視器(float-bits,category=workshop):輸入十進位數字(或反過來貼 16 進位反查)
+  拆解成電腦實際儲存的符號 / 指數 / 尾數位元(三色標示),並用 BigInt 完整展開「真正存進去的精確十進位值」
+  (分母為 2 次方必有限位),看懂浮點誤差從何而來(0.1+0.2≠0.3)。可切 64 位元 double / 32 位元 float,
+  支援 NaN、Infinity、subnormal 非正規數,並提示輸入無法精確表示。引擎 src/features/floatBits.ts
+  (DataView 取/還原原始位元 bitsToNumber、breakdown 分類 zero/subnormal/normal/infinity/nan 並切位元欄位、
+  exactDecimal 把尾數 M×2^E 用 BigInt 展成有限十進位、parseHex/breakdownFromHex 反查;純函式無 DOM)+ 回歸測試
+  scripts/test-floatbits.mjs(double/float 已知 hex 1.0/0.5/0.1/-2、欄位長度、0.1 雙精度精確真值、單精度精確值、
+  Inf/-Inf/NaN/-0、最小 subnormal 含有效數字、exactDecimal 直測、多值 round-trip、parseHex 含 0x/空白/超長/非法、
+  bitsToNumber,併入 npm test)。與 base-convert(整數進位)、hex-view(位元組)互補;零新相依、不上傳;
+  type-check + 全測試 + build 通過 — 2026-06-19
 
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
