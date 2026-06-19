@@ -486,6 +486,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/json-flatten/Index.vue'),
   },
   {
+    id: 'data-chart',
+    name: '資料圖表產生器',
+    category: 'workshop',
+    description: '貼上 CSV/Excel 表格,選欄位即畫成長條圖、折線圖或圓餅圖,下載 SVG(向量,放大不模糊)或 PNG —— 全程在你瀏覽器繪製,含營業數字的資料不上傳、無廣告、無浮水印、免註冊。',
+    keywords: ['圖表', '製圖', '畫圖', '長條圖', '柱狀圖', 'bar chart', '折線圖', '線圖', 'line chart', '圓餅圖', '圓形圖', '派圖', 'pie chart', '統計圖', '視覺化', 'chart', 'graph', '資料視覺化', 'csv轉圖表', 'excel圖表', '數據圖', '報表', '簡報圖表', '下載圖表', 'svg', 'png'],
+    icon: '📊',
+    loader: () => import('@/tools/data-chart/Index.vue'),
+  },
+  {
     id: 'table-stats',
     name: '表格統計 / 樞紐',
     category: 'workshop',

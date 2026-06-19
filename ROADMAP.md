@@ -901,6 +901,14 @@
   scripts/test-panguspacing.mjs(26 筆:中英/數字/日文/連續切換/idempotent/換行/標點分隔不加/補空格計數/null,
   esbuild 打包後跑,併入 npm test)。與 text-clean(去空白/全半形/隱形字元)互補;繁簡轉換與標點全形化不在範圍;
   零新相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-19
+- 資料圖表產生器(data-chart,category=workshop):貼上 CSV/TSV(或從 Excel/試算表複製),選類別欄與數值欄,
+  即畫成長條圖 / 折線圖 / 圓餅圖,下載 SVG(向量,放大不模糊)或 PNG(canvas 2x)、可複製 SVG。長條/折線可多選
+  數值欄一起比較(自動配色 + 圖例),圓餅圖取第一個數值欄並自動算百分比。自己算座標軸漂亮刻度與圓弧,不依賴
+  任何繪圖套件。引擎 src/features/chartSvg.ts(parseNumber 去千分位/貨幣/百分比符號、buildChartData 非數字當 0、
+  niceScale 漂亮刻度無浮點雜訊、pieSlices 負值/0 不佔比例且總角 360、polarPoint/arcPath 12 點鐘順時針含整圓兩段弧、
+  fmtNum、renderChart 三型別,皆純函式無 DOM)+ 回歸測試 scripts/test-chartsvg.mjs(44 筆:數字解析/資料組裝/
+  刻度上下界與間距一致/扇形比例與角度相接/極座標/大弧旗標/SVG 元素數量含分組長條,esbuild 打包後跑,併入 npm test)。
+  與 table-stats(先算數字)互補;線上繪圖站常要註冊或上傳故全程不上傳;零新相依;type-check + 全測試 + build 通過 — 2026-06-19
 
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
