@@ -22,6 +22,14 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
+- JSON Schema 產生器(json-schema,category=workshop):貼上範例 JSON 推斷出 JSON Schema(draft-07)。
+  陣列合併所有元素結構;物件陣列裡只有部分樣本才有的鍵自動從 required 移除(取交集);integer+number
+  推成 number;不同型別合成 anyOf(攤平去重);可選偵測 email/date/date-time/uri/uuid 字串格式;可複製/下載 .json。
+  引擎 src/features/jsonSchema.ts(jsonType/detectStringFormat/inferSchema/mergeSchemas/mergeTwo/buildSchema/
+  generate 純函式無 DOM)+ 回歸測試 scripts/test-jsonschema.mjs(29 筆:各基本型別/格式偵測開關/物件 required
+  與 requireAll 開關/空與同型別與混型別陣列/物件陣列 required 交集/巢狀/mergeSchemas 直接測/anyOf 攤平去重/
+  $schema 標頭/generate 解析錯誤/頂層純陣列,併入 npm test)。與 json-to-ts(TS 型別)互補;
+  零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-19
 - chmod 權限計算機(chmod-calc,category=workshop):把 Unix 檔案權限的八進位(755)與符號(rwxr-xr-x)
   雙向對照,核取方塊勾選每個身分(u/g/o)的讀/寫/執行即時換算出 chmod 數字與指令,支援 setuid/setgid/sticky
   特殊位元(s/S/t/T 大小寫依該位執行與否)並附白話說明與風險。常見權限(644/755/600/777/700)一鍵帶入。
