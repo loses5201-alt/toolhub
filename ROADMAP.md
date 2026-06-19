@@ -716,6 +716,12 @@
   BMP/SVG,不信任宣告的 MIME),預覽並用正確副檔名下載;非圖片或無效 Base64 給明確錯誤。零三方相依、不上傳
   (線上 Base64 圖片工具多半要上傳又夾廣告);type-check + build 通過 — 2026-06-19
 
+- SVG → PNG / 點陣圖匯出(svg-to-png,category=workshop):貼上 SVG 原始碼或選 .svg 檔,在任意解析度
+  轉成 PNG / JPG / WebP。以 DOMParser 解析取得原始尺寸(width/height,否則 viewBox,皆無預設 300×150),
+  輸出前把 SVG 設為目標寬高並補 xmlns/viewBox 再序列化,確保 Image() 正確繪製;canvas drawImage→toBlob。
+  可鎖定原始比例、選背景(透明/白/黑,JPG 自動填背景)、品質;尺寸夾在 1–8192。SVG 含外部字型/圖片致 canvas
+  tainted 或無法繪製時給明確錯誤。零三方相依、不上傳(線上 SVG 轉檔站多半要上傳又夾廣告);type-check + build 通過 — 2026-06-19
+
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
       與本專案「精簡 + 自包含」原則不符,**跳過**(未來若改自架模型再評估)

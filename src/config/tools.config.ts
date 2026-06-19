@@ -531,6 +531,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/id-photo/Index.vue'),
   },
   {
+    id: 'svg-to-png',
+    name: 'SVG → PNG / 點陣圖匯出',
+    category: 'workshop',
+    description: '把向量 SVG 在任意解析度轉成 PNG / JPG / WebP,可指定寬高、背景與品質 —— 全程在你瀏覽器用 canvas 繪製,SVG 不上傳、無廣告、無浮水印。',
+    keywords: ['svg', 'svg轉png', 'svg轉圖', '向量轉點陣', '向量轉圖', 'png', 'jpg', 'webp', 'svg轉檔', 'svg匯出', '高解析', '放大不模糊', 'rasterize', '圖示轉png', 'logo轉png', 'icon'],
+    icon: '🖌️',
+    loader: () => import('@/tools/svg-to-png/Index.vue'),
+  },
+  {
     id: 'image-base64',
     name: 'Base64 / Data URI 圖片互轉',
     category: 'workshop',
