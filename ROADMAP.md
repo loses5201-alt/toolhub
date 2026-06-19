@@ -997,6 +997,15 @@
   全符號、純量與各種陣列、簡單物件、巢狀內嵌 struct、物件陣列欄位聯集、型別衝突、頂層陣列與純量、null、解析錯誤、
   rootName 正規化,併入 npm test)。與 json-to-ts(TypeScript)互補;零新相依、不上傳;
   type-check + 全測試 + build 通過 — 2026-06-19
+- 色彩混合器(color-mix,category=workshop):兩種模式——混色(兩色依比例在 sRGB 線性內插,等同 CSS
+  color-mix(in srgb,…),並列出兩色之間的色階可點選複製)與疊色(把帶透明度的前景以 source-over alpha
+  compositing 疊在背景上,算出最終看到的實色;背景不透明則結果不透明)。解析 #RGB/#RGBA/#RRGGBB/#RRGGBBAA
+  與 rgb()/rgba()(含百分比),輸出 HEX 與 RGB。引擎 src/features/colorMix.ts(parseColor、toHex(alpha<1 輸出 8 位)/
+  toRgbString、mix 含 alpha 內插、alphaComposite、gradientSteps;純函式無 DOM)+ 回歸測試 scripts/test-colormix.mjs
+  (解析各格式與百分比與非法、toHex/RGB、白黑混 #808080、紅藍混 #800080、ratio 0/1/超界夾限、alpha 內插、
+  半透明黑/紅疊白已知值、不透明蓋過、全透明回背景、疊不透明 a=1、半透明疊半透明 a=0.75、色階,併入 npm test)。
+  補齊 color-tools/color-scale/gradient-maker 色彩工坊系列(這支專做混色與疊色);零新相依、不上傳;
+  type-check + 全測試 + build 通過 — 2026-06-19
 
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
