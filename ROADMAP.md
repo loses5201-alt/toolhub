@@ -923,6 +923,15 @@
   fmtNum、renderChart 三型別,皆純函式無 DOM)+ 回歸測試 scripts/test-chartsvg.mjs(44 筆:數字解析/資料組裝/
   刻度上下界與間距一致/扇形比例與角度相接/極座標/大弧旗標/SVG 元素數量含分組長條,esbuild 打包後跑,併入 npm test)。
   與 table-stats(先算數字)互補;線上繪圖站常要註冊或上傳故全程不上傳;零新相依;type-check + 全測試 + build 通過 — 2026-06-19
+- CSS 緩動曲線編輯器(cubic-bezier,category=workshop):拖動兩個控制點視覺化調出 CSS 動畫節奏,
+  右側方塊以瀏覽器真實 transition 重播預覽(跑道平移 + 縮放兩種),支援回彈/過衝(y 超界並提示),
+  一鍵複製函式或完整 CSS,可貼上既有 cubic-bezier 字串或四個數字載入。附 ease/linear/ease-in/out/
+  ease-in-out/回彈/彈性等範本。引擎 src/features/cubicBezier.ts(makeEasing 用 WebKit UnitBezier 多項式係數,
+  以 Newton-Raphson 失敗退二分法由時間 x 解參數 t 再求完成度 y;easeAt/sampleCurve/hasOvershoot/
+  toBezierString/buildTransitionCss/parseBezier 純函式無 DOM,x 依 CSS 規範夾 [0,1]、y 不限)+ 回歸測試
+  scripts/test-cubicbezier.mjs(linear y===x、各範本端點 0/1、ease-in/out 與對角線比較、ease-in-out 點對稱、
+  單調遞增、過衝偵測、x 夾限 y 不限、字串四捨五入、parse 各情形與防呆、NaN/超界夾限,併入 npm test)。
+  補齊 gradient-maker/box-shadow/color-scale 視覺工坊系列;零新相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-19
 
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
