@@ -815,6 +815,13 @@
   引擎 src/features/slugify.ts(stripDiacritics/slugify 純函式無 DOM)+ 回歸測試 scripts/test-slugify.mjs
   (28 筆:標點/多空白/重音/大小寫/分隔符/中文日文保留與 ASCII 移除/長度上限/綜合,esbuild 打包後跑,併入 npm test)。
   與 case-convert(命名慣例)、line-tools 區隔(這支標題→網址);零新相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-19
+- 中文排版盤古之白(pangu-spacing,category=workshop):在中日韓文字與英文字母/數字之間自動補半形空格,
+  中英混排的文章/貼文/文件更易讀(「在GitHub上有100顆星」→「在 GitHub 上有 100 顆星」)。可重複套用結果不變
+  (idempotent)、保留標點與換行、若中英間已有標點分隔則不另加。引擎 src/features/panguSpacing.ts(CJK 範圍含
+  中日韓表意字+假名+注音+部首,雙向 regex addSpacing/addSpacingWithCount 純函式無 DOM)+ 回歸測試
+  scripts/test-panguspacing.mjs(26 筆:中英/數字/日文/連續切換/idempotent/換行/標點分隔不加/補空格計數/null,
+  esbuild 打包後跑,併入 npm test)。與 text-clean(去空白/全半形/隱形字元)互補;繁簡轉換與標點全形化不在範圍;
+  零新相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-19
 
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
