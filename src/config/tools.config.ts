@@ -270,6 +270,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/markdown-table/Index.vue'),
   },
   {
+    id: 'markdown-preview',
+    name: 'Markdown 預覽 / 轉 HTML',
+    category: 'workshop',
+    description: '即時把 Markdown 渲染成畫面與乾淨 HTML,可複製成 Word/Email 格式化內容、下載 .html(再列印成 PDF)—— 全程在你瀏覽器,不必貼到線上編輯器、不上傳。',
+    keywords: ['markdown', 'md', '預覽', 'preview', '渲染', '轉html', 'markdown轉html', 'md轉html', 'readme', '筆記', 'notion', 'hackmd', '編輯器', 'editor', '排版', '轉pdf', '格式化', '所見即所得'],
+    icon: '📝',
+    loader: () => import('@/tools/markdown-preview/Index.vue'),
+  },
+  {
     id: 'regex-tester',
     name: '正規表達式測試器',
     category: 'workshop',

@@ -114,6 +114,18 @@
   unescapeString 純函式無 DOM)+ 回歸測試 scripts/test-escapetext.mjs(45 筆:各模式/引號模式/控制字元/emoji 代理對/
   錯誤處理/escapeForQuote 與 escapeUnicode 各自來回一致含反斜線,併入 npm test)。零三方相依、不上傳;
   type-check + 全測試 + build 通過 — 2026-06-19
+- Markdown 預覽 / 轉 HTML(markdown-preview,category=workshop):即時把 Markdown 渲染成畫面與乾淨 HTML,
+  寫 README/筆記/部落格時免來回切換、也不必把內容貼到線上 Markdown 編輯器(隱私)。可「複製格式化內容」
+  (text/html 寫入剪貼簿,貼進 Word/Gmail/Outlook 保留粗體/清單/表格)、複製 HTML 原始碼、下載 .html
+  (含基本排版樣式,再用瀏覽器列印成 PDF)、下載 .md。補足 html-to-text(反向)與 markdown-table(只表格)的缺口。
+  引擎 src/features/markdownRender.ts(renderMarkdown/renderInline/escapeHtml 純函式無 DOM):支援標題、
+  粗體/斜體/刪除線、行內與圍欄程式碼、連結、圖片、引言、巢狀清單、水平線、表格(複用 markdownTable 的
+  markdownToTable);安全性:所有文字一律 HTML 逸出、危險網址(javascript:/vbscript:/data:/file:)過濾掉
+  只剩文字、自動連結僅限 http(s)/mailto/tel/ftp,故輸出可安全放進 v-html。行內程式碼先抽出佔位再逸出/套格式
+  避免內部符號誤判;底線粗斜體加 word 邊界保護 snake_case;表格偵測需「含 | 且下一行為分隔列」。
+  回歸測試 scripts/test-markdownrender.mjs(50 筆:各區塊/逸出/XSS 阻擋(script、javascript:/data: url)/
+  巢狀清單/表格對齊/圍欄不解析內部 markdown/snake_case 不破壞/綜合文件,以 esbuild 打包後跑,併入 npm test)。
+  零新相依(複用既有 markdownTable);type-check + 全測試 + build 通過 — 2026-06-19
 - 網址解析 / 查詢字串編輯(url-parse,category=workshop):把網址用標準 URL API 拆成協定/主機/埠/路徑/錨點,
   查詢字串自製解析器拆成鍵值對(保留順序與重複、'+' 轉空白、壞 %XX 退回原字串不丟例外、旗標型參數記 flag),
   表格可直接編輯/新增/刪除,改完用 buildUrl 即時組回;沒寫協定自動補 https://(記 assumedProtocol);
