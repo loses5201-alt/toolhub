@@ -22,6 +22,13 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
+- 文字雜湊值產生器(text-hash,category=workshop):把一段文字算出 MD5 / SHA-1 / SHA-256 / SHA-384 /
+  SHA-512 / CRC32,即時重算、可大寫顯示、點一下複製。SHA 家族用 crypto.subtle;MD5 與 CRC32 瀏覽器
+  Web Crypto 不提供,改以純函式實作(RFC 1321 MD5 with padding 邊界處理 + 64-bit 長度;IEEE 802.3 CRC32 查表)。
+  引擎 src/features/hashText.ts(md5/md5Hex/crc32/crc32Hex/bytesToHex/utf8Bytes 純函式無 DOM)+ 回歸測試
+  scripts/test-hashtext.mjs(25 筆:RFC 1321 全部已知向量、CRC32 已知檢查值 cbf43926、padding 邊界 54–120、
+  中文 UTF-8、200 組亂數與 Node 內建 crypto 交叉驗證,併入 npm test)。明確標示 MD5/SHA-1 不安全、雜湊不可逆。
+  與 file-checksum(檔案雜湊+比對官方校驗碼)互補。零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-19
 - Hex 檢視器(hex-view,category=workshop):把檔案或文字攤開成「位移 + 十六進位 + ASCII」三欄
   (像 xxd / hexdump),看清檔頭魔術位元組、編碼、夾帶內容;三模式 —— 讀取檔案(只讀前 256KB、
   maxBytes 截斷保護)、貼上文字(UTF-8 編碼後看位元組)、十六進位還原(parseHex 容許空白/換行/0x/逗號,
