@@ -989,6 +989,14 @@
   全零/::1/去前導零/最左零段優先/單零不壓/最長段/結尾段、IPv4-mapped 展開壓縮與分類、各類型、大寫與 zone 正規化、
   兩個::/組數不足過多/五位 hex/非 hex/IPv4 超界/::佔滿 8 組等非法,併入 npm test)。補上 cidr-calc(IPv4)缺口;
   零新相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-19
+- JSON 轉 Go struct(json-to-go,category=workshop):貼上 JSON 自動推斷對應 Go struct(含 `json:"..."` tag)——
+  巢狀物件用內嵌匿名 struct、陣列合併所有元素欄位取聯集、同鍵型別衝突退 interface{}、欄位名轉 Go 慣例 PascalCase
+  且常見縮寫(ID/URL/API/HTML…)整個大寫、整數 int 含小數 float64、null interface{};欄位對齊交給 gofmt。引擎
+  src/features/jsonToGo.ts(goFieldName 切 camelCase 與縮寫邊界、mergeValues 遞迴合併物件/陣列/純量、goType、
+  generateGo;純函式無 DOM)+ 回歸測試 scripts/test-jsontogo.mjs(欄位名 id/userId/html-url/api_key/數字開頭/
+  全符號、純量與各種陣列、簡單物件、巢狀內嵌 struct、物件陣列欄位聯集、型別衝突、頂層陣列與純量、null、解析錯誤、
+  rootName 正規化,併入 npm test)。與 json-to-ts(TypeScript)互補;零新相依、不上傳;
+  type-check + 全測試 + build 通過 — 2026-06-19
 
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
