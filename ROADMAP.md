@@ -22,6 +22,14 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
+- Unicode 正規化 / 比對(unicode-normalize,category=workshop):解決「兩段文字看起來一樣卻不相等」——
+  同一個字可能是單一碼點(é)或基底字＋組合符號(e+◌́),全形/半形與相容字(① ﬁ ㎏)也會讓比對失敗。
+  正規化模式給 NFC/NFD/NFKC/NFKD 四種形式(各標碼點/碼元數、是否改變);比對模式判斷兩段文字在哪種形式下
+  才相等並指出第一個差異碼點;順手統計組合符/全形/零寬字元。引擎 src/features/unicodeNormalize.ts
+  (normalizeAll/listCodePoints 正確處理代理對/analyzeText/compareStrings 純函式無 DOM)+ 回歸測試
+  scripts/test-unicodenormalize.mjs(35 筆:é 合成分解、NFKC 相容字 Ａ①ﬁ㎏→A1fikg、碼點清單與 emoji 代理對、
+  組合符/全形/零寬統計、比對各情形與差異定位,併入 npm test)。與 text-clean、char-inspect 互補;
+  零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-19
 - JSON 修復 / 寬鬆解析(json-repair,category=workshop):以小型遞迴下降解析器容忍常見不嚴謹 JSON 並還原
   成標準 JSON —— 單引號、未加引號的物件鍵、結尾多餘逗號、// 與 /* */ 註解、Python None/True/False、
   十六進位與底線數字、各種跳脫;NaN/Infinity/undefined 轉 null 確保輸出合法。結構嚴重損壞誠實報錯不亂修;
