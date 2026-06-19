@@ -757,6 +757,10 @@
   esbuild 打包後跑,併入 npm test)。與 markdown-table(GitHub/Notion 用)、data-convert(格式互轉)互補;
   零三方相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-19
 
+- 品質:補上身分證字號引擎(twId)回歸測試 scripts/test-twid.mjs(20 筆:有效樣本檢查碼「人工依規則
+  獨立算出」非反推、含特殊跳號字母 I=34/O=35/W=32/X=30/Z=33、改末碼即無效、格式/性別碼錯誤、
+  每前綴恰一個有效檢查碼、LETTER/REGION 對照表),併入 npm test;驗證 isValidTwId 正確 — 2026-06-19
+
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
       與本專案「精簡 + 自包含」原則不符,**跳過**(未來若改自架模型再評估)
