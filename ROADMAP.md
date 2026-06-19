@@ -1030,6 +1030,14 @@
   BOT_RE 爬蟲庫;純函式無 DOM)+ 回歸測試 scripts/test-uaparser.mjs(Chrome/Safari/Firefox/Edge/Opera/Samsung/
   iPhone/iPad/Android 手機與平板/CriOS/FxiOS/IE11/Googlebot/curl/空輸入/去空白,併入 npm test)。
   零相依、不上傳;type-check + build 通過 — 2026-06-19
+- Cookie 解析器(cookie-parse,category=workshop):把 Set-Cookie(回應)或 Cookie(請求)標頭拆成結構化欄位——
+  名稱、值、Domain、Path、Expires、Max-Age、Secure、HttpOnly、SameSite,白話說明存活時間(Max-Age 優先於 Expires、
+  皆無則為 session cookie),並附安全性提醒(SameSite=None 需 Secure、缺 HttpOnly/Secure/SameSite)。網頁除錯必備。
+  引擎 src/features/cookieParse.ts(parseCookieHeader 多組 name=value、parseSetCookie 拆名值與旗標/屬性並產生警告與
+  存活說明、humanDuration 秒轉天/小時/分;純函式無 DOM)+ 回歸測試 scripts/test-cookieparse.mjs(請求標頭多組/
+  Cookie: 前綴/值含等號/無值/空、Set-Cookie 各屬性與旗標、Set-Cookie: 前綴、SameSite=None 缺 Secure 警告與
+  缺 HttpOnly/Secure/SameSite 警告、session 說明、Max-Age 0/負刪除、Expires 轉 ISO、齊全無警告、空與只有屬性無名稱 null、
+  humanDuration 各情形,併入 npm test)。零新相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-19
 
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
