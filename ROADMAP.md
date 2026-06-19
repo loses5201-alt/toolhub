@@ -961,6 +961,15 @@
   #s12:not(FOO)、.foo :is(.bar,#baz)、:where、虛擬元素/類別、巢狀 :not/:has、複雜混合、連續 class/ID;
   compareSpec、splitTop 括號內逗號不切、rankSelectors 排序與同名次與逗號展開,併入 npm test)。零新相依、不上傳;
   type-check + 全測試 + build 通過 — 2026-06-19
+- Glob 樣式比對測試器(glob-tester,category=workshop):填 glob 樣式(每行一個)與要測的路徑,即時看
+  每個路徑符合哪些樣式,並顯示第一條樣式編譯出的正規表達式。驗證 tsconfig include/exclude、CI path filter、
+  .gitignore/.dockerignore 樣式對不對。語意採 minimatch 常見子集:星號(不跨 /)、雙星號 globstar(段邊界跨多層、
+  否則退化)、? 單字元、[abc] 字元集(範圍 a-z 與開頭 !/^ 取反)、{a,b} 巢狀擇一、反斜線跳脫、可不分大小寫。
+  引擎 src/features/globMatch.ts(translate 逐字元編譯成 regex、globstar before/afterSlash/atEnd 判定、matchBrace/
+  splitBrace 巢狀大括號、escapeLiteral 跳脫所有 metachar、globToRegExp/matchGlob/cleanPatterns(去空行與 #)/
+  testPaths 多樣式×多路徑;純函式無 DOM)+ 回歸測試 scripts/test-globmatch.mjs(星號不跨斜線、**/*.js 與 src/**
+  與 a/**/b 各情形、非段邊界 ** 退化、? 、字元集範圍與取反、{js,ts} 與巢狀大括號、字面點/加號/括號、反斜線跳脫、
+  nocase、cleanPatterns、testPaths 命中清單,併入 npm test)。零新相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-19
 
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
