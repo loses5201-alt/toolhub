@@ -727,6 +727,12 @@
   全程單調。色塊點擊複製、依明度自動切換深淺文字;輸出 CSS 變數 / Tailwind 設定 / JSON 一鍵複製。與 color-tools
   (色碼互轉 + 照片抽色)、contrast-check(對比)互補。零三方相依、不連網;type-check + build 通過 — 2026-06-19
 
+- 去純色背景 → 透明(bg-color-key,category=workshop):點圖吸取背景色,把白底/綠幕/純色背景變透明 PNG。
+  canvas 像素處理:RGB 歐式距離 ≤ 容差 → alpha 0,容差~容差+柔化帶內 → alpha 漸變(去鋸齒);過大圖先縮到
+  邊長 1800。即時(watch keyColor/容差/柔化)、棋盤格底襯顯示透明、顯示去除百分比。與 AI 去背(bg-remove,
+  需下載模型,適合人/毛髮/複雜背景)互補,這支免模型、即時,專攻純色背景(logo/掃描簽名印章/線稿/截圖)。
+  零三方相依、不上傳;type-check + build 通過 — 2026-06-19
+
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
       與本專案「精簡 + 自包含」原則不符,**跳過**(未來若改自架模型再評估)

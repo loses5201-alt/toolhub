@@ -531,6 +531,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/id-photo/Index.vue'),
   },
   {
+    id: 'bg-color-key',
+    name: '去純色背景 → 透明',
+    category: 'workshop',
+    description: '點一下背景色,把白底、綠幕、純色背景變透明,輸出透明 PNG —— 即時、免下載 AI 模型,最適合 logo、掃描的簽名/印章、線稿。全程在你瀏覽器,圖片不上傳。',
+    keywords: ['去背', '去白底', '去背景', '純色去背', '綠幕', '去綠幕', '透明背景', '退底', '摳圖', 'logo去背', '簽名去背', '印章', '線稿', 'chroma', 'png', '背景變透明', '吸色'],
+    icon: '🪄',
+    loader: () => import('@/tools/bg-color-key/Index.vue'),
+  },
+  {
     id: 'color-scale',
     name: '色階產生器',
     category: 'workshop',
