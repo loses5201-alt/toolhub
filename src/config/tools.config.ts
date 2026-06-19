@@ -531,6 +531,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/id-photo/Index.vue'),
   },
   {
+    id: 'color-scale',
+    name: '色階產生器',
+    category: 'workshop',
+    description: '從一個主色生出 50~950 的明暗色階(設計系統色板),一鍵複製成 CSS 變數 / Tailwind 設定 / JSON —— 純前端計算,不連網、不上傳。',
+    keywords: ['色階', '色板', '配色', '調色盤', 'palette', 'shade', 'tint', 'color scale', '主題色', '設計系統', 'tailwind', 'css變數', '深淺', '色票', '明暗', '50 900', 'design system'],
+    icon: '🌈',
+    loader: () => import('@/tools/color-scale/Index.vue'),
+  },
+  {
     id: 'svg-to-png',
     name: 'SVG → PNG / 點陣圖匯出',
     category: 'workshop',
