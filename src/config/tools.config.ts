@@ -531,6 +531,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/id-photo/Index.vue'),
   },
   {
+    id: 'text-table',
+    name: '等寬純文字表格',
+    category: 'workshop',
+    description: '把 CSV/TSV(可從 Excel 整塊複製貼上)轉成在等寬字型下對齊的純文字表格(框線 / ASCII / 簡潔),貼進純文字 email、程式碼註解、Slack、README —— 純前端,不上傳。',
+    keywords: ['純文字表格', 'ascii表格', 'ascii table', '等寬表格', '對齊', '文字表格', 'box drawing', '框線表格', 'plain text', 'csv轉表格', 'tsv', '程式碼註解', 'slack表格', 'readme', '終端機', '表格對齊'],
+    icon: '📐',
+    loader: () => import('@/tools/text-table/Index.vue'),
+  },
+  {
     id: 'dup-photos',
     name: '重複 / 相似照片偵測',
     category: 'workshop',

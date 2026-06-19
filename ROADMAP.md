@@ -749,6 +749,14 @@
   全平/漢明/hex/分群門檻/保留 id/近似距離小,esbuild 打包後跑,併入 npm test)。照片是隱私故全程不上傳;
   零三方相依;type-check + 全測試 + build 通過 — 2026-06-19
 
+- 等寬純文字表格(text-table,category=workshop):把 CSV/TSV(可從 Excel/試算表整塊貼上)轉成等寬字型下
+  對齊的純文字表格,貼進純文字 email、程式碼註解、Slack、README 程式碼區塊、終端機。引擎 src/features/textTable.ts
+  (displayWidth CJK 全形算 2、parseDelimited 自動偵測 TSV/CSV 含引號逸出/欄內逗號換行、toTextTable 三種樣式
+  grid 框線/ascii +-|/simple 空格+表頭虛線、純數字欄右對齊,皆純函式無 DOM)+ 回歸測試 scripts/test-texttable.mjs
+  (22 筆:寬度/CJK/CSV 引號換行跳脫/TSV 偵測/三樣式邊框/每行等寬對齊/數字右對齊/短列補齊/無表頭/空輸入,
+  esbuild 打包後跑,併入 npm test)。與 markdown-table(GitHub/Notion 用)、data-convert(格式互轉)互補;
+  零三方相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-19
+
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
       與本專案「精簡 + 自包含」原則不符,**跳過**(未來若改自架模型再評估)
