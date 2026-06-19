@@ -786,6 +786,14 @@
   序列化:根鍵在前區段在後、僅前後空白或含 ;#= 才加引號(內部空白不需,INI 讀到行尾)、數字布林轉字串;
   限一層區段,JSON 巢狀過深/陣列報錯。回歸測試 scripts/test-ini.mjs(25 筆,esbuild 打包後跑,併入 npm test)。
   與 dotenv-convert、json-yaml 互補;設定常含金鑰密碼故不上傳;type-check + 全測試 + build 通過 — 2026-06-19
+- 命名格式轉換(case-convert,category=workshop):把變數名/欄位名/詞句在 13 種命名慣例間互轉 ——
+  camelCase/PascalCase/snake_case/CONSTANT_CASE/kebab-case/COBOL-CASE/Train-Case/dot.case/path/case/
+  Title Case/Sentence case/全小寫/全大寫;自動辨識來源格式並拆字(splitWords 處理 camelCase 邊界、
+  縮寫接一般字 HTMLParser→HTML Parser、明確分隔符 _-./:\ 合併、字母接數字不拆),支援多行批次逐行轉換、
+  空白行原樣保留。一次列出全部格式各附複製鈕。引擎 src/features/caseConvert.ts(splitWords/joinWords/
+  convertCase/convertLines/convertAll 純函式無 DOM)+ 回歸測試 scripts/test-caseconvert.mjs(43 筆:拆字各情境/
+  13 格式/跨格式互轉/縮寫正規化/空輸入/批次,esbuild 打包後跑,併入 npm test)。與 line-tools/text-clean 互補
+  (這支專做命名慣例);零新相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-19
 
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
