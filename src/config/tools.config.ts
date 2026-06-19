@@ -306,6 +306,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/escape-text/Index.vue'),
   },
   {
+    id: 'html-to-text',
+    name: 'HTML 轉純文字',
+    category: 'workshop',
+    description: '把從網頁、HTML 電子報複製來的內容去掉標籤、解開 &amp;amp; 等實體,保留段落換行,洗成乾淨純文字 —— 全程在你瀏覽器,不連網、不上傳。',
+    keywords: ['html', '純文字', '去標籤', '去除html', '移除標籤', 'strip', 'tag', '網頁轉文字', 'html轉文字', '實體', 'entity', '解碼', '電子報', '清理', '貼上', 'plain text', '抓文字', '去html', '原始碼'],
+    icon: '📰',
+    loader: () => import('@/tools/html-to-text/Index.vue'),
+  },
+  {
     id: 'timestamp-convert',
     name: 'Unix 時間戳記轉換',
     category: 'workshop',

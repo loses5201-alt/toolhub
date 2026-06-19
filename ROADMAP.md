@@ -74,6 +74,14 @@
   (displayWidth/tableToMarkdown/splitRow/markdownToTable 純函式無 DOM,複用 tableClean 的 Table)+ 回歸測試
   scripts/test-markdowntable.mjs(22 筆:行數/分隔列/逸出/換行/對齊/無外框/對齊偵測/還原/補裁/報錯/往返一致含中文,
   esbuild 多入口打包後跑,併入 npm test)。補足 data-convert 不含 Markdown 的缺口;不上傳;type-check + 全測試 + build 通過 — 2026-06-17
+- HTML 轉純文字(html-to-text,category=workshop):把網頁/HTML 電子報/後台複製來的內容去標籤、解 HTML 實體、
+  保留段落換行,洗成乾淨純文字。先移除註解與 script/style 整塊;<br>/<hr> 與區塊結束標籤(p/div/li/h1-6/tr…)轉換行、
+  <li> 前加項目符號、td/th 以 Tab 分隔;去掉其餘標籤「後」才解實體(避免 &lt;script&gt; 被當標籤);
+  decodeEntities 支援具名(常用 30 個)+ 十進位 &#39; + 十六進位 &#x27;,未知具名/非實體 & 原樣保留;
+  正規化只收斂多重空白(保留 Tab)、逐行 trim、壓掉 3+ 空行。引擎 src/features/htmlToText.ts
+  (htmlToText/decodeEntities 純函式無 DOM)+ 回歸測試 scripts/test-htmltotext.mjs(33 筆:具名/數值/中文實體/
+  未知保留/去標籤/換行/script style 註解移除/清單/巢狀/Tab 分隔/&lt;script&gt; 不誤判/空字串/trim,併入 npm test)。
+  零三方相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-19
 - 文字跳脫 / 還原(escape-text,category=workshop):四模式 —— 文字→JSON 字串(=JSON.stringify)、
   文字→程式碼跳脫(最小必要、可選引號樣式)、文字→\\uXXXX(逐 UTF-16 碼元轉非 ASCII 與控制字元、反斜線也跳脫
   確保可逆、代理對自然成兩個 \\u)、跳脫→原文(支援 \\n\\r\\t\\b\\f\\v\\0\\\\\\"\\'\\`\\/、\\xXX、\\uXXXX、
