@@ -22,6 +22,15 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
+- JSON 修復 / 寬鬆解析(json-repair,category=workshop):以小型遞迴下降解析器容忍常見不嚴謹 JSON 並還原
+  成標準 JSON —— 單引號、未加引號的物件鍵、結尾多餘逗號、// 與 /* */ 註解、Python None/True/False、
+  十六進位與底線數字、各種跳脫;NaN/Infinity/undefined 轉 null 確保輸出合法。結構嚴重損壞誠實報錯不亂修;
+  可輸出美化或單行。整理 LLM 輸出、JS 物件、log 片段最好用。引擎 src/features/jsonRepair.ts
+  (Parser 類別 skip/value/object/key/array/string/number/literal + sanitize + repairJson 純函式無 DOM)
+  + 回歸測試 scripts/test-jsonrepair.mjs(43 筆:標準不變/單引號/未加引號鍵含特殊字元/各層結尾逗號/
+  行區塊開頭註解/Python 字面量/NaN 與 Infinity/hex 與底線與前導點數字/跳脫含 unicode/kitchen sink/深巢狀/
+  輸出格式/6 種錯誤/與 JSON.parse 對拍,併入 npm test)。與 json-to-ts、json-schema 互補;
+  零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-19
 - Markdown 目錄產生器(markdown-toc,category=workshop):從 Markdown 標題自動產生帶錨點連結的目錄(TOC),
   錨點對齊 github-slugger(先去標點、每個空白逐一換連字號、保留中日韓與底線、重複標題加 -1/-2)貼到
   GitHub 可正確跳轉。略過圍欄程式碼區塊內的 #(``` 與 ~~~)、處理標題行內粗體/連結/行內碼、要求 # 後有空白;
