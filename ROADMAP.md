@@ -74,6 +74,14 @@
   (displayWidth/tableToMarkdown/splitRow/markdownToTable 純函式無 DOM,複用 tableClean 的 Table)+ 回歸測試
   scripts/test-markdowntable.mjs(22 筆:行數/分隔列/逸出/換行/對齊/無外框/對齊偵測/還原/補裁/報錯/往返一致含中文,
   esbuild 多入口打包後跑,併入 npm test)。補足 data-convert 不含 Markdown 的缺口;不上傳;type-check + 全測試 + build 通過 — 2026-06-17
+- 隨機 ID 產生器(id-gen,category=workshop):UUID v4 / ULID / Nano ID 一次大量產生(上限 10000),
+  全用 crypto.getRandomValues 密碼學等級亂數。UUID 手動設 version=4、variant=10xx 位元並可選大寫;
+  ULID = 10 字 Crockford Base32 時間(高位在前可字典序排序、不含易混淆 I/L/O/U)+ 16 字亂數(256%32=0 無偏差);
+  Nano ID 預設 21 字 URL-safe、長度與字元集可調,用拒絕取樣(limit=256-256%len)避免取模偏差。
+  引擎 src/features/idGen.ts(uuidV4/isValidUuidV4/ulid/isValidUlid/encodeTimeBase32/nanoid/generate 純函式)
+  + 回歸測試 scripts/test-idgen.mjs(33 筆:UUID 格式/版本/variant/2000 筆不重複、ULID 長度/字元集/可排序/
+  encodeTime 已知值、Nano ID 長度/自訂字元集/拒絕短字元集/二元分布大致均勻、批次上下限,併入 npm test)。
+  與 password-gen(密碼)區隔。零三方相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-19
 - HTML 轉純文字(html-to-text,category=workshop):把網頁/HTML 電子報/後台複製來的內容去標籤、解 HTML 實體、
   保留段落換行,洗成乾淨純文字。先移除註解與 script/style 整塊;<br>/<hr> 與區塊結束標籤(p/div/li/h1-6/tr…)轉換行、
   <li> 前加項目符號、td/th 以 Tab 分隔;去掉其餘標籤「後」才解實體(避免 &lt;script&gt; 被當標籤);

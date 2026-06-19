@@ -315,6 +315,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/html-to-text/Index.vue'),
   },
   {
+    id: 'id-gen',
+    name: '隨機 ID 產生器',
+    category: 'workshop',
+    description: 'UUID v4、ULID(含時間可排序)、Nano ID 一次大量產生,用密碼學等級亂數 —— 全程在本機產生,不連網、不上傳、不記錄(線上產生器可能偷記你的 ID)。',
+    keywords: ['uuid', 'guid', 'ulid', 'nanoid', 'nano id', 'id', '識別碼', '唯一識別碼', '隨機id', '產生id', '主鍵', 'primary key', '訂單編號', '亂數id', 'v4', '識別字串', 'token', '隨機字串', '產生器'],
+    icon: '🆔',
+    loader: () => import('@/tools/id-gen/Index.vue'),
+  },
+  {
     id: 'timestamp-convert',
     name: 'Unix 時間戳記轉換',
     category: 'workshop',
