@@ -27,6 +27,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/image-studio/Index.vue'),
   },
   {
+    id: 'text-card',
+    name: '社群文字卡 / 語錄圖',
+    category: 'workshop',
+    description: '把一段文字做成漂亮的圖片卡片(IG 貼文/限動、Threads、FB、公告、金句)—— 字級自動填滿版面、中英自動斷行,選好尺寸即套各社群版位。全程在你瀏覽器繪製,文字不上傳、無廣告、無浮水印、免開 Canva。',
+    keywords: ['文字卡', '語錄', '語錄圖', '金句', '金句圖', '文字圖', '文字轉圖片', '文字卡片', '圖卡', '貼文圖', '公告圖', '海報', 'ig', 'instagram', '限動', 'threads', 'facebook', '社群', '引言', 'quote', 'text image', '做圖', '排版', '標語'],
+    icon: '🗯️',
+    loader: () => import('@/tools/text-card/Index.vue'),
+  },
+  {
     id: 'signature-maker',
     name: '手寫簽名製作',
     category: 'workshop',
