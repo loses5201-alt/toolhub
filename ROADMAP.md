@@ -709,6 +709,13 @@
   Notepad++/HandBrake/Audacity 加 github 欄位(release tag 乾淨),併入每日版本自動更新;Bitwarden/Brave/Thunderbird
   因 release channel 較雜暫不自動抓版本。純資料(public/data/software.json),JSON 驗證(無重複 id、URL 合法)通過 — 2026-06-19
 
+- Base64 / Data URI 圖片互轉(image-base64,category=workshop):雙向。編碼把圖片檔(FileReader.readAsDataURL)
+  轉成 data URI,附純 Base64、HTML `<img>`、CSS `background-image`、Markdown 四種現成片段一鍵複製,顯示原檔→
+  Data URI 大小(說明 Base64 放大約 33%)、超過 10KB 提醒大圖不宜內嵌(無法快取);解碼貼上 data URI 或純 Base64
+  (自動清換行/空白、容許有無 data: 前綴),以 atob 還原位元組後依「魔術位元組」辨識真實格式(PNG/JPG/GIF/WebP/
+  BMP/SVG,不信任宣告的 MIME),預覽並用正確副檔名下載;非圖片或無效 Base64 給明確錯誤。零三方相依、不上傳
+  (線上 Base64 圖片工具多半要上傳又夾廣告);type-check + build 通過 — 2026-06-19
+
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
       與本專案「精簡 + 自包含」原則不符,**跳過**(未來若改自架模型再評估)

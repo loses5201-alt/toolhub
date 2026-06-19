@@ -531,6 +531,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/id-photo/Index.vue'),
   },
   {
+    id: 'image-base64',
+    name: 'Base64 / Data URI 圖片互轉',
+    category: 'workshop',
+    description: '把圖片轉成 Base64 / Data URI 字串(內嵌進 HTML/CSS/Markdown,附現成片段),或把 Data URI / Base64 還原成可下載的圖片 —— 全程在你瀏覽器,圖片不上傳。',
+    keywords: ['base64', 'data uri', 'datauri', 'data url', '圖片轉base64', 'base64轉圖片', '內嵌圖片', '圖片編碼', '圖片解碼', '轉字串', 'img', 'css background', 'inline image', '簽名檔', 'email圖片', '編碼', '解碼'],
+    icon: '🔤',
+    loader: () => import('@/tools/image-base64/Index.vue'),
+  },
+  {
     id: 'favicon-gen',
     name: '網站圖示 / Favicon 產生器',
     category: 'workshop',
