@@ -378,6 +378,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/hmac/Index.vue'),
   },
   {
+    id: 'markdown-toc',
+    name: 'Markdown 目錄產生器',
+    category: 'workshop',
+    description: '從 Markdown 標題自動產生帶錨點連結的目錄(TOC),錨點採 GitHub 風格 slug(保留中文、重複自動加序號),貼回 README / Issue / Notion / HackMD 即可點擊跳轉。會略過程式碼區塊;全程在你瀏覽器,不上傳。',
+    keywords: ['markdown', 'toc', '目錄', 'table of contents', '大綱', '索引', '錨點', 'anchor', 'readme', '文件', 'github', 'notion', 'hackmd', '標題', 'heading', 'slug', 'md 目錄', '自動目錄'],
+    icon: '🔖',
+    loader: () => import('@/tools/markdown-toc/Index.vue'),
+  },
+  {
     id: 'url-parse',
     name: '網址解析 / 查詢字串編輯',
     category: 'workshop',
