@@ -22,6 +22,15 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
+- TOTP 兩步驟驗證碼產生器(totp,category=workshop):輸入 2FA 設定金鑰(base32)或 otpauth:// 連結,
+  在本機即時算出當下一次性驗證碼與倒數秒數(RFC 6238,等同 Google Authenticator/Authy),可選 6/7/8 位、
+  30/60 秒週期、SHA-1/256/512。貼上 otpauth:// 自動帶入參數;每秒刷新進度條(≤5 秒轉紅)、點數字複製。
+  契合「只有本系統能乾淨+離線達成」DNA:密鑰是高敏資訊,絕不該貼到一般網站,強調不連網/不上傳/不儲存。
+  引擎 src/features/totp.ts(base32Decode RFC4648/counterToBytes 大端 8 byte/truncate RFC4226 動態截斷/
+  hotp/totp/parseOtpauth;HMAC 用 crypto.subtle,瀏覽器與 Node 22 皆有)+ 回歸測試 scripts/test-totp.mjs
+  (45 筆:base32 已知值與容錯、RFC 4226 HOTP counter 0–9 全部官方向量、RFC 6238 TOTP SHA1 六組與 SHA256
+  官方向量交叉驗證、remaining/counter、6 位預設、parseOtpauth 解析與拒絕 hotp/缺 secret,併入 npm test)。
+  零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-19
 - JSON Schema 產生器(json-schema,category=workshop):貼上範例 JSON 推斷出 JSON Schema(draft-07)。
   陣列合併所有元素結構;物件陣列裡只有部分樣本才有的鍵自動從 required 移除(取交集);integer+number
   推成 number;不同型別合成 anyOf(攤平去重);可選偵測 email/date/date-time/uri/uuid 字串格式;可複製/下載 .json。
