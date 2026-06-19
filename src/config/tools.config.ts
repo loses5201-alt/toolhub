@@ -351,6 +351,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/chmod-calc/Index.vue'),
   },
   {
+    id: 'json-schema',
+    name: 'JSON Schema 產生器',
+    category: 'workshop',
+    description: '貼上範例 JSON,自動推斷出 JSON Schema(draft-07)—— 陣列合併所有元素結構、物件 required 取交集、可偵測 email/date/uri/uuid 格式。用於 API 合約與資料驗證;全程在你瀏覽器,不上傳。',
+    keywords: ['json schema', 'jsonschema', 'schema', '結構', '驗證', 'validation', 'draft-07', 'api', '合約', 'contract', 'json', '產生 schema', '推斷', 'infer', 'openapi', '資料驗證', 'json 轉 schema'],
+    icon: '📐',
+    loader: () => import('@/tools/json-schema/Index.vue'),
+  },
+  {
     id: 'url-parse',
     name: '網址解析 / 查詢字串編輯',
     category: 'workshop',
