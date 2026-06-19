@@ -360,6 +360,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/json-schema/Index.vue'),
   },
   {
+    id: 'totp',
+    name: 'TOTP 兩步驟驗證碼',
+    category: 'workshop',
+    description: '輸入 2FA 設定金鑰(base32)或 otpauth:// 連結,在本機算出當下的一次性驗證碼與倒數秒數(RFC 6238,等同 Google Authenticator)。手機不在身邊時臨時登入用 —— 密鑰是高度敏感資訊,本工具全程在你瀏覽器計算、不連網、不上傳、不儲存。',
+    keywords: ['totp', '2fa', '兩步驟', '兩步驟驗證', '二階段驗證', '驗證碼', '一次性密碼', 'otp', 'hotp', 'google authenticator', 'authenticator', 'authy', 'otpauth', '動態密碼', 'mfa', '雙重認證', 'rfc6238', '驗證器', 'base32'],
+    icon: '🔑',
+    loader: () => import('@/tools/totp/Index.vue'),
+  },
+  {
     id: 'url-parse',
     name: '網址解析 / 查詢字串編輯',
     category: 'workshop',
