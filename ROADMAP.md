@@ -22,6 +22,14 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
+- CIDR / 子網計算機(cidr-calc,category=workshop):輸入 IPv4 CIDR(192.168.1.10/24)算出網路位址、
+  廣播位址、可用主機範圍、子網路遮罩、萬用遮罩、可用/總位址數,並判斷私有位址(RFC 1918)與 A/B/C 等級。
+  支援 /n、純位址(預設 /32)、遮罩寫法(192.168.1.0 255.255.255.0)三種輸入;正確處理 /31 點對點
+  (RFC 3021 兩端皆可用)與 /32 單一位址、拒絕非連續遮罩(255.0.255.0)。引擎 src/features/cidr.ts
+  (parseIPv4 擋前導零/越界、octetsToInt/intToIp/ipToInt/parseCidr/prefixToMask/maskToPrefix/computeSubnet
+  純函式無 DOM,32 位元無號運算)+ 回歸測試 scripts/test-cidr.mjs(78 筆:解析驗證/整數往返/遮罩往返/
+  非連續遮罩拒絕/各字首子網實算/私有與等級判斷/邊界 /0 /16 /24 /30 /31 /32,併入 npm test)。
+  設定路由器/防火牆/伺服器用;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-19
 - 文字雜湊值產生器(text-hash,category=workshop):把一段文字算出 MD5 / SHA-1 / SHA-256 / SHA-384 /
   SHA-512 / CRC32,即時重算、可大寫顯示、點一下複製。SHA 家族用 crypto.subtle;MD5 與 CRC32 瀏覽器
   Web Crypto 不提供,改以純函式實作(RFC 1321 MD5 with padding 邊界處理 + 64-bit 長度;IEEE 802.3 CRC32 查表)。
