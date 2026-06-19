@@ -761,6 +761,11 @@
   獨立算出」非反推、含特殊跳號字母 I=34/O=35/W=32/X=30/Z=33、改末碼即無效、格式/性別碼錯誤、
   每前綴恰一個有效檢查碼、LETTER/REGION 對照表),併入 npm test;驗證 isValidTwId 正確 — 2026-06-19
 
+- 品質:搜尋排序邏輯從 finder.ts 抽到純函式 finderRank.ts(rankTools(query, list),無 Vue/config 相依),
+  findTools 行為不變(僅注入完整清單)。新增回歸測試 scripts/test-finderrank.mjs(12 筆:空查詢/無命中/
+  關鍵字命中/名稱>關鍵字>說明 權重/整句 +5/遞減排序/大小寫不敏感/多詞/純說明低分/不變更原清單),
+  併入 npm test。讓首頁關鍵字導引的排序可被測試保護 — 2026-06-19
+
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
       與本專案「精簡 + 自包含」原則不符,**跳過**(未來若改自架模型再評估)
