@@ -693,6 +693,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/url-clean/Index.vue'),
   },
   {
+    id: 'punycode',
+    name: 'Punycode / IDN 網域檢視',
+    category: 'anti-scam',
+    description: '把 xn-- 開頭的網域解回真正顯示的文字,揪出用西里爾/希臘字母假冒英文(例 apple→аpple)的形近字釣魚網域 —— 全程在你瀏覽器解析,不連網、不上傳。',
+    keywords: ['punycode', 'idn', 'xn--', '網域', '網址', '釣魚', '假網站', '假冒', '形近字', '同形異字', 'homograph', '西里爾', 'cyrillic', '混淆', 'confusable', '國際化網域', '解碼', '看穿', '假網域', '詐騙網址', 'idna'],
+    icon: '🌐',
+    loader: () => import('@/tools/punycode/Index.vue'),
+  },
+  {
     id: 'sms-check',
     name: '詐騙簡訊檢查',
     category: 'anti-scam',

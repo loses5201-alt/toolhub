@@ -74,6 +74,14 @@
   (displayWidth/tableToMarkdown/splitRow/markdownToTable 純函式無 DOM,複用 tableClean 的 Table)+ 回歸測試
   scripts/test-markdowntable.mjs(22 筆:行數/分隔列/逸出/換行/對齊/無外框/對齊偵測/還原/補裁/報錯/往返一致含中文,
   esbuild 多入口打包後跑,併入 npm test)。補足 data-convert 不含 Markdown 的缺口;不上傳;type-check + 全測試 + build 通過 — 2026-06-17
+- Punycode / IDN 網域檢視(punycode,category=anti-scam):把 xn-- 網域解回真正 Unicode、揪出用西里爾/希臘
+  字母假冒英文的形近字釣魚網域(延續 anti-scam 第二支柱)。自行實作 RFC 3492 Punycode 編解碼(瀏覽器無內建):
+  adapt/basicToDigit/digitToBasic/punyEncode/punyDecode,含溢位防護;labelToUnicode/labelToAscii/domainToUnicode/
+  domainToAscii 逐標籤處理、解碼失敗原樣保留;detectScripts 依碼點範圍分類 10 種文字系統,analyzeDomain 標出
+  拉丁與西里爾/希臘混用(mixedConfusable)與整體 risky。引擎 src/features/punycode.ts(純函式無 DOM)+ 回歸測試
+  scripts/test-punycode.mjs(以 Node 內建 punycode 模組為 oracle 交叉驗證:已知向量 mañana/münchen/bücher/中日韓/
+  俄希/emoji + 300 組隨機標籤 encode 與 oracle 一致且可往返、網域層級、detectScripts、analyzeDomain 風險偵測,
+  共 50+ 筆,併入 npm test)。零三方相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-19
 - 隨機 ID 產生器(id-gen,category=workshop):UUID v4 / ULID / Nano ID 一次大量產生(上限 10000),
   全用 crypto.getRandomValues 密碼學等級亂數。UUID 手動設 version=4、variant=10xx 位元並可選大寫;
   ULID = 10 字 Crockford Base32 時間(高位在前可字典序排序、不含易混淆 I/L/O/U)+ 16 字亂數(256%32=0 無偏差);
