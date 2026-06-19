@@ -74,6 +74,13 @@
   (displayWidth/tableToMarkdown/splitRow/markdownToTable 純函式無 DOM,複用 tableClean 的 Table)+ 回歸測試
   scripts/test-markdowntable.mjs(22 筆:行數/分隔列/逸出/換行/對齊/無外框/對齊偵測/還原/補裁/報錯/往返一致含中文,
   esbuild 多入口打包後跑,併入 npm test)。補足 data-convert 不含 Markdown 的缺口;不上傳;type-check + 全測試 + build 通過 — 2026-06-17
+- 進位轉換器(base-convert,category=workshop):二/八/十/十六進位一次互轉 + 任意 2–36 進位,用 BigInt 運算,
+  64 位元以上超大整數不像 parseInt 失準(64 位元全 1 = 18446744073709551615 實測正確)。parseInBase 容許開頭
+  正負號、字串中空白/底線分組、與該進位相符的 0b/0o/0x 前綴,任一字元超界即報錯;toBase 用 BigInt 除餘輸出小寫
+  (HEX 顯示轉大寫);convertViews 一次給四種、groupBinary 二進位每 4 位右起分組、bitLength 算位元長度。
+  引擎 src/features/baseConvert.ts(digitValue/parseInBase/toBase/convertViews/groupBinary/bitLength 純函式無 DOM)
+  + 回歸測試 scripts/test-baseconvert.mjs(45 筆:各進位/前綴/分組/正負號/錯誤處理/超大整數不失真/來回一致 6 種進位,
+  併入 npm test)。零三方相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-19
 - 文字資料抽取(data-extract,category=workshop):從一大段雜亂文字(轉寄信、文件、PDF 複製文字、貼上網頁)
   一次抓出 Email、網址、台灣手機、有效統一編號,各自去重(email 忽略大小寫、手機正規化成 09 開頭 10 碼)。
   統編複用既有 isValidVat 做檢查碼驗證 → 高精度不誤抓;網址只吃 RFC 3986 ASCII 安全字元(遇中文即停)

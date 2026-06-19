@@ -279,6 +279,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/regex-tester/Index.vue'),
   },
   {
+    id: 'base-convert',
+    name: '進位轉換器',
+    category: 'workshop',
+    description: '二進位、八進位、十進位、十六進位一次互轉,還支援任意 2–36 進位 —— 用 BigInt 運算,64 位元以上超大整數也不失真。全程在你瀏覽器計算,不上傳。',
+    keywords: ['進位', '進位轉換', '二進位', '十六進位', '八進位', '十進位', 'binary', 'hex', 'hexadecimal', 'octal', 'decimal', 'bin', 'oct', 'dec', '0x', '0b', 'base', '基底', '位元', 'bit', '轉換', '進制', '進制轉換', '36進位', 'base36', 'base32'],
+    icon: '🔢',
+    loader: () => import('@/tools/base-convert/Index.vue'),
+  },
+  {
     id: 'timestamp-convert',
     name: 'Unix 時間戳記轉換',
     category: 'workshop',
