@@ -741,6 +741,14 @@
   回歸測試 scripts/test-dotenv.mjs(33 筆,esbuild 打包後跑,併入 npm test)。設定常含金鑰密碼故全程不上傳;
   零三方相依;type-check + 全測試 + build 通過 — 2026-06-19
 
+- 重複 / 相似照片偵測(dup-photos,category=workshop):一次多選照片,用感知雜湊(dHash)找重複/近似圖,
+  幫清理相簿。引擎 src/features/imageHash.ts(toGray luma 轉灰階、dHash 9×8 取樣比較相鄰亮度得 64 位元、
+  hamming 漢明距離、bitsToHex、clusterByHash 貪婪分群,皆純函式無 DOM);元件以 canvas 把圖縮 9×8 灰階算雜湊,
+  依「寬鬆度」(漢明門檻 0~20)即時分群,只列出 ≥2 張的相似群,標「保留建議」並顯示檔名/大小。改尺寸/重存/
+  輕壓縮的同張照片也找得到(非僅完全相同檔)。回歸測試 scripts/test-imagehash.mjs(17 筆:灰階/漸層全 1 全 0/
+  全平/漢明/hex/分群門檻/保留 id/近似距離小,esbuild 打包後跑,併入 npm test)。照片是隱私故全程不上傳;
+  零三方相依;type-check + 全測試 + build 通過 — 2026-06-19
+
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
       與本專案「精簡 + 自包含」原則不符,**跳過**(未來若改自架模型再評估)

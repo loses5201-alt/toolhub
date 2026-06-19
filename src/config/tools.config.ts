@@ -531,6 +531,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/id-photo/Index.vue'),
   },
   {
+    id: 'dup-photos',
+    name: '重複 / 相似照片偵測',
+    category: 'workshop',
+    description: '一次選多張照片,用感知雜湊找出重複或近似(改過尺寸、重新存檔、輕微壓縮)的照片,幫你清理相簿 —— 全程在你瀏覽器比對,照片不上傳。',
+    keywords: ['重複照片', '相似照片', '找重複', '重複圖片', '清理相簿', '整理照片', '去重', '重複檔案', 'duplicate', '近似圖', '感知雜湊', 'phash', 'dhash', '相似度', '照片整理', '釋放空間'],
+    icon: '🖼️',
+    loader: () => import('@/tools/dup-photos/Index.vue'),
+  },
+  {
     id: 'dotenv-convert',
     name: '.env ↔ JSON / shell 轉換',
     category: 'workshop',
