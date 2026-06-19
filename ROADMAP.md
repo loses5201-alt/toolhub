@@ -733,6 +733,14 @@
   需下載模型,適合人/毛髮/複雜背景)互補,這支免模型、即時,專攻純色背景(logo/掃描簽名印章/線稿/截圖)。
   零三方相依、不上傳;type-check + build 通過 — 2026-06-19
 
+- .env ↔ JSON / shell 轉換(dotenv-convert,category=workshop):雙向。.env→JSON 物件與 shell export;
+  JSON 物件→.env。引擎 src/features/dotenv.ts(parseDotenv/stringifyDotenv/stringifyShell/pairsToJson/
+  jsonToPairs 純函式無 DOM):解析支援 # 註解、空白行、export 前綴、單引號字面值、雙引號 \n\t\r\\\" 跳脫、
+  無引號值去行內 # 註解、同名後者覆蓋、不合法鍵名/未結束引號逐行報錯;序列化僅在含空白/#/引號/換行時加雙引號
+  並跳脫;shell 以單引號 '\'' 安全脫逸;JSON→.env 數字/布林轉字串、null 轉空、巢狀/陣列/壞語法報錯。
+  回歸測試 scripts/test-dotenv.mjs(33 筆,esbuild 打包後跑,併入 npm test)。設定常含金鑰密碼故全程不上傳;
+  零三方相依;type-check + 全測試 + build 通過 — 2026-06-19
+
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
       與本專案「精簡 + 自包含」原則不符,**跳過**(未來若改自架模型再評估)

@@ -531,6 +531,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/id-photo/Index.vue'),
   },
   {
+    id: 'dotenv-convert',
+    name: '.env ↔ JSON / shell 轉換',
+    category: 'workshop',
+    description: '把 .env 設定檔轉成 JSON 物件或 shell export,反之亦然;支援註解、引號與跳脫 —— .env 常含金鑰密碼,全程在你瀏覽器處理,不上傳。',
+    keywords: ['env', '.env', 'dotenv', '環境變數', 'environment', 'json', 'shell', 'export', '設定檔', 'config', '金鑰', '密碼', 'ci', '互轉', '轉換'],
+    icon: '🔑',
+    loader: () => import('@/tools/dotenv-convert/Index.vue'),
+  },
+  {
     id: 'bg-color-key',
     name: '去純色背景 → 透明',
     category: 'workshop',
