@@ -444,6 +444,13 @@
   (純函式、只用標準 URL:cleanUrl/unwrapRedirect/processUrl)+ 回歸測試 scripts/test-urlclean.mjs
   (24 筆:清理/大小寫/多層巢狀/safelinks/自指不誤拆/整合,併入 npm test)。零三方相依;type-check + test + build 通過 — 2026-06-17
 
+- ISBN 檢核 / 轉換(isbn-check,category=life):驗證書籍 ISBN-10(mod 11 加權,餘 10 寫 X)與 ISBN-13
+  (EAN-13 mod 10 交替 1/3 權重)檢查碼,並互轉(978 開頭可轉 ISBN-10,979 不可、明確告知)。單筆分析給兩種
+  格式;批次對整批書單標出無效;檢查碼錯時提示正確值;聲明檢查碼正確≠真有此書。引擎 src/features/isbn.ts
+  (normalizeIsbn/isbn10CheckDigit/isbn13CheckDigit/isValidIsbn10/13/isbn10to13/isbn13to10/analyzeIsbn 純函式無 DOM)
+  + 回歸測試 scripts/test-isbn.mjs(38 筆:真實 ISBN 含 K&R 與末位 X、檢查碼計算、錯一碼/長度/非數字、
+  10↔13 互轉與往返、979 不可轉、analyzeIsbn 各情形,併入 npm test)。與 barcode-generate 互補;
+  零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-19
 - 金額轉國字大寫(num-to-chinese,category=life):把數字金額轉中文大寫(壹貳參…拾佰仟萬億兆、元角分整),
   支票/本票/合約/收據填寫防竄改用。可含千分位逗號、四捨五入到分(進位用 BigInt 避免大數誤差)、可到兆級;
   正確處理節內與節間的零(零壹佰、壹億零壹、收斂雙零、去尾零)、角為零分不為零補零。輸出「金額大寫(新臺幣…元整)」
