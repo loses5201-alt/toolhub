@@ -324,6 +324,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/hex-view/Index.vue'),
   },
   {
+    id: 'text-hash',
+    name: '文字雜湊值',
+    category: 'workshop',
+    description: '把一段文字算出 MD5 / SHA-1 / SHA-256 / SHA-384 / SHA-512 / CRC32 —— MD5、CRC32 也能離線算(瀏覽器內建加密不提供)。比對內容、產生識別碼用;全程在你瀏覽器,連密碼也不上傳。',
+    keywords: ['雜湊', '雜湊值', 'hash', 'md5', 'sha', 'sha1', 'sha256', 'sha512', 'sha-256', 'crc32', 'crc', '校驗', '檢查碼', 'checksum', '加密', '摘要', 'digest', '指紋', 'fingerprint', '文字雜湊', '比對', 'etag'],
+    icon: '#️⃣',
+    loader: () => import('@/tools/text-hash/Index.vue'),
+  },
+  {
     id: 'url-parse',
     name: '網址解析 / 查詢字串編輯',
     category: 'workshop',
