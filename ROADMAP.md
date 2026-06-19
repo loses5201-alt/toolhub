@@ -22,6 +22,14 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
+- Markdown 目錄產生器(markdown-toc,category=workshop):從 Markdown 標題自動產生帶錨點連結的目錄(TOC),
+  錨點對齊 github-slugger(先去標點、每個空白逐一換連字號、保留中日韓與底線、重複標題加 -1/-2)貼到
+  GitHub 可正確跳轉。略過圍欄程式碼區塊內的 #(``` 與 ~~~)、處理標題行內粗體/連結/行內碼、要求 # 後有空白;
+  可選有序/無序清單、限定收錄層級(如只收 H2–H3)、相對最小層級縮排。引擎 src/features/markdownToc.ts
+  (stripInline/githubSlug/dedupeSlug/parseHeadings/buildToc 純函式無 DOM)+ 回歸測試 scripts/test-markdowntoc.mjs
+  (41 筆:行內去除/slug 標點與 CJK 與底線保留與 C++→c--c 邊界/重複序號/兩種圍欄略過/尾端 #/需空白/
+  相對縮排/有序/層級過濾/空,併入 npm test)。與 markdown-preview、markdown-table 互補;
+  零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-19
 - HMAC / Webhook 簽章驗證(hmac,category=workshop):用密鑰對訊息算 HMAC-SHA1/256/512(輸出十六進位
   + Base64),驗證 webhook 是否真來自服務方(GitHub X-Hub-Signature-256 / Stripe / LINE Messaging API)。
   可貼收到的簽章定時比對(safeEqualHex 常數時間、大小寫不敏感、自動忽略 sha256= 前綴)。引擎
