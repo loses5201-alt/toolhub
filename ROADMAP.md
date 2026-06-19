@@ -932,6 +932,15 @@
   scripts/test-cubicbezier.mjs(linear y===x、各範本端點 0/1、ease-in/out 與對角線比較、ease-in-out 點對稱、
   單調遞增、過衝偵測、x 夾限 y 不限、字串四捨五入、parse 各情形與防呆、NaN/超界夾限,併入 npm test)。
   補齊 gradient-maker/box-shadow/color-scale 視覺工坊系列;零新相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-19
+- CSS clamp() 流體字級產生器(clamp-generator,category=workshop):給小螢幕與大螢幕各自的字級/間距,
+  自動算出隨視窗寬度平滑縮放的 clamp() CSS(中間用 vw、兩端夾住),免手刻 utopia 式流體排版公式。
+  附互動預覽:拖動模擬視窗寬度即時看實際解析出的尺寸;可選 rem/px、自訂根字級(1rem=?px)、
+  套用到 font-size/padding/margin/gap/border-radius。引擎 src/features/clampCss.ts(buildClamp 線性內插
+  求斜率 slope×100=vw、截距換 rem、min<=max 自動排序、截距為 0 省略;pxToRem;resolveAt 重算同公式供預覽;
+  fmt 四捨五入 4 位去尾零去 -0;同寬度/遞減/寬度顛倒給警告;純函式無 DOM)+ 回歸測試
+  scripts/test-clampcss.mjs(經典 16px@320→24px@1280 字串、px 單位、自訂 root 20、resolveAt 兩端中點與
+  上下夾限、截距 0 只留 vw、同寬度退化、遞減與顛倒警告,併入 npm test)。補齊漸層/陰影/緩動視覺工坊系列;
+  零新相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-19
 
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
