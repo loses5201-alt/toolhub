@@ -74,6 +74,14 @@
   (displayWidth/tableToMarkdown/splitRow/markdownToTable 純函式無 DOM,複用 tableClean 的 Table)+ 回歸測試
   scripts/test-markdowntable.mjs(22 筆:行數/分隔列/逸出/換行/對齊/無外框/對齊偵測/還原/補裁/報錯/往返一致含中文,
   esbuild 多入口打包後跑,併入 npm test)。補足 data-convert 不含 Markdown 的缺口;不上傳;type-check + 全測試 + build 通過 — 2026-06-17
+- 時間長度轉換(duration,category=workshop):在人話(1天2小時30分)、時鐘(mm:ss / hh:mm:ss)、
+  ISO 8601 期間(PT1H30M、P1DT2H、P1W)、總秒/分/時之間互轉(影片時長、工時、計時、設定檔期間用)。
+  parseDuration 依序試:純數字當秒 → 時鐘(冒號分段、末段可帶小數)→ ISO 8601(正則 W/D/T H/M/S 且至少一段非空)
+  → 帶單位字串(parseUnits:中文長詞先換[小時/分鐘…]再單字[天/時/分/秒]、英文長寫[hours/minutes…],token 掃描
+  須完整消耗無殘留才接受);formatHuman/formatClock(超過一天累進小時)/formatIso/breakdown 輸出。
+  引擎 src/features/duration.ts(純函式無 DOM)+ 回歸測試 scripts/test-duration.mjs(50 筆:各格式解析/中英單位/
+  錯誤處理/格式化/ISO 與時鐘來回一致,併入 npm test)。與 timestamp-convert(epoch↔日期)區隔。
+  零三方相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-19
 - Punycode / IDN 網域檢視(punycode,category=anti-scam):把 xn-- 網域解回真正 Unicode、揪出用西里爾/希臘
   字母假冒英文的形近字釣魚網域(延續 anti-scam 第二支柱)。自行實作 RFC 3492 Punycode 編解碼(瀏覽器無內建):
   adapt/basicToDigit/digitToBasic/punyEncode/punyDecode,含溢位防護;labelToUnicode/labelToAscii/domainToUnicode/

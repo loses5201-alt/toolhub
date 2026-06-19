@@ -324,6 +324,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/id-gen/Index.vue'),
   },
   {
+    id: 'duration',
+    name: '時間長度轉換',
+    category: 'workshop',
+    description: '在人話(1天2小時30分)、時鐘(01:30:00)、ISO 8601(PT1H30M)、總秒/分/時之間互轉 —— 影片時長、工時、計時換算用。全程在你瀏覽器計算,不上傳。',
+    keywords: ['時間長度', '時長', '時間轉換', '秒', '分鐘', '小時', '時:分:秒', 'hh:mm:ss', 'iso8601', 'duration', 'pt1h30m', '影片長度', '工時', '通話時間', '計時', '換算秒數', '幾分鐘', '幾小時', '總秒數', '時分秒'],
+    icon: '⏳',
+    loader: () => import('@/tools/duration/Index.vue'),
+  },
+  {
     id: 'timestamp-convert',
     name: 'Unix 時間戳記轉換',
     category: 'workshop',
