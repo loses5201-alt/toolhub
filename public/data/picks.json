@@ -288,6 +288,159 @@
       "url": "https://rate.bot.com.tw/",
       "tag": "官方參考",
       "note": "臺灣銀行即時牌告匯率,出國換匯、海外刷卡估算、看美元日圓走勢的常用官方參考來源,乾淨無廣告。"
+    },
+    {
+      "id": "findbiz",
+      "name": "經濟部 商工登記公示查詢",
+      "category": "防詐 ‧ 查證",
+      "icon": "🏢",
+      "url": "https://findbiz.nat.gov.tw/",
+      "tag": "政府官方",
+      "note": "經濟部官方公司行號登記查詢。對方自稱某公司、或網購/徵才前,輸入公司名或統編查它是否真的存在、有沒有解散停業 —— 抓假冒公司、假徵才最實用。"
+    },
+    {
+      "id": "hibp",
+      "name": "Have I Been Pwned",
+      "category": "防詐 ‧ 查證",
+      "icon": "🔓",
+      "url": "https://haveibeenpwned.com/",
+      "tag": "完全免費",
+      "note": "輸入 email 就能查它有沒有出現在已知的資料外洩名單裡。若中了,代表該密碼可能已外流,趕快換掉並開啟兩步驟驗證。資安界公認可信。"
+    },
+    {
+      "id": "isafe-moe",
+      "name": "全民資安素養網",
+      "category": "防詐 ‧ 查證",
+      "icon": "🔐",
+      "url": "https://isafe.moe.edu.tw/",
+      "tag": "政府官方",
+      "note": "教育部建置的資安教育網站,用白話介紹個資保護、密碼安全、釣魚與詐騙手法。適合分享給家中長輩與孩子一起學。"
+    },
+    {
+      "id": "notebooklm",
+      "name": "NotebookLM",
+      "category": "AI 助手",
+      "icon": "📓",
+      "url": "https://notebooklm.google.com/",
+      "tag": "有免費版",
+      "note": "Google 推出的 AI 筆記本。把自己的 PDF、文件、網頁丟進去當資料庫,它只根據你給的資料回答並附出處,讀長文件、整理研究資料很強。"
+    },
+    {
+      "id": "ms-copilot",
+      "name": "Microsoft Copilot",
+      "category": "AI 助手",
+      "icon": "🟦",
+      "url": "https://copilot.microsoft.com/",
+      "tag": "有免費版",
+      "note": "微軟的 AI 助手,可免費使用,結合網路搜尋回答時事問題,也能畫圖。整合在 Windows 與 Edge 裡,順手好用。"
+    },
+    {
+      "id": "duolingo",
+      "name": "Duolingo 多鄰國",
+      "category": "學習 ‧ 翻譯",
+      "icon": "🦉",
+      "url": "https://www.duolingo.com/",
+      "tag": "有免費版",
+      "note": "遊戲化的語言學習 app,英文、日文、韓文等,每天幾分鐘累積。免費版就很夠用,適合全家一起練。"
+    },
+    {
+      "id": "naer-terms",
+      "name": "國教院 雙語詞彙(樂詞網)",
+      "category": "學習 ‧ 翻譯",
+      "icon": "📖",
+      "url": "https://terms.naer.edu.tw/",
+      "tag": "政府官方",
+      "note": "國家教育研究院的學術名詞中英對照庫。翻譯專有名詞、學科術語時,這裡查到的是官方審定譯名,比一般翻譯網站準確可靠。"
+    },
+    {
+      "id": "pixabay",
+      "name": "Pixabay",
+      "category": "影像 ‧ 設計",
+      "icon": "🖼️",
+      "url": "https://pixabay.com/",
+      "tag": "完全免費",
+      "note": "免費可商用的圖片、插圖、向量圖與影片素材庫,免註冊即可下載,做簡報、海報、社群貼文找圖很方便。"
+    },
+    {
+      "id": "google-fonts",
+      "name": "Google Fonts",
+      "category": "影像 ‧ 設計",
+      "icon": "🔤",
+      "url": "https://fonts.google.com/",
+      "tag": "完全免費",
+      "note": "Google 的免費可商用字型庫,含繁體中文思源黑體/宋體(Noto)。做設計、網站、影片字幕挑字型不必再擔心授權。"
+    },
+    {
+      "id": "excalidraw",
+      "name": "Excalidraw",
+      "category": "影像 ‧ 設計",
+      "icon": "✏️",
+      "url": "https://excalidraw.com/",
+      "tag": "完全免費",
+      "note": "手繪風格的線上白板,畫流程圖、架構圖、心智圖超快。免註冊,內容存在本機瀏覽器,開會講解很好用。"
+    },
+    {
+      "id": "obsidian",
+      "name": "Obsidian",
+      "category": "文件 ‧ 生產力",
+      "icon": "🗒️",
+      "url": "https://obsidian.md/",
+      "tag": "有免費版",
+      "note": "把筆記以 Markdown 檔存在自己電腦的本機軟體,不必上雲、隱私佳,還能把筆記互相連結成知識網。個人使用免費。"
+    },
+    {
+      "id": "tra",
+      "name": "臺灣鐵路(台鐵)",
+      "category": "台灣在地 ‧ 生活",
+      "icon": "🚆",
+      "url": "https://www.railway.gov.tw/",
+      "tag": "政府官方",
+      "note": "台鐵官方網站,查時刻、訂票、誤點資訊。認明官網訂票,別點來路不明的「訂票退款」簡訊連結。"
+    },
+    {
+      "id": "thsr",
+      "name": "台灣高鐵",
+      "category": "台灣在地 ‧ 生活",
+      "icon": "🚄",
+      "url": "https://www.thsrc.com.tw/",
+      "tag": "官方",
+      "note": "高鐵官方訂票與時刻查詢,有早鳥與多人優惠。一律從官網或官方 App 購票,避免假購票網站。"
+    },
+    {
+      "id": "lvr-moi",
+      "name": "不動產實價登錄",
+      "category": "台灣在地 ‧ 生活",
+      "icon": "🏠",
+      "url": "https://lvr.land.moi.gov.tw/",
+      "tag": "政府官方",
+      "note": "內政部官方成交行情查詢。買房、租屋、看房價前先查同區實際成交價,心裡有底就不容易被開高價或話術唬住。"
+    },
+    {
+      "id": "gov-portal",
+      "name": "我的 E 政府",
+      "category": "政府 ‧ 官方服務",
+      "icon": "🏛️",
+      "url": "https://www.gov.tw/",
+      "tag": "政府官方",
+      "note": "政府服務的入口網,各部會線上服務、便民資訊一站找。不確定某項政府服務的官網時,從這裡找最安全。"
+    },
+    {
+      "id": "etax",
+      "name": "財政部 稅務入口網",
+      "category": "政府 ‧ 官方服務",
+      "icon": "🧾",
+      "url": "https://www.etax.nat.gov.tw/",
+      "tag": "政府官方",
+      "note": "綜所稅、地價稅、牌照稅等稅務查詢與線上繳納的官方入口。報稅季常有假退稅詐騙,認明這個官網辦理。"
+    },
+    {
+      "id": "cdc",
+      "name": "衛福部 疾病管制署",
+      "category": "政府 ‧ 官方服務",
+      "icon": "🩺",
+      "url": "https://www.cdc.gov.tw/",
+      "tag": "政府官方",
+      "note": "疫情、疫苗、傳染病與旅遊健康的官方資訊來源。健康相關訊息以這裡為準,別輕信 LINE 群組轉傳的養生謠言。"
     }
   ]
 }

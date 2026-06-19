@@ -1001,6 +1001,14 @@
 - [ ] 下載中心:擴充更多軟體、更多 github 自動版本來源
 - [ ] 品質:單元測試擴充、視覺與 RWD 持續打磨
 
+- 推薦好站(picks.json)擴充:32 → 49 筆,新增 17 個可信免費/官方資源 — 2026-06-19
+  - 防詐查證:經濟部商工登記公示查詢(查公司真偽/抓假徵才)、Have I Been Pwned(查 email 外洩)、全民資安素養網
+  - AI 助手:NotebookLM、Microsoft Copilot;學習翻譯:Duolingo、國教院雙語詞彙(樂詞網,官方審定譯名)
+  - 影像設計:Pixabay、Google Fonts、Excalidraw;生產力:Obsidian(本機筆記、隱私佳)
+  - 台灣在地:台鐵、高鐵、不動產實價登錄;政府服務:我的 E 政府、財政部稅務入口網、衛福部疾管署
+  - 全為高信心可信網址(沙盒 WebFetch 被擋無法逐一驗證,故只收極知名服務與標準 *.gov.tw 域名);
+    picks.json 執行時 fetch(NetworkFirst),免重建即生效;build + JSON 驗證(無重複 id)通過
+
 ## 注意:工具已 24 個,philosophy 是「窄而深、少而精」,新增前先確認非「網路隨手可得」且資料可驗證
 
 ## 注意
