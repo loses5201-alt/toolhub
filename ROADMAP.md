@@ -22,6 +22,13 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
+- chmod 權限計算機(chmod-calc,category=workshop):把 Unix 檔案權限的八進位(755)與符號(rwxr-xr-x)
+  雙向對照,核取方塊勾選每個身分(u/g/o)的讀/寫/執行即時換算出 chmod 數字與指令,支援 setuid/setgid/sticky
+  特殊位元(s/S/t/T 大小寫依該位執行與否)並附白話說明與風險。常見權限(644/755/600/777/700)一鍵帶入。
+  引擎 src/features/chmod.ts(parseOctal 接受 3/4 位與 0o 前綴、permsToOctal 省略無特殊位首零、
+  permsToSymbolic/parseSymbolic 容許 ls -l 開頭類型字元/describe/describeSpecial 純函式無 DOM)+ 回歸測試
+  scripts/test-chmod.mjs(81 筆:14 組八進位↔符號已知對照與往返、特殊位元大小寫、錯誤處理、ls -l 10 字元、
+  白話說明,併入 npm test)。零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-19
 - CIDR / 子網計算機(cidr-calc,category=workshop):輸入 IPv4 CIDR(192.168.1.10/24)算出網路位址、
   廣播位址、可用主機範圍、子網路遮罩、萬用遮罩、可用/總位址數,並判斷私有位址(RFC 1918)與 A/B/C 等級。
   支援 /n、純位址(預設 /32)、遮罩寫法(192.168.1.0 255.255.255.0)三種輸入;正確處理 /31 點對點
