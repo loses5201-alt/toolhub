@@ -645,6 +645,11 @@
   電子發票/勞保/健保/法規連結與站內 invoice-lottery/勞動/稅健工具互相呼應;JSON 驗證(無重複 id、欄位齊、URL 合法)
   + type-check + build 通過 — 2026-06-19
 
+- 防詐騙下載中心擴充 32→38 軟體:新增 Thunderbird(免費郵件)、Notepad++、Bitwarden(密碼管理,
+  安全防護)、HandBrake(影片轉檔)、Audacity(音訊編輯)、Brave 瀏覽器,皆附官方網域與「認明官網」提醒;
+  Notepad++/HandBrake/Audacity 加 github 欄位(release tag 乾淨),併入每日版本自動更新;Bitwarden/Brave/Thunderbird
+  因 release channel 較雜暫不自動抓版本。純資料(public/data/software.json),JSON 驗證(無重複 id、URL 合法)通過 — 2026-06-19
+
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
       與本專案「精簡 + 自包含」原則不符,**跳過**(未來若改自架模型再評估)

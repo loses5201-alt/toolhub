@@ -327,6 +327,69 @@
       "download": "https://moica.nat.gov.tw/download_2.html",
       "version": "",
       "note": "內政部憑證管理中心官方網域 moica.nat.gov.tw,讀卡、報稅、政府網站登入用。"
+    },
+    {
+      "id": "thunderbird",
+      "name": "Mozilla Thunderbird",
+      "category": "文件與辦公",
+      "icon": "🐦",
+      "official": "https://www.thunderbird.net/zh-TW/",
+      "download": "https://www.thunderbird.net/zh-TW/download/",
+      "version": "",
+      "note": "Mozilla 的免費電子郵件軟體,可同時收多個信箱、本機備份信件,介面清楚適合長輩用。認明官方網域 thunderbird.net。"
+    },
+    {
+      "id": "notepad-plus-plus",
+      "name": "Notepad++",
+      "category": "開發工具",
+      "icon": "📄",
+      "official": "https://notepad-plus-plus.org/",
+      "download": "https://notepad-plus-plus.org/downloads/",
+      "version": "",
+      "note": "免費的純文字/程式碼編輯器,開大檔、轉編碼、批次取代很方便。官方網域 notepad-plus-plus.org,別從廣告下載站安裝。",
+      "github": "notepad-plus-plus/notepad-plus-plus"
+    },
+    {
+      "id": "bitwarden",
+      "name": "Bitwarden 密碼管理",
+      "category": "安全防護",
+      "icon": "🔐",
+      "official": "https://bitwarden.com/",
+      "download": "https://bitwarden.com/download/",
+      "version": "",
+      "note": "開源免費的密碼管理器,幫你記住每個網站的高強度密碼,不用再到處用同一組。認明官方網域 bitwarden.com。"
+    },
+    {
+      "id": "handbrake",
+      "name": "HandBrake 影片轉檔",
+      "category": "影音娛樂",
+      "icon": "🎬",
+      "official": "https://handbrake.fr/",
+      "download": "https://handbrake.fr/downloads.php",
+      "version": "",
+      "note": "免費開源的影片轉檔工具,壓縮影片、轉成 MP4 給手機或電視播放。官方網域 handbrake.fr。",
+      "github": "HandBrake/HandBrake"
+    },
+    {
+      "id": "audacity",
+      "name": "Audacity 音訊編輯",
+      "category": "影音娛樂",
+      "icon": "🎵",
+      "official": "https://www.audacityteam.org/",
+      "download": "https://www.audacityteam.org/download/",
+      "version": "",
+      "note": "免費開源的錄音與音訊編輯軟體,剪音檔、去雜訊、轉格式都行。官方網域 audacityteam.org,別裝到夾廣告的仿冒版。",
+      "github": "audacity/audacity"
+    },
+    {
+      "id": "brave",
+      "name": "Brave 瀏覽器",
+      "category": "瀏覽器",
+      "icon": "🦁",
+      "official": "https://brave.com/",
+      "download": "https://brave.com/download/",
+      "version": "",
+      "note": "以隱私為訴求的免費瀏覽器,內建擋廣告與追蹤器。基於 Chromium,操作與 Chrome 相近。認明官方網域 brave.com。"
     }
   ]
 }
