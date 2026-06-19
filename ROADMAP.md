@@ -980,6 +980,15 @@
   inc7、Twitter epoch 範例、epoch 0、手工組 id 各欄位拆解、parseId 邊界(64 位元上限可/超過 null/負數/非數字/空)、
   snowflakeForTime 往返與早於 epoch 回 0、平台表,併入 npm test)。與 jwt-decode、timestamp-convert 互補;
   零新相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-19
+- IPv6 展開 / 壓縮(ipv6-tools,category=workshop):貼上任意寫法的 IPv6,正規化成展開式(8 組各 4 位數)
+  與 RFC 5952 標準壓縮式(全小寫、去每組前導零、最長一段連續零群組用 :: 取代(長度≥2、平手取最左)),
+  並判斷類型(未指定 :: / loopback ::1 / link-local fe80::/10 / ULA fc00::/7 / 多播 ff00::/8 / IPv4-mapped /
+  global 2000::/3),每組附 16 進位與十進位。支援 :: 省略、內嵌 IPv4(::ffff:192.168.1.1)、%zone 介面識別。
+  引擎 src/features/ipv6.ts(parseIPv6 處理雙冒號展開/內嵌 IPv4 轉兩組/zone 去除/各種錯誤、expand、compress
+  最左最長零段、classify、analyzeIPv6;純函式無 DOM)+ 回歸測試 scripts/test-ipv6.mjs(RFC 5952 壓縮範例、
+  全零/::1/去前導零/最左零段優先/單零不壓/最長段/結尾段、IPv4-mapped 展開壓縮與分類、各類型、大寫與 zone 正規化、
+  兩個::/組數不足過多/五位 hex/非 hex/IPv4 超界/::佔滿 8 組等非法,併入 npm test)。補上 cidr-calc(IPv4)缺口;
+  零新相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-19
 
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
