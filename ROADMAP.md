@@ -970,6 +970,16 @@
   testPaths 多樣式×多路徑;純函式無 DOM)+ 回歸測試 scripts/test-globmatch.mjs(星號不跨斜線、**/*.js 與 src/**
   與 a/**/b 各情形、非段邊界 ** 退化、? 、字元集範圍與取反、{js,ts} 與巢狀大括號、字面點/加號/括號、反斜線跳脫、
   nocase、cleanPatterns、testPaths 命中清單,併入 npm test)。零新相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-19
+- Snowflake ID 解析器(snowflake-id,category=workshop):貼上 Discord / Twitter(X)/ Instagram 的 64 位元
+  Snowflake ID,反推內嵌的建立時間(精確到毫秒,給台灣時間/UTC/Unix 毫秒/相對時間)與中間兩個 5 位元欄位
+  (Discord:worker/process;Twitter:datacenter/worker)與 12 位元序號,並用四色拆解 42+5+5+12 位元結構。
+  可選平台預設 epoch 或自訂 epoch。純位元運算,不查詢任何帳號或內容(無法得知對應的使用者/訊息)。引擎
+  src/features/snowflake.ts(parseId 驗證純數字且 ≤64 位元無號、parseSnowflake 以 BigInt 取 ts=(id>>22)+epoch
+  與三欄位與 64 位元二進位、parseByPlatform 平台表、snowflakeForTime 由時間反推最小 id;純函式無 DOM)+ 回歸測試
+  scripts/test-snowflake.mjs(Discord 官方文件範例 175928847299117063→2016-04-30T11:18:25.796Z/worker1/process0/
+  inc7、Twitter epoch 範例、epoch 0、手工組 id 各欄位拆解、parseId 邊界(64 位元上限可/超過 null/負數/非數字/空)、
+  snowflakeForTime 往返與早於 epoch 回 0、平台表,併入 npm test)。與 jwt-decode、timestamp-convert 互補;
+  零新相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-19
 
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
