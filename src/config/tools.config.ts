@@ -387,6 +387,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/markdown-toc/Index.vue'),
   },
   {
+    id: 'json-repair',
+    name: 'JSON 修復 / 寬鬆解析',
+    category: 'workshop',
+    description: '把不嚴謹的 JSON 修成標準 JSON —— 單引號、未加引號的鍵、結尾多餘逗號、// 與 /* */ 註解、Python None/True/False、NaN/Infinity 都能容忍並還原。整理 LLM 輸出、JS 物件、log 片段最好用;全程在你瀏覽器,不上傳。',
+    keywords: ['json', 'json修復', '修復', 'repair', 'fix json', '寬鬆', 'lenient', '單引號', '結尾逗號', 'trailing comma', '註解', 'comment', 'json5', 'jsonc', '格式化', 'format', '美化', 'beautify', 'parse', '解析', 'llm', '修正json'],
+    icon: '🩹',
+    loader: () => import('@/tools/json-repair/Index.vue'),
+  },
+  {
     id: 'url-parse',
     name: '網址解析 / 查詢字串編輯',
     category: 'workshop',
