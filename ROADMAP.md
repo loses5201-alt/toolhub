@@ -794,6 +794,14 @@
   convertCase/convertLines/convertAll 純函式無 DOM)+ 回歸測試 scripts/test-caseconvert.mjs(43 筆:拆字各情境/
   13 格式/跨格式互轉/縮寫正規化/空輸入/批次,esbuild 打包後跑,併入 npm test)。與 line-tools/text-clean 互補
   (這支專做命名慣例);零新相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-19
+- 假文 / Lorem Ipsum 產生器(lorem-ipsum,category=workshop):做版面/設計稿時填的「假內文」。
+  拉丁 Lorem Ipsum(可選經典開頭 "Lorem ipsum dolor sit amet…")＋中文假文(多數線上 lorem 工具只有拉丁文,
+  這裡能產生中文版面用的佔位文字,常用字組句、中文標點 ,、。!?)。段落/句子/字三種單位、數量 1–200、
+  固定種子(mulberry32 可注入)可重現同一批。引擎 src/features/loremIpsum.ts(makeRng/latinSentence/
+  latinParagraph/cjkSentence/cjkParagraph/generate 純函式無 DOM)+ 回歸測試 scripts/test-loremipsum.mjs
+  (24 筆:拉丁字數/經典開頭/句段結構/僅 ASCII、中文字數/漢字範圍/句末標點/逗號頓號/無拉丁字母、
+  可重現性、count 夾限,esbuild 打包後跑,併入 npm test)。與 fake-data(擬真個資)、text-card(做圖)區隔;
+  零新相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-19
 
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
