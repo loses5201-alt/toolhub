@@ -774,6 +774,13 @@
   關鍵字命中/名稱>關鍵字>說明 權重/整句 +5/遞減排序/大小寫不敏感/多詞/純說明低分/不變更原清單),
   併入 npm test。讓首頁關鍵字導引的排序可被測試保護 — 2026-06-19
 
+- INI / 設定檔 ↔ JSON(ini-convert,category=workshop):雙向。引擎 src/features/ini.ts(parseIni/stringifyIni/
+  iniToJson/jsonToIni 純函式無 DOM):解析支援 ; 與 # 註解、[區段]、key=value(亦接受 key: value、值只切第一個
+  分隔符)、值前後引號去除、區段前根層鍵、同鍵後者覆蓋、重複區段合併;區段缺 ]/無 =/空區段名逐行報錯。
+  序列化:根鍵在前區段在後、僅前後空白或含 ;#= 才加引號(內部空白不需,INI 讀到行尾)、數字布林轉字串;
+  限一層區段,JSON 巢狀過深/陣列報錯。回歸測試 scripts/test-ini.mjs(25 筆,esbuild 打包後跑,併入 npm test)。
+  與 dotenv-convert、json-yaml 互補;設定常含金鑰密碼故不上傳;type-check + 全測試 + build 通過 — 2026-06-19
+
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
       與本專案「精簡 + 自包含」原則不符,**跳過**(未來若改自架模型再評估)

@@ -558,6 +558,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/dup-photos/Index.vue'),
   },
   {
+    id: 'ini-convert',
+    name: 'INI / 設定檔 ↔ JSON',
+    category: 'workshop',
+    description: '把 INI 設定檔(含區段、註解)轉成 JSON,或把 JSON 物件倒成 INI —— 設定常含金鑰密碼,全程在你瀏覽器處理,不上傳。',
+    keywords: ['ini', '設定檔', 'config', 'conf', '組態', '區段', 'section', 'json', '互轉', '轉換', '金鑰', '密碼', '設定轉json', 'desktop entry', 'cfg'],
+    icon: '⚙️',
+    loader: () => import('@/tools/ini-convert/Index.vue'),
+  },
+  {
     id: 'dotenv-convert',
     name: '.env ↔ JSON / shell 轉換',
     category: 'workshop',
