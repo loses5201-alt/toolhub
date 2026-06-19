@@ -1228,6 +1228,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/tw-vat-check/Index.vue'),
   },
   {
+    id: 'isbn-check',
+    name: 'ISBN 檢核 / 轉換',
+    category: 'life',
+    description: '驗證書籍 ISBN-10 / ISBN-13 檢查碼有沒有打對,並在兩種格式間互相轉換(978 開頭可轉,979 不可)。可批次對整批書單。全程本機計算、不上傳。',
+    keywords: ['isbn', '國際標準書號', '書號', '書籍', '書', 'isbn10', 'isbn13', '檢查碼', '檢核', '驗證', '轉換', 'ean', '978', '979', '圖書', '書單', '出版'],
+    icon: '📚',
+    loader: () => import('@/tools/isbn-check/Index.vue'),
+  },
+  {
     id: 'password-gen',
     name: '本機密碼產生器',
     category: 'life',
