@@ -22,6 +22,14 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
+- 社群文字卡 / 語錄圖(text-card,category=workshop):把一段文字做成漂亮的圖片卡片(IG 貼文/限動、
+  Threads、FB、公告、金句),取代開 Canva 做圖。Canvas 繪製:漸層/純色背景、黑/明體、置中/靠左、留白、
+  粗體、文字色依背景亮度自動擇黑白;尺寸預設 1:1/4:5/9:16/16:9/3:4 對應各社群版位,輸出 1080~1920px PNG,
+  可下載或複製到剪貼簿。排版邏輯抽到 src/features/textCard.ts 純函式(isCJK/tokenize/wrapParagraph/wrapText/
+  fitFontSize),中英混排自動斷行(CJK 逐字、英數整詞、超長字硬切、行首空白去除、保留明確換行)+ 自動字級
+  以二分搜尋在文字框內擇最大可填入字級;不依賴 DOM 故可 Node 測。回歸測試 scripts/test-textcard.mjs
+  (19 筆:isCJK/tokenize/英數與 CJK 斷行/硬切/換行/空行/自動字級擇優與邊界,以「每字固定寬」假 measure,
+  併入 npm test)。零新相依;type-check + 全測試 + build 通過 — 2026-06-19
 - 圖片工坊(image-studio):批次轉檔/壓縮/縮放,canvas 處理、去 EXIF — 2026-06-15
 - HEIC 轉 JPG/PNG(heic-convert):iPhone .heic 在 Windows/舊機/網站常打不開,免費線上站要上傳私密照片;
   heic2any(libheif WASM)在瀏覽器內解碼、不上傳,支援拖放/批次/品質/最長邊縮放,多影像 HEIC 取第一張,
