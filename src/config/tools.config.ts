@@ -297,6 +297,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/url-parse/Index.vue'),
   },
   {
+    id: 'escape-text',
+    name: '文字跳脫 / 還原',
+    category: 'workshop',
+    description: '把含換行、引號的文字轉成可貼進 JSON/程式碼的跳脫字串,或把含 \\n、\\uXXXX、\\xXX 的字串還原成原文 —— 全程在你瀏覽器,不連網、不上傳。',
+    keywords: ['跳脫', '逸出', 'escape', 'unescape', '還原', 'json字串', '字串跳脫', '反斜線', '換行', '\\n', '\\uxxxx', 'unicode跳脫', 'unicode escape', '\\xxx', '碼位', 'codepoint', '轉跳脫', '解跳脫', '字串編碼', 'stringify'],
+    icon: '⌨️',
+    loader: () => import('@/tools/escape-text/Index.vue'),
+  },
+  {
     id: 'timestamp-convert',
     name: 'Unix 時間戳記轉換',
     category: 'workshop',

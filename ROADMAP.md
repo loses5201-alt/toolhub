@@ -74,6 +74,14 @@
   (displayWidth/tableToMarkdown/splitRow/markdownToTable 純函式無 DOM,複用 tableClean 的 Table)+ 回歸測試
   scripts/test-markdowntable.mjs(22 筆:行數/分隔列/逸出/換行/對齊/無外框/對齊偵測/還原/補裁/報錯/往返一致含中文,
   esbuild 多入口打包後跑,併入 npm test)。補足 data-convert 不含 Markdown 的缺口;不上傳;type-check + 全測試 + build 通過 — 2026-06-17
+- 文字跳脫 / 還原(escape-text,category=workshop):四模式 —— 文字→JSON 字串(=JSON.stringify)、
+  文字→程式碼跳脫(最小必要、可選引號樣式)、文字→\\uXXXX(逐 UTF-16 碼元轉非 ASCII 與控制字元、反斜線也跳脫
+  確保可逆、代理對自然成兩個 \\u)、跳脫→原文(支援 \\n\\r\\t\\b\\f\\v\\0\\\\\\"\\'\\`\\/、\\xXX、\\uXXXX、
+  ES6 變長 \\u{...},自動去成對外層引號,未知跳脫保留其後字元,位數不足/缺 } 報明確錯誤)。讀含 \\uXXXX 的 log/設定值、
+  把多行文字塞進 JSON 都好用。引擎 src/features/escapeText.ts(toJsonString/escapeForQuote/escapeUnicode/
+  unescapeString 純函式無 DOM)+ 回歸測試 scripts/test-escapetext.mjs(45 筆:各模式/引號模式/控制字元/emoji 代理對/
+  錯誤處理/escapeForQuote 與 escapeUnicode 各自來回一致含反斜線,併入 npm test)。零三方相依、不上傳;
+  type-check + 全測試 + build 通過 — 2026-06-19
 - 網址解析 / 查詢字串編輯(url-parse,category=workshop):把網址用標準 URL API 拆成協定/主機/埠/路徑/錨點,
   查詢字串自製解析器拆成鍵值對(保留順序與重複、'+' 轉空白、壞 %XX 退回原字串不丟例外、旗標型參數記 flag),
   表格可直接編輯/新增/刪除,改完用 buildUrl 即時組回;沒寫協定自動補 https://(記 assumedProtocol);
