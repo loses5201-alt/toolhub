@@ -369,6 +369,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/totp/Index.vue'),
   },
   {
+    id: 'hmac',
+    name: 'HMAC / Webhook 簽章驗證',
+    category: 'workshop',
+    description: '用密鑰對訊息算 HMAC-SHA1/256/512(十六進位 + Base64),驗證 webhook 是否真的來自服務方(GitHub / Stripe / LINE)。可貼收到的簽章定時比對,自動處理 sha256= 前綴。全程在你瀏覽器,密鑰與內容不上傳。',
+    keywords: ['hmac', 'webhook', '簽章', '驗章', 'signature', '驗證', 'x-hub-signature', 'github', 'stripe', 'line', '簽名', 'sign', 'sha256', 'mac', '訊息鑑別', '密鑰雜湊', 'secret', '驗簽'],
+    icon: '🔏',
+    loader: () => import('@/tools/hmac/Index.vue'),
+  },
+  {
     id: 'url-parse',
     name: '網址解析 / 查詢字串編輯',
     category: 'workshop',
