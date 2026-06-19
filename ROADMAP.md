@@ -459,6 +459,12 @@
   + 回歸測試 scripts/test-isbn.mjs(38 筆:真實 ISBN 含 K&R 與末位 X、檢查碼計算、錯一碼/長度/非數字、
   10↔13 互轉與往返、979 不可轉、analyzeIsbn 各情形,併入 npm test)。與 barcode-generate 互補;
   零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-19
+- 羅馬數字轉換(roman-numeral,category=life):阿拉伯數字(1–3999)↔ 標準羅馬數字雙向轉換,採減法記號
+  (IV/IX/XL/XC/CD/CM)。解析時用嚴格正則驗證,擋下 IIII/VV/IC/IL 等非規範寫法並提示正確;範圍外與非整數
+  明確報錯;大小寫與空白容忍。引擎 src/features/roman.ts(toRoman 查表貪婪、fromRoman 嚴格驗證後解析 純函式無 DOM)
+  + 回歸測試 scripts/test-roman.mjs(89 筆:18 組已知對照雙向、範圍邊界、非規範寫法拒絕、大小寫空白、
+  全範圍 1..3999 往返一致,併入 npm test)。與 num-to-chinese、amount-english、base-convert 同屬轉換家族;
+  零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-19
 - 金額轉國字大寫(num-to-chinese,category=life):把數字金額轉中文大寫(壹貳參…拾佰仟萬億兆、元角分整),
   支票/本票/合約/收據填寫防竄改用。可含千分位逗號、四捨五入到分(進位用 BigInt 避免大數誤差)、可到兆級;
   正確處理節內與節間的零(零壹佰、壹億零壹、收斂雙零、去尾零)、角為零分不為零補零。輸出「金額大寫(新臺幣…元整)」
