@@ -333,6 +333,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/text-hash/Index.vue'),
   },
   {
+    id: 'cidr-calc',
+    name: 'CIDR / 子網計算機',
+    category: 'workshop',
+    description: '輸入 IPv4 CIDR(如 192.168.1.10/24),立刻算出網路位址、廣播位址、可用主機範圍、子網路遮罩、萬用遮罩、主機數量,並判斷私有位址與等級。設定路由器/防火牆/伺服器必備;全程在你瀏覽器計算,不上傳。',
+    keywords: ['cidr', '子網', '子網路', '網段', 'subnet', '遮罩', '子網路遮罩', 'netmask', 'mask', 'ip', 'ipv4', '網路位址', '廣播位址', 'broadcast', 'network', '主機數', 'wildcard', '萬用遮罩', '網路計算', 'ip計算', '/24', '私有ip', 'rfc1918'],
+    icon: '🌐',
+    loader: () => import('@/tools/cidr-calc/Index.vue'),
+  },
+  {
     id: 'url-parse',
     name: '網址解析 / 查詢字串編輯',
     category: 'workshop',
