@@ -1384,6 +1384,16 @@
   25.4mm=1inch=300px@300dpi/A4@300dpi=2480×3508 與 @72dpi=595×842/橫式寬高對調/A3@300dpi=3508×4961/
   dpi 0 與未知紙張 null,併入 npm test)。與 aspect-ratio、ppi-calc、image-fit-size 互補;零相依、不上傳;
   type-check + 全測試 + build 通過 — 2026-06-20
+- XML ↔ JSON 轉換(xml-json,category=workshop):把 SOAP 回應 / RSS / pom.xml / Android 版面 /
+  各式 XML 設定檔轉成方便程式處理的 JSON,或反向還原成 XML。慣例:屬性 → @ 前綴鍵、純文字元素 →
+  直接是值、混合文字放 #text、同名重複子元素 → 陣列;轉 JSON 可選把數字/true/false 強制轉型(嚴格
+  數字正則,不破壞電話/前導零)。引擎 src/features/xmlJson.ts(自寫 tokenizer 建樹:處理一般標籤/自關閉/
+  CDATA(視為文字)/註解/PI/DOCTYPE,parseAttrs 解析屬性、decodeEntities 解碼文字與屬性實體、
+  elementToValue 遞迴建值、jsonToXml 反向遞迴含 escapeText/escapeAttr 跳脫與多頂層鍵包根;純函式無 DOM)
+  + 回歸測試 scripts/test-xmljson.mjs(以 @屬性/#text 慣例明確語意手構 48 筆 oracle:基本巢狀/空元素/
+  屬性+文字/同名→陣列/混合文字/實體解碼編碼/CDATA/略過註解PI/命名空間前綴/parseValues 轉型與前導零保護/
+  自訂前綴/錯誤處理/JSON→XML 各型別與跳脫/往返一致與結構穩定,併入 npm test)。與 xml-format(美化)、
+  json-yaml、json-repair 互補;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
 
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
