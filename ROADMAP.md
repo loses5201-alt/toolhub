@@ -207,6 +207,13 @@
   scripts/test-typescale.mjs(base16/ratio1.25 → 16/20/25/12.8、rem 換算、自訂 root、0 階單列、
   round 控制、錯誤、toCss 命名與單位、RATIOS 遞增,共 23 筆,併入 npm test)。做設計系統字級階層用;
   與 clamp 流體字級/CSS 單位互補;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
+- BPM 節拍 / 延遲時間計算(bpm-delay,category=workshop):由 BPM 算各音符時長(ms)與頻率(Hz),
+  含直音/附點/三連音,設定 delay/reverb/LFO 同步用;附 tap tempo 打點測速。引擎 src/features/bpm.ts
+  (quarterMs=60000/BPM、noteMs 含 straight/dotted×1.5/triplet×2/3、msToHz/hzToMs 互逆、buildTable
+  常見音符對照、bpmFromTaps 相鄰間隔平均反推;純函式無 DOM)+ 回歸測試 scripts/test-bpm.mjs
+  (120BPM 四分=500/八分=250/全=2000、附點八分=375、四分三連≈333.33、四分@120=2Hz、Hz 互逆、
+  buildTable、bpmFromTaps 500ms→120,共 22 筆,併入 npm test)。音樂製作/編曲/混音用;與音名頻率
+  互補;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
 - Open Graph / SEO 標籤產生器(og-meta,category=workshop):填標題/描述/預覽圖等欄位產生完整
   Open Graph + Twitter Card + SEO meta 標籤並即時顯示社群分享預覽卡;也能反向貼 HTML 解析出欄位。
   附標題/描述長度、缺漏、絕對網址健檢。引擎 src/features/ogMeta.ts(escapeAttr/escapeText 跳脫、
