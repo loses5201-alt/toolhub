@@ -342,6 +342,16 @@
   finder 加虛擬項 picks-center 讓關鍵字導向;App 導覽 + 首頁入口卡;NetworkFirst 自動涵蓋新 JSON — 2026-06-15
 
 ## 處理工坊(續)
+- SQL 格式化 / 美化(sql-format,category=workshop):把擠成一行或排版凌亂的 SQL 整理成可讀格式
+  (主要子句各自換行、欄位與條件縮排、頂層逗號斷行、AND/OR 換行;子查詢與 CREATE TABLE 欄位用區塊括號縮排),
+  或反向壓成單行(minify,移除註解)。關鍵字大小寫 upper/lower/preserve、縮排 2/4 可選。查詢常含資料表/欄位名
+  與參數值,不該貼到陌生線上工具 —— 全程瀏覽器執行、不上傳。與 sql-insert(產生 INSERT)互補。
+  引擎 src/features/sqlFormat.ts(tokenizeSql 正確保留字串(含 '' 與反斜線跳脫)、識別字("" / ``)、行與區塊註解、
+  數字含 0x/小數/指數、參數 @ : $;formatSql 單遍排版含括號堆疊、區塊 vs 行內括號、BETWEEN…AND 不誤斷;
+  minifySql 純函式無 DOM)+ 回歸測試 scripts/test-sqlformat.mjs(41 筆:多項精確輸出 select/join/子查詢/
+  create table/insert/update/delete/group by、大小寫與縮排選項、字串與註解內容不改動、7 組冪等性
+  format(format(x))===format(x) + 顯著 token 不漏不重排、minify、多語句、未結束字串/註解錯誤,併入 npm test)。
+  零新相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
 - QR Code 產生器(qr-generate,category=workshop):qrcode 函式庫,文字/網址、WiFi、vCard 三模式,
   即時預覽 + 下載 PNG、尺寸/容錯等級可調;直接編碼原始內容(不像線上產生器偷塞追蹤短網址),
   輸入不上傳。qrcode 動態 import,precache +33KB(可接受,未拆 vendor)— 2026-06-15
