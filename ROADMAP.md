@@ -175,6 +175,14 @@
   DOM)+ 回歸測試 scripts/test-resistor.mjs(公認範例棕黑紅金=1kΩ/黃紫紅金=4.7kΩ/棕黑黑棕棕=1kΩ±1%/
   6環溫度係數、encode↔decode 多組來回、錯誤情況、SMD 472=4.7k/4R7=4.7Ω/R47=0.47Ω、formatOhms,共 43 筆,
   併入 npm test)。電子 DIY/Arduino/樹莓派/修電路用;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
+- 分數 / 小數 / 百分比互轉(fraction,category=workshop):約分、帶分數、分數↔小數↔百分比互轉,
+  支援循環小數「精確」轉分數(0.1(6)=1/6、0.(142857)=1/7)與連分數近似(π≈355/113);分數轉小數
+  自動標出循環節。引擎 src/features/fraction.ts(gcd 輾轉相除、simplify 分母歸正、decimalToFractionExact
+  代數消去循環節(含括號/方括號)、approxFraction 連分數收斂、fractionToDecimalString 長除法偵測循環、
+  toMixed/toPercent/parseFraction 支援分數/帶分數/整數/小數;純函式無 DOM)+ 回歸測試
+  scripts/test-fraction.mjs(約分、0.(3)=1/3、0.1(6)=1/6、0.(142857)=1/7、-1.2(34)=-611/495、
+  π→355/113、1/7=0.(142857)、往返一致、帶分數/百分比/parse,共 45 筆,併入 npm test)。數學作業/
+  食譜比例/工程估算用;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
 - Open Graph / SEO 標籤產生器(og-meta,category=workshop):填標題/描述/預覽圖等欄位產生完整
   Open Graph + Twitter Card + SEO meta 標籤並即時顯示社群分享預覽卡;也能反向貼 HTML 解析出欄位。
   附標題/描述長度、缺漏、絕對網址健檢。引擎 src/features/ogMeta.ts(escapeAttr/escapeText 跳脫、
