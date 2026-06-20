@@ -22,6 +22,17 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
+- HAR 網路分析(har-analyze,category=workshop):把瀏覽器 DevTools Network 面板匯出的 .har 檔
+  彙整成可讀統計 —— 總請求數、總傳輸大小、牆鐘載入時間、依狀態碼/資源類型/網域分布、最慢與最大的
+  請求、4xx/5xx 錯誤清單,快速找出網頁效能瓶頸。拖放或選檔即解析;HAR 常含 cookie/Authorization
+  等敏感資料,故全程在瀏覽器解析、不上傳。引擎 src/features/har.ts(parseHar 容錯非 HAR/壞 JSON、
+  classifyType 由 mimeType 與副檔名分 document/script/.../xhr、extractHost 去 userinfo 與埠、
+  normalizeEntry 傳輸大小優先 _transferSize、summarize 一次算 byStatus/byType/byHost/slowest/
+  largest/errors、wallClockTime 牆鐘時間、formatBytes/formatMs;純函式無 DOM)+ 回歸測試
+  scripts/test-har.mjs(手構 HAR 為 oracle:類型分類/主機解析/壞 JSON 與無 log/entries 報錯/
+  _transferSize 優先於 headers+body/彙整總大小與內容大小/牆鐘時間/byStatus 各群/byType 排序/
+  byHost/最慢最大/錯誤清單/topN 限制/格式化,併入 npm test)。與 cookie-parse、url-parse、
+  curl-convert、jwt-decode 網頁除錯系列互補;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
 - Java .properties ↔ JSON(properties-convert,category=workshop):補上 ini/dotenv/toml 設定檔家族
   缺的 Java .properties —— 把 Java/Spring/Android 的 .properties 設定/語系檔轉成 JSON 或倒回。正確套用
   java.util.Properties 規則:=/:/空白 三種分隔符、# 與 ! 註解、行尾奇數反斜線「續行」且丟棄續行前導空白、
