@@ -234,6 +234,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/aspect-ratio/Index.vue'),
   },
   {
+    id: 'ppi-calc',
+    name: '螢幕像素密度(PPI)計算',
+    category: 'workshop',
+    description: '輸入解析度與螢幕對角線英吋,算出每英吋像素(PPI)、點距、實體尺寸,並依觀看距離判定是否達「視網膜」清晰度 —— 買螢幕/手機、決定列印解析度時好用。純數學計算、不上傳。',
+    keywords: ['ppi', 'dpi', '像素密度', '解析度', '螢幕', '對角線', '英吋', '點距', 'dot pitch', '視網膜', 'retina', '清晰度', '買螢幕', '手機螢幕', '列印解析度', 'pixel density', '畫質', 'ppcm'],
+    icon: '🖥️',
+    loader: () => import('@/tools/ppi-calc/Index.vue'),
+  },
+  {
     id: 'image-diff',
     name: '圖片差異比對',
     category: 'workshop',

@@ -1282,6 +1282,13 @@
   純函式無 DOM)+ 回歸測試 scripts/test-cssunits.mjs(以 CSS 規範手算為 oracle:各單位 px 係數/12pt=16px/
   1in=96px/96px=2.54cm/1.5rem=24px/em 與 % 依脈絡字級/2em(context20)=40px 再轉 2.5rem/壞單位與字級 0
   報錯,併入 npm test)。零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
+- 螢幕像素密度 PPI 計算(ppi-calc,category=workshop):輸入解析度與螢幕對角線英吋,算 PPI、點距、每公分像素、
+  實體寬高、總像素/百萬像素,並依觀看距離以 1 弧分視力極限推算「視網膜門檻」判定清晰度;與 aspect-ratio 互補。
+  引擎 src/features/ppi.ts(computePpi 用畢氏對角線像素÷英吋、點距 25.4/ppi、實體尺寸由邊像素比例反推、
+  retinaThreshold 依距離與弧分、isRetina、round;純函式無 DOM)+ 回歸測試 scripts/test-ppi.mjs
+  (以畢氏定理手算為 oracle,常見螢幕交叉驗證:15.6"FHD≈141.21PPI/27"2K≈108.79/1000×1000@√2吋=1000PPI/
+  點距/實體尺寸/25cm 門檻≈349 且越遠越低/458PPI 手機達視網膜、141PPI 筆電未達/邊界報錯,併入 npm test)。
+  零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
 
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
