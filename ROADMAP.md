@@ -22,6 +22,14 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
+- 佔位圖產生器(placeholder-image,category=workshop):做網頁/簡報/排版示意圖的灰底尺寸圖,自訂尺寸、
+  顏色、文字、對角交叉線,輸出 SVG / PNG / data URI。引擎 src/features/placeholder.ts(純函式無 DOM:
+  escapeXml 五種特殊字元、autoFontSize=min(w,h)/8 夾 12–160、parseSize 解析 640x480/全形×/*/空白、
+  placeholderText 預設「寬×高」、buildSvg 組 rect+選配對角線+置中 text、svgToDataUri URL 編碼)+
+  回歸測試 scripts/test-placeholder.mjs(以 XML 跳脫規則、字級公式、SVG 結構為 oracle 28 筆:跳脫/字級夾鉗
+  與取較短邊/尺寸解析各格式與 0 值/預設與自訂與空白文字/SVG 標籤寬高 viewBox 背景字級/cross 兩線/自訂字級/
+  文字內 < 跳脫/data URI 前綴與編碼,併入 npm test)。PNG 由 Vue 端把 SVG 畫到 canvas 匯出。與 favicon-gen、
+  text-card、aspect-ratio 互補;零相依、不連網、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
 - 日文假名 ↔ 羅馬字(kana-romaji,category=life):四種模式——假名→赫本式羅馬字、羅馬字→假名(平/片可選)、
   平假名⇄片假名。引擎 src/features/kana.ts(純函式無 DOM:KANA_ROMAJI 五十音+濁/半濁+拗音對照表、
   katakanaToHiragana/hiraganaToKatakana 以 Unicode 0x60 位移、kanaToRomaji 處理拗音/促音っ(重複子音、

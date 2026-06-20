@@ -134,6 +134,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/image-ocr/Index.vue'),
   },
   {
+    id: 'placeholder-image',
+    name: '佔位圖產生器',
+    category: 'workshop',
+    description: '做網頁 / 簡報 / 排版示意圖時的灰底尺寸圖 —— 自訂尺寸、顏色、文字、對角線,輸出 SVG / PNG 或 data URI。線上 placeholder 服務要連網又可能追蹤,這支全程在你瀏覽器產生,不連網、不上傳、無浮水印。',
+    keywords: ['佔位圖', '占位圖', 'placeholder', 'placeholder image', '示意圖', '假圖', 'mockup', 'wireframe', 'dummy image', '灰圖', '尺寸圖', '預覽圖', '範例圖', 'svg', 'png', '圖片產生', '版面', '排版', 'banner', 'thumbnail', '佔位符', '圖框'],
+    icon: '🖼️',
+    loader: () => import('@/tools/placeholder-image/Index.vue'),
+  },
+  {
     id: 'kana-romaji',
     name: '日文假名 ↔ 羅馬字',
     category: 'life',
