@@ -22,6 +22,15 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
+- robots.txt 測試器(robots-tester,category=workshop):貼上 robots.txt + 網址 + 爬蟲 UA,
+  判斷該頁能否被抓取 —— 依 Google 規範:符合的群組內以最長規則勝、同長 Allow 勝 Disallow,
+  支援 * 與 $ 萬用字元,列出解析後群組與 Sitemap。SEO 除錯必備。引擎 src/features/robots.ts
+  (parseRobots 以 User-agent 分組/規則後再見 UA 開新組/去註解/收 Sitemap 與 Crawl-delay、
+  extractPath 從網址取 path、patternToRegExp * 與 $ 編譯、selectGroup 最長 token 前綴匹配否則 *、
+  isAllowed 最長匹配與同長 Allow 勝;純函式無 DOM)+ 回歸測試 scripts/test-robots.mjs(以 Google 規範為
+  oracle 33 筆:取 path/空全允許/Disallow 全禁/空 Disallow 全允許/Allow 覆蓋/同長 Allow 勝/$ 錨點與
+  query/星號中段/群組選擇特定 UA 優先/連續 UA 共用/規則後開新組/註解與 Sitemap/UA 大小寫前綴/
+  crawl-delay,併入 npm test)。零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
 - HTTP 安全標頭稽核(security-headers,category=workshop):貼上 HTTP 回應標頭,逐項檢查
   HSTS / CSP / X-Content-Type-Options / 防點擊劫持 / Referrer-Policy / Permissions-Policy
   等安全防護是否齊全與設定良好,給 A+~F 評分(權重 hsts20 csp25 nosniff15 clickjacking15
