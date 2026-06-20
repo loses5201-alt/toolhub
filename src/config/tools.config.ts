@@ -509,6 +509,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/base-convert/Index.vue'),
   },
   {
+    id: 'bitwise',
+    name: '位元運算計算機',
+    category: 'workshop',
+    description: 'AND / OR / XOR / NOT / NAND / NOR / XNOR、左右移,支援 8/16/32/64 位元固定寬度與二補數(有號/無號對照)—— 用 BigInt 運算,64 位元也不失真。全程在你瀏覽器計算,不上傳。',
+    keywords: ['位元', '位元運算', '邏輯運算', 'bitwise', 'bit', 'and', 'or', 'xor', 'not', 'nand', 'nor', 'xnor', '及', '或', '互斥或', '反相', '左移', '右移', '位移', 'shift', '遮罩', 'mask', '旗標', 'flag', '二補數', '有號', '無號', 'signed', 'unsigned', '韌體', '嵌入式', '暫存器', 'register', '十六進位', 'hex'],
+    icon: '🧮',
+    loader: () => import('@/tools/bitwise/Index.vue'),
+  },
+  {
     id: 'base32-58',
     name: 'Base32 / Base58 編解碼',
     category: 'workshop',
