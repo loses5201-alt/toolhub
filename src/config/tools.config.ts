@@ -243,6 +243,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/ppi-calc/Index.vue'),
   },
   {
+    id: 'paper-size',
+    name: '紙張尺寸與列印像素',
+    category: 'workshop',
+    description: 'A4/A3/B5… 與美規紙張到底幾 mm?在 300 DPI 要做幾 × 幾像素?一次給 mm/cm/英吋與指定 DPI 的像素尺寸(A4@300dpi=2480×3508px),含直橫式 —— 做海報、印刷稿、報名表免再到處查。純查表計算、不上傳。',
+    keywords: ['紙張', '尺寸', 'a4', 'a3', 'a5', 'b4', 'b5', 'letter', '海報', '印刷', '列印', 'dpi', '像素', 'px', 'mm', '公分', '英吋', 'iso 216', '出血', '解析度', '300dpi', 'a4幾px', 'a4像素', 'print size'],
+    icon: '📄',
+    loader: () => import('@/tools/paper-size/Index.vue'),
+  },
+  {
     id: 'image-diff',
     name: '圖片差異比對',
     category: 'workshop',

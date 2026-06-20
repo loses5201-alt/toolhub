@@ -1303,6 +1303,14 @@
   純函式無 DOM)+ 回歸測試 scripts/test-qsconvert.mjs(以方括號語意為 oracle:扁平/問號/無值/巢狀/陣列 push 與索引/
   深巢狀/重複裸鍵/URL 編解碼/編碼方括號鍵/四種陣列格式/null 空值/數字布林/非物件回空/物件與含編碼往返,併入 npm test)。
   與 url-parse(扁平單一網址)互補;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
+- 紙張尺寸與列印像素(paper-size,category=workshop):收錄 ISO 216 的 A0–A8、B0–B6 與美規 Letter/Legal/
+  Tabloid(共 19 種),給 mm/cm/英吋尺寸與「指定 DPI 下要做幾×幾像素」,含直/橫式。解決「A4 幾 mm、
+  300dpi 要 2480×3508px」這類到處查都不乾淨的需求。引擎 src/features/paperSize.ts(PAPERS 標準尺寸表、
+  getPaper、mmToInch、mmToPx 四捨五入、dimensions 依方向與 DPI 一次算 mm/cm/inch/px、round;純函式無 DOM)+
+  回歸測試 scripts/test-papersize.mjs(以 ISO 216 標準 mm 與 mm/25.4×dpi 手算為 oracle:各標準尺寸/收錄數量/
+  25.4mm=1inch=300px@300dpi/A4@300dpi=2480×3508 與 @72dpi=595×842/橫式寬高對調/A3@300dpi=3508×4961/
+  dpi 0 與未知紙張 null,併入 npm test)。與 aspect-ratio、ppi-calc、image-fit-size 互補;零相依、不上傳;
+  type-check + 全測試 + build 通過 — 2026-06-20
 
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
