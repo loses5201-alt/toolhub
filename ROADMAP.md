@@ -159,6 +159,13 @@
   八度加倍、等音 C#4=Db4、MIDI 0–127 音名往返、freqToMidi、nearestNote cents、自訂 A4=442、
   noteTable 連續,共 30 筆,併入 npm test)。中央 C=C4;作曲/編曲/樂器調音/音訊開發用;與音訊工坊
   互補;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
+- 電阻色環計算器(resistor,category=workshop):色環 ↔ 阻值雙向換算(4/5/6 環),即時讀出阻值/
+  誤差/溫度係數/容許範圍,反向由阻值產生色環,並解析 SMD 數字碼(472/4702/4R7);附電阻外觀示意。
+  引擎 src/features/resistor.ts(COLORS IEC 60062 色碼表、decodeBands 依環數拆數字/倍率/誤差/溫度係數、
+  encodeValue 取有效數字+倍率含四捨五入進位與精確性檢查、parseSmd 3碼/4碼/R 小數、formatOhms;純函式無
+  DOM)+ 回歸測試 scripts/test-resistor.mjs(公認範例棕黑紅金=1kΩ/黃紫紅金=4.7kΩ/棕黑黑棕棕=1kΩ±1%/
+  6環溫度係數、encode↔decode 多組來回、錯誤情況、SMD 472=4.7k/4R7=4.7Ω/R47=0.47Ω、formatOhms,共 43 筆,
+  併入 npm test)。電子 DIY/Arduino/樹莓派/修電路用;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
 - Open Graph / SEO 標籤產生器(og-meta,category=workshop):填標題/描述/預覽圖等欄位產生完整
   Open Graph + Twitter Card + SEO meta 標籤並即時顯示社群分享預覽卡;也能反向貼 HTML 解析出欄位。
   附標題/描述長度、缺漏、絕對網址健檢。引擎 src/features/ogMeta.ts(escapeAttr/escapeText 跳脫、
