@@ -22,6 +22,13 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
+- 文字相似度比對(text-similarity,category=workshop):算兩段文字有多像 —— Levenshtein 編輯距離、
+  字元級相似度百分比、以詞為單位的 Jaccard/Dice 與共同詞/各自獨有詞。引擎 src/features/textSimilarity.ts
+  (levenshtein 滾動陣列 O(min) 記憶體、similarityRatio=1-距離/較長長度、tokenize 以空白標點分詞且純
+  中文連寫退化逐字、jaccard、dice、compare 綜合;純函式無 DOM)+ 回歸測試
+  scripts/test-textsimilarity.mjs(以 kitten→sitting=3 等經典 Levenshtein 手算值 + Jaccard/Dice
+  定義式為 oracle 29 筆,併入 npm test)。判斷地址/姓名是否同一筆、找近似重複、看改寫幅度用;與
+  list-compare、text-diff 互補;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
 - GPS 座標轉換 / 距離(geo-coord,category=workshop):十進位度(Google 地圖)↔ 度分秒(DMS)
   ↔ 度分(DM)互轉,並用 haversine 算兩座標間直線(大圓)距離。引擎 src/features/geoCoord.ts
   (normalizeSymbols 正規化度分秒符號、parseComponent 解析十進位/DMS/DM 與 N/S/E/W 半球及負號、
