@@ -151,6 +151,14 @@
   (幾何事實 N/E/S/W=0/90/180/270、(0,0)->(1,1)≈45、compass 各方位與 4/8/16 分級、normalize/back
   環繞、經線 final=initial、台北->東京偏東北,共 25 筆,併入 npm test)。給真北方位(需留意磁偏角);
   登山定向、天線/小耳朵對準、航海飛行用;與 geo-coord 互補;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
+- 音名 / 頻率 / MIDI 換算(note-freq,category=workshop):音名(C4、A#5、Bb3)↔ 頻率 ↔ MIDI
+  互轉,A4 標準音可調(440/442/古樂 415);頻率反查最接近音 + 偏差音分(調音器),音域對照表、
+  Web Audio 試聽。引擎 src/features/noteFreq.ts(noteToMidi 解析字母/升降號(含全形、重升)/科學音高
+  記號 SPN、midiToNote 升降記號、midiToFreq/freqToMidi 十二平均律、noteToFreq、nearestNote 含
+  cents、noteTable;純函式無 DOM)+ 回歸測試 scripts/test-notefreq.mjs(A4=69=440、C4=60=261.6256、
+  八度加倍、等音 C#4=Db4、MIDI 0–127 音名往返、freqToMidi、nearestNote cents、自訂 A4=442、
+  noteTable 連續,共 30 筆,併入 npm test)。中央 C=C4;作曲/編曲/樂器調音/音訊開發用;與音訊工坊
+  互補;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
 - Open Graph / SEO 標籤產生器(og-meta,category=workshop):填標題/描述/預覽圖等欄位產生完整
   Open Graph + Twitter Card + SEO meta 標籤並即時顯示社群分享預覽卡;也能反向貼 HTML 解析出欄位。
   附標題/描述長度、缺漏、絕對網址健檢。引擎 src/features/ogMeta.ts(escapeAttr/escapeText 跳脫、
