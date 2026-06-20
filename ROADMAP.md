@@ -249,6 +249,16 @@
   flattenJson/flattenedToCSV 純函式無 DOM,複用 data-convert 的 objectsToCSV 做欄位聯集+引號逸出)+ 回歸測試
   scripts/test-jsonflatten.mjs(23 筆:巢狀路徑/陣列索引/型別/頂層純值/空物件陣列/多列聯集/CSV 逸出/真實範例,
   併入 npm test)。零新相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-17
+- JSON 查詢(json-query,category=workshop):從又大又深的 API 回應/設定/log JSON 用 JSONPath 路徑直接撈值,
+  免一層層展開。刻意收斂為「正確且可測」的子集:$ 根、.key/["含空白鍵"]、[n]/[-1] 負索引、[*]或*、.. 遞迴下降、
+  [start:end:step] 切片、[?(@.field OP value)] 過濾(== != < <= > >=,或只寫 @.field 表示存在)。自刻解析器+求值器、
+  不用 eval(安全);遞迴以 collectDescendants 攤平 self+所有子孫再套下一個選擇器;過濾數值對數值比、否則轉字串比。
+  與 json-flatten/json-diff/json-schema/json-to-ts/json-to-go 互補(這支是「查詢取值」)。引擎 src/features/jsonQuery.ts
+  (parsePath/parseBracket/parseFilter/evaluate/sliceArray/matchFilter 純函式無 DOM,回 {ok,results,output,count,error})
+  + 回歸測試 scripts/test-jsonquery.mjs(43 筆:基本路徑/省略$/負索引/越界與不存在回空不報錯/$根、陣列與物件萬用、
+  ..author 與 ..price 與 ..中文鍵、切片含負值與 [::2]、過濾存在/數值</>=/字串==!=/單引號、中括號字串鍵與含空白鍵、
+  頂層陣列、輸出美化、6 種錯誤含缺@與 step0 與未閉合,併入 npm test)。API 回應常含 token/個資,全程瀏覽器、不上傳;
+  零新相依;type-check + 全測試 + build 通過 — 2026-06-20
 - 表格統計 / 樞紐(table-stats,category=workshop):把一份明細「依某欄分組,對另一欄做統計」
   (等同 Excel 樞紐分析 / SQL GROUP BY):支援 count/sum/avg/min/max/distinct 六種聚合,可選不分組(全部一組);
   數值自動吃千分位逗號+去空白、非數值在 sum/avg/min/max 時略過(全組無數值回空字串),avg 分母只算有效數值;
