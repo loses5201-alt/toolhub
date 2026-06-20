@@ -134,6 +134,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/image-ocr/Index.vue'),
   },
   {
+    id: 'ascii-art',
+    name: '圖片轉 ASCII 藝術',
+    category: 'workshop',
+    description: '把圖片轉成用字元拼出的圖(可純文字或彩色),貼進 README、終端機、聊天室、簽名檔 —— 多種字元風格、可調寬度與反相,輸出 .txt / .png。全程在你瀏覽器以 canvas 運算,圖片不上傳、無廣告、無浮水印。',
+    keywords: ['ascii', 'ascii art', 'ascii藝術', '字元畫', '字元圖', '文字畫', '文字藝術', '圖片轉文字', '圖轉ascii', '圖片轉ascii', '字元藝術', 'text art', 'ansi', '終端機', 'readme', '簽名檔', '字元拼圖', '圖變文字', 'art'],
+    icon: '🔡',
+    loader: () => import('@/tools/ascii-art/Index.vue'),
+  },
+  {
     id: 'random-picker',
     name: '抽籤 / 分組',
     category: 'life',

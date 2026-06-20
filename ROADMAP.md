@@ -22,6 +22,15 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
+- 圖片轉 ASCII 藝術(ascii-art,category=workshop):把圖片切成「字元格」,每格取平均亮度,依字元
+  梯度(由深到淺)挑字元拼成圖;可調寬度(字元數)、5 種字元風格(經典/細緻 70 階/方塊 █▓▒░/極簡/點陣)、
+  反相(深底淺字)、彩色(保留每格平均顏色),輸出複製文字 / .txt / .png。引擎 src/features/asciiArt.ts
+  (純函式無 DOM:RAMPS 字元梯度表、luminance Rec.601、pickChar 依亮度比例 round 到梯度索引(亮→尾端空白、
+  暗→開頭最深、可反相)、rgbaToAscii 依 cols 與字元長寬比 0.5 算 rows、逐格平均像素並與白底混合(透明→白)、
+  toText;Vue 端用 canvas 取樣最長邊≤400 再交引擎平均)+ 回歸測試 scripts/test-asciiart.mjs(以 Rec.601
+  亮度公式、梯度索引定義、平均取樣與白底混合手算為 oracle 33 筆:梯度表/亮度三原色/pickChar 邊界與反相與中灰/
+  維持比例 rows 計算/全黑全白/平均顏色保留/透明與半透明混白/水平漸層左深右淺/cols 過大與夾為 1,併入 npm test)。
+  與 text-card、image-studio、palette-extract 互補;零相依、不上傳、無浮水印;type-check + 全測試 + build 通過 — 2026-06-20
 - OKLCH / OKLab 轉換(oklch-convert,category=workshop):HEX/RGB ↔ OKLCH 雙向轉換,並可直接拉
   明度 L / 彩度 C / 色相 H 三條滑桿即時調色,輸出 CSS oklch()/HEX/rgb()/OKLab,並標示超出 sRGB 色域。
   引擎 src/features/oklch.ts(純函式無 DOM:srgbToLinear/linearToSrgb、rgbToOklab/oklabToRgbRaw 採
