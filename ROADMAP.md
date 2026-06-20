@@ -22,6 +22,15 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
+- 日文假名 ↔ 羅馬字(kana-romaji,category=life):四種模式——假名→赫本式羅馬字、羅馬字→假名(平/片可選)、
+  平假名⇄片假名。引擎 src/features/kana.ts(純函式無 DOM:KANA_ROMAJI 五十音+濁/半濁+拗音對照表、
+  katakanaToHiragana/hiraganaToKatakana 以 Unicode 0x60 位移、kanaToRomaji 處理拗音/促音っ(重複子音、
+  っち→tcha)/長音記號ー(重複母音)/撥音ん(母音/y/n 前作 n')、romajiToKana 貪婪最長比對+雙子音促音
+  +tch+單獨 n+相容訓令式 si/tu/hu/zi;反向表排除小寫假名與罕用ぢづゐゑ重複)+ 回歸測試 scripts/test-kana.mjs
+  (以修正赫本式標準拼法與常見詞彙為 oracle 42 筆:平/片互轉/五十音/shi-chi-tsu-fu-ji/濁半濁/拗音/促音 gakkou
+  與 matcha/撥音 nihon-shinkansen-kon'ya-shin'ai/長音 koohii-raamen/羅馬字反轉 konnichiwa-arigatou/
+  片假名輸出/乾淨詞往返一致,併入 npm test)。は/へ/を 以字面 ha/he/wo 轉寫(助詞語境發音另註)。
+  與 unicode-normalize、char-inspect、morse-code 互補;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
 - 圖片轉 ASCII 藝術(ascii-art,category=workshop):把圖片切成「字元格」,每格取平均亮度,依字元
   梯度(由深到淺)挑字元拼成圖;可調寬度(字元數)、5 種字元風格(經典/細緻 70 階/方塊 █▓▒░/極簡/點陣)、
   反相(深底淺字)、彩色(保留每格平均顏色),輸出複製文字 / .txt / .png。引擎 src/features/asciiArt.ts

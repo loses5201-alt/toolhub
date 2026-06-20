@@ -134,6 +134,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/image-ocr/Index.vue'),
   },
   {
+    id: 'kana-romaji',
+    name: '日文假名 ↔ 羅馬字',
+    category: 'life',
+    description: '日文假名轉赫本式羅馬字、羅馬字轉假名(平/片可選),另附平假名 ⇄ 片假名互換 —— 處理拗音、促音、長音、撥音。學日文、查發音、日本旅遊輸入日文名好用。全程在你瀏覽器執行,不連網、不上傳。',
+    keywords: ['日文', '假名', '平假名', '片假名', '羅馬字', '羅馬拼音', 'romaji', 'hiragana', 'katakana', 'kana', '赫本式', 'hepburn', '日語', '日文發音', '五十音', '拗音', '促音', '日文輸入', '日本', '日文轉換', '假名轉羅馬字', '羅馬字轉假名', '平假名轉片假名'],
+    icon: 'あ',
+    loader: () => import('@/tools/kana-romaji/Index.vue'),
+  },
+  {
     id: 'ascii-art',
     name: '圖片轉 ASCII 藝術',
     category: 'workshop',
