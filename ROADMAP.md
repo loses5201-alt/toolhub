@@ -22,6 +22,14 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
+- ULID 解析器(ulid-inspect,category=workshop):貼上 ULID(26 碼 Crockford Base32)反推內嵌
+  建立時間(48 位元毫秒時間戳)與 80 位元亂數欄位,顏色拆解 48+80 位元結構並給台灣時間/UTC/Unix
+  毫秒/相對時間;補上 id-gen 只能「產生」ULID 的反查缺口。引擎 src/features/ulid.ts(Crockford
+  字母表排除 ILOU、decodeTime/encodeTime round-trip、parseUlid 驗長度/非法字元/U/第一碼溢位(>7)/
+  Crockford 寬容 I L→1 O→0,純函式無 DOM)+ 回歸測試 scripts/test-ulid.mjs(以規範範例
+  01ARZ3NDEKTSV4RRFFQ69G5FAV→1469922850259ms 為 oracle:字母表/正規化/編解碼往返/欄位拆解/小寫/
+  全零/最大時間/寬容字元/太短太長/含 U/第一碼溢位/空,併入 npm test)。與 uuid-inspect、snowflake-id
+  互補;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
 - IBAN 國際帳號驗證(iban-check,category=workshop):驗證歐洲/中東等地跨國匯款用的 IBAN
   國際銀行帳號 —— 檢查國別代碼、各國固定長度與 mod-97-10(ISO 7064)檢查碼,拆解國別/檢查碼/
   BBAN 各欄位並提示錯誤原因;收海外款項(自由接案、跨國匯款)前先驗,少打一碼就匯錯。引擎
