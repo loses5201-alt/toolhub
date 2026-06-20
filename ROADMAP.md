@@ -22,6 +22,14 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
+- OKLCH / OKLab 轉換(oklch-convert,category=workshop):HEX/RGB ↔ OKLCH 雙向轉換,並可直接拉
+  明度 L / 彩度 C / 色相 H 三條滑桿即時調色,輸出 CSS oklch()/HEX/rgb()/OKLab,並標示超出 sRGB 色域。
+  引擎 src/features/oklch.ts(純函式無 DOM:srgbToLinear/linearToSrgb、rgbToOklab/oklabToRgbRaw 採
+  Ottosson 公布矩陣、oklab↔oklch 極座標、oklchToRgb 含色域偵測與夾鉗、rgbToHex/formatOklch;複用
+  colorMix 的 parseColor)+ 回歸測試 scripts/test-oklch.mjs(以白=(1,0,0)/黑/三原色 OKLab+OKLCH
+  參考值為 oracle、大量 sRGB rgb→oklch→rgb 往返一致、純灰 a,b≈0、色域外偵測,共 27 筆,併入 npm test)。
+  OKLCH 是 CSS Color 4 現代色彩空間,感知均勻、調色不偏色,做漸層/色階/無障礙配色比 HSL 自然;
+  與色彩工坊、色階產生器、漸層產生器、色差計算互補;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
 - 色差計算 Delta E(delta-e,category=workshop):輸入兩個顏色,算出人眼覺得差多少 ——
   換到感知均勻的 CIE L*a*b*(D65),給出 ΔE*ab(CIE76)、ΔE94(graphic arts 參數、以 A 為
   參考色故不對稱)、ΔE00(CIEDE2000,業界標準)三種色差與白話可辨識度解讀(<1 幾乎分不出…>5 不同色)。
