@@ -127,6 +127,14 @@
   品目筆數/編碼參數、encodingLabel;純函式無 DOM)+ 回歸測試 scripts/test-einvoiceqr.mjs(以規格手構
   77 字 + hex 金額/民國日期手算為 oracle 31 筆:日期換算/編碼/欄位拆解/個人vs統編買方/錯誤情況/無 tail/
   去空白,併入 npm test)。與 invoice-lottery(對獎)、qr-decode 互補;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
+- 數獨解題 / 出題(sudoku,category=life):貼上或輸入卡關的數獨瞬間求解,並判斷無解/唯一解/多組解;
+  一鍵出題(easy/medium/hard),每題都驗證過保證唯一解;輸入時即時標出同列/行/宮衝突格(黑=提示、藍=解)。
+  引擎 src/features/sudoku.ts(parseGrid 容錯 0/./_/× 空格、conflictsAt/findConflicts、candidatesMask
+  + popcount 候選 bitmask、pickCell MRV 最少候選優先、backtrack 可注入候選順序、solve/countSolutions(限上限數)、
+  makeRng Mulberry32 可重現亂數、generateSolved 隨機終盤、generate 挖洞每步 countSolutions==1 確認唯一解、
+  gridToString/gridToLines;純函式無 DOM)+ 回歸測試 scripts/test-sudoku.mjs(經典題唯一解逐格比對、
+  解滿足每列/行/宮 1–9 各一次、count=0/1/>=2、違規偵測、固定種子產生題唯一解且為解的子集、難度提示數遞減,
+  共 35 筆,併入 npm test)。與抽籤/分組同屬離線小工具;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
 - Open Graph / SEO 標籤產生器(og-meta,category=workshop):填標題/描述/預覽圖等欄位產生完整
   Open Graph + Twitter Card + SEO meta 標籤並即時顯示社群分享預覽卡;也能反向貼 HTML 解析出欄位。
   附標題/描述長度、缺漏、絕對網址健檢。引擎 src/features/ogMeta.ts(escapeAttr/escapeText 跳脫、
