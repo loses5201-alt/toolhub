@@ -22,6 +22,15 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
+- 色差計算 Delta E(delta-e,category=workshop):輸入兩個顏色,算出人眼覺得差多少 ——
+  換到感知均勻的 CIE L*a*b*(D65),給出 ΔE*ab(CIE76)、ΔE94(graphic arts 參數、以 A 為
+  參考色故不對稱)、ΔE00(CIEDE2000,業界標準)三種色差與白話可辨識度解讀(<1 幾乎分不出…>5 不同色)。
+  引擎 src/features/deltaE.ts(純函式無 DOM:srgbToLinear、rgbToLab、deltaE76/94/2000 採
+  Sharma 2005 標準式含 G 補償與色相旋轉 RT、compareColors、interpretDeltaE;複用 colorMix 的
+  parseColor)+ 回歸測試 scripts/test-deltae.mjs(以 Sharma, Wu, Dalal (2005) CIEDE2000 標準
+  測試資料 34 對逐筆驗證到小數第 4 位 + 已知 sRGB→Lab 白/黑/中灰/三原色 + ΔE76 自洽/對稱,共 58 筆,
+  併入 npm test)。品牌色把關、印刷打樣對色、配色微調用;與色彩工坊、色彩混合器、顏色可讀性檢測互補;
+  零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
 - 古典密碼(cipher-classic,category=life):凱撒 / ROT13 / ROT47 / Atbash / Vigenère / A1Z26
   編解碼,凱撒附 25 種位移暴力破解。引擎 src/features/cipher.ts(caesar 保留大小寫與非字母含負位移環繞、
   rot13/rot47(可見 ASCII 94 字自反)/atbash 自反、vigenere 只有字母消耗金鑰且忽略金鑰非字母、
