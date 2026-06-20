@@ -1244,6 +1244,15 @@
   缺 HttpOnly/Secure/SameSite 警告、session 說明、Max-Age 0/負刪除、Expires 轉 ISO、齊全無警告、空與只有屬性無名稱 null、
   humanDuration 各情形,併入 npm test)。零新相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-19
 
+- 長寬比與尺寸計算(aspect-ratio,category=workshop):做設計/剪片/印刷/響應式圖片常用的長寬比缺口——
+  ① 算寬高最簡整數比(gcd 約分,例 1920×1080→16:9)、辨識常見比例名稱(16:9/4:3/9:16 短影音/1.91:1 連結預覽等)、
+  橫直式、百萬像素;② 維持比例求另一邊(給寬求高/給高求寬);③ 把圖塞進外框 contain(完整、留白)/
+  cover(填滿、裁切)的縮放尺寸與縮放比。引擎 src/features/aspectRatio.ts(gcd 輾轉相除、simplifyRatio 小數放大成整數再約分、
+  commonName 比值容差辨識、orientation、solveDimension、fit contain/cover、megapixels、round;純函式無 DOM)+
+  回歸測試 scripts/test-aspectratio.mjs(以數學定義手算為 oracle:gcd/各常見解析度約分/小數約分/常見名稱與容差/橫直正方/
+  維持比例兩向/contain 取較小 cover 取較大縮放/百萬像素/邊界 null,併入 npm test)。與 image-fit-size、image-studio
+  互補;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
+
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
       與本專案「精簡 + 自包含」原則不符,**跳過**(未來若改自架模型再評估)
