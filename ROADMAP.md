@@ -135,6 +135,14 @@
   gridToString/gridToLines;純函式無 DOM)+ 回歸測試 scripts/test-sudoku.mjs(經典題唯一解逐格比對、
   解滿足每列/行/宮 1–9 各一次、count=0/1/>=2、違規偵測、固定種子產生題唯一解且為解的子集、難度提示數遞減,
   共 35 筆,併入 npm test)。與抽籤/分組同屬離線小工具;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
+- 色溫(Kelvin)↔ 顏色(color-temp,category=workshop):色溫(克氏溫度 K)→ sRGB 顏色,
+  並可由顏色反查最接近色溫;附常見光源(燭光/暖白燈泡/日光/D65/陰天)快選與 mired 換算。
+  引擎 src/features/colorTemp.ts(kelvinToRgb 採 Tanner Helland 近似式並夾鉗 1000–40000K、
+  kelvinToMired/miredToKelvin 互逆、rgbToKelvin 於色溫曲線以去亮度色比距離搜尋、rgbToHex、
+  describeKelvin、LIGHT_SOURCES;純函式無 DOM)+ 回歸測試 scripts/test-colortemp.mjs
+  (已知輸出 1000K=(255,68,0)/6600K=(255,255,255)、暖紅冷藍與通道單調/範圍、邊界夾鉗、
+  mired 互逆、rgbToKelvin 自洽,共 19 筆,併入 npm test)。選燈泡、攝影白平衡、UI 配色用;
+  與色彩工坊/混合器/色差互補;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
 - Open Graph / SEO 標籤產生器(og-meta,category=workshop):填標題/描述/預覽圖等欄位產生完整
   Open Graph + Twitter Card + SEO meta 標籤並即時顯示社群分享預覽卡;也能反向貼 HTML 解析出欄位。
   附標題/描述長度、缺漏、絕對網址健檢。引擎 src/features/ogMeta.ts(escapeAttr/escapeText 跳脫、
