@@ -342,6 +342,16 @@
   finder 加虛擬項 picks-center 讓關鍵字導向;App 導覽 + 首頁入口卡;NetworkFirst 自動涵蓋新 JSON — 2026-06-15
 
 ## 處理工坊(續)
+- XML 格式化 / 壓縮(xml-format,category=workshop):把擠成一行的 XML / SVG / RSS / pom.xml / 設定檔
+  重新縮排成可讀格式,或反向壓成單行 —— 補足資料轉換群(JSON/YAML/CSV/Excel/INI/.env)一直缺的 XML。
+  不依賴 DOMParser,自行 tokenize+建樹+重排(可在 Node 測,也代表全程瀏覽器執行、不上傳;XML 設定常含
+  連線字串/密鑰)。保留註解、CDATA、<?xml?> 宣告、DOCTYPE 與屬性值,標籤內多餘空白收斂成單一空格;
+  單一文字子節點 inline(<a>x</a>)、空元素 inline、自閉合保留。引擎 src/features/xmlFormat.ts
+  (tokenize 處理註解/CDATA/PI/DOCTYPE/標籤含引號內 > 不誤判、normalizeTag 引號外收斂空白、parse 用堆疊
+  比對開始/結束標籤、formatXml/minifyXml 純函式無 DOM)+ 回歸測試 scripts/test-xmlformat.mjs(32 筆:
+  巢狀/屬性+文字 inline/自閉合/空元素/空白視同空/宣告/註解/CDATA/實體不改動/縮排選項/標籤空白正規化/
+  rss 與 pom 巢狀、minify、4 組冪等性 + 結構保留(minify(x)===minify(format(x)))、6 種錯誤(標籤不符/
+  未關閉/多出結束/未結束註解與 CDATA),併入 npm test)。零新相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
 - SQL 格式化 / 美化(sql-format,category=workshop):把擠成一行或排版凌亂的 SQL 整理成可讀格式
   (主要子句各自換行、欄位與條件縮排、頂層逗號斷行、AND/OR 換行;子查詢與 CREATE TABLE 欄位用區塊括號縮排),
   或反向壓成單行(minify,移除註解)。關鍵字大小寫 upper/lower/preserve、縮排 2/4 可選。查詢常含資料表/欄位名
