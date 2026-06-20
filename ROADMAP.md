@@ -30,6 +30,15 @@
   scripts/test-unicodenormalize.mjs(35 筆:é 合成分解、NFKC 相容字 Ａ①ﬁ㎏→A1fikg、碼點清單與 emoji 代理對、
   組合符/全形/零寬統計、比對各情形與差異定位,併入 npm test)。與 text-clean、char-inspect 互補;
   零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-19
+- JWT 簽發 / 產生(jwt-sign,category=workshop):補上「jwt-decode 只能解碼/驗證」的反向能力 —— 在本機用密鑰
+  簽出 HS256/384/512 的 JSON Web Token(測 API、後端串接、重現過期/尚未生效情境)。可勾選自動補 iat / nbf(=現在)
+  與 exp(分鐘/小時/天後,自動換算 Unix 秒),即時預覽「實際簽入的內容」並三段彩色顯示 token。安全主張同 jwt-decode:
+  簽發需密鑰、持有者即可偽造任何憑證,絕不該貼到 jwt.io 等線上產生器;全程瀏覽器、不連網、不上傳;僅對稱式 HMAC。
+  引擎沿用並擴充 src/features/jwt.ts(新增 encodeSegment/buildHeader/signingInput/applyTimeClaims 純函式 +
+  signJwt 用 crypto.subtle;export 既有 bytesToBase64Url 共用)+ 回歸測試 scripts/test-jwtsign.mjs(39 筆:
+  jwt.io 官方 HS256 向量逐字、buildHeader/encodeSegment/signingInput、4 組 payload×演算法與 Node crypto 交叉、
+  與同檔 verifyHmac 簽發→驗證往返且錯誤密鑰應失敗、decodeJwt 解回 payload/alg、applyTimeClaims iat/exp/nbf/
+  取整/不動原物件,併入 npm test)。與 jwt-decode、hmac 互補;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
 - JSON 修復 / 寬鬆解析(json-repair,category=workshop):以小型遞迴下降解析器容忍常見不嚴謹 JSON 並還原
   成標準 JSON —— 單引號、未加引號的物件鍵、結尾多餘逗號、// 與 /* */ 註解、Python None/True/False、
   十六進位與底線數字、各種跳脫;NaN/Infinity/undefined 轉 null 確保輸出合法。結構嚴重損壞誠實報錯不亂修;

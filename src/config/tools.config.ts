@@ -755,6 +755,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/jwt-decode/Index.vue'),
   },
   {
+    id: 'jwt-sign',
+    name: 'JWT 簽發 / 產生',
+    category: 'workshop',
+    description: '在本機用密鑰簽出 HS256/384/512 的 JSON Web Token,可自動補 iat/exp/nbf 時間宣告 —— 測 API、後端串接、重現過期情境好用。別把密鑰貼到線上產生器(等於交出能偽造憑證的鑰匙),這支全程在你瀏覽器、不上傳。',
+    keywords: ['jwt', 'json web token', 'token', '權杖', '簽發', '產生', '簽章', '製作', 'encode', 'sign', 'hs256', 'hs384', 'hs512', 'hmac', '密鑰', 'secret', 'iat', 'exp', '過期', 'nbf', 'payload', 'bearer', '授權', 'api測試', 'jwt產生', 'jwt簽發', 'jwt.io'],
+    icon: '🖋️',
+    loader: () => import('@/tools/jwt-sign/Index.vue'),
+  },
+  {
     id: 'snowflake-id',
     name: 'Snowflake ID 解析器',
     category: 'workshop',
