@@ -39,6 +39,16 @@
   jwt.io 官方 HS256 向量逐字、buildHeader/encodeSegment/signingInput、4 組 payload×演算法與 Node crypto 交叉、
   與同檔 verifyHmac 簽發→驗證往返且錯誤密鑰應失敗、decodeJwt 解回 payload/alg、applyTimeClaims iat/exp/nbf/
   取整/不動原物件,併入 npm test)。與 jwt-decode、hmac 互補;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
+- JSONPath 查詢(json-query,category=workshop):用路徑運算式從一大包巢狀 JSON 精準撈值/過濾陣列/跨層蒐集
+  (整理 API 回應、設定檔、log),補上 JSON 套件缺的「查詢」能力。自實作 Goessner 風格實用子集:$ 根、
+  .key 與 ['key']、[0]/負數[-1]、萬用 [*] 與 .*、[start:end:step] 切片(含負索引/負步進)、.. 遞迴下降、
+  逗號聯集 [0,1] / ['a','b']、過濾 [?(...)](== != < <= > >=、&& / ||、@ 相對路徑、字串/數字/true/false/null
+  字面值);每筆附正規化路徑 $['store']['book'][0]['author']。引擎 src/features/jsonPath.ts(parsePath/query/
+  descendants/selectChildren/sliceNodes/makeFilter/evalTerm/compare 純函式無 DOM,splitTop 忽略引號與括號內分隔)
+  + 回歸測試 scripts/test-jsonpath.mjs(44 筆:以 Goessner 書店為 oracle —— 基本/萬用/遞迴 $..author 與 $..price/
+  聯集/各式切片/存在性與比較與 AND/OR 過濾/正規化路徑/負索引/越界回空/null 保留/鍵含點/物件值過濾/錯誤處理,
+  esbuild 打包後跑,併入 npm test)。與 json-repair、json-flatten、json-diff 互補;零相依、不上傳;
+  type-check + 全測試 + build 通過 — 2026-06-20
 - JSON 修復 / 寬鬆解析(json-repair,category=workshop):以小型遞迴下降解析器容忍常見不嚴謹 JSON 並還原
   成標準 JSON —— 單引號、未加引號的物件鍵、結尾多餘逗號、// 與 /* */ 註解、Python None/True/False、
   十六進位與底線數字、各種跳脫;NaN/Infinity/undefined 轉 null 確保輸出合法。結構嚴重損壞誠實報錯不亂修;

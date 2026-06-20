@@ -614,6 +614,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/markdown-toc/Index.vue'),
   },
   {
+    id: 'json-query',
+    name: 'JSONPath 查詢',
+    category: 'workshop',
+    description: '用路徑運算式從一大包 JSON 精準撈出欄位、過濾陣列、跨層級蒐集 —— $.store.book[?(@.price<10)].title。支援萬用 [*]、切片、遞迴 ..、過濾 [?(...)](== != < > && ||)。整理 API 回應、設定檔、log 最好用;全程在你瀏覽器,不上傳。',
+    keywords: ['jsonpath', 'json path', 'json查詢', 'query', '查詢', '撈資料', '取值', '過濾', 'filter', 'json篩選', '路徑', 'path', 'goessner', 'jq', '陣列過濾', '遞迴', '萬用', 'wildcard', 'json擷取', 'extract', 'api回應', '設定檔'],
+    icon: '🔍',
+    loader: () => import('@/tools/json-query/Index.vue'),
+  },
+  {
     id: 'json-repair',
     name: 'JSON 修復 / 寬鬆解析',
     category: 'workshop',
