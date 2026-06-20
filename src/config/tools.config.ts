@@ -1679,6 +1679,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/punycode/Index.vue'),
   },
   {
+    id: 'domain-twist',
+    name: '相似網域產生(防仿冒)',
+    category: 'anti-scam',
+    description: '輸入你常用的真實網域(銀行、購物、政府),列出詐騙集團常拿來假冒它的形近 / 錯字網域樣式(少打多打、相鄰對調、l↔1 o↔0 形近字、插連字號、換 TLD…),認得仿冒網域長什麼樣。dnstwist 風格;只在你瀏覽器產生字串,不連網、不查詢任何網域。',
+    keywords: ['相似網域', '仿冒網域', '假網域', '釣魚網域', 'typosquatting', 'dnstwist', '搶註', '形近網域', '錯字網域', '假冒', '仿冒', '防詐騙', '網域', '網址', 'phishing', '盜版網站', '山寨', 'homoglyph', 'tld', '品牌保護'],
+    icon: '🎭',
+    loader: () => import('@/tools/domain-twist/Index.vue'),
+  },
+  {
     id: 'sms-check',
     name: '詐騙簡訊檢查',
     category: 'anti-scam',

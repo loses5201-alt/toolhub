@@ -57,6 +57,15 @@
   jwt.io 官方 HS256 向量逐字、buildHeader/encodeSegment/signingInput、4 組 payload×演算法與 Node crypto 交叉、
   與同檔 verifyHmac 簽發→驗證往返且錯誤密鑰應失敗、decodeJwt 解回 payload/alg、applyTimeClaims iat/exp/nbf/
   取整/不動原物件,併入 npm test)。與 jwt-decode、hmac 互補;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
+- 相似網域產生 / 防仿冒(domain-twist,category=anti-scam):輸入真實網域,列出詐騙集團常拿來假冒它的形近/
+  錯字網域樣式(dnstwist 風格),讓使用者與長輩認得仿冒網域長什麼樣,深化反詐第二支柱。引擎
+  src/features/domainTwist.ts(parseDomain 去協定/路徑/小寫/最後一點切 name+tld;11 種轉換 omission/repetition/
+  transposition/replacement(QWERTY 鄰鍵)/insertion/homoglyph(l↔1 o↔0 與多字元 m↔rn w↔vv)/hyphenation/
+  vowelSwap/bitsquatting(7 位元翻轉留合法字元)/addition/tld-swap(常見+形近 TLD);generateTwists 全域去重排除原網域、
+  純函式無 DOM、只生成字串不連網不解析)+ 回歸測試 scripts/test-domaintwist.mjs(49 筆:parseDomain 各情形與
+  null、每種轉換對已知輸入的精確輸出、鄰鍵數、bitsquatting 合法性、整合去重/排除原網域/TLD 保留/tld-swap 換 TLD、
+  google 案例與 countTwists,esbuild 打包後跑,併入 npm test)。明確聲明不查詢/不解析/別點開;分組顯示可整組複製、
+  連到 punycode 與 link-check;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
 - curl 指令轉換(curl-convert,category=workshop):把 DevTools「Copy as cURL」或文件複製來的 curl 拆成
   method / 網址 / 標頭 / body / 認證,並轉成 JavaScript fetch 與 Python requests(curlconverter.com 那類,
   但 curl 常含 API token,本工具全程瀏覽器解析、不上傳)。引擎 src/features/curlConvert.ts(tokenize 依 shell
