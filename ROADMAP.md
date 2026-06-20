@@ -22,6 +22,15 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
+- 商品條碼檢查碼(gtin-check,category=life):驗證 EAN-13 / UPC-A(12)/ EAN-8 / GTIN-14 的
+  GS1 mod-10 檢查碼,或由前置碼補上檢查碼,並解讀 EAN-13 的 GS1 國別/用途前置碼(471=臺灣、690-699=
+  中國大陸、978-979=ISBN…約 100 筆對照)。引擎 src/features/gtin.ts(computeCheckDigit 由最右資料碼起
+  權重 3,1 交替取 10 補數、validateGtin 依長度判型別/拆資料碼與檢查碼/回報錯誤、completeGtin 由 7/11/12/13
+  碼前置補碼、lookupPrefix 前 3 碼查 GS1 前置範圍;純函式無 DOM)+ 回歸測試 scripts/test-gtin.mjs
+  (以 GS1 演算法與已知有效碼 EAN-13 4006381333931 / UPC-A 036000291452 / EAN-8 96385074 /
+  GTIN-14 10614141000415 為 oracle 約 40 筆:檢查碼計算/各型別驗證/錯碼/長度不符/補碼往返/國別前置,
+  併入 npm test)。與條碼產生器(視覺)、ISBN / 信用卡號(card-check)/ IBAN 檢查互補;只做數學驗證、
+  不查商品資料;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
 - 摩斯密碼轉換(morse-code,category=life):文字 ↔ 摩斯密碼互轉,依 ITU-R M.1677-1 國際標準碼表
   (A–Z、0–9、常用標點與少數重音字母)。編碼字母間單空白、單字以「/」分隔;解碼容錯多空白/全形「・」「−」。
   可調速(PARIS 標準:1 單位 = 1.2÷WPM 秒)以 Web Audio 播放 600Hz 嗶聲、一鍵對調與複製、自動偵測貼上的是摩斯碼。
