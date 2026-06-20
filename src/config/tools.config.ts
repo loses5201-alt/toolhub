@@ -1047,6 +1047,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/color-scale/Index.vue'),
   },
   {
+    id: 'palette-extract',
+    name: '圖片調色盤萃取',
+    category: 'workshop',
+    description: '上傳一張圖,用 median cut 量化取出最具代表性的 4–12 個主色,附每色佔比與可直接貼用的 HEX / RGB / CSS 變數 / JSON。做設計取色、配色參考用 —— 全程在你的瀏覽器以 canvas 運算,圖片不上傳、不連網。',
+    keywords: ['調色盤', '配色', '取色', '主色', 'palette', 'color palette', 'extract', '圖片取色', '色票', '從圖片', 'dominant color', '主題色', '量化', 'median cut', 'coolors', 'eyedropper', '吸色', '色彩', '設計取色', 'hex'],
+    icon: '🎨',
+    loader: () => import('@/tools/palette-extract/Index.vue'),
+  },
+  {
     id: 'color-mix',
     name: '色彩混合器',
     category: 'workshop',

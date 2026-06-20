@@ -39,6 +39,15 @@
   jwt.io 官方 HS256 向量逐字、buildHeader/encodeSegment/signingInput、4 組 payload×演算法與 Node crypto 交叉、
   與同檔 verifyHmac 簽發→驗證往返且錯誤密鑰應失敗、decodeJwt 解回 payload/alg、applyTimeClaims iat/exp/nbf/
   取整/不動原物件,併入 npm test)。與 jwt-decode、hmac 互補;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
+- 圖片調色盤萃取(palette-extract,category=workshop):上傳一張圖,用 median cut 量化取出 4–12 個最具代表性
+  的主色(做設計取色、配色參考),補齊色彩工坊缺的「從圖片取色」(coolors / imagecolorpicker 那類)。前端把圖縮到
+  最長邊 ≤160px 用 canvas 取樣,引擎 src/features/paletteExtract.ts(rgbToHex/clamp255/luminance、extractPixels
+  跳過透明像素可跳格抽樣、medianCut 反覆挑單一通道色差最大的色塊沿最長通道中位數切割直到湊滿 N 個再取平均、
+  依像素數遞減排序附佔比、formatSwatches 輸出 HEX/RGB/CSS 變數/JSON 純函式無 DOM)+ 回歸測試
+  scripts/test-palette.mjs(35 筆:hex 轉換與補零、clamp 四捨五入、luminance 白>灰>黑、extractPixels 跳透明與
+  stride、medianCut 等量純色乾淨切割、單色塊取平均、沿 R 軸三段保證乾淨切割並依數量排序與佔比守恆、純色/空/
+  count=0/兩像素上限、不變動輸入、四種輸出格式,esbuild 打包後跑,併入 npm test)。色票點擊複製、文字色依
+  背景亮度自動黑白;與 color-tools/color-scale/contrast-check 互補;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
 - JSONPath 查詢(json-query,category=workshop):用路徑運算式從一大包巢狀 JSON 精準撈值/過濾陣列/跨層蒐集
   (整理 API 回應、設定檔、log),補上 JSON 套件缺的「查詢」能力。自實作 Goessner 風格實用子集:$ 根、
   .key 與 ['key']、[0]/負數[-1]、萬用 [*] 與 .*、[start:end:step] 切片(含負索引/負步進)、.. 遞迴下降、
