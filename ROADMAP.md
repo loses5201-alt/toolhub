@@ -22,6 +22,13 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
+- 電子發票 QR 解析(einvoice-qr,category=life,台灣在地):貼上電子發票證明聯「左方」QR 掃出的文字,
+  依財政部二維條碼規格拆解前 77 字固定欄位 —— 發票號碼、開立日期(民國轉西元)、隨機碼、未稅銷售額與
+  含稅總計額(十六進位轉台幣)、買賣方統編,並推估稅額。引擎 src/features/einvoiceQr.ts(parseRocDate
+  民國轉西元含月日驗證、hexToInt、parseEinvoiceQr 切 77 字欄位 + 右方條碼/長度/字軌格式容錯 + 冒號尾段
+  品目筆數/編碼參數、encodingLabel;純函式無 DOM)+ 回歸測試 scripts/test-einvoiceqr.mjs(以規格手構
+  77 字 + hex 金額/民國日期手算為 oracle 31 筆:日期換算/編碼/欄位拆解/個人vs統編買方/錯誤情況/無 tail/
+  去空白,併入 npm test)。與 invoice-lottery(對獎)、qr-decode 互補;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
 - Open Graph / SEO 標籤產生器(og-meta,category=workshop):填標題/描述/預覽圖等欄位產生完整
   Open Graph + Twitter Card + SEO meta 標籤並即時顯示社群分享預覽卡;也能反向貼 HTML 解析出欄位。
   附標題/描述長度、缺漏、絕對網址健檢。引擎 src/features/ogMeta.ts(escapeAttr/escapeText 跳脫、
