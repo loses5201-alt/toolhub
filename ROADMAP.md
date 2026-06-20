@@ -143,6 +143,14 @@
   (已知輸出 1000K=(255,68,0)/6600K=(255,255,255)、暖紅冷藍與通道單調/範圍、邊界夾鉗、
   mired 互逆、rgbToKelvin 自洽,共 19 筆,併入 npm test)。選燈泡、攝影白平衡、UI 配色用;
   與色彩工坊/混合器/色差互補;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
+- 方位角 / 羅盤方位(geo-bearing,category=workshop):給兩座標算起始/到達/反方位角、羅盤方位名
+  (中英 4/8/16 方位)與大圓距離,附 SVG 羅盤指針示意;也能單獨把方位角換成方位名。引擎
+  src/features/bearing.ts(initialBearing 球面三角、finalBearing=反向起始+180、backBearing、
+  normalizeBearing、compassPoint 直接量化到所選精度方位環、distance 複用 haversine、computeBearing;
+  複用 geoCoord 的 parsePair/validate;純函式無 DOM)+ 回歸測試 scripts/test-bearing.mjs
+  (幾何事實 N/E/S/W=0/90/180/270、(0,0)->(1,1)≈45、compass 各方位與 4/8/16 分級、normalize/back
+  環繞、經線 final=initial、台北->東京偏東北,共 25 筆,併入 npm test)。給真北方位(需留意磁偏角);
+  登山定向、天線/小耳朵對準、航海飛行用;與 geo-coord 互補;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
 - Open Graph / SEO 標籤產生器(og-meta,category=workshop):填標題/描述/預覽圖等欄位產生完整
   Open Graph + Twitter Card + SEO meta 標籤並即時顯示社群分享預覽卡;也能反向貼 HTML 解析出欄位。
   附標題/描述長度、缺漏、絕對網址健檢。引擎 src/features/ogMeta.ts(escapeAttr/escapeText 跳脫、
