@@ -134,6 +134,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/image-ocr/Index.vue'),
   },
   {
+    id: 'image-frame',
+    name: '照片加邊框 / 方形白邊',
+    category: 'workshop',
+    description: '把長方形照片加白邊變成正方形(或 4:5、9:16 限動)以利 IG 上傳不被裁切 —— 保留原圖原始像素、不放大失真,可自訂邊框寬度與顏色,可批次處理並打包 ZIP。全程在你瀏覽器以 canvas 運算,照片不上傳、無廣告、無浮水印。',
+    keywords: ['加邊框', '白邊', '方形', '正方形', 'ig', 'instagram', '限動', '限時動態', '貼文', '不被裁切', '滿版', '照片邊框', '加框', '相框', '留白', '補白', 'border', 'frame', 'square', '改比例', '長寬比', '4:5', '9:16', '照片變正方', '批次', 'padding'],
+    icon: '🖼️',
+    loader: () => import('@/tools/image-frame/Index.vue'),
+  },
+  {
     id: 'placeholder-image',
     name: '佔位圖產生器',
     category: 'workshop',

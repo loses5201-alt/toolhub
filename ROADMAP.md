@@ -22,6 +22,15 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
+- 照片加邊框 / 方形白邊(image-frame,category=workshop):把長方形照片加白邊變成正方形(或 4:5、9:16
+  限動、16:9、3:2 等)以利 IG 上傳不被裁切;保留原圖原始像素、不放大失真,可調邊框寬度(原圖長邊百分比)與
+  顏色,批次處理並打包 ZIP(JSZip)。引擎 src/features/imageFrame.ts(純函式無 DOM:computeFrame 依
+  marginPercent×長邊算邊框、minW/minH=源圖+2margin,再依目標比例「補滿較短維度」算 canvasW/H 與置中
+  drawX/Y,圖維持原尺寸;aspectValue;marginPercent 夾 0–50)+ 回歸測試 scripts/test-imageframe.mjs
+  (以比例定義與置中/補邊幾何手算為 oracle 37 筆:aspectValue/original 等寬框與 margin0 原樣/橫圖→正方補高
+  與直圖→正方補寬/含框正方四周≥margin/9:16 直式由比例算高且 H>W/正方圖→正方不變/marginPercent 夾 50%,
+  併入 npm test)。Vue 端 canvas 繪製與 toBlob 下載。與 image-crop、image-fit-size、image-watermark 互補;
+  零相依新增、不上傳、無浮水印;type-check + 全測試 + build 通過 — 2026-06-20
 - 佔位圖產生器(placeholder-image,category=workshop):做網頁/簡報/排版示意圖的灰底尺寸圖,自訂尺寸、
   顏色、文字、對角交叉線,輸出 SVG / PNG / data URI。引擎 src/features/placeholder.ts(純函式無 DOM:
   escapeXml 五種特殊字元、autoFontSize=min(w,h)/8 夾 12–160、parseSize 解析 640x480/全形×/*/空白、
