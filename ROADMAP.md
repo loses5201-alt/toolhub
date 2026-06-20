@@ -22,6 +22,14 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
+- 干支生肖納音(ganzhi,category=datetime):輸入西元或民國年,算出天干地支(六十甲子)、十二生肖、
+  天干五行、納音五行、六十甲子序與地支時辰。引擎 src/features/ganzhi.ts(ganzhiOfYear 以公元 4 年=甲子、
+  (year-4)%10/%12/%60 求干支/生肖/甲子序、NAYIN_30 每兩甲子共用、rocToAd、sexagenaryIndexOf、
+  yearsForGanzhi 反查近期相符年份;純函式無 DOM,正數取模處理西元前)+ 回歸測試 scripts/test-ganzhi.mjs
+  (以已知對照 1984=甲子鼠海中金 / 2024=甲辰龍覆燈火 / 2025=乙巳蛇 / 1911=辛亥豬 / 公元 4=甲子 為
+  oracle 約 40 筆:常數/已知年/60 與 12 循環/納音 30 種/甲子序互異/民國換算/反查/不相容組合,併入 npm test)。
+  明確標註以西曆年為準、春節/立春前出生者往前一年判讀;與民國年換算、年齡計算互補;零相依、不上傳;
+  type-check + 全測試 + build 通過 — 2026-06-20
 - 商品條碼檢查碼(gtin-check,category=life):驗證 EAN-13 / UPC-A(12)/ EAN-8 / GTIN-14 的
   GS1 mod-10 檢查碼,或由前置碼補上檢查碼,並解讀 EAN-13 的 GS1 國別/用途前置碼(471=臺灣、690-699=
   中國大陸、978-979=ISBN…約 100 筆對照)。引擎 src/features/gtin.ts(computeCheckDigit 由最右資料碼起
