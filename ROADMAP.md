@@ -22,6 +22,15 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
+- Unified diff / patch 產生器(unified-diff,category=workshop):把兩段文字比對輸出標準
+  unified diff(--- / +++ / @@ 區塊),可複製或下載成 .patch 直接 git apply / patch 套用、貼進 PR。
+  可調上下文行數、忽略大小寫/行尾空白、對調兩邊。與 text-diff 互補(那支視覺對照,這支產可套用 patch)。
+  引擎 src/features/unifiedDiff.ts(lcsOps 逐行 LCS、toOpcodes 壓成 equal/delete/insert/replace、
+  groupOpcodes 仿 difflib 依 context 切群並修剪首尾上下文、formatRange 仿 difflib 空範圍起點減一、
+  unifiedDiff 組 patch 與 added/removed/hunks/identical;純函式無 DOM)+ 回歸測試
+  scripts/test-unifieddiff.mjs(以 unified diff 格式與 difflib 規則手算為 oracle:相同/替換/結尾新增/
+  刪除/兩處變更分兩區塊且中間 equal>context*2 切斷/context=1 收窄/自訂檔名/忽略大小寫與行尾空白/
+  空到有內容,逐字比對完整 patch 字串,併入 npm test)。零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
 - HAR 網路分析(har-analyze,category=workshop):把瀏覽器 DevTools Network 面板匯出的 .har 檔
   彙整成可讀統計 —— 總請求數、總傳輸大小、牆鐘載入時間、依狀態碼/資源類型/網域分布、最慢與最大的
   請求、4xx/5xx 錯誤清單,快速找出網頁效能瓶頸。拖放或選檔即解析;HAR 常含 cookie/Authorization
