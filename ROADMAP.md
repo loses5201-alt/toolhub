@@ -342,6 +342,16 @@
   finder 加虛擬項 picks-center 讓關鍵字導向;App 導覽 + 首頁入口卡;NetworkFirst 自動涵蓋新 JSON — 2026-06-15
 
 ## 處理工坊(續)
+- CSS 格式化 / 壓縮(css-format,category=workshop):把擠成一行或凌亂的 CSS 排成可讀格式
+  (每條宣告獨立一行、選擇器逗號各自成行、巢狀 @media 縮排),或反向壓成單行。與 sql-format、
+  xml-format 構成「格式化三兄弟」。正確處理易錯點:url(data:...;base64,...) 內的 ; 與 , 不被誤切
+  (掃描器追蹤括號深度)、a:hover 偽類冒號不被當成宣告的 prop:value 冒號(以頂層冒號切分)、
+  字串與註解原樣保留(獨立成行或附在該行)。引擎 src/features/cssFormat.ts(collapseWs 收斂空白但保留
+  引號內容、splitTopLevel 在括號/中括號/引號外切分、formatDeclaration 以第一個頂層冒號分 prop/value、
+  scan 回呼式掃描、formatCss/minifyCss 純函式無 DOM)+ 回歸測試 scripts/test-cssformat.mjs(32 筆:
+  規則/選擇器清單/巢狀 @media/前導註解/偽類/括號內逗號/url 冒號/data URI 不誤切/@import/縮排/空白收斂/
+  字串保留/空規則,minify 7 種,4 組冪等性 + 結構保留(minify(x)===minify(format(x))),邊界,併入 npm test)。
+  零新相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
 - XML 格式化 / 壓縮(xml-format,category=workshop):把擠成一行的 XML / SVG / RSS / pom.xml / 設定檔
   重新縮排成可讀格式,或反向壓成單行 —— 補足資料轉換群(JSON/YAML/CSV/Excel/INI/.env)一直缺的 XML。
   不依賴 DOMParser,自行 tokenize+建樹+重排(可在 Node 測,也代表全程瀏覽器執行、不上傳;XML 設定常含
