@@ -22,6 +22,13 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
+- 網購交易詐騙風險評估(deal-risk,category=anti-scam):下單前勾選符合的情況(價格過低/要加 LINE 私下
+  匯款/限時催促/操作 ATM/索驗證碼/退回多付款…),用加權題庫即時算出風險等級並針對每項給具體提醒;
+  關鍵警訊(ATM/驗證碼/退款代收)一中即判極高風險。轉長輩當下單把關清單。引擎 src/features/dealRisk.ts
+  (QUESTIONS 12 題含 critical 旗標、assess 累加權重+critical 覆蓋+門檻 35/15%、summaryFor 各級建議;
+  純函式無 DOM)+ 回歸測試 scripts/test-dealrisk.mjs(以加權門檻為 oracle:題庫健全/全否無風險/單一關鍵題
+  極高/低權重低風險/關鍵題排前/15 分達高風險/6 分中風險/全勾 100% 極高/各級 summary 非空,併入 npm test)。
+  與 scam-guide(圖鑑)、sms-check(簡訊)、link-check(網址)互補;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
 - robots.txt 測試器(robots-tester,category=workshop):貼上 robots.txt + 網址 + 爬蟲 UA,
   判斷該頁能否被抓取 —— 依 Google 規範:符合的群組內以最長規則勝、同長 Allow 勝 Disallow,
   支援 * 與 $ 萬用字元,列出解析後群組與 Sitemap。SEO 除錯必備。引擎 src/features/robots.ts
