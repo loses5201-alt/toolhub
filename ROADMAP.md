@@ -22,6 +22,13 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
+- Open Graph / SEO 標籤產生器(og-meta,category=workshop):填標題/描述/預覽圖等欄位產生完整
+  Open Graph + Twitter Card + SEO meta 標籤並即時顯示社群分享預覽卡;也能反向貼 HTML 解析出欄位。
+  附標題/描述長度、缺漏、絕對網址健檢。引擎 src/features/ogMeta.ts(escapeAttr/escapeText 跳脫、
+  generateMeta 只輸出有值欄位、parseAttrs 解析屬性(雙/單引號、content 與 property 任意順序)、
+  parseMeta 抽 og:/twitter:/title/description 並 fallback、metaWarnings 健檢;純函式無 DOM)+ 回歸測試
+  scripts/test-ogmeta.mjs(以 OG/Twitter 標準與 generate→parse 來回一致為 oracle 33 筆,併入 npm test)。
+  與 robots-tester 組成 SEO 工具組;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
 - 網購交易詐騙風險評估(deal-risk,category=anti-scam):下單前勾選符合的情況(價格過低/要加 LINE 私下
   匯款/限時催促/操作 ATM/索驗證碼/退回多付款…),用加權題庫即時算出風險等級並針對每項給具體提醒;
   關鍵警訊(ATM/驗證碼/退款代收)一中即判極高風險。轉長輩當下單把關清單。引擎 src/features/dealRisk.ts
