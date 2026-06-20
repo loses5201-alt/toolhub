@@ -1002,6 +1002,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/dotenv-convert/Index.vue'),
   },
   {
+    id: 'toml-convert',
+    name: 'TOML ↔ JSON 互轉',
+    category: 'workshop',
+    description: '把 Cargo.toml / pyproject.toml / netlify.toml 等 TOML 設定檔轉成 JSON,或把 JSON 倒回 TOML —— 支援巢狀表、陣列表、inline table、點分鍵。設定常含金鑰密碼,全程在你瀏覽器處理,不上傳。',
+    keywords: ['toml', 'json', '互轉', '轉換', 'cargo.toml', 'pyproject.toml', 'pyproject', 'netlify.toml', 'config.toml', '設定檔', 'config', 'rust', 'python', '金鑰', '密碼', 'toml轉json', 'json轉toml', '陣列表', 'inline table'],
+    icon: '🦀',
+    loader: () => import('@/tools/toml-convert/Index.vue'),
+  },
+  {
     id: 'bg-color-key',
     name: '去純色背景 → 透明',
     category: 'workshop',
