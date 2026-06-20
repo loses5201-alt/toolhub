@@ -768,6 +768,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/url-parse/Index.vue'),
   },
   {
+    id: 'qs-convert',
+    name: 'JSON ↔ 查詢字串轉換',
+    category: 'workshop',
+    description: '查詢字串與 JSON 物件互轉,支援巢狀物件與陣列的方括號表示法(a[b][]=1)—— 對接 API、debug axios/qs 參數時好用。可選 brackets/indices/repeat/comma 陣列格式。純前端、不上傳。',
+    keywords: ['查詢字串', 'query string', 'querystring', 'qs', 'json', '轉換', '參數', 'params', 'url編碼', 'urlencode', '方括號', '巢狀', 'axios', 'api', '表單', 'form-urlencoded', 'serialize', '序列化', '陣列參數'],
+    icon: '🔀',
+    loader: () => import('@/tools/qs-convert/Index.vue'),
+  },
+  {
     id: 'cookie-parse',
     name: 'Cookie 解析器',
     category: 'workshop',

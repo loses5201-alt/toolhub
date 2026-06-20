@@ -1296,6 +1296,13 @@
   (以畢氏定理手算為 oracle,常見螢幕交叉驗證:15.6"FHD≈141.21PPI/27"2K≈108.79/1000×1000@√2吋=1000PPI/
   點距/實體尺寸/25cm 門檻≈349 且越遠越低/458PPI 手機達視網膜、141PPI 筆電未達/邊界報錯,併入 npm test)。
   零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
+- JSON ↔ 查詢字串轉換(qs-convert,category=workshop):查詢字串與 JSON 物件互轉,支援巢狀物件/陣列的
+  方括號表示法(a[b][]=1、a[0]=x、重複裸鍵 a=1&a=2 合併成陣列),對接 API、debug axios/qs 參數用;
+  序列化可選 brackets/indices/repeat/comma 陣列格式。引擎 src/features/qsConvert.ts(parseKeyPath 拆方括號路徑、
+  assign 沿路徑建巢狀物件/陣列、queryToJson 解析、serialize/jsonToQuery 各陣列格式、encKey 保留結構方括號為字面值;
+  純函式無 DOM)+ 回歸測試 scripts/test-qsconvert.mjs(以方括號語意為 oracle:扁平/問號/無值/巢狀/陣列 push 與索引/
+  深巢狀/重複裸鍵/URL 編解碼/編碼方括號鍵/四種陣列格式/null 空值/數字布林/非物件回空/物件與含編碼往返,併入 npm test)。
+  與 url-parse(扁平單一網址)互補;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
 
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
