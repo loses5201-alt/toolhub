@@ -22,6 +22,14 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
+- SMPTE 影格時間碼(timecode,category=workshop):影格數 ↔ 時間碼(HH:MM:SS:FF)互轉,支援
+  23.976/24/25/29.97/30/50/59.94/60 fps 與 drop-frame(29.97/59.94),並算實際時間長度。引擎
+  src/features/timecode.ts(FPS_OPTIONS 含 actual/nominal/dropAllowed、dropFramesPerMinute、
+  framesToTimecode/timecodeToFrames 採經典 SMPTE 掉幀演算法、parseTimecode 容錯 :;.,/負號/DF 偵測、
+  framesToSeconds/formatSeconds;純函式無 DOM)+ 回歸測試 scripts/test-timecode.mjs(以經典 oracle
+  29.97DF 影格 1800=00:01:00;02、17982=00:10:00;00、59.94DF 3600=00:01:00;04,加多幀率大量 round-trip
+  與實際秒數,約 40 筆,併入 npm test)。剪輯/字幕/套對用;與時間長度、時間戳換算互補;零相依、不上傳;
+  type-check + 全測試 + build 通過 — 2026-06-20
 - 干支生肖納音(ganzhi,category=datetime):輸入西元或民國年,算出天干地支(六十甲子)、十二生肖、
   天干五行、納音五行、六十甲子序與地支時辰。引擎 src/features/ganzhi.ts(ganzhiOfYear 以公元 4 年=甲子、
   (year-4)%10/%12/%60 求干支/生肖/甲子序、NAYIN_30 每兩甲子共用、rocToAd、sexagenaryIndexOf、
