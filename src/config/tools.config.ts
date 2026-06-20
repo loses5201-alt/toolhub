@@ -207,6 +207,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/image-fit-size/Index.vue'),
   },
   {
+    id: 'data-size',
+    name: '資料大小與下載時間換算',
+    category: 'workshop',
+    description: 'KB/MB/GB(1000)對照系統實際顯示的 KiB/MiB/GiB(1024)—— 搞懂「1TB 硬碟為何只剩 931GB」;bit/byte 換算、輸入頻寬估下載/上傳要多久。純數學計算、不上傳。',
+    keywords: ['資料大小', '檔案大小', 'kb', 'mb', 'gb', 'tb', 'kib', 'mib', 'gib', '位元組', 'byte', 'bit', '位元', '1024', '1000', '硬碟容量', '931gb', '頻寬', '下載時間', '傳輸時間', 'mbps', '網速', 'bytes', 'megabyte', 'gigabyte'],
+    icon: '💾',
+    loader: () => import('@/tools/data-size/Index.vue'),
+  },
+  {
     id: 'aspect-ratio',
     name: '長寬比與尺寸計算',
     category: 'workshop',

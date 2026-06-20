@@ -1260,6 +1260,15 @@
   維持比例兩向/contain 取較小 cover 取較大縮放/百萬像素/邊界 null,併入 npm test)。與 image-fit-size、image-studio
   互補;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
 
+- 資料大小與下載時間換算(data-size,category=workshop):解三個常見混淆——① KB/MB/GB(十進位 1000)
+  對照 KiB/MiB/GiB(二進位 1024),說明「1TB 硬碟系統只顯示 931GiB」;② bit/byte(1 byte=8 bit);
+  ③ 輸入頻寬估下載/上傳時間(檔案大小×8÷頻寬 bps)。引擎 src/features/dataSize.ts(unitBytes/toBytes 依
+  SI/IEC 冪次與 bit、breakdown 同時展開兩套單位、humanize 自動挑單位、transferSeconds 含 Mbps/MBps 等、
+  humanDuration 時分秒、round;純函式無 DOM)+ 回歸測試 scripts/test-datasize.mjs(以 1000/1024 冪與
+  1 byte=8 bit 手算為 oracle:各單位係數/1TB→0.909TiB/humanize SI 與 IEC 邊界/1GB@100Mbps=80s/
+  MBps/速度 0 與負 size NaN/humanDuration 毫秒到時分秒,併入 npm test)。與 unit-convert(物理單位)
+  區隔;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
+
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
       與本專案「精簡 + 自包含」原則不符,**跳過**(未來若改自架模型再評估)
