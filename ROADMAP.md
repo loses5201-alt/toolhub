@@ -22,6 +22,16 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
+- HTTP 安全標頭稽核(security-headers,category=workshop):貼上 HTTP 回應標頭,逐項檢查
+  HSTS / CSP / X-Content-Type-Options / 防點擊劫持 / Referrer-Policy / Permissions-Policy
+  等安全防護是否齊全與設定良好,給 A+~F 評分(權重 hsts20 csp25 nosniff15 clickjacking15
+  referrer10 permissions10 disclosure5)+ 改善建議,並對 X-XSS-Protection 棄用、COOP/COEP 給資訊。
+  概念類似 securityheaders.com 但離線判讀。引擎 src/features/securityHeaders.ts(parseHeaders
+  跳狀態行/小寫鍵/重複串接、各 check 含 ratio、HSTS 解 max-age 判半年門檻、CSP 偵 unsafe-inline/eval、
+  frame-ancestors 替代 XFO、Server/X-Powered-By 版本揭露、gradeOf;純函式無 DOM)+ 回歸測試
+  scripts/test-securityheaders.mjs(以權重手算分數為 oracle:全空 5 分 F / 滿分 100 A+ / 部分 50 D /
+  短 HSTS 與無 max-age warn / CSP unsafe warn / nosniff 錯值 / frame-ancestors / 版本揭露 / 舊版
+  Feature-Policy / xss 棄用與 COOP 資訊,併入 npm test)。零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
 - Unified diff / patch 產生器(unified-diff,category=workshop):把兩段文字比對輸出標準
   unified diff(--- / +++ / @@ 區塊),可複製或下載成 .patch 直接 git apply / patch 套用、貼進 PR。
   可調上下文行數、忽略大小寫/行尾空白、對調兩邊。與 text-diff 互補(那支視覺對照,這支產可套用 patch)。
