@@ -48,6 +48,16 @@
   jwt.io 官方 HS256 向量逐字、buildHeader/encodeSegment/signingInput、4 組 payload×演算法與 Node crypto 交叉、
   與同檔 verifyHmac 簽發→驗證往返且錯誤密鑰應失敗、decodeJwt 解回 payload/alg、applyTimeClaims iat/exp/nbf/
   取整/不動原物件,併入 npm test)。與 jwt-decode、hmac 互補;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
+- curl 指令轉換(curl-convert,category=workshop):把 DevTools「Copy as cURL」或文件複製來的 curl 拆成
+  method / 網址 / 標頭 / body / 認證,並轉成 JavaScript fetch 與 Python requests(curlconverter.com 那類,
+  但 curl 常含 API token,本工具全程瀏覽器解析、不上傳)。引擎 src/features/curlConvert.ts(tokenize 依 shell
+  規則切詞:單引號原樣/雙引號\跳脫/引號黏 token/反斜線續行;parseCurl 解析 -X -H -d/--data-* -F -u -G -A -e -b
+  --url、黏寫短旗標 -XPOST、--flag=value、content-type 決定 body raw vs urlencoded、-G 併查詢字串、預設 method;
+  toFetch/toPython 產碼,純函式無 DOM)+ 回歸測試 scripts/test-curlconvert.mjs(41 筆:tokenize 各情形、基本 GET、
+  POST+header+json、預設 POST/urlencoded、多 -d 串接、黏寫旗標、--data-raw 與 --request=、-u 認證、-G 查詢字串、
+  -F 表單、-A/-e/-b 轉標頭、忽略無關旗標、未知旗標與缺網址警告、--url、fetch 與 python 輸出含認證/表單,
+  esbuild 打包後跑,併入 npm test)。解析結果以表格+method 色票呈現、fetch/python 切換複製;零相依、不上傳;
+  type-check + 全測試 + build 通過 — 2026-06-20
 - 反向正則 / 產生範例字串(regex-gen,category=workshop):給一個正規表示式,倒過來產生一批「符合該樣式」
   的範例字串(09\d{8}→一堆手機號),造測試資料、確認自己寫的 regex 到底會吃到哪些字串。與 regex-tester(正向比對)
   互補。自實作遞迴下降解析器(Parser:parseAlt/parseSeq/parseQuantifier/parseAtom/parseClass/parseEscape)把正則

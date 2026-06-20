@@ -445,6 +445,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/regex-tester/Index.vue'),
   },
   {
+    id: 'curl-convert',
+    name: 'curl 指令轉換',
+    category: 'workshop',
+    description: '把 DevTools「Copy as cURL」或文件複製來的 curl,拆成 method / 網址 / 標頭 / body,並轉成 JavaScript fetch 與 Python requests 程式碼。支援 -X -H -d -F -u -G 等;curl 常含 API token,全程在你瀏覽器解析、不上傳。',
+    keywords: ['curl', 'curl轉換', 'curl converter', 'copy as curl', 'fetch', 'requests', 'python', 'javascript', 'http', 'api', '請求', 'devtools', '轉程式碼', 'curl to fetch', 'curl to python', '網路請求', '標頭', 'header', '解析curl'],
+    icon: '🌐',
+    loader: () => import('@/tools/curl-convert/Index.vue'),
+  },
+  {
     id: 'regex-gen',
     name: '反向正則(產生範例字串)',
     category: 'workshop',
