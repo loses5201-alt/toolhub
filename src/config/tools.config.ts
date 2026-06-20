@@ -207,6 +207,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/image-fit-size/Index.vue'),
   },
   {
+    id: 'aspect-ratio',
+    name: '長寬比與尺寸計算',
+    category: 'workshop',
+    description: '算出寬高是幾比幾(16:9、4:3…)、維持比例放大縮小求另一邊、把圖塞進外框(contain/cover)會縮成多大 —— 做設計/剪片/印刷/響應式圖片必備,純數學計算、不上傳。',
+    keywords: ['長寬比', '比例', '寬高比', '16:9', '4:3', '21:9', '尺寸', '解析度', '縮放', '等比例', '放大', '縮小', '百萬像素', 'megapixel', 'aspect ratio', 'resize', 'contain', 'cover', '影片尺寸', '螢幕比例', '相片比例'],
+    icon: '📏',
+    loader: () => import('@/tools/aspect-ratio/Index.vue'),
+  },
+  {
     id: 'image-diff',
     name: '圖片差異比對',
     category: 'workshop',
