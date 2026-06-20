@@ -65,6 +65,14 @@
   jwt.io 官方 HS256 向量逐字、buildHeader/encodeSegment/signingInput、4 組 payload×演算法與 Node crypto 交叉、
   與同檔 verifyHmac 簽發→驗證往返且錯誤密鑰應失敗、decodeJwt 解回 payload/alg、applyTimeClaims iat/exp/nbf/
   取整/不動原物件,併入 npm test)。與 jwt-decode、hmac 互補;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
+- NDJSON / JSON Lines 轉換(ndjson-convert,category=workshop):在「每行一個 JSON」(log、資料匯出、ML 資料集、
+  串流 API)與「JSON 陣列」之間互轉,核心價值是轉換失敗時逐行指出哪一行壞掉、行號與錯誤訊息(一般編輯器看不出來),
+  補齊 data-convert 不含 NDJSON 的缺口。引擎 src/features/ndjson.ts(parseNdjson 逐行 JSON.parse 略過空白行記壞行行號、
+  validateLines 逐行燈號、ndjsonToArray 美化、arrayToNdjson 每元素壓單行且須最外層為陣列、tidyNdjson 去空白規整,
+  純函式無 DOM)+ 回歸測試 scripts/test-ndjson.mjs(31 筆:基本/空白行略過/壞行行號(含空白行後)/CRLF/各型別/
+  validateLines/toArray 成功與壞行/fromArray 非陣列與無效與空陣列/巢狀單行/tidy/兩向往返一致/空輸入,esbuild 打包後跑,
+  併入 npm test)。模式切換、壞行清單、一鍵去空白、連到 data-convert 與 json-query;零相依、不上傳;
+  type-check + 全測試 + build 通過 — 2026-06-20
 - 相似網域產生 / 防仿冒(domain-twist,category=anti-scam):輸入真實網域,列出詐騙集團常拿來假冒它的形近/
   錯字網域樣式(dnstwist 風格),讓使用者與長輩認得仿冒網域長什麼樣,深化反詐第二支柱。引擎
   src/features/domainTwist.ts(parseDomain 去協定/路徑/小寫/最後一點切 name+tld;11 種轉換 omission/repetition/

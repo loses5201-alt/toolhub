@@ -669,6 +669,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/markdown-toc/Index.vue'),
   },
   {
+    id: 'ndjson-convert',
+    name: 'NDJSON / JSON Lines 轉換',
+    category: 'workshop',
+    description: '在「每行一個 JSON」(log、資料匯出、ML 資料集、串流 API)與「JSON 陣列」之間互轉,並逐行指出哪一行壞掉(一般編輯器看不出來)、可一鍵去空白行。全程在你瀏覽器,不上傳。',
+    keywords: ['ndjson', 'json lines', 'jsonl', 'jsonlines', '每行一個', 'json陣列', '互轉', 'log', '日誌', '資料集', 'dataset', '串流', 'stream', '轉換', 'json line', '逐行', '壞行', '驗證', 'jq', '匯出'],
+    icon: '📑',
+    loader: () => import('@/tools/ndjson-convert/Index.vue'),
+  },
+  {
     id: 'json-query',
     name: 'JSONPath 查詢',
     category: 'workshop',
