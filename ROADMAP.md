@@ -1402,6 +1402,16 @@
   屬性+文字/同名→陣列/混合文字/實體解碼編碼/CDATA/略過註解PI/命名空間前綴/parseValues 轉型與前導零保護/
   自訂前綴/錯誤處理/JSON→XML 各型別與跳脫/往返一致與結構穩定,併入 npm test)。與 xml-format(美化)、
   json-yaml、json-repair 互補;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
+- CSS 顏色名稱查詢(color-name,category=workshop):輸入任何 HEX / rgb() / hsl() / 顏色英文名,
+  回答「這個顏色叫什麼」—— 完全相符給名稱,否則用 redmean 加權 RGB 距離列出最接近的 CSS 標準命名色;
+  反向也可由名稱看 HEX/RGB/HSL。資料 CSS_COLORS=CSS Color Module Level 4 的 148 個標準命名色(含
+  gray/grey 等同義拼法)。引擎 src/features/colorName.ts(parseColor 解析 3/6/8 碼 HEX、rgb()/rgba()、
+  hsl()/hsla()(含百分比與 alpha)、命名色;hslToRgb/rgbToHsl/rgbToHex 轉換;colorDistance redmean 近似;
+  nearestNamed 同 hex 同義名去重後排序;describeColor 綜合輸出 exactName 與最近清單;純函式無 DOM)+
+  回歸測試 scripts/test-colorname.mjs(以標準命名色已知 HEX、HSL 手算值、redmean 距離定義為 oracle 34 筆:
+  資料完整性/各格式解析/短碼大寫/alpha/hsl 三原色與白/無效→null/往返/距離單調性/精確命中與最近/同義去重/
+  describe 輸出,併入 npm test)。與 color-tools、color-mix、contrast-check 互補;零相依、不上傳;
+  type-check + 全測試 + build 通過 — 2026-06-20
 
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
