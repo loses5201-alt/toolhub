@@ -22,6 +22,17 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
+- RRULE 行事曆重複規則解讀(rrule-explain,category=workshop):貼上 .ics 行事曆檔裡看不懂的
+  RRULE(例 FREQ=MONTHLY;BYDAY=-1FR),用白話中文說明「多久發生一次」,並依開始時間(DTSTART)
+  算出接下來幾次實際日期。支援 FREQ(DAILY/WEEKLY/MONTHLY/YEARLY)、INTERVAL、COUNT、UNTIL、
+  BYMONTH、BYMONTHDAY(含負數=月底倒數)、BYDAY(含序數 2MO/-1FR)、BYSETPOS、WKST。引擎
+  src/features/rrule.ts(parseRRule 解析含 DTSTART 前綴行/欄位驗證、per-period 候選日產生器
+  weekdayDaysInMonth/dayNumbersForMonth 處理序數與 BYMONTHDAY∩BYDAY 交集、applySetPos、
+  startPeriod/advance 依 WKST 對齊週起始、occurrences 過濾 < dtstart 與 > UNTIL、describeRRule 白話;
+  純函式無 DOM)+ 回歸測試 scripts/test-rrule.mjs(以 RFC 5545 官方範例為 oracle,含兩個 WKST 會
+  改變結果的經典例 + 工作日/最後一個週五/最後一天/第 2,4 個週一/最後工作日 BYSETPOS/黑色星期五交集/
+  感恩節/COUNT/UNTIL/錯誤情況/describe 共 38 筆,併入 npm test)。與 cron 解讀、.ics 事件產生器互補;
+  零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
 - JSON Patch RFC 6902(json-patch,category=workshop):套用模式把 patch(add/remove/replace/move/
   copy/test)套到 JSON 文件;比較模式丟兩份 JSON 產生轉換 patch。JSON Pointer(/foo/0/bar、~1=/、~0=~)。
   與 json-diff(視覺)互補,這支產可機器套用的標準 patch。引擎 src/features/jsonPatch.ts(parsePointer、
