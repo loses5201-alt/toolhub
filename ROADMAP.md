@@ -39,6 +39,16 @@
   jwt.io 官方 HS256 向量逐字、buildHeader/encodeSegment/signingInput、4 組 payload×演算法與 Node crypto 交叉、
   與同檔 verifyHmac 簽發→驗證往返且錯誤密鑰應失敗、decodeJwt 解回 payload/alg、applyTimeClaims iat/exp/nbf/
   取整/不動原物件,併入 npm test)。與 jwt-decode、hmac 互補;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
+- 反向正則 / 產生範例字串(regex-gen,category=workshop):給一個正規表示式,倒過來產生一批「符合該樣式」
+  的範例字串(09\d{8}→一堆手機號),造測試資料、確認自己寫的 regex 到底會吃到哪些字串。與 regex-tester(正向比對)
+  互補。自實作遞迴下降解析器(Parser:parseAlt/parseSeq/parseQuantifier/parseAtom/parseClass/parseEscape)把正則
+  子集轉 AST 再隨機生成:字面、.、字元類別[a-z0-9]含範圍與否定[^...]、\d \w \s 與大寫否定、量詞 * + ? {n}{n,}{n,m}、
+  選擇 |、群組 ( )(?: );無上限量詞以「重複次數上限」收斂、錨點 ^ $ \b 與前瞻 (?=)(?!) 視零寬略過。引擎
+  src/features/regexGen.ts(parseRegex/generateSamples 純函式無 DOM)+ 回歸測試 scripts/test-regexgen.mjs
+  (43 筆:以原生 RegExp 為 oracle —— 25+ 種樣式(手機/email/IPv4/hex/車牌/日期/類別含 shorthand/巢狀群組…)
+  各產生 25 筆並用 ^(?:pattern)$ 整串核對、錨點與前瞻略過、固定樣式恆等、量詞次數上限、unique 去重、count、
+  6 種解析錯誤,esbuild 打包後跑,併入 npm test)。範例一鍵帶入、可重新產生/單筆或全部複製;零相依、不上傳;
+  type-check + 全測試 + build 通過 — 2026-06-20
 - 圖片差異比對(image-diff,category=workshop):上傳兩張同尺寸的圖(改版前後截圖),逐像素用 YIQ 感知色差
   (pixelmatch 風格)標出哪裡變了、變化比例多少(UI 改版核對、大家來找碴)。線上 image diff 多要上傳圖。
   引擎 src/features/imageDiff.ts(colorDelta YIQ 色差平方含半透明疊白底、diffImages 逐像素超過門檻標色並

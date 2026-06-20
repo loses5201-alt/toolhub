@@ -445,6 +445,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/regex-tester/Index.vue'),
   },
   {
+    id: 'regex-gen',
+    name: '反向正則(產生範例字串)',
+    category: 'workshop',
+    description: '給一個正規表示式,倒過來產生一批「符合該樣式」的範例字串(09\\d{8}→一堆手機號)。造測試資料、確認自己寫的 regex 到底會吃到哪些字串時最好用。支援字元類別、量詞、選擇、群組;全程在你瀏覽器,不連網、不上傳。',
+    keywords: ['反向正則', '正則產生', 'regex generator', 'reverse regex', 'randexp', '產生字串', '範例字串', '測試資料', 'test data', '正規表示式', '依正則', '符合樣式', '產生符合', '假資料', 'mock', '造資料', 'pattern', '正則範例'],
+    icon: '🎲',
+    loader: () => import('@/tools/regex-gen/Index.vue'),
+  },
+  {
     id: 'base-convert',
     name: '進位轉換器',
     category: 'workshop',
