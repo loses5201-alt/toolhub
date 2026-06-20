@@ -22,6 +22,14 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
+- 古典密碼(cipher-classic,category=life):凱撒 / ROT13 / ROT47 / Atbash / Vigenère / A1Z26
+  編解碼,凱撒附 25 種位移暴力破解。引擎 src/features/cipher.ts(caesar 保留大小寫與非字母含負位移環繞、
+  rot13/rot47(可見 ASCII 94 字自反)/atbash 自反、vigenere 只有字母消耗金鑰且忽略金鑰非字母、
+  a1z26Encode/Decode 以「/」表空白、caesarBruteForce;純函式無 DOM)+ 回歸測試 scripts/test-cipher.mjs
+  (以經典 oracle 凱撒+3 HELLO→KHOOR、ROT13 Hello→Uryyb、Vigenère ATTACKATDAWN/LEMON→
+  LXFOPVEFRNHR、Atbash ABC→ZYX、A1Z26 與各自反/往返為準約 40 筆,併入 npm test)。明確聲明古典密碼
+  極易破解、非安全加密(真加密用 secure-box AES);與摩斯密碼互補;零相依、不上傳;
+  type-check + 全測試 + build 通過 — 2026-06-20
 - SMPTE 影格時間碼(timecode,category=workshop):影格數 ↔ 時間碼(HH:MM:SS:FF)互轉,支援
   23.976/24/25/29.97/30/50/59.94/60 fps 與 drop-frame(29.97/59.94),並算實際時間長度。引擎
   src/features/timecode.ts(FPS_OPTIONS 含 actual/nominal/dropAllowed、dropFramesPerMinute、
