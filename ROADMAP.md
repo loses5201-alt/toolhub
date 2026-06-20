@@ -22,6 +22,15 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
+- 語意化版本工坊(semver-tools,category=workshop):解析 SemVer、依 semver.org §11 比較版本先後
+  (含 prerelease 優先序:正式版 > prerelease,數字識別碼 < 文字識別碼)、測試 npm/node-semver 範圍是否
+  符合並把範圍展開成基本比較子(看清「為什麼符合/不符合」),另提供一串版本由舊到新排序。支援 ^ 插入符、
+  ~ 波浪號、x-range(1.2.x / 1 / *)、連字號範圍(1.2.3 - 2.3.4)、|| 聯集、空白 AND、>= <= > < =;
+  prerelease 過濾採 node-semver includePrerelease=false 預設。除錯 package.json 依賴範圍必備。引擎
+  src/features/semver.ts(parseSemver/compareSemver/compareVersions/sortVersions/diffLevel/
+  expandComparatorSet/satisfies 純函式無 DOM)+ 回歸測試 scripts/test-semver.mjs(以 semver.org §11
+  經典遞增序與 node-semver 文件為 oracle,涵蓋解析/比較/排序/diff/^~x 連字號展開/satisfies/prerelease
+  過濾規則/無效輸入,併入 npm test)。零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
 - Unicode 正規化 / 比對(unicode-normalize,category=workshop):解決「兩段文字看起來一樣卻不相等」——
   同一個字可能是單一碼點(é)或基底字＋組合符號(e+◌́),全形/半形與相容字(① ﬁ ㎏)也會讓比對失敗。
   正規化模式給 NFC/NFD/NFKC/NFKD 四種形式(各標碼點/碼元數、是否改變);比對模式判斷兩段文字在哪種形式下
