@@ -22,6 +22,14 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
+- IBAN 國際帳號驗證(iban-check,category=workshop):驗證歐洲/中東等地跨國匯款用的 IBAN
+  國際銀行帳號 —— 檢查國別代碼、各國固定長度與 mod-97-10(ISO 7064)檢查碼,拆解國別/檢查碼/
+  BBAN 各欄位並提示錯誤原因;收海外款項(自由接案、跨國匯款)前先驗,少打一碼就匯錯。引擎
+  src/features/iban.ts(normalizeIban/mod97 逐塊取餘避免大數溢位/validateIban/formatIban/
+  computeCheckDigits 反算檢查碼,純函式無 DOM;內含 ~85 國長度表與常用國名)+ 回歸測試
+  scripts/test-iban.mjs(以 SWIFT IBAN registry 官方範例 GB/DE/FR/NL/CH/BE/ES/IT/SA/NO/TR 為
+  oracle,涵蓋欄位拆解/改碼校驗失敗/長度不符/未知國別/反算檢查碼,併入 npm test)。與 card-check/
+  isbn-check 驗證系列互補;台灣本地匯款不用 IBAN;type-check + 全測試 + build 通過 — 2026-06-20
 - Email 亂碼主旨還原(encoded-word,category=workshop):把 email 主旨/寄件者/附件檔名裡
   =?charset?B?...?=(Base64)或 =?charset?Q?...?=(Quoted-Printable)的 RFC 2047 編碼亂碼還原成
   可讀文字,逐段標出字元集與編碼方式;支援 UTF-8/Big5/ISO-8859-1/Shift_JIS/GBK(交給瀏覽器內建
