@@ -207,6 +207,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/image-fit-size/Index.vue'),
   },
   {
+    id: 'image-diff',
+    name: '圖片差異比對',
+    category: 'workshop',
+    description: '上傳兩張同尺寸的圖(例:改版前後的截圖),逐像素用 YIQ 感知色差標出哪裡變了、變化比例多少。做 UI 改版核對、找出兩張圖差異(大家來找碴)用,可調容忍度忽略壓縮雜訊、抗鋸齒。差異圖可下載 —— 全程在你瀏覽器以 canvas 運算,圖片不上傳、不連網。',
+    keywords: ['圖片比對', '圖片差異', '比較圖片', 'image diff', 'diff', 'pixelmatch', '找不同', '大家來找碴', '截圖比對', 'ui 改版', '視覺回歸', 'visual diff', 'compare images', '差異', '像素比對', '兩張圖', '改版前後', '比對'],
+    icon: '🔬',
+    loader: () => import('@/tools/image-diff/Index.vue'),
+  },
+  {
     id: 'heic-convert',
     name: 'HEIC 轉 JPG / PNG',
     category: 'workshop',

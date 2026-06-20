@@ -39,6 +39,14 @@
   jwt.io 官方 HS256 向量逐字、buildHeader/encodeSegment/signingInput、4 組 payload×演算法與 Node crypto 交叉、
   與同檔 verifyHmac 簽發→驗證往返且錯誤密鑰應失敗、decodeJwt 解回 payload/alg、applyTimeClaims iat/exp/nbf/
   取整/不動原物件,併入 npm test)。與 jwt-decode、hmac 互補;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
+- 圖片差異比對(image-diff,category=workshop):上傳兩張同尺寸的圖(改版前後截圖),逐像素用 YIQ 感知色差
+  (pixelmatch 風格)標出哪裡變了、變化比例多少(UI 改版核對、大家來找碴)。線上 image diff 多要上傳圖。
+  引擎 src/features/imageDiff.ts(colorDelta YIQ 色差平方含半透明疊白底、diffImages 逐像素超過門檻標色並
+  淡化未變動處為灰階、回傳 changed/total/ratio,純函式吃 RGBA 位元組無 DOM)+ 回歸測試 scripts/test-imagediff.mjs
+  (19 筆:相同色=0、黑↔白色差很大、差越大色差越大、全透明疊白底相等、相同圖 changed=0、一像素不同定位標紅、
+  自訂差異色、dimUnchanged 開關、threshold 嚴格/寬鬆、空圖、大圖一致,esbuild 打包後跑,併入 npm test)。
+  前端 canvas 取像素、尺寸不同則比對重疊範圍並提醒、差異圖可下載 PNG、容忍度可調忽略壓縮雜訊/抗鋸齒;
+  零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
 - 圖片調色盤萃取(palette-extract,category=workshop):上傳一張圖,用 median cut 量化取出 4–12 個最具代表性
   的主色(做設計取色、配色參考),補齊色彩工坊缺的「從圖片取色」(coolors / imagecolorpicker 那類)。前端把圖縮到
   最長邊 ≤160px 用 canvas 取樣,引擎 src/features/paletteExtract.ts(rgbToHex/clamp255/luminance、extractPixels
