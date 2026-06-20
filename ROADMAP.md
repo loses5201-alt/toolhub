@@ -22,6 +22,15 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
+- 位元運算計算機(bitwise,category=workshop):補上 base-convert 只做「進位轉換」缺的位元運算缺口 ——
+  AND/OR/XOR/NOT/NAND/NOR/XNOR、左移與邏輯/算術右移,可選 8/16/32/64 位元固定寬度,自動處理二補數
+  (有號/無號值並列、負數正確),每筆結果同列二進位(每 4 位分組)/Hex/有號/無號並可一鍵複製;
+  做韌體/嵌入式/通訊協定/旗標遮罩必備。引擎 src/features/bitwise.ts(maskFor/wrap 用 BigInt & 遮罩同時
+  處理正數溢位與負數補碼、asSigned 依最高位解讀有號、parseIntInput 支援 0x/0b/0o 與底線分組、compute 一次
+  算 11 種運算、popcount/toBin/toHex/groupBin/views 純函式無 DOM)+ 回歸測試 scripts/test-bitwise.mjs
+  (手算二補數 oracle + 以 JS 32 位元原生位元運算交叉驗證 AND/OR/XOR/NOT/邏輯右移/算術右移,涵蓋
+  解析/wrap/asSigned/位移溢位/popcount/格式化/64 位元不失真,併入 npm test)。與 base-convert、float-bits、
+  hex-view 互補;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
 - ULID 解析器(ulid-inspect,category=workshop):貼上 ULID(26 碼 Crockford Base32)反推內嵌
   建立時間(48 位元毫秒時間戳)與 80 位元亂數欄位,顏色拆解 48+80 位元結構並給台灣時間/UTC/Unix
   毫秒/相對時間;補上 id-gen 只能「產生」ULID 的反查缺口。引擎 src/features/ulid.ts(Crockford
