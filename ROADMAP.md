@@ -22,6 +22,15 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
+- .ics 行事曆檢視器(ics-viewer,category=workshop):貼上或開啟收到的 .ics 會議邀請 / 訂閱
+  行事曆檔,列出每筆事件(摘要/起訖/地點/主辦/說明),重複事件用 RRULE 引擎翻成白話並列出接下來
+  幾次發生。引擎 src/features/ics.ts(unfoldLines RFC 5545 行折疊還原、parseLine 解析
+  NAME;PARAM=VAL:VALUE 含引號內冒號不切斷、unescapeText TEXT 跳脫、parseIcsDate DATE/DATE-TIME/
+  Z 標示、parseIcs 以 BEGIN/END 堆疊只收 VEVENT 直屬欄位避免 VALARM 污染、依開始時間排序;純函式
+  無 DOM)+ 回歸測試 scripts/test-ics.mjs(以 RFC 5545 結構/折行/跳脫規則手構樣本逐欄比對 28 筆:
+  折行/Tab 續行/引號內冒號/跳脫還原/DATE 與 DATE-TIME/UTC/完整事曆雙事件排序/VALARM 不污染/
+  全天事件/空事曆,併入 npm test)。UI 重用 rrule.ts 的 describeRRule/occurrences;與 event-ics
+  (產生)、rrule-explain(解讀)互補;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
 - RRULE 行事曆重複規則解讀(rrule-explain,category=workshop):貼上 .ics 行事曆檔裡看不懂的
   RRULE(例 FREQ=MONTHLY;BYDAY=-1FR),用白話中文說明「多久發生一次」,並依開始時間(DTSTART)
   算出接下來幾次實際日期。支援 FREQ(DAILY/WEEKLY/MONTHLY/YEARLY)、INTERVAL、COUNT、UNTIL、
