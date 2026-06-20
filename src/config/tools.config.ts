@@ -216,6 +216,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/data-size/Index.vue'),
   },
   {
+    id: 'css-units',
+    name: 'CSS 單位換算',
+    category: 'workshop',
+    description: 'px / rem / em / pt / pc / in / cm / mm / % 一次互轉,可自訂根字級(rem)與脈絡字級(em、%)—— 網頁與印刷排版常用,96dpi 的 px↔pt↔mm 換算不再記錯。純數學計算、不上傳。',
+    keywords: ['css', '單位', 'px', 'rem', 'em', 'pt', 'pc', 'cm', 'mm', 'inch', '英吋', '點數', '字級', '根字級', 'root font-size', '排版', '網頁', '前端', 'pixel', 'point', '換算', 'px轉rem', 'rem轉px'],
+    icon: '🔡',
+    loader: () => import('@/tools/css-units/Index.vue'),
+  },
+  {
     id: 'aspect-ratio',
     name: '長寬比與尺寸計算',
     category: 'workshop',

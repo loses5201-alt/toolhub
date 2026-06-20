@@ -1268,6 +1268,13 @@
   1 byte=8 bit 手算為 oracle:各單位係數/1TB→0.909TiB/humanize SI 與 IEC 邊界/1GB@100Mbps=80s/
   MBps/速度 0 與負 size NaN/humanDuration 毫秒到時分秒,併入 npm test)。與 unit-convert(物理單位)
   區隔;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
+- CSS 單位換算(css-units,category=workshop):px / rem / em / pt / pc / in / cm / mm / % 一次互轉,
+  可自訂根字級(供 rem)與脈絡字級(供 em、%)。依 CSS 規範 1in=96px、1pt=96/72px、1pc=16px、
+  1cm=96/2.54px、1mm=96/25.4px,補上既有 CSS 工坊(clamp/box-shadow/specificity/format)缺的單位換算。
+  引擎 src/features/cssUnits.ts(pxPerUnit 各單位係數含字級脈絡、toPx/fromPx、convertAll 一次轉所有單位、round;
+  純函式無 DOM)+ 回歸測試 scripts/test-cssunits.mjs(以 CSS 規範手算為 oracle:各單位 px 係數/12pt=16px/
+  1in=96px/96px=2.54cm/1.5rem=24px/em 與 % 依脈絡字級/2em(context20)=40px 再轉 2.5rem/壞單位與字級 0
+  報錯,併入 npm test)。零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
 
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
