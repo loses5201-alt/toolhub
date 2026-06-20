@@ -22,6 +22,13 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
+- 摩斯密碼轉換(morse-code,category=life):文字 ↔ 摩斯密碼互轉,依 ITU-R M.1677-1 國際標準碼表
+  (A–Z、0–9、常用標點與少數重音字母)。編碼字母間單空白、單字以「/」分隔;解碼容錯多空白/全形「・」「−」。
+  可調速(PARIS 標準:1 單位 = 1.2÷WPM 秒)以 Web Audio 播放 600Hz 嗶聲、一鍵對調與複製、自動偵測貼上的是摩斯碼。
+  引擎 src/features/morse.ts(MORSE_MAP 標準碼表 + 反查、encodeMorse/decodeMorse 含不支援字元回報、
+  looksLikeMorse 偵測、morseToTones 展開成 on/off 時序;純函式無 DOM)+ 回歸測試 scripts/test-morse.mjs
+  (以 ITU 碼表與 SOS/HELLO WORLD 為 oracle 約 50 筆:碼表/編碼/解碼/全形/略過與回報/往返一致/偵測/播放時序,
+  併入 npm test)。零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
 - 文字相似度比對(text-similarity,category=workshop):算兩段文字有多像 —— Levenshtein 編輯距離、
   字元級相似度百分比、以詞為單位的 Jaccard/Dice 與共同詞/各自獨有詞。引擎 src/features/textSimilarity.ts
   (levenshtein 滾動陣列 O(min) 記憶體、similarityRatio=1-距離/較長長度、tokenize 以空白標點分詞且純
