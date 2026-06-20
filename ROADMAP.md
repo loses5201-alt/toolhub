@@ -73,6 +73,16 @@
   jwt.io 官方 HS256 向量逐字、buildHeader/encodeSegment/signingInput、4 組 payload×演算法與 Node crypto 交叉、
   與同檔 verifyHmac 簽發→驗證往返且錯誤密鑰應失敗、decodeJwt 解回 payload/alg、applyTimeClaims iat/exp/nbf/
   取整/不動原物件,併入 npm test)。與 jwt-decode、hmac 互補;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
+- JSON 轉 Python(json-to-python,category=workshop):貼上範例 JSON 推斷出 Python 類別,可選 dataclass /
+  TypedDict / Pydantic BaseModel 三種樣式,補齊 json-to-ts(TS)、json-to-go(Go)缺的 Python。引擎
+  src/features/jsonToPython.ts(Generator 類別:classNameFromKey PascalCase、singular 單數化陣列元素名、
+  fieldNameFromKey 非法識別字 sanitize+保留原鍵註解、scalarUnion int+float→float 其餘衝突→Any、resolveType 處理
+  null→Optional、makeClass 合併陣列物件欄位且缺鍵→Optional、registerClass 同名同結構重用否則加序號;
+  輸出 from __future__ import annotations 免順序限制、僅匯入用到的 typing,純函式無 DOM)+ 回歸測試
+  scripts/test-jsontopython.mjs(40 筆:classNameFromKey、基本型別、null→Any/Optional、巢狀類別與順序、陣列合併與
+  缺鍵 Optional、int+float→float、根為陣列(List 別名且避免與類別同名)/純量/空物件 pass、非法鍵 sanitize+註解、
+  三種樣式基底與匯入、重用同結構、自訂根名、不匯入未用 typing、解析錯誤,esbuild 打包後跑,併入 npm test)。
+  樣式切換、複製、連到 json-to-ts/json-to-go;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
 - NDJSON / JSON Lines 轉換(ndjson-convert,category=workshop):在「每行一個 JSON」(log、資料匯出、ML 資料集、
   串流 API)與「JSON 陣列」之間互轉,核心價值是轉換失敗時逐行指出哪一行壞掉、行號與錯誤訊息(一般編輯器看不出來),
   補齊 data-convert 不含 NDJSON 的缺口。引擎 src/features/ndjson.ts(parseNdjson 逐行 JSON.parse 略過空白行記壞行行號、

@@ -400,6 +400,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/json-to-go/Index.vue'),
   },
   {
+    id: 'json-to-python',
+    name: 'JSON 轉 Python',
+    category: 'workshop',
+    description: '貼上 API 回應或任何 JSON,自動推斷出 Python 類別 —— 可選 dataclass / TypedDict / Pydantic 三種樣式,巢狀物件各自成類別、陣列合併欄位、缺鍵或 null 自動 Optional。寫 Python 後端免手刻型別。與 JSON 轉 TypeScript / Go 互補;全程在你瀏覽器,含密鑰回應不上傳。',
+    keywords: ['json', 'python', 'dataclass', 'typeddict', 'pydantic', 'basemodel', '型別', 'type', 'json轉python', 'json to python', '產生類別', 'class', 'api', '回應', '後端', 'annotation', 'typing', 'optional', '資料類別'],
+    icon: '🐍',
+    loader: () => import('@/tools/json-to-python/Index.vue'),
+  },
+  {
     id: 'big5-convert',
     name: 'Big5 ↔ UTF-8 文字檔轉換',
     category: 'workshop',
