@@ -192,6 +192,13 @@
   scripts/test-fraction.mjs(約分、0.(3)=1/3、0.1(6)=1/6、0.(142857)=1/7、-1.2(34)=-611/495、
   π→355/113、1/7=0.(142857)、往返一致、帶分數/百分比/parse,共 45 筆,併入 npm test)。數學作業/
   食譜比例/工程估算用;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
+- 字級比例 / Type Scale 產生器(type-scale,category=workshop):基準字級 + 比例(小三度/大三度/
+  完全五度/黃金比例…)產生整套和諧字級,即時預覽各階大小並輸出 px/rem 與 CSS 自訂屬性。引擎
+  src/features/typeScale.ts(RATIOS 比例表、generateScale 等比數列由大階到小階含 rem 換算與
+  四捨五入、toCss 輸出 :root 自訂屬性含 base/負階 n 命名;純函式無 DOM)+ 回歸測試
+  scripts/test-typescale.mjs(base16/ratio1.25 → 16/20/25/12.8、rem 換算、自訂 root、0 階單列、
+  round 控制、錯誤、toCss 命名與單位、RATIOS 遞增,共 23 筆,併入 npm test)。做設計系統字級階層用;
+  與 clamp 流體字級/CSS 單位互補;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
 - Open Graph / SEO 標籤產生器(og-meta,category=workshop):填標題/描述/預覽圖等欄位產生完整
   Open Graph + Twitter Card + SEO meta 標籤並即時顯示社群分享預覽卡;也能反向貼 HTML 解析出欄位。
   附標題/描述長度、缺漏、絕對網址健檢。引擎 src/features/ogMeta.ts(escapeAttr/escapeText 跳脫、
