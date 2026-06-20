@@ -22,6 +22,16 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
+- Java .properties ↔ JSON(properties-convert,category=workshop):補上 ini/dotenv/toml 設定檔家族
+  缺的 Java .properties —— 把 Java/Spring/Android 的 .properties 設定/語系檔轉成 JSON 或倒回。正確套用
+  java.util.Properties 規則:=/:/空白 三種分隔符、# 與 ! 註解、行尾奇數反斜線「續行」且丟棄續行前導空白、
+  \uXXXX 萬國碼與 \t \n \r \f \\ 跳脫、值保留尾端空白、後鍵覆蓋;倒回時自動跳脫鍵中空白與 = : # !、
+  值中換行。鍵當扁平字串(點號是鍵名一部分,不展開巢狀)確保來回轉換語意一致。引擎
+  src/features/properties.ts(logicalLines 組邏輯行/處理續行、readEscape 解跳脫、parseLogicalLine 切鍵值、
+  parseProperties/jsonToProperties/propertiesToJson 純函式無 DOM)+ 回歸測試 scripts/test-properties.mjs
+  (36 筆:三種分隔/註解/各跳脫/\uXXXX 中文/續行奇偶反斜線/尾端空白保留/覆蓋/空值/JSON 來回/非物件與壞 JSON
+  報錯/round-trip 語意一致,以 Java 規則為 oracle,併入 npm test)。與 ini-convert、dotenv-convert、
+  toml-convert、json-yaml 互補;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
 - 位元運算計算機(bitwise,category=workshop):補上 base-convert 只做「進位轉換」缺的位元運算缺口 ——
   AND/OR/XOR/NOT/NAND/NOR/XNOR、左移與邏輯/算術右移,可選 8/16/32/64 位元固定寬度,自動處理二補數
   (有號/無號值並列、負數正確),每筆結果同列二進位(每 4 位分組)/Hex/有號/無號並可一鍵複製;

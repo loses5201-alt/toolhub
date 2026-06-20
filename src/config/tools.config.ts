@@ -1168,6 +1168,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/toml-convert/Index.vue'),
   },
   {
+    id: 'properties-convert',
+    name: 'Java .properties ↔ JSON',
+    category: 'workshop',
+    description: '把 Java / Spring / Android 的 .properties 設定檔、語系檔轉成 JSON,或倒回 .properties —— 正確處理 \\uXXXX 萬國碼、=/:/空白 分隔、反斜線續行與跳脫。設定常含金鑰密碼,全程在你瀏覽器處理,不上傳。',
+    keywords: ['properties', '.properties', 'java', 'spring', 'springboot', 'android', 'i18n', '語系', '語系檔', '在地化', 'messages', 'application.properties', 'json', '互轉', '轉換', '設定檔', 'config', '金鑰', '密碼', 'unicode', 'uXXXX', '萬國碼', '跳脫', '續行'],
+    icon: '☕',
+    loader: () => import('@/tools/properties-convert/Index.vue'),
+  },
+  {
     id: 'bg-color-key',
     name: '去純色背景 → 透明',
     category: 'workshop',
