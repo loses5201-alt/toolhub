@@ -22,6 +22,15 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
+- Email 亂碼主旨還原(encoded-word,category=workshop):把 email 主旨/寄件者/附件檔名裡
+  =?charset?B?...?=(Base64)或 =?charset?Q?...?=(Quoted-Printable)的 RFC 2047 編碼亂碼還原成
+  可讀文字,逐段標出字元集與編碼方式;支援 UTF-8/Big5/ISO-8859-1/Shift_JIS/GBK(交給瀏覽器內建
+  TextDecoder),並依 RFC 2047 §6.2 移除相鄰編碼字之間的空白。引擎 src/features/encodedWord.ts
+  (base64ToBytes/qEncodingToBytes/decodeWord/decodeMimeHeader 純函式,只用標準 TextDecoder 無 DOM)
+  + 回歸測試 scripts/test-encodedword.mjs(以 RFC 2047 §8 範例 Keld Jørn/Patrik Fältström 與已知
+  Base64/QP 向量為 oracle:位元組解碼/B 與 Q/UTF-8 與 Big5 與 ISO-8859-1/大小寫/RFC2231 語言後綴/
+  相鄰空白移除/混合文字/segments,併入 npm test)。與 mojibake-fix 互補(那支修 UTF-8 誤判西歐;
+  這支解標頭編碼);零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
 - 語意化版本工坊(semver-tools,category=workshop):解析 SemVer、依 semver.org §11 比較版本先後
   (含 prerelease 優先序:正式版 > prerelease,數字識別碼 < 文字識別碼)、測試 npm/node-semver 範圍是否
   符合並把範圍展開成基本比較子(看清「為什麼符合/不符合」),另提供一串版本由舊到新排序。支援 ^ 插入符、
