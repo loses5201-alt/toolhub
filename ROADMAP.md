@@ -22,6 +22,13 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
+- GPS 座標轉換 / 距離(geo-coord,category=workshop):十進位度(Google 地圖)↔ 度分秒(DMS)
+  ↔ 度分(DM)互轉,並用 haversine 算兩座標間直線(大圓)距離。引擎 src/features/geoCoord.ts
+  (normalizeSymbols 正規化度分秒符號、parseComponent 解析十進位/DMS/DM 與 N/S/E/W 半球及負號、
+  toDMS 含浮點進位防 60 秒、formatDMS/formatDM、validate 範圍、haversine、parsePair 逗號/半球
+  字母/空白對半切;純函式無 DOM)+ 回歸測試 scripts/test-geocoord.mjs(以手算 DD↔DMS、台北 101
+  座標、赤道 1 度經度 ≈111195m、對蹠點 =πR 等幾何事實為 oracle 33 筆,併入 npm test)。
+  零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-20
 - .ics 行事曆檢視器(ics-viewer,category=workshop):貼上或開啟收到的 .ics 會議邀請 / 訂閱
   行事曆檔,列出每筆事件(摘要/起訖/地點/主辦/說明),重複事件用 RRULE 引擎翻成白話並列出接下來
   幾次發生。引擎 src/features/ics.ts(unfoldLines RFC 5545 行折疊還原、parseLine 解析
