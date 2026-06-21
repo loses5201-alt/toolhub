@@ -1600,6 +1600,16 @@
   CRC-32、bcrypt $2a$與$2b$、md5crypt $1$、sha256/512crypt、Argon2id/i、{SSHA}、MySQL *、scrypt、
   charset 偵測、base64 位元組長度、空字串與非雜湊,併入 npm test)。Vue 端純顯示+範例按鈕。與 text-hash、
   hmac、password-strength 互補;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-21
+- HTML 轉 Markdown(html-to-markdown,category=workshop):把網頁/Notion/Google 文件/HTML Email 複製
+  來的內容轉成乾淨 Markdown ——標題、粗體/斜體/刪除線、連結、圖片、有序無序(含巢狀)清單、引言、行內與
+  區塊程式碼、表格、分隔線、br 硬換行都保留,自動解開 HTML 實體、略過 script/style/註解/DOCTYPE。引擎
+  src/features/htmlToMarkdown.ts(純函式、自帶輕量 HTML 解析器無 DOM:tokenizer 容忍未閉合/自閉合/void
+  標籤、parseAttrs、decodeEntities 具名+數字+nbsp→空白、renderInline 與 renderBlocks/renderBlock 區塊行內
+  分流、巢狀清單縮排、renderTable、blockquote 行前綴、pre 圍欄、collapseWs)+ 回歸測試
+  scripts/test-htmltomarkdown.mjs(以手寫 HTML→預期 Markdown 對照為 oracle 36 筆:實體解碼/標題/強調/
+  連結圖片/有序無序巢狀清單/引言/程式碼圍欄/分隔線/br 硬換行/表格/丟棄 script-style/忽略註解 doctype/
+  空白收斂/未閉合容忍/巢狀強調/真實 div 片段,併入 npm test)。html-to-text 只去標籤、這支產 Markdown;
+  與 markdown-preview(反向)互補;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-21
 
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
