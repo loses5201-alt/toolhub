@@ -22,7 +22,17 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
-- JSON 轉 C# class/record(json-to-csharp,category=workshop):補齊 json-to-X 家族的 .NET。貼上 JSON 推斷
+- GraphQL 格式化 / 壓縮(graphql-format,category=workshop):把雜亂的 query/mutation/SDL 排整齊
+  (2 空白縮排)或壓成一行。自實作 tokenizer + 遞迴下降 parser + pretty/minify printer,支援 executable
+  (query/mutation/subscription、匿名簡寫、變數定義與預設值、引數、別名、指令、片段 ...Frag、行內片段
+  ... on Type)與 SDL(type/interface/enum/input/union/scalar/schema/directive、描述字串、實作介面、
+  非空/清單型別、欄位引數)。引擎拆成 src/features/graphql/{lex,parse,print}.ts 純函式無 DOM +
+  src/features/graphqlFormat.ts 整合(formatGraphql/minifyGraphql/parseGraphql)+ 回歸測試
+  scripts/test-graphqlformat.mjs(36 筆:以「parse(print(x)) 結構等於 parse(x)」往返一致為主 oracle +
+  query/SDL/enum/union/描述/alias+指令 的格式快照 + 註解移除 + 字串跳脫往返 + format∘minify 等冪 +
+  6 種解析錯誤,esbuild 打包後跑,併入 npm test)。依 GraphQL 慣例不保留 # 註解、區塊字串統一輸出雙引號;
+  與 json-repair、json-to-ts 互補;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-21
+- JSON 轉 C# class/record(json-to-csharp,category=workshop):補齊 json-to-X 家族的 .NET。貼上 JSON 推斷補齊 json-to-X 家族的 .NET。貼上 JSON 推斷
   class 或 record,可選 System.Text.Json([JsonPropertyName])/ Newtonsoft([JsonProperty])/ 無標註,屬性 PascalCase
   與原鍵不同時自動補標註,巢狀物件各自成類別、陣列合併欄位、缺鍵或 null 自動可空(實值型別加 ?),可包覆 namespace。
   引擎 src/features/jsonToCsharp.ts(純函式無 DOM:pascalFromKey、scalarUnion long+double→double 衝突→object、
