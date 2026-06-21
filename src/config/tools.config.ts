@@ -1247,6 +1247,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/html-to-text/Index.vue'),
   },
   {
+    id: 'ansi-convert',
+    name: 'ANSI 終端機色碼轉換',
+    category: 'workshop',
+    description: '把 CI log、彩色 console 輸出裡的 ANSI 跳脫碼,即時還原成彩色預覽、轉成可貼進部落格/Email/文件的內嵌樣式 HTML,或清成乾淨純文字(連游標移動、清行等控制碼一起拿掉)。支援 16 色 / 256 色 / 24-bit 真彩、粗體底線反白。全程在你瀏覽器,不連網、不上傳。',
+    keywords: ['ansi', 'ansi色碼', '終端機', 'terminal', '色碼', '跳脫碼', '逸出', 'escape', 'sgr', 'console', 'log', 'ci log', '彩色log', '亂碼', 'esc[31m', '32m', 'strip ansi', '去色碼', '終端機顏色', 'ansi轉html', 'ansi to html', '色彩碼', 'xterm', '256色', '真彩', 'truecolor', '貼上有顏色', 'github actions log'],
+    icon: '🖥️',
+    loader: () => import('@/tools/ansi-convert/Index.vue'),
+  },
+  {
     id: 'id-gen',
     name: '隨機 ID 產生器',
     category: 'workshop',
