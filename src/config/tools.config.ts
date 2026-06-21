@@ -2116,6 +2116,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/svg-optimize/Index.vue'),
   },
   {
+    id: 'graphql-format',
+    name: 'GraphQL 格式化 / 壓縮',
+    category: 'workshop',
+    description: '把雜亂的 GraphQL query / mutation / SDL 排整齊(2 空白縮排)或壓成一行。支援片段、變數、指令與 SDL(type / enum / input / union 等)。GraphQL 查詢常含後端結構與變數,全程在你瀏覽器解析、不上傳、無廣告。',
+    keywords: ['graphql', 'graphql格式化', 'graphql formatter', 'graphql美化', 'graphql壓縮', 'graphql minify', 'gql', 'query', 'mutation', 'schema', 'sdl', '格式化', '美化', '壓縮', 'prettify', 'beautify', '查詢', '片段', 'fragment', '排版'],
+    icon: '◈',
+    loader: () => import('@/tools/graphql-format/Index.vue'),
+  },
+  {
     id: 'image-base64',
     name: 'Base64 / Data URI 圖片互轉',
     category: 'workshop',
