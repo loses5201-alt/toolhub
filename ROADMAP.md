@@ -22,6 +22,13 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
+- JSON 轉 C# class/record(json-to-csharp,category=workshop):補齊 json-to-X 家族的 .NET。貼上 JSON 推斷
+  class 或 record,可選 System.Text.Json([JsonPropertyName])/ Newtonsoft([JsonProperty])/ 無標註,屬性 PascalCase
+  與原鍵不同時自動補標註,巢狀物件各自成類別、陣列合併欄位、缺鍵或 null 自動可空(實值型別加 ?),可包覆 namespace。
+  引擎 src/features/jsonToCsharp.ts(純函式無 DOM:pascalFromKey、scalarUnion long+double→double 衝突→object、
+  null→nullable(實值加?參考型別保持)、陣列合併缺鍵→nullable、同名同結構重用否則加序號、record 用 init/class 用 set、
+  根陣列/純量輸出註解提示)+ 回歸測試 scripts/test-jsontocsharp.mjs(43 筆,esbuild 打包後跑,併入 npm test)。
+  零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-21
 - JSON 轉 Rust struct(json-to-rust,category=workshop):補齊 json-to-ts/go/python 缺的 Rust。貼上 JSON 推斷
   struct,serde 樣式自動加 #[derive(Debug, Clone, Serialize, Deserialize)] 與 #[serde(rename)],純結構樣式只
   derive Debug/Clone 並用註解標原鍵,可選欄位加 pub。引擎 src/features/jsonToRust.ts(純函式無 DOM:
