@@ -22,6 +22,15 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
+- EPUB 電子書檢視器(epub-viewer,category=workshop):打開 .epub 不必裝閱讀軟體就能看書名/作者/出版社/
+  出版日期/ISBN/分類/封面,列出完整目錄與閱讀順序,點章節即可把內文轉成乾淨純文字離線閱讀並估算全書字數。
+  內文以純文字呈現,不載入內嵌遠端圖片/追蹤連結;電子書全程在瀏覽器、不上傳。引擎 src/features/epub.ts
+  (純函式無 DOM、不用 DOMParser:parseAttrs/findElements 容忍命名空間前綴與自閉合、parseContainer 取 OPF 路徑、
+  resolveHref 處理 ./../與錨點、parseOpf 解 Dublin Core 中繼資料+manifest+spine+EPUB2 meta cover、findCoverHref
+  支援 EPUB3 properties=cover-image 與 EPUB2 fallback、parseNcx 巢狀 navPoint 深度、parseNav 解 EPUB3 nav.xhtml
+  巢狀 ol)+ 回歸測試 scripts/test-epub.mjs(手構符合規範的 container/OPF/NCX/nav 片段為 oracle,37 筆,
+  併入 npm test)。Vue 端用既有 JSZip 解壓、複用 htmlToText 轉純文字、封面以 blob URL 顯示;與 eml-viewer、
+  mbox-split、vcf-viewer 同屬「打開檔案看內容」家族;零相依新增、不上傳;type-check + 全測試 + build 通過 — 2026-06-21
 - Bencode / .torrent 解碼器(bencode-decode,category=workshop):貼上 bencode 文字或 .torrent 檔的 hex /
   base64,拆成可讀結構樹 —— 不開 BT 軟體就能看種子含哪些檔案、單檔大小、piece 大小、連去哪些 tracker(下載來路
   不明種子前先檢查),頂層含 info 時自動算 info-hash(SHA-1=v1、SHA-256=v2)供核對 magnet。引擎 src/features/
