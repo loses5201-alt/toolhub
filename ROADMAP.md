@@ -22,6 +22,17 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
+- ASN.1 / DER 解碼器(asn1-decode,category=workshop):貼上 PEM / base64 / hex 的 DER 編碼(X.509 憑證、
+  公私鑰、CSR…),拆解成可讀的 ASN.1 TLV 結構樹,常見 OID(簽章演算法 sha256WithRSAEncryption、公鑰型別
+  rsaEncryption/ecPublicKey/Ed25519、DN 屬性 commonName/organizationName、憑證擴充 subjectAltName/keyUsage 等
+  ~40 筆)自動標名稱,BIT STRING / OCTET STRING 內嵌 DER 會再往內解一層。引擎 src/features/asn1.ts(純函式無
+  DOM:parseDerInput 辨識 PEM/base64/hex、parseNodes 遞迴 TLV 解析含短/長式長度與高位 tag number、decodeOid
+  base-128、decodeInteger 小數十進位+大數 hex、decodeString 各字串型別含 BMPString=utf-16be、tryNested 只在看似
+  SEQUENCE/SET/context 構造且剛好用完整段才遞迴以免誤判、BER 不定長度 0x80 明確報錯;複用 baseEncode hexToBytes
+  與 encodedWord base64ToBytes)+ 回歸測試 scripts/test-asn1.mjs(35 筆:INTEGER/BOOLEAN/NULL/字串/OID 與名稱/
+  SEQUENCE 巢狀/AlgorithmIdentifier/長式長度/context tag/BIT·OCTET STRING 內嵌 DER 與不誤判基本型別/BER 報錯/
+  PEM·base64·hex 輸入,手構標準 DER 為 oracle,esbuild 打包後跑,併入 npm test)。Vue 端遞迴元件 Asn1Tree
+  顯示結構樹;與 jwt-decode、card-check、file-checksum 互補;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-21
 - .eml 郵件檢視器(eml-viewer,category=workshop):開啟存下來的 .eml 信件(或 Gmail/Outlook「顯示原始郵件」
   存的檔),解析標頭(主旨/寄件/收件/日期,RFC 2047 亂碼還原)、MIME 結構樹、內文(quoted-printable / base64
   解碼)與附件清單(檔名/型別/大小,可一鍵下載)。為防隱私外洩,HTML 內文不直接渲染(不載入遠端追蹤圖片 /
