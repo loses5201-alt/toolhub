@@ -2824,6 +2824,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/punycode/Index.vue'),
   },
   {
+    id: 'homoglyph-check',
+    name: '同形字 / 混合文字偵測',
+    category: 'anti-scam',
+    description: '貼上品牌名、網址或可疑訊息,找出「看起來像英數字、其實是其他語系字元」的偽裝 —— 例如用西里爾字母 а 冒充拉丁 a(paypаl)、希臘 ο 冒充 o(gοοgle),或全形字母。逐字標出 Unicode 碼位與它冒充的字元,並還原成「它想假裝成的樣子」;也會偵測同一個詞混用多種語系這種典型釣魚手法。全程在你瀏覽器,不連網、不上傳。',
+    keywords: ['同形字', '混合文字', '假冒', '釣魚', 'homoglyph', 'confusable', 'unicode', '西里爾', '希臘', '全形', '假網址', '假品牌', '冒充', 'idn', 'spoofing', '詐騙', '看起來一樣', '字元偽裝', 'phishing', 'mixed script'],
+    icon: '🕵️',
+    loader: () => import('@/tools/homoglyph-check/Index.vue'),
+  },
+  {
     id: 'domain-twist',
     name: '相似網域產生(防仿冒)',
     category: 'anti-scam',
