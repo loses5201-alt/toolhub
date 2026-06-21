@@ -1247,6 +1247,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/html-to-text/Index.vue'),
   },
   {
+    id: 'html-to-markdown',
+    name: 'HTML 轉 Markdown',
+    category: 'workshop',
+    description: '把從網頁、HTML 電子報、Notion/Google Docs 複製來的內容轉成保留結構的 Markdown(標題、清單、連結、粗體、表格、引言、程式碼)—— 貼進 README / Issue / 筆記。全程在你瀏覽器,不連網、不上傳。',
+    keywords: ['html', 'markdown', 'md', 'html轉markdown', 'html轉md', '轉markdown', '轉md', '網頁轉markdown', 'turndown', 'readme', 'issue', '筆記', 'notion', 'hackmd', 'github', '剪貼', '網頁剪輯', '電子報', '保留格式', '結構', '標題', '清單', '表格', '連結'],
+    icon: '📑',
+    loader: () => import('@/tools/html-to-markdown/Index.vue'),
+  },
+  {
     id: 'id-gen',
     name: '隨機 ID 產生器',
     category: 'workshop',

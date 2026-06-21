@@ -22,7 +22,21 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
-- 照片加邊框 / 方形白邊(image-frame,category=workshop):把長方形照片加白邊變成正方形(或 4:5、9:16
+- HTML 轉 Markdown(html-to-markdown,category=workshop):把網頁/HTML 電子報/Notion/Google Docs 複製來的
+  內容轉成「保留結構」的 Markdown(標題、清單含巢狀、連結、圖片、粗體/斜體/刪除線、行內與區塊程式碼、引言、
+  表格、分隔線),補上 markdown-preview(MD→HTML)、html-to-text(只留純文字)缺的反向「結構化」轉換。引擎
+  src/features/htmlToMarkdown.ts(純函式無 DOM,Node 可測:tokenize 自寫 tokenizer 移除註解/doctype 並整塊
+  丟棄 script/style/noscript/template、buildTree 寬容堆疊解析(未閉合內嵌標籤自動收斂)、renderContainer
+  收行內為段落/區塊各自成塊、renderInline 含 emphasis 空白外移 wrap/連結圖片退化/br 行尾兩空白硬換行、
+  renderList 巢狀緊湊 + start 屬性、renderBlock 標題/hr/表格/ul/ol/blockquote/pre(language- class 取語言)、
+  renderTable 遞迴收 tr 以首列為表頭、escapeInline 跳脫 \ ` * [ ];複用 htmlToText 的 decodeEntities)+
+  回歸測試 scripts/test-htmltomarkdown.mjs(以 Markdown 標準語法與手算為 oracle 48 筆:h1–h6/段落/b strong em i
+  del/emphasis 空白外移/連結與無 href 退化/圖片與無 src 退化/連結內粗體/行內 code/pre+code 帶語言/pre 純文字保留
+  換行/無序有序清單與 start/巢狀緊湊/引言/分隔線/表格含 th 與無 th 以首列為表頭/實體解碼 amp nbsp lt/移除
+  script style 註解/多段落空行/空白收斂/br 硬換行/星號方括號跳脫/未閉合 b 收斂/div 包區塊/空輸入/純文字/
+  tokenize 與 buildTree 結構/綜合文件,esbuild 打包後跑,併入 npm test)。複製 / 下載 .md;與 html-to-text、
+  markdown-preview、markdown-toc、markdown-table 互補;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-21
+- 照片加邊框 / 方形白邊(image-frame,category=workshop):把長方形照片加白邊變成正方形(或 4:5、9:16把長方形照片加白邊變成正方形(或 4:5、9:16
   限動、16:9、3:2 等)以利 IG 上傳不被裁切;保留原圖原始像素、不放大失真,可調邊框寬度(原圖長邊百分比)與
   顏色,批次處理並打包 ZIP(JSZip)。引擎 src/features/imageFrame.ts(純函式無 DOM:computeFrame 依
   marginPercent×長邊算邊框、minW/minH=源圖+2margin,再依目標比例「補滿較短維度」算 canvasW/H 與置中
