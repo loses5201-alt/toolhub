@@ -1688,6 +1688,16 @@
   巢狀只一個 public class/裝箱型別/衝突→Object/陣列合併/空物件空 class/根陣列·純量提示/同名不同結構加序號/
   record 樣式內聯標註與空 record,esbuild 打包後跑,併入 npm test)。零相依、不上傳;type-check + 全測試 + build
   通過 — 2026-06-21
+- JSON 轉 Swift struct(json-to-swift,category=workshop):補齊 json-to-X 家族的 iOS/macOS。貼上 JSON 推斷
+  Swift Codable struct,屬性 camelCase,只要有任一屬性名與原鍵不同就自動產生 CodingKeys 並依 Swift 規定列出
+  全部鍵(未改名 case foo、改名 case foo = "raw"),巢狀物件各自成 struct、陣列合併欄位、缺鍵或 null 自動可選
+  (T?,Codable 解碼缺鍵即 nil),撞 Swift 關鍵字的屬性名(含 CodingKeys 內)以反引號包覆。引擎
+  src/features/jsonToSwift.ts(純函式無 DOM:structNameFromKey/propNameFromKey、scalarUnion Int+Double→Double
+  衝突→AnyCodable、null/全 null→AnyCodable、同名同結構重用否則加序號、用到 AnyCodable 時在檔頭加說明註解、
+  根陣列/純量輸出註解提示)+ 回歸測試 scripts/test-jsontoswift.mjs(43 筆:命名/Codable/Int·Bool·Double·String/
+  同鍵不產 CodingKeys 與有 rename 列全鍵/null·缺鍵→optional/巢狀葉節點在前/[T] 陣列/衝突→AnyCodable 與說明註解/
+  關鍵字反引號含改名後 CodingStateKeys/空 struct/根陣列·純量提示/同名不同結構加序號,esbuild 打包後跑,併入
+  npm test)。零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-21
 
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,

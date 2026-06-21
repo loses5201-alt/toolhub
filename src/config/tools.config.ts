@@ -793,6 +793,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/json-to-java/Index.vue'),
   },
   {
+    id: 'json-to-swift',
+    name: 'JSON 轉 Swift',
+    category: 'workshop',
+    description: '貼上 API 回應或任何 JSON,自動推斷出 Swift Codable struct —— 屬性採 camelCase,與原鍵不同時自動產生 CodingKeys,巢狀物件各自成 struct、陣列合併欄位、缺鍵或 null 自動可選。寫 iOS / macOS App 免手刻型別。與 JSON 轉 TypeScript / Go / Python / Rust / C# / Kotlin / Java 互補;全程在你瀏覽器,含密鑰回應不上傳。',
+    keywords: ['json', 'swift', 'ios', 'macos', 'codable', 'struct', 'codingkeys', 'decodable', 'encodable', '型別', 'json轉swift', 'json to swift', '產生類別', 'apple', 'xcode', 'dto', 'swiftui'],
+    icon: '🦅',
+    loader: () => import('@/tools/json-to-swift/Index.vue'),
+  },
+  {
     id: 'gitignore-tester',
     name: '.gitignore 測試器',
     category: 'workshop',
