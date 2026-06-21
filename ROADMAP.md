@@ -22,6 +22,16 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
+- SVG 最佳化 / 壓縮(svg-optimize,category=workshop):把 Inkscape / Illustrator 匯出的 SVG 瘦身,
+  只做「不改變畫面」的安全瘦身 —— 移除註解、<metadata>、編輯器專屬命名空間與屬性(inkscape/sodipodi/
+  rdf/dc/cc)、<?xml?> 宣告與 <!DOCTYPE>、標籤間排版縮排,可選移除 title/desc 或把幾何數值小數四捨五入。
+  刻意不做合併路徑/刪屬性等有風險轉換。引擎 src/features/svgOptimize.ts(純函式無 DOM:removeComments/
+  removeProlog/removeEditorCruft/removeTitleDesc/collapseWhitespace(只壓含換行的縮排,保留有意義空白)/
+  roundNumbers(只動數值型屬性、指數記號保留、-0 正規化)/optimizeSvg 串接並回傳壓縮前後位元組統計、
+  byteLength)+ 回歸測試 scripts/test-svgoptimize.mjs(以安全瘦身規則手構樣本為 oracle 41 筆:byteLength、
+  各 transform 邊界(含 xlink 命名空間保留、文字內空白保留、含換行純空白節點壓除、precision 0、負零、
+  指數安全)、optimizeSvg 整合與全關閉/空輸入,esbuild 打包後跑,併入 npm test)。預覽以 <img>+data URI
+  載入不執行 SVG 腳本;與 svg-to-png、favicon-gen 互補;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-21
 - 照片加邊框 / 方形白邊(image-frame,category=workshop):把長方形照片加白邊變成正方形(或 4:5、9:16
   限動、16:9、3:2 等)以利 IG 上傳不被裁切;保留原圖原始像素、不放大失真,可調邊框寬度(原圖長邊百分比)與
   顏色,批次處理並打包 ZIP(JSZip)。引擎 src/features/imageFrame.ts(純函式無 DOM:computeFrame 依
