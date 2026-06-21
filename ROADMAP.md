@@ -22,6 +22,16 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
+- 字型檔檢視器(font-inspect,category=workshop):打開 .ttf / .otf / .ttc 不必裝軟體,即可看字型家族 /
+  樣式 / 完整名稱、版本、製造商 / 設計師、著作權與授權、是否允許嵌入(fsType,做 PDF / 網頁前先確認授權)、
+  字重 / 寬度 / 斜體 / 等寬、每 em 單位、字符數、建立 / 修改日期、cmap 編碼表數、資料表清單,並用 FontFace
+  即時預覽外觀。引擎 src/features/font.ts(純函式無 DOM:解 SFNT offset table 與目錄、head/maxp/OS-2/post/
+  cmap/name 各表 —— name 取 Windows 英文優先於 Mac、UTF-16BE/latin1 解碼、typographic family 覆蓋;辨識 .ttc
+  字型集外殼與 WOFF/WOFF2 提示先轉檔)+ 回歸測試 scripts/test-font.mjs(以測試內獨立 SFNT 組裝器 buildSfnt
+  依規範手寫各表組合法字型為 oracle,名稱/指標/樣式旗標/fsType 各值/OpenType CFF/.ttc 外殼(目錄 offset 絕對
+  位置修正)/錯誤路徑,併入 npm test;另以 Arsenal SC、Big Shoulders、IPAGothic 三款真實字型手動驗證)。Vue 端
+  檔案上傳 + FontFace 即時預覽(可調字級 / 文字)+ 嵌入授權醒目提示;零相依、不上傳;type-check + 全測試 +
+  build 通過 — 2026-06-21
 - Python pickle 反組譯器(pickle-disasm,category=workshop):只讀不執行,把 .pkl / .pickle 逐個 opcode 拆解
   (等同 pickletools.dis),並在不呼叫任何建構式下重建 list/dict/tuple/set/數字/字串等結構。安全用途:
   pickle.load() 會在反序列化時執行資料指定的程式碼,載入來路不明的 .pkl(ML 模型權重、Django/Celery 任務、
