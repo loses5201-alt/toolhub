@@ -897,6 +897,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/base32-58/Index.vue'),
   },
   {
+    id: 'base85',
+    name: 'Base85 / Ascii85 / Z85 編解碼',
+    category: 'workshop',
+    description: '把位元組串(文字或 hex)用 85 進位編碼,比 Base64 更省約 7% 體積。支援 Ascii85(Adobe / PostScript / PDF,含 z 縮寫與 <~ ~> 包裹)與 Z85(ZeroMQ RFC 32,適合放進程式碼/JSON、常用於傳金鑰)雙向編解碼。與 Base32 / Base58、Base64 互補。全程在你瀏覽器計算,不上傳。',
+    keywords: ['base85', 'ascii85', 'z85', 'base-85', '85進位', '編碼', '解碼', 'encode', 'decode', 'adobe', 'postscript', 'pdf', 'zeromq', 'rfc 32', '位元組', 'bytes', 'hex', 'base64替代', '省體積', '二進位編碼', '金鑰編碼'],
+    icon: '🔤',
+    loader: () => import('@/tools/base85/Index.vue'),
+  },
+  {
     id: 'hex-view',
     name: 'Hex 檢視器',
     category: 'workshop',
