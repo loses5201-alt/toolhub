@@ -2089,6 +2089,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/favicon-gen/Index.vue'),
   },
   {
+    id: 'identicon',
+    name: 'Identicon 頭像產生器',
+    category: 'workshop',
+    description: '輸入暱稱 / Email / 任意 ID,決定性產生 GitHub 風格的對稱像素頭像(相同輸入永遠同一張),當預設大頭貼、留言頭像、區別帳號用。可調格數、底色,下載 SVG(向量)或 PNG。全程在你瀏覽器繪製,不連網、不上傳。',
+    keywords: ['identicon', '頭像', '大頭貼', '預設頭像', '隨機頭像', 'avatar', '頭貼產生', 'github頭像', '像素頭像', '對稱圖案', '帳號圖示', '暱稱頭像', 'email頭像', 'gravatar替代', '產生頭像', '頭像產生器'],
+    icon: '👤',
+    loader: () => import('@/tools/identicon/Index.vue'),
+  },
+  {
     id: 'audio-studio',
     name: '音訊工坊',
     category: 'workshop',
