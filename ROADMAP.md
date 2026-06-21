@@ -1677,6 +1677,17 @@
   O×AB→{A,B}/O×O→{O}、AB×O 不可能生 O 或 AB、Rh−×−→只有−、impossible 集合與機率和=1,併入 npm test)。
   明確標註不含 cis-AB/孟買型特例、血型不符不代表非親生請以 DNA 為準;與 combinatorics 互補;零相依、
   不上傳;type-check + 全測試 + build 通過 — 2026-06-21
+- JSON 轉 Java class/record(json-to-java,category=workshop):補齊 json-to-X 家族最熱門的 Java。貼上 JSON
+  推斷 Java class 或 record(Java 16+),可選 Jackson(@JsonProperty)/ Gson(@SerializedName)/ 無標註,
+  屬性 camelCase 與原鍵不同時自動補標註(record 內聯標註),巢狀物件各自成類別、陣列合併欄位。一律用裝箱型別
+  (Long/Double/Boolean/String)以容納 JSON 缺值與 null,撞 Java 關鍵字的欄位補底線並用標註對映原鍵;因
+  一個 .java 檔只能有一個 public 頂層型別,根類別輸出 public、其餘 package-private(附說明)。引擎
+  src/features/jsonToJava.ts(純函式無 DOM:classNameFromKey/propNameFromKey、scalarUnion Long+Double→Double
+  衝突→Object、null/全 null→Object、同名同結構重用否則加序號、record 與 class 兩種印法、List import 只在用到時加、
+  根陣列/純量輸出註解提示)+ 回歸測試 scripts/test-jsontojava.mjs(56 筆:命名/關鍵字底線/jackson·gson·none 標註/
+  巢狀只一個 public class/裝箱型別/衝突→Object/陣列合併/空物件空 class/根陣列·純量提示/同名不同結構加序號/
+  record 樣式內聯標註與空 record,esbuild 打包後跑,併入 npm test)。零相依、不上傳;type-check + 全測試 + build
+  通過 — 2026-06-21
 
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
