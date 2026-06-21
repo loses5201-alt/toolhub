@@ -22,6 +22,14 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
+- GPX / KML 軌跡分析(gpx-analyze,category=workshop):開啟 Garmin/Strava/Komoot/手機運動 App 或 Google Earth
+  匯出的 .gpx / .kml,一眼看到總距離、累計爬升/下降、海拔範圍、總時間、配速、均速/最高速度,並畫出路線形狀與
+  海拔剖面 SVG 預覽。可調海拔雜訊過濾排除 GPS 抖動。軌跡是高度敏感的位置紀錄,全程在瀏覽器、不上傳、不連網。
+  引擎 src/features/gpxAnalyze.ts(純函式無 DOM:parseGpx 解 trk/trkseg/trkpt 含 ele/time 與 rte/wpt、parseKml 解
+  LineString/LinearRing/Point 與 gx:Track(KML 經緯順序)、parseTrackFile 自動辨識;analyzeTrack 複用既有 haversine
+  算距離、逐段海拔含雜訊閾值、時間/均速/最高速度/邊界;analyzeAll 多軌跡逐條相加不補跳接段)+ 回歸測試
+  scripts/test-gpxanalyze.mjs(手構 GPX/KML 片段 + 以已知座標手算為 oracle,39 筆,併入 npm test)。Vue 端等距投影
+  畫路線、海拔剖面;與 geo-coord、geo-bearing 互補;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-21
 - EPUB 電子書檢視器(epub-viewer,category=workshop):打開 .epub 不必裝閱讀軟體就能看書名/作者/出版社/
   出版日期/ISBN/分類/封面,列出完整目錄與閱讀順序,點章節即可把內文轉成乾淨純文字離線閱讀並估算全書字數。
   內文以純文字呈現,不載入內嵌遠端圖片/追蹤連結;電子書全程在瀏覽器、不上傳。引擎 src/features/epub.ts
