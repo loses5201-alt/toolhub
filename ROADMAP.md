@@ -1525,6 +1525,17 @@
   資料完整性/各格式解析/短碼大寫/alpha/hsl 三原色與白/無效→null/往返/距離單調性/精確命中與最近/同義去重/
   describe 輸出,併入 npm test)。與 color-tools、color-mix、contrast-check 互補;零相依、不上傳;
   type-check + 全測試 + build 通過 — 2026-06-20
+- ANSI 終端機色碼轉換(ansi-convert,category=workshop):把 CI log / 彩色 console 輸出裡的 ANSI
+  跳脫碼(ECMA-48 SGR),即時還原成「彩色預覽」、轉成可貼進部落格/Email/文件的內嵌樣式 HTML,或
+  清成乾淨純文字(連游標移動、清行 CSI、視窗標題 OSC 等控制碼一併移除)。支援 xterm 16 色、256 色
+  (38;5;n 立方/灰階)、24-bit 真彩(38;2;r;g;b)、粗體/淡化/斜體/底線/刪除線/反白。引擎
+  src/features/ansiConvert.ts(純函式無 DOM:ANSI_16 標準盤、color256 立方+灰階公式、STRIP_RE/TOKEN_RE
+  以 String.fromCharCode(27) 建構並一律以 ESC 為錨點故不誤刪正文方括號、applySgr 逐參數含 38/48 子序列、
+  ansiToSpans 合併同樣式片段、styleToCss(inverse 前後景對調)、ansiToHtml 對文字做 HTML 跳脫故 v-html 安全)
+  + 回歸測試 scripts/test-ansiconvert.mjs(以 SGR 定義/xterm 調色盤/256 立方+灰階公式為 oracle 66 筆:
+  調色盤常數/256 色純紅綠藍與灰階夾鉗/strip 各類 CSI 與 OSC(BEL 與 ST)且保留正文括號/span 切分與合併/
+  高亮與 256/真彩前後景/關閉屬性 22/39/空 SGR reset/各文字裝飾/HTML 跳脫/strip==spans 接合,併入 npm test)。
+  與 big5-convert、mojibake-fix、escape-text、ascii-art 互補;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-21
 
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
