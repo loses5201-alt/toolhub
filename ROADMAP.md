@@ -22,6 +22,12 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
+- JSON 轉 Kotlin data class(json-to-kotlin,category=workshop):補齊 json-to-X 家族的 Android/Kotlin。貼上 JSON
+  推斷 data class,可選 kotlinx.serialization(@SerialName)/ Gson(@SerializedName)/ Moshi(@Json)/ 無標註,
+  屬性 camelCase 與原鍵不同時自動補標註,巢狀物件各自成類別、陣列合併欄位、缺鍵或 null 自動可空(T? = null),
+  撞 Kotlin 關鍵字以反引號包覆。引擎 src/features/jsonToKotlin.ts(純函式無 DOM,Long+Double→Double 衝突→Any、
+  同名同結構重用否則加序號、空物件→非 data class、根陣列/純量輸出註解提示)+ 回歸測試 scripts/test-jsontokotlin.mjs
+  (46 筆,esbuild 打包後跑,併入 npm test)。零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-21
 - GraphQL 格式化 / 壓縮(graphql-format,category=workshop):把雜亂的 query/mutation/SDL 排整齊
   (2 空白縮排)或壓成一行。自實作 tokenizer + 遞迴下降 parser + pretty/minify printer,支援 executable
   (query/mutation/subscription、匿名簡寫、變數定義與預設值、引數、別名、指令、片段 ...Frag、行內片段
