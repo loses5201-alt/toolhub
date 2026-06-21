@@ -2089,6 +2089,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/svg-to-png/Index.vue'),
   },
   {
+    id: 'svg-optimize',
+    name: 'SVG 最佳化 / 壓縮',
+    category: 'workshop',
+    description: '把 Inkscape / Illustrator 匯出的 SVG 瘦身 —— 移除註解、metadata、編輯器專屬命名空間與屬性、XML 宣告與排版縮排,可選小數四捨五入,檔案瞬間變小。只做「不改變畫面」的安全瘦身;全程在你瀏覽器處理,SVG 不上傳、無廣告。',
+    keywords: ['svg', 'svg最佳化', 'svg壓縮', 'svg優化', 'svgo', 'svgomg', 'optimize svg', 'minify svg', 'svg瘦身', '壓縮svg', '清理svg', 'inkscape', 'illustrator', '移除metadata', '去除註解', '縮小svg', 'svg minifier', 'icon', '圖示優化', '向量壓縮'],
+    icon: '✂️',
+    loader: () => import('@/tools/svg-optimize/Index.vue'),
+  },
+  {
     id: 'image-base64',
     name: 'Base64 / Data URI 圖片互轉',
     category: 'workshop',
