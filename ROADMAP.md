@@ -22,6 +22,17 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
+- X.509 憑證檢視器(cert-viewer,category=workshop):貼上 PEM / .crt / .cer 憑證,翻成白話欄位 —— 主體 /
+  簽發者 DN、有效期與到期狀態(已過期 / 快到期 <30 天 / 還有幾天)、SAN 適用網域、公鑰型別與長度(EC 曲線 /
+  RSA 模數位數)、簽章演算法、各擴充(basicConstraints / keyUsage / extKeyUsage 等含 critical 標示),Vue 端以
+  WebCrypto 算 SHA-256 指紋供核對。引擎 src/features/x509.ts(純函式無 DOM,建立在 asn1 decodeDer 之上:導覽
+  TBSCertificate 含可選 version context tag、parseName 把 RDN→「C=…, O=…, CN=…」、parseTime 解 UTCTime YY 世紀
+  推斷與 GeneralizedTime、EC 曲線/RSA 模數位數、describeExtension 解 SAN 的 GeneralName context 標籤[dNSName/
+  rfc822/URI/IP]·basicConstraints·keyUsage 位元·extKeyUsage、擴充內層 OCTET STRING 以 valueHex 再 decodeDer 一層、
+  自簽偵測)+ 回歸測試 scripts/test-x509.mjs(23 筆,以 openssl 產生並內嵌的固定自簽 EC P-256 憑證為 oracle:版本/
+  序號/簽章/DN/有效期/公鑰/SAN/各擴充/critical/錯誤路徑,測試自足不依賴 openssl,esbuild 打包後跑,併入 npm test);
+  另以 RSA 憑證手動驗證 2048-bit 分支。與 asn1-decode、jwt-decode 互補;零相依、不上傳;type-check + 全測試 +
+  build 通過 — 2026-06-21
 - mbox 信箱分割器(mbox-split,category=workshop):把 Thunderbird / Apple Mail / Google Takeout 匯出的
   mbox 檔(常上 GB)分割成一封封獨立郵件,列出主旨/寄件者/日期、可搜尋,單封或整批(JSZip)下載成標準 .eml。
   引擎 src/features/mbox.ts(純函式無 DOM:splitMbox 依開頭為 "From " 的 From_ 分隔行切割、略過第一個 From_
