@@ -775,6 +775,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/json-to-csharp/Index.vue'),
   },
   {
+    id: 'json-to-kotlin',
+    name: 'JSON 轉 Kotlin',
+    category: 'workshop',
+    description: '貼上 API 回應或任何 JSON,自動推斷出 Kotlin data class —— 可選 kotlinx.serialization(@SerialName)/ Gson(@SerializedName)/ Moshi(@Json)標註,屬性採 camelCase 並自動補標註,巢狀物件各自成類別、陣列合併欄位、缺鍵或 null 自動可空。寫 Android / 後端免手刻型別。與 JSON 轉 TypeScript / Go / Python / Rust / C# 互補;全程在你瀏覽器,含密鑰回應不上傳。',
+    keywords: ['json', 'kotlin', 'android', 'data class', 'kotlinx', 'serialization', 'gson', 'moshi', 'serialname', 'serializedname', '型別', 'json轉kotlin', 'json to kotlin', '產生類別', '後端', 'dto'],
+    icon: '🟣',
+    loader: () => import('@/tools/json-to-kotlin/Index.vue'),
+  },
+  {
     id: 'big5-convert',
     name: 'Big5 ↔ UTF-8 文字檔轉換',
     category: 'workshop',
