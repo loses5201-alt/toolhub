@@ -22,6 +22,13 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
+- 拼讀 / 電話報號助手(phonetic-spell,category=life):把帳號/確認碼/訂單號逐字拆成「怎麼念」,電話報給
+  銀行客服不會把 B/D、M/N、1/7 聽錯。台灣電話報號口語(0洞1么2兩7拐9勾)與國際 NATO(Alpha/Bravo)兩種,
+  並能反向把對方念的「Alpha Bravo」或「洞么拐」還原回字串。引擎 src/features/phonetic.ts(純函式無 DOM:
+  NATO 26 字母、DIGIT_EN/DIGIT_TW 數字念法、PUNCT 標點對照、spell 逐字含大小寫標註、spellLine、unspell 反向
+  含去連字號/大小寫不敏感/中文數字比對)+ 回歸測試 scripts/test-phonetic.mjs(25 筆:NATO 表/字母/數字英文與
+  台灣/標點/spellLine/unspell 各情境/往返一致,esbuild 打包後跑,併入 npm test)。長輩友善;零相依、不上傳;
+  type-check + 全測試 + build 通過 — 2026-06-21
 - vCard 通訊錄檢視 / 分割器(vcf-viewer,category=workshop):開啟 Google 通訊錄 / iCloud / Android 匯出的
   .vcf(常一個檔含上百張名片),列成一張張看得懂的名片(姓名/電話/Email/公司/職稱/地址/生日/備註),可搜尋,
   單張另存 .vcf 或整批匯出成 CSV(含 BOM 供 Excel)。引擎 src/features/vcardParse.ts(純函式無 DOM:unfoldLines
