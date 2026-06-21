@@ -1568,6 +1568,18 @@
   86 4F D2 6F B5 59 F7 5B→HelloWorld、Ascii85 z 縮寫、手算 sure→F*2M7、Adobe 包裹、1/3 byte 部分組、
   容忍空白、200 組隨機位元組 Ascii85+Z85 往返一致、各類非法輸入丟錯為 oracle 24 筆,併入 npm test)。
   與 base32-58、base-convert(數字進位)、base64 互補;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-21
+- 數論工具箱 / 質因數分解(number-theory,category=life):輸入整數即給質因數分解(360=2³×3²×5)、
+  質數判定、所有正因數、因數個數 τ、因數總和 σ、歐拉函數 φ、上一個/下一個質數、虧數/完美數/盈數分類;
+  另區塊一次算多數的 GCD/LCM。全程 BigInt 精確,連上百位大數不失準。引擎 src/features/numberTheory.ts
+  (純函式無 DOM:parseBigInt 容逗號/空白、gcd/lcm/gcdMany/lcmMany、modPow、isPrime 用 Miller–Rabin
+  ——n<3.317×10²⁴ 以前 12 質數為確定見證者、更大數退化為 40 回合機率判定、Carmichael 561/1105 正確判合、
+  pollardRho 分解大因數、factorize 小質數試除+rho 遞迴回 [{prime,exp}]、tau/sigma/eulerTotient、
+  divisors 由分解枚舉並截斷防爆、nextPrime/prevPrime、classifyNumber 虧/完美/盈、formatFactorization 上標)
+  + 回歸測試 scripts/test-numbertheory.mjs(以初等數論已知結果為 oracle 62 筆:gcd/lcm 與 0 邊界、
+  isPrime 小質合數/Carmichael/Mersenne 2³¹−1 與 2⁶¹−1/大半質數、factorize 12/360/1024/p·q 與重組回原數、
+  τ(12)=6/σ(28)=56/φ(12)=4/φ(p)=p−1、divisors(28)、nextPrime/prevPrime、完美數 6/28 與虧 8/盈 12、
+  上標格式,併入 npm test)。Vue 端純顯示。與 combinatorics、fraction 互補;零相依、不上傳;
+  type-check + 全測試 + build 通過 — 2026-06-21
 
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
