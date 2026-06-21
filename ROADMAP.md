@@ -63,6 +63,14 @@
   地址/簡單信/multipart-alternative 含 CRLF 與 preamble/multipart-mixed 附件,base64 以 Buffer 即時產生為 oracle,
   esbuild 打包後跑,併入 npm test)。Vue 端以 readAsArrayBuffer 保留原始位元組;與 email-check、ics-viewer 互補;
   零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-21
+- JSON 轉 Protobuf(json-to-proto,category=workshop):補齊 json-to-X 家族的 gRPC/protobuf。貼上 JSON 推斷
+  proto3 message 定義 —— 欄位採 snake_case 並依序編號,巢狀物件各自成 message、陣列轉 repeated,snake_case 與原鍵
+  不同時自動補 [json_name]。整數→int64、含小數→double(混用也→double)、布林→bool、字串→string,型別衝突或全
+  null→google.protobuf.Value(自動加 import "google/protobuf/struct.proto")。proto3 不允許 repeated repeated,故
+  陣列的陣列自動產生 wrapper message(欄位 values)維持合法。引擎 src/features/jsonToProto.ts(純函式無 DOM:結構化
+  TRef scalar/message/list/value,protoElem 偵測巢狀陣列遞迴 wrap、同名同結構重用否則加序號、葉節點 message 在前、
+  根陣列/純量輸出註解提示)+ 回歸測試 scripts/test-jsontoproto.mjs(39 筆,esbuild 打包後跑,併入 npm test)。
+  零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-21
 - JSON 轉 Dart class(json-to-dart,category=workshop):補齊 json-to-X 家族的 Flutter/Dart。貼上 JSON 推斷 Dart
   class,兩種序列化模式 —— plain 自帶 fromJson 工廠 + toJson(免 codegen 直接可用)、json_serializable 產生
   @JsonSerializable + @JsonKey(name:) 搭配 build_runner。屬性 lowerCamelCase,巢狀物件各自成 class、陣列合併欄位、
