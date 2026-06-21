@@ -766,6 +766,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/json-to-rust/Index.vue'),
   },
   {
+    id: 'json-to-csharp',
+    name: 'JSON 轉 C#',
+    category: 'workshop',
+    description: '貼上 API 回應或任何 JSON,自動推斷出 C# class 或 record —— 可選 System.Text.Json([JsonPropertyName])或 Newtonsoft([JsonProperty])標註,屬性採 PascalCase 並自動補標註,巢狀物件各自成類別、陣列合併欄位、缺鍵或 null 自動可空。寫 .NET/Unity 後端免手刻型別。與 JSON 轉 TypeScript / Go / Python / Rust 互補;全程在你瀏覽器,含密鑰回應不上傳。',
+    keywords: ['json', 'csharp', 'c#', 'dotnet', '.net', 'class', 'record', 'newtonsoft', 'system.text.json', 'jsonpropertyname', '型別', 'json轉c#', 'json to csharp', '產生類別', 'unity', 'poco', 'dto', '後端'],
+    icon: '🔷',
+    loader: () => import('@/tools/json-to-csharp/Index.vue'),
+  },
+  {
     id: 'big5-convert',
     name: 'Big5 ↔ UTF-8 文字檔轉換',
     category: 'workshop',
