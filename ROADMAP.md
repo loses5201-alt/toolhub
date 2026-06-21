@@ -22,6 +22,17 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
+- Bencode / .torrent 解碼器(bencode-decode,category=workshop):貼上 bencode 文字或 .torrent 檔的 hex /
+  base64,拆成可讀結構樹 —— 不開 BT 軟體就能看種子含哪些檔案、單檔大小、piece 大小、連去哪些 tracker(下載來路
+  不明種子前先檢查),頂層含 info 時自動算 info-hash(SHA-1=v1、SHA-256=v2)供核對 magnet。引擎 src/features/
+  bencode.ts(純函式無 DOM:readValue 遞迴解四型 —— 整數 i…e(BigInt 不失真、拒前導零/-0)、字串 <長度>:<位元組>
+  (tryText 以 fatal UTF-8 判斷,二進位字串如 pieces 雜湊顯示長度+hex 預覽不爆版)、清單 l…e、字典 d…e(鍵須字串);
+  decodeBencode 回頂層值並標示尾端多餘位元組;parseBencodeInput 以「能否乾淨解析」在原始文字/hex/base64 間自動挑格式)
+  + 回歸測試 scripts/test-bencode.mjs(30 筆,依 bencode 文法手構編碼為 oracle:整數/大數/前導零·-0·未結尾錯誤、
+  字串/空字串/UTF-8/長度不足/二進位、清單/巢狀、字典/空/含清單/鍵非字串、類 .torrent 結構含 info 子字典、尾端多餘、
+  空輸入、文字/hex/base64 格式偵測,esbuild 打包後跑,併入 npm test)。Vue 端遞迴元件 BencodeTree + 以 WebCrypto 算
+  info-hash。與 cbor-decode、msgpack-decode、protobuf-decode、asn1-decode 互補;零相依、不上傳;type-check + 全測試
+  + build 通過 — 2026-06-21
 - MessagePack 解碼器(msgpack-decode,category=workshop):貼上 hex / base64 的 MessagePack 二進位,依官方
   spec 拆成可讀結構樹(整數 / float / 字串 / bin / 陣列 / map / ext / timestamp)。Redis、msgpack-rpc、IoT 常用。
   引擎 src/features/msgpack.ts(純函式無 DOM:parseMsgpackInput 辨識 hex/base64、readItem 涵蓋全部格式族 —— 正/負
