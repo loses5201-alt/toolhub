@@ -2259,6 +2259,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/case-convert/Index.vue'),
   },
   {
+    id: 'fancy-text',
+    name: 'Unicode 花式字產生器',
+    category: 'workshop',
+    description: '把英數字轉成各種 Unicode「字體」變體 —— 數學粗體 𝐀、斜體 𝐴、花體 𝒜、哥德體 𝔄、雙線體 𝔸、圈圈字 Ⓐ、全形 Ａ、刪除線、底線、上下顛倒等,直接貼進 IG / Threads / Discord 個人簡介、暱稱、貼文標題。這些是真正的 Unicode 字元、不是圖片,可複製貼上。全程在你瀏覽器,不上傳。',
+    keywords: ['花式字', '花式字體', '特殊字體', '特殊符號字', 'unicode字體', '字體產生器', 'fancy text', 'ig字體', 'instagram字體', '限動字體', 'threads字體', 'discord字體', '暱稱', '名稱產生器', '個人簡介', 'bio', '花體字', '草寫', '粗體字', '斜體字', '哥德體', '雙線體', '圈圈字', '全形字', '上下顛倒', '顛倒字', 'flip text', '刪除線文字', '底線文字', '藝術字', '特效字'],
+    icon: '🔠',
+    loader: () => import('@/tools/fancy-text/Index.vue'),
+  },
+  {
     id: 'lorem-ipsum',
     name: '假文 / Lorem Ipsum 產生器',
     category: 'workshop',
