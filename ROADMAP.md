@@ -22,6 +22,16 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
+- MessagePack 解碼器(msgpack-decode,category=workshop):貼上 hex / base64 的 MessagePack 二進位,依官方
+  spec 拆成可讀結構樹(整數 / float / 字串 / bin / 陣列 / map / ext / timestamp)。Redis、msgpack-rpc、IoT 常用。
+  引擎 src/features/msgpack.ts(純函式無 DOM:parseMsgpackInput 辨識 hex/base64、readItem 涵蓋全部格式族 —— 正/負
+  fixint、fixmap/fixarray/fixstr、nil/bool、bin8/16/32、ext8/16/32、float32/64(big-endian)、uint/int 8~64
+  (64 位元 BigInt 不失真)、fixext1~16、str8/16/32、array16/32、map16/32;readExt 解 ext type 有號 int8,type=-1
+  的 timestamp 擴充(4/8/12 位元組三種編碼)還原成 ISO 時間;0xc1 保留值與截斷明確報錯;頂層支援多個串接物件)+
+  回歸測試 scripts/test-msgpack.mjs(46 筆,依官方 spec 手構編碼為 oracle:各整數族/float32·64/nil·bool/字串·UTF-8·
+  bin/巢狀陣列·fixmap·array16·map16/fixext·timestamp·非 timestamp ext/串接/0xc1·截斷·項目不足錯誤路徑/hex·base64,
+  esbuild 打包後跑,併入 npm test)。Vue 端遞迴元件 MsgpackTree。與 cbor-decode、protobuf-decode、asn1-decode 互補;
+  零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-21
 - CBOR 解碼器(cbor-decode,category=workshop):貼上 hex / base64 的 CBOR(RFC 8949)二進位,拆成可讀
   結構樹(整數 / byte / text / 陣列 / map / tag / 浮點 / 布林 / null)。WebAuthn / passkey 認證、COSE、CTAP、
   IoT 常用。引擎 src/features/cbor.ts(純函式無 DOM:parseCborInput 辨識 hex/base64、readArgument 處理 ai
