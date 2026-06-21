@@ -1547,6 +1547,18 @@
   正負極性符號/同色與近似色鉗為 0/對白底與黑底的單調性/describeLc 等級與內文門檻,30 筆,併入 npm test)。
   與 contrast-check(WCAG 2)、color-blind 互補;明確標註 WCAG 3 仍草案、要符合現行法規仍以 WCAG 2 為準;
   零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-21
+- Unicode 花式字產生器(fancy-text,category=workshop):把英數字轉成各種 Unicode「字體」變體 ——
+  數學粗體 𝐀 / 斜體 𝐴 / 粗斜 / 花體 𝒜 / 粗花體 / 哥德體 𝔄 / 粗哥德 / 雙線體 𝔸 / 無襯線 4 種 / 等寬 /
+  圈圈字 Ⓐ / 全形 Ａ,加刪除線、底線、寬鬆間距、上下顛倒,直接貼進 IG/Threads/Discord 暱稱簡介貼文。
+  引擎 src/features/fancyText.ts(純函式無 DOM:ALPHA_STYLES 15 種以「數學字母符號」區塊碼位偏移對應、
+  SCRIPT/FRAKTUR/DBL/ITALIC 例外表處理被挪到 Letterlike Symbols 的保留字母(雙線 C=ℂ U+2102、花體
+  e=ℯ U+212F、斜體 h=ℎ U+210E…)與不連續的圈圈數字、styleText 逐碼點轉換、combineText 疊組合刪除線
+  U+0336/底線 U+0332、spaceOut、flipText 替換後反轉、allVariants 一次出全部)+ 回歸測試
+  scripts/test-fancytext.mjs(以 Unicode 標準碼位偏移與保留字母為 oracle 56 筆:各樣式 A/Z/a/z/0/9 碼點、
+  保留字母例外、圈圈不連續數字、全形、astral 碼點長度、組合符號略過空白、顛倒含反轉與未知字保留、
+  allVariants 結構、空字串穩定,併入 npm test)。是真正的 Unicode 字元非圖片可複製貼上;附顯示相容/
+  無障礙(螢幕報讀念不出)提醒;與 case-convert、char-inspect、unicode-normalize 互補;零相依、不上傳;
+  type-check + 全測試 + build 通過 — 2026-06-21
 
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
