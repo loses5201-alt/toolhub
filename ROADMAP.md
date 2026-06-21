@@ -22,6 +22,19 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
+- Python pickle 反組譯器(pickle-disasm,category=workshop):只讀不執行,把 .pkl / .pickle 逐個 opcode 拆解
+  (等同 pickletools.dis),並在不呼叫任何建構式下重建 list/dict/tuple/set/數字/字串等結構。安全用途:
+  pickle.load() 會在反序列化時執行資料指定的程式碼,載入來路不明的 .pkl(ML 模型權重、Django/Celery 任務、
+  快取常見)等同執行陌生程式 —— 讓使用者先看清楚會 import 哪些模組、呼叫哪些函式(GLOBAL/REDUCE 標紅)。引擎
+  src/features/pickle.ts(純函式無 DOM:涵蓋 protocol 0~5 opcode —— 整數族/LONG1·4/FLOAT·BINFLOAT/各字串·
+  bytes·unicode/EMPTY 與 MARK 容器·TUPLE1-3/APPEND(S)·SETITEM(S)·ADDITEMS/memo PUT·GET·MEMOIZE/
+  GLOBAL·STACK_GLOBAL·REDUCE·NEWOBJ(_EX)·BUILD·INST·OBJ/FRAME·PROTO 等;以堆疊 + memo 模擬重建,危險 opcode
+  以 placeholder 呈現不執行;decodeLong 二補數、parsePickleInput 辨識 hex/base64/latin1 文字 pickle)+ 回歸測試
+  scripts/test-pickle.mjs(45 筆,oracle = CPython pickle.dumps() 實際產生的位元組以 base64 內嵌:protocol
+  0/2/3/4、純量/各整數寬度/bigint/Unicode/容器/巢狀/empty、OrderedDict·complex·datetime 的 GLOBAL·REDUCE·
+  STACK_GLOBAL·MEMOIZE 序列、protocol 偵測、未知 opcode·缺 STOP·截斷錯誤路徑、格式偵測,測試本身不需 Python,
+  併入 npm test)。Vue 端遞迴元件 PickleTree + 重建結構/opcode 反組譯雙檢視 + 危險 opcode 警示橫幅。與 cbor-decode、
+  msgpack-decode、bencode-decode 互補;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-21
 - Apple plist 檢視器(plist-viewer,category=workshop):開啟 iOS / macOS 的 .plist 檔(二進位 bplist00 或
   XML 皆可),拆成可讀結構樹並一鍵轉乾淨 JSON。App 偏好設定 / Info.plist / iCloud·iTunes 備份 / 描述檔
   (.mobileconfig)內層 / NSKeyedArchiver 封存常用 plist;二進位的用文字編輯器打開只會看到亂碼。引擎
