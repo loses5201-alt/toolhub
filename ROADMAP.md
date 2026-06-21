@@ -22,6 +22,19 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
+- Word(.docx)檢視器(docx-viewer,category=workshop):收到 .docx 卻沒裝 Word/Office?直接打開看內容與
+  文件資訊(標題/作者/建立·修改日期/頁數/字數),並一鍵轉成乾淨純文字或 Markdown(保留標題/清單/粗體·斜體/
+  表格)貼進筆記·部落格·聊天室。引擎 src/features/docx.ts(純函式無 DOM、不用 DOMParser:scanBlocks/findClose
+  以平衡掃描正確處理段落 <w:p> 與表格 <w:tbl> 的同名巢狀與自閉合空段落;runText 依序解 <w:t>/tab/br/cr 並保留
+  xml:space 前後空白;paraStyle 由 <w:pStyle> 判標題層級(heading/標題/title)、<w:numPr>+<w:ilvl> 判清單縮排;
+  paraRuns 由 <w:rPr> 的 <w:b>/<w:i> 取粗斜體(val=0/false/none 視為關);表格逐 tr/tc 取儲存格純文字;blocksToText
+  /blocksToMarkdown 輸出,Markdown 表格跳脫管線、清單依層級縮排;parseCore/parseApp 解 docProps 中繼資料)+ 回歸
+  測試 scripts/test-docx.mjs(44 筆,以 OOXML(WordprocessingML)規範手構 document.xml/core.xml/app.xml 為 oracle:
+  巢狀掃描/run 文字順序/標題·清單·粗斜體/表格與管線跳脫/字數/粗體開關/中繼資料,esbuild 打包後跑,併入 npm test)。
+  Vue 端用既有 JSZip 解壓、複用 htmlToText 的 decodeEntities;預覽/純文字/Markdown 三檢視,可複製·下載 .txt/.md;
+  履歷·合約·報告常含個資,線上 Word 轉檔網站卻要你整份上傳,這支全程在你瀏覽器解析、不連網、不上傳,且不載入
+  內嵌遠端圖片/追蹤連結。與 epub-viewer、eml-viewer、mbox-split、vcf-viewer 同屬「打開檔案看內容」家族;零相依新增、
+  不上傳;type-check + 全測試 + build 通過 — 2026-06-21
 - PHP serialize() 解碼器(php-serialize,category=workshop):貼上 WordPress(wp_options / postmeta)、
   Laravel(session / cache)、Drupal 資料庫裡那一坨 PHP serialize() 字串(a:2:{…}、O:8:"stdClass":…),
   拆成可讀結構樹並可一鍵轉乾淨 JSON。引擎 src/features/phpSerialize.ts(純函式無 DOM:parsePhpInput 辨識純文字 /
