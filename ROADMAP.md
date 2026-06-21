@@ -1559,6 +1559,15 @@
   allVariants 結構、空字串穩定,併入 npm test)。是真正的 Unicode 字元非圖片可複製貼上;附顯示相容/
   無障礙(螢幕報讀念不出)提醒;與 case-convert、char-inspect、unicode-normalize 互補;零相依、不上傳;
   type-check + 全測試 + build 通過 — 2026-06-21
+- Base85 / Ascii85 / Z85 編解碼(base85,category=workshop):把位元組串(文字或 hex)用 85 進位
+  編碼,每 4 bytes→5 字元、比 Base64 省約 7% 體積。Ascii85(Adobe/PostScript/PDF:全零組縮成 z、
+  可選 <~ ~> 包裹)與 Z85(ZeroMQ RFC 32:字元集對程式碼/JSON 友善、常傳金鑰、長度須 4 倍數)雙向。
+  引擎 src/features/base85.ts(純函式無 DOM:encodeAscii85 含 z 縮寫與 delimiters、decodeAscii85 容忍
+  空白/<~ ~>/z 且部分組以 'u'=84 補滿、encodeZ85/decodeZ85 含長度檢查、uint32ToBytes 以除法取位元組避免
+  >2^32 位元運算溢位、utf8/hex 互轉)+ 回歸測試 scripts/test-base85.mjs(以 Z85 RFC 32 官方向量
+  86 4F D2 6F B5 59 F7 5B→HelloWorld、Ascii85 z 縮寫、手算 sure→F*2M7、Adobe 包裹、1/3 byte 部分組、
+  容忍空白、200 組隨機位元組 Ascii85+Z85 往返一致、各類非法輸入丟錯為 oracle 24 筆,併入 npm test)。
+  與 base32-58、base-convert(數字進位)、base64 互補;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-21
 
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
