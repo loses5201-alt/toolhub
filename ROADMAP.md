@@ -22,6 +22,14 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
+- mbox 信箱分割器(mbox-split,category=workshop):把 Thunderbird / Apple Mail / Google Takeout 匯出的
+  mbox 檔(常上 GB)分割成一封封獨立郵件,列出主旨/寄件者/日期、可搜尋,單封或整批(JSZip)下載成標準 .eml。
+  引擎 src/features/mbox.ts(純函式無 DOM:splitMbox 依開頭為 "From " 的 From_ 分隔行切割、略過第一個 From_
+  之前的 preamble、CRLF 正規化、每封去尾端空白;unescapeMboxrd 還原 mboxrd 對本體中 >*From 行的跳脫)+ 回歸
+  測試 scripts/test-mbox.mjs(20 筆:兩封/From_ 行不入 raw/mboxrd 還原/preamble 略過/無 From_ 回空/CRLF/多層
+  跳脫/三封計數,手構 mbox 為 oracle,esbuild 打包後跑,併入 npm test)。Vue 端以 readAsArrayBuffer 分塊組字串
+  避免爆堆疊、複用 eml 的 parseEml 取標頭顯示;與 eml-viewer 互補;零相依(JSZip 既有)、不上傳;
+  type-check + 全測試 + build 通過 — 2026-06-21
 - ASN.1 / DER 解碼器(asn1-decode,category=workshop):貼上 PEM / base64 / hex 的 DER 編碼(X.509 憑證、
   公私鑰、CSR…),拆解成可讀的 ASN.1 TLV 結構樹,常見 OID(簽章演算法 sha256WithRSAEncryption、公鑰型別
   rsaEncryption/ecPublicKey/Ed25519、DN 屬性 commonName/organizationName、憑證擴充 subjectAltName/keyUsage 等
