@@ -22,7 +22,16 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
-- JSON 轉 Kotlin data class(json-to-kotlin,category=workshop):補齊 json-to-X 家族的 Android/Kotlin。貼上 JSON
+- QR 詐騙(quishing)安全檢查(qr-scam-check,category=anti-scam):上傳含 QR 的圖片或貼上掃到的內容,
+  判讀它要帶你做什麼並針對 QR 釣魚手法給警示。深化反詐第二支柱(停車繳費單/罰單/菜單上的假 QR)。
+  引擎 src/features/qrScam.ts(純函式無 DOM:analyzeQrContent 依前綴分類 url/wifi/tel/sms/email/geo/
+  contact(vCard·MECARD)/crypto/text,網址(含 javascript/data 危險協定)複用 linkcheck 的 analyzeUrl、
+  danger 時置頂 quishing 警語、純文字內含網址也抽出一併檢查、各類型給 detail+findings+advice;parseKeyed 解
+  WIFI:/MECARD: 鍵值)+ 回歸測試 scripts/test-qrscam.mjs(43 筆:空/純文字/正常與釣魚網址/危險協定/Wi-Fi
+   開放與 WPA/加密貨幣 danger 與地址解析/電話/簡訊/Email/geo/vCard 與 MECARD/文字內含釣魚網址,esbuild 打包後
+  跑,併入 npm test)。Vue 端用 jsQR 在瀏覽器解碼,圖片不上傳;與 link-check、sms-check、scam-guide、qr-decode
+  互補;零相依新增、不上傳;type-check + 全測試 + build 通過 — 2026-06-21
+- JSON 轉 Kotlin data class(json-to-kotlin,category=workshop):補齊 json-to-X 家族的 Android/Kotlin。貼上 JSON補齊 json-to-X 家族的 Android/Kotlin。貼上 JSON
   推斷 data class,可選 kotlinx.serialization(@SerialName)/ Gson(@SerializedName)/ Moshi(@Json)/ 無標註,
   屬性 camelCase 與原鍵不同時自動補標註,巢狀物件各自成類別、陣列合併欄位、缺鍵或 null 自動可空(T? = null),
   撞 Kotlin 關鍵字以反引號包覆。引擎 src/features/jsonToKotlin.ts(純函式無 DOM,Long+Double→Double 衝突→Any、
