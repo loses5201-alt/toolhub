@@ -1274,6 +1274,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/html-to-text/Index.vue'),
   },
   {
+    id: 'html-to-markdown',
+    name: 'HTML 轉 Markdown',
+    category: 'workshop',
+    description: '把網頁、Notion、Google 文件、HTML Email 複製來的內容轉成乾淨 Markdown —— 標題、粗體/斜體/刪除線、連結、圖片、巢狀清單、引言、程式碼、表格、分隔線都會保留,自動解開 HTML 實體、略過 script/style。內建輕量解析器,全程在你瀏覽器,不連網、不上傳。',
+    keywords: ['html轉markdown', 'html to markdown', 'html轉md', '轉markdown', 'markdown', 'md', '網頁轉markdown', 'notion', 'google文件', '複製貼上', '轉筆記', 'readme', '部落格', '富文本轉markdown', 'rich text', '電子報轉markdown', '保留格式', '貼上', 'h2m'],
+    icon: '📝',
+    loader: () => import('@/tools/html-to-markdown/Index.vue'),
+  },
+  {
     id: 'ansi-convert',
     name: 'ANSI 終端機色碼轉換',
     category: 'workshop',
