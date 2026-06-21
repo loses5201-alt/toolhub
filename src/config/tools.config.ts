@@ -98,6 +98,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/contrast-check/Index.vue'),
   },
   {
+    id: 'apca-contrast',
+    name: 'APCA 對比檢測(WCAG 3)',
+    category: 'workshop',
+    description: '用 WCAG 3 草案採用的新一代 APCA 模型檢測文字與背景的可讀性,算出更貼近人眼的「Lc 值」—— 會區分深字淺底/淺字深底的明暗極性(傳統對比比值算不出來),並依字級給達標建議。與 WCAG 2 對比比值互補。全程在你瀏覽器計算,不上傳。',
+    keywords: ['apca', 'lc', 'lc值', 'wcag3', 'wcag 3', '對比', '對比度', '可讀性', '感知對比', '無障礙', 'a11y', '配色', '文字顏色', '背景色', '極性', 'perceptual contrast', '新對比', '色彩對比', 'lightness contrast', 'apcacontrast'],
+    icon: '🔆',
+    loader: () => import('@/tools/apca-contrast/Index.vue'),
+  },
+  {
     id: 'color-blind',
     name: '色盲友善檢測',
     category: 'workshop',
