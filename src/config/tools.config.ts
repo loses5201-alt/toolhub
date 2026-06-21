@@ -901,6 +901,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/json-to-swift/Index.vue'),
   },
   {
+    id: 'json-to-dart',
+    name: 'JSON 轉 Dart',
+    category: 'workshop',
+    description: '貼上 API 回應或任何 JSON,自動推斷出 Dart class —— plain 模式自帶 fromJson 工廠 + toJson(免 codegen 直接可用),或 json_serializable 模式產生 @JsonSerializable / @JsonKey 標註搭配 build_runner。屬性採 lowerCamelCase,巢狀物件各自成 class、陣列合併欄位、缺鍵或 null 自動可空。寫 Flutter App 免手刻型別。與 JSON 轉 TypeScript / Go / Python / Rust / C# / Kotlin / Java / Swift 互補;全程在你瀏覽器,含密鑰回應不上傳。',
+    keywords: ['json', 'dart', 'flutter', 'class', 'model', 'fromjson', 'tojson', 'json_serializable', 'jsonkey', 'jsonserializable', 'build_runner', '型別', 'json轉dart', 'json to dart', '產生類別', 'dto', 'codable'],
+    icon: '🎯',
+    loader: () => import('@/tools/json-to-dart/Index.vue'),
+  },
+  {
     id: 'gitignore-tester',
     name: '.gitignore 測試器',
     category: 'workshop',
