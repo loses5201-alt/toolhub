@@ -1963,6 +1963,15 @@
   MultiPolygon + GeometryCollection / 壞 JSON·非物件·缺 features·缺 type 各錯誤 / 顯示格式,esbuild 打包後跑,
   併入 npm test)。Vue 端總覽卡 + 型別長條 + 屬性欄位 + 可排序 feature 表;面積長度採球面近似標明非測量精度;
   零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-21
+- WKT ⇆ GeoJSON 轉換(wkt-convert,category=workshop):空間資料庫(PostGIS / MySQL / SQL Server /
+  Oracle Spatial)用 WKT 文字、前端地圖與開放資料用 GeoJSON,本工具雙向互轉。引擎 src/features/wkt.ts
+  (純函式無 DOM:tokenize 詞法(word/num/括號/逗號,數字含正負小數科學記號)、Parser 遞迴下降解析
+  POINT/LINESTRING/POLYGON/MULTI*/GEOMETRYCOLLECTION、EMPTY、Z/M 維度標記、MULTIPOINT 容忍裸與括號座標、
+  容忍 EWKT 的 SRID= 前綴、結尾多餘內容報錯;geoJsonToWkt 反向、geoJsonTextToWkt 從 Feature/FeatureCollection
+  抽幾何多行輸出)+ 回歸測試 scripts/test-wkt.mjs(WKT 規範範例為 oracle,50+ 筆:各型別雙向 / 有洞 polygon /
+  Z 三軸 / MULTIPOINT 兩種寫法 / EMPTY / EWKT SRID / 7 種 round-trip / Feature·FeatureCollection / 空·未知型別·
+  括號不匹配·座標不足·結尾多餘 各錯誤,esbuild 打包後跑,併入 npm test)。Vue 端雙向切換 + 對調帶入 + 範例 +
+  多行批次轉 FeatureCollection;與 geojson-inspect 互補;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-21
 
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
