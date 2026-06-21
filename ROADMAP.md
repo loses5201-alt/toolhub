@@ -1942,6 +1942,17 @@
   與連結 / CSV BOM 與資料列數 / 空與非 OPML / 混合自閉合與巢狀,esbuild 打包後跑,併入 npm test)。Vue 端
   訂閱清單 / 重複 / 大綱 / Markdown / CSV 五檢視;與 feed-viewer、bookmarks-clean 同屬「打開檔案看內容」家族;
   零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-21
+- GeoJSON 檢視 / 分析(geojson-inspect,category=workshop):開啟 QGIS / Leaflet / Mapbox / OSM 匯出或
+  政府開放資料的 .geojson,一眼看到幾何型別分布、feature 數、座標點總數、整體邊界框 bbox、線段總長、面積合計,
+  逐 feature 列出型別 / 點數 / 長度 / 面積 / 屬性欄位,可依點數 / 長度 / 面積排序。引擎 src/features/geojson.ts
+  (純函式無 DOM:支援 FeatureCollection / 單一 Feature / 裸幾何 / GeometryCollection,eachPosition 遞迴計點與
+  bbox、lineLength 複用 geoCoord haversine、ringArea 球面近似面積、polygonArea 外環扣洞、geometryLength/
+  geometryArea 各型別、countPositions;analyzeGeoJson 容錯回 errors 不丟例外;formatLength/formatArea 公里·公頃
+  友善顯示)+ 回歸測試 scripts/test-geojson.mjs(手構 RFC 7946 GeoJSON,以已知座標手算為 oracle,45 筆:型別統計 /
+  點數 / 屬性鍵彙整去重 / bbox / 線長=度數×111km / Polygon 扣洞面積 / null geometry / 裸幾何 / 單一 Feature /
+  MultiPolygon + GeometryCollection / 壞 JSON·非物件·缺 features·缺 type 各錯誤 / 顯示格式,esbuild 打包後跑,
+  併入 npm test)。Vue 端總覽卡 + 型別長條 + 屬性欄位 + 可排序 feature 表;面積長度採球面近似標明非測量精度;
+  零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-21
 
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
