@@ -784,6 +784,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/json-to-kotlin/Index.vue'),
   },
   {
+    id: 'gitignore-tester',
+    name: '.gitignore 測試器',
+    category: 'workshop',
+    description: '貼上 .gitignore 與要測的路徑,逐一判斷哪些被 git 忽略、哪些被追蹤,並指出「最後命中(last match wins)」的規則。正確處理 ! 反向、結尾 / 只比對目錄、錨定、** 任意層,以及「父目錄被忽略無法重新納入子檔」這個常見陷阱 —— 比一般 glob 比對更貼近 git 真實行為。全程在你瀏覽器,不連網、不上傳。',
+    keywords: ['gitignore', 'git', 'ignore', '忽略', '.gitignore', '版本控制', '排除', 'exclude', 'untrack', '為什麼沒被忽略', '為什麼還被追蹤', 'negate', '反向', 'last match', 'dockerignore', '樣式', 'pattern', '測試'],
+    icon: '🙈',
+    loader: () => import('@/tools/gitignore-tester/Index.vue'),
+  },
+  {
     id: 'big5-convert',
     name: 'Big5 ↔ UTF-8 文字檔轉換',
     category: 'workshop',
