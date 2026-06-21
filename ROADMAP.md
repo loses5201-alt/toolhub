@@ -22,6 +22,17 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
+- .eml 郵件檢視器(eml-viewer,category=workshop):開啟存下來的 .eml 信件(或 Gmail/Outlook「顯示原始郵件」
+  存的檔),解析標頭(主旨/寄件/收件/日期,RFC 2047 亂碼還原)、MIME 結構樹、內文(quoted-printable / base64
+  解碼)與附件清單(檔名/型別/大小,可一鍵下載)。為防隱私外洩,HTML 內文不直接渲染(不載入遠端追蹤圖片 /
+  beacon),只呈現原始碼。引擎 src/features/eml.ts(純函式無 DOM:parseHeaders 折行還原、parseParamHeader 引號
+  內分號不切+反斜線跳脫、resolveParam 支援 RFC 2231 延續 filename*0*/filename*1 與編碼+RFC 2047 encoded-word、
+  splitMultipart 依 boundary 切割略過 preamble/epilogue、decodeBody 處理 base64/quoted-printable/8bit、
+  decodeText 以 TextDecoder 依字元集解碼退回 UTF-8、parseAddresses 引號內逗號不切+角括號;複用 encodedWord 的
+  base64ToBytes/decodeMimeHeader)+ 回歸測試 scripts/test-eml.mjs(41 筆:折行/參數/RFC2231/QP/base64/iso-8859-1/
+  地址/簡單信/multipart-alternative 含 CRLF 與 preamble/multipart-mixed 附件,base64 以 Buffer 即時產生為 oracle,
+  esbuild 打包後跑,併入 npm test)。Vue 端以 readAsArrayBuffer 保留原始位元組;與 email-check、ics-viewer 互補;
+  零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-21
 - .gitignore 測試器(gitignore-tester,category=workshop):貼上 .gitignore 與要測路徑,逐一判定是否被 git 忽略並
   指出「最後命中(last match wins)」規則。比 glob-tester 更貼近 git 真實語意:! 反向、結尾 / 只比對目錄、開頭/中間 /
   錨定根、* 不跨 /、? / [abc] / **(**/、/**、/**/),且逐層評估「父目錄被忽略時無法用 ! 重新納入其下檔案」的陷阱。
