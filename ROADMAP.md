@@ -22,6 +22,14 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
+- .gitignore 測試器(gitignore-tester,category=workshop):貼上 .gitignore 與要測路徑,逐一判定是否被 git 忽略並
+  指出「最後命中(last match wins)」規則。比 glob-tester 更貼近 git 真實語意:! 反向、結尾 / 只比對目錄、開頭/中間 /
+  錨定根、* 不跨 /、? / [abc] / **(**/、/**、/**/),且逐層評估「父目錄被忽略時無法用 ! 重新納入其下檔案」的陷阱。
+  引擎 src/features/gitignore.ts(純函式無 DOM:parseGitignoreLine 處理註解/轉義 #!/尾端空白(奇數反斜線保留)/旗標、
+  globToRegexBody 反斜線轉義與 **,matchPath 由上而下逐段測試、父目錄忽略即停止下探、決定規則回傳行號)+ 回歸測試
+  scripts/test-gitignore.mjs(53 筆:以 git 官方規則為 oracle —— basename/錨定/目錄專屬/萬用字元/字元集合/**/反向 last
+  match wins/父目錄陷阱/先重新納入目錄再保留特定檔/尾端空白/parsePaths/整合,esbuild 打包後跑,併入 npm test)。零相依、
+  不上傳;type-check + 全測試 + build 通過 — 2026-06-21
 - QR 詐騙(quishing)安全檢查(qr-scam-check,category=anti-scam):上傳含 QR 的圖片或貼上掃到的內容,
   判讀它要帶你做什麼並針對 QR 釣魚手法給警示。深化反詐第二支柱(停車繳費單/罰單/菜單上的假 QR)。
   引擎 src/features/qrScam.ts(純函式無 DOM:analyzeQrContent 依前綴分類 url/wifi/tel/sms/email/geo/
