@@ -98,6 +98,16 @@
   scripts/test-gitignore.mjs(53 筆:以 git 官方規則為 oracle —— basename/錨定/目錄專屬/萬用字元/字元集合/**/反向 last
   match wins/父目錄陷阱/先重新納入目錄再保留特定檔/尾端空白/parsePaths/整合,esbuild 打包後跑,併入 npm test)。零相依、
   不上傳;type-check + 全測試 + build 通過 — 2026-06-21
+- 同形字 / 混合文字偵測(homoglyph-check,category=anti-scam):深化反詐第一支柱。貼上品牌名/網址/可疑訊息,
+  找出「看似英數字、實為其他語系字元」的偽裝(西里爾 а 冒充 a → paypаl、希臘 ο 冒充 o → gοοgle、全形字母),
+  逐字標出 Unicode 碼位與冒充目標、還原成 skeleton(它想假裝成的樣子),並偵測同一詞混用多種語系的釣魚手法。
+  引擎 src/features/homoglyph.ts(純函式無 DOM:scriptOf 依 Unicode 區段判 Latin/Cyrillic/Greek/Han/Hiragana/
+  Katakana/Hangul/Fullwidth 等、confusableTarget 明確同形字對照表 + 全形 ASCII(FF01–FF5E)程式化還原、analyzeText
+  逐字 CharInfo + 逐詞 Token 含 mixed/hasConfusable + skeleton;中英/日韓夾雜屬正常僅提示不算同形字)+ 回歸測試
+  scripts/test-homoglyph.mjs(47 筆:scriptOf 各語系/confusableTarget 西里爾·希臘·全形/純拉丁不可疑/paypаl 西里爾
+  冒充含碼位 U+0430/全形 ＡＢＣ→ABC/中英日韓正常不誤判/希臘 gοοgle→google/空字串/多詞部分可疑/emoji 不誤判,
+  esbuild 打包後跑,併入 npm test)。與 link-check、domain-twist、punycode、char-inspect 互補;零相依、不上傳;
+  type-check + 全測試 + build 通過 — 2026-06-21
 - QR 詐騙(quishing)安全檢查(qr-scam-check,category=anti-scam):上傳含 QR 的圖片或貼上掃到的內容,
   判讀它要帶你做什麼並針對 QR 釣魚手法給警示。深化反詐第二支柱(停車繳費單/罰單/菜單上的假 QR)。
   引擎 src/features/qrScam.ts(純函式無 DOM:analyzeQrContent 依前綴分類 url/wifi/tel/sms/email/geo/
