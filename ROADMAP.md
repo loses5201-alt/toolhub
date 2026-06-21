@@ -1920,6 +1920,18 @@
   RDF 兄弟 item / dc:date / 壞日期保留 / 空頻道 / unknown / Markdown 輸出,esbuild 打包後跑,併入 npm test)。
   Vue 端文章清單/Markdown 雙檢視 + 搜尋排序;與 eml-viewer、epub-viewer、bookmarks-clean 同屬「打開檔案看內容」
   家族;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-21
+- OPML 訂閱清單檢視器(opml-viewer,category=workshop):開啟 RSS 閱讀器(Feedly / Inoreader /
+  NetNewsWire…)「匯出訂閱」存的 .opml,把巢狀資料夾攤成清晰訂閱清單(標題 / Feed 網址 / 所在資料夾),
+  一鍵找重複 feed(忽略尾斜線 / 大小寫)、關鍵字搜尋,匯出 Markdown / CSV / 縮排純文字大綱。換閱讀器或備份
+  訂閱時最好用;OPML 也是大綱 / 心智圖交換格式。引擎 src/features/opml.ts(純函式無 DOM:以堆疊解析巢狀
+  <outline>(自閉合葉節點與含子節點兩種)、attr 解 text·title·type·xmlUrl·htmlUrl、parseOpml 取 head 的
+  title·ownerName·dateCreated + body outlines、flattenOutlines 帶資料夾路徑與深度、countOutlines 統計
+  資料夾/feed/總數、findDuplicateFeeds 正規化 xmlUrl 比對、toOutlineText 縮排大綱、toMarkdown 資料夾為標題
+  訂閱為連結、toCsv 含 BOM)+ 回歸測試 scripts/test-opml.mjs(手構 OPML 2.0 為 oracle,40 筆:head 解實體 /
+  巢狀樹三層 / xmlUrl·htmlUrl / 統計 / 攤平資料夾路徑與深度 / 重複 feed 僅尾斜線差異 / 大綱縮排 / Markdown 標題
+  與連結 / CSV BOM 與資料列數 / 空與非 OPML / 混合自閉合與巢狀,esbuild 打包後跑,併入 npm test)。Vue 端
+  訂閱清單 / 重複 / 大綱 / Markdown / CSV 五檢視;與 feed-viewer、bookmarks-clean 同屬「打開檔案看內容」家族;
+  零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-21
 
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
