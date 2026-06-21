@@ -937,6 +937,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/json-to-swift/Index.vue'),
   },
   {
+    id: 'json-to-proto',
+    name: 'JSON 轉 Protobuf',
+    category: 'workshop',
+    description: '貼上 API 回應或任何 JSON,自動推斷出 proto3 message 定義 —— 欄位採 snake_case 並依序編號,巢狀物件各自成 message、陣列轉 repeated,snake_case 與原鍵不同時自動補 [json_name]。整數→int64、含小數→double、布林→bool、字串→string,型別衝突或全 null→google.protobuf.Value。寫 gRPC / protobuf schema 免手刻。與 JSON 轉 TypeScript / Go / Rust / Dart 等互補;全程在你瀏覽器,含密鑰回應不上傳。',
+    keywords: ['json', 'protobuf', 'proto', 'proto3', 'grpc', 'message', 'schema', '.proto', 'int64', 'repeated', '型別', 'json轉proto', 'json to protobuf', '產生proto', 'gRPC', 'serialization'],
+    icon: '🔌',
+    loader: () => import('@/tools/json-to-proto/Index.vue'),
+  },
+  {
     id: 'json-to-dart',
     name: 'JSON 轉 Dart',
     category: 'workshop',
