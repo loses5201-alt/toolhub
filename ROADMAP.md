@@ -1620,6 +1620,20 @@
   O×AB→{A,B}/O×O→{O}、AB×O 不可能生 O 或 AB、Rh−×−→只有−、impossible 集合與機率和=1,併入 npm test)。
   明確標註不含 cis-AB/孟買型特例、血型不符不代表非親生請以 DNA 為準;與 combinatorics 互補;零相依、
   不上傳;type-check + 全測試 + build 通過 — 2026-06-21
+- 描述統計計算機(descriptive-stats,category=workshop):貼上一串數字(可直接從 Excel 一欄貼上,
+  容忍換行/逗號/空白/分號/Tab 分隔、自動忽略非數字),算出完整敘述統計 —— 平均/中位數/眾數、樣本與母體
+  標準差/變異數、全距、四分位數 Q1/Q3/IQR、變異係數、平均數標準誤、偏度、超額峰度、幾何/調和平均、RMS、
+  1.5×IQR 離群值偵測,並畫出直方圖(分組數自動 Sturges 或手選 5/10/15/20)與盒鬚圖(鬚只延伸到界內、
+  離群值紅點)。引擎 src/features/descriptiveStats.ts(純函式無 DOM:parseNumbers 容髒資料並計數忽略、
+  median/modes(全不重複則無眾數)、variance/stdDev 樣本 n−1 與母體 n 兩式、percentile 線性內插 R-7
+  =Excel QUARTILE.INC/PERCENTILE.INC、skewness=Excel SKEW 調整後 Fisher–Pearson、kurtosis=Excel KURT
+  超額峰度、geometric/harmonic 僅正數適用否則 null、histogram Sturges 分組且全等值單一組、summarize 彙整
+  含離群與小樣本邊界 null)+ 回歸測試 scripts/test-descriptivestats.mjs(以課本定義/手算/Excel 函式對照
+  為 oracle 68 筆:經典 [2,4,4,4,5,5,7,9] 全量含 Q1=4/Q3=5.5/上界 7.75→9 離群、對稱 [1,2,3,4,5] 偏度 0/
+  KURT=−1.2、離群 [1,2,3,4,5,100]、幾何=2/調和=12/7/RMS=√7、偏度 [1,2,3,4,10]≈1.69705、n=1/2/3 小樣本
+  邊界 null、全等值 SD0、parseNumbers 各分隔與忽略計數、percentile 內插與 histogram 總數守恆,併入 npm test)。
+  text-stats 是字數、table-stats 是分組樞紐,這支專做「一組數字」的敘述統計;免開 Excel/SPSS、不上傳、
+  無廣告;type-check + 全測試 + build 通過 — 2026-06-21
 
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
