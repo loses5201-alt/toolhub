@@ -22,6 +22,19 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
+- Apple plist 檢視器(plist-viewer,category=workshop):開啟 iOS / macOS 的 .plist 檔(二進位 bplist00 或
+  XML 皆可),拆成可讀結構樹並一鍵轉乾淨 JSON。App 偏好設定 / Info.plist / iCloud·iTunes 備份 / 描述檔
+  (.mobileconfig)內層 / NSKeyedArchiver 封存常用 plist;二進位的用文字編輯器打開只會看到亂碼。引擎
+  src/features/plist.ts(純函式無 DOM:decodeBinaryPlist 依 CFBinaryPlist 解 trailer / 偏移表 / 各物件型別
+  —— null·bool / int(8·16 位元組帶號)/ real(f32·f64)/ date(Apple 絕對時間轉 ISO)/ data / ascii·utf16be
+  字串 / uid / array·set / dict,含 0xf 長度欄位與重複參照 seen 防護;parseXmlPlist 自寫 XML tokenizer 解
+  dict/array/各純量與 <true/> 等自閉合元素、實體解碼;parsePlistText 自動辨識 XML 文字或二進位 hex/base64、
+  parsePlistBytes 從檔案位元組辨識;plistToJson 回乾淨 raw)+ 回歸測試 scripts/test-plist.mjs(50 筆,以測試
+  內獨立手寫的 bplist 編碼器 buildBplist round-trip 為 oracle:純量/各整數寬度/負數/Unicode·emoji/data/date/uid/
+  巢狀/空容器/0xf 長度觸發/trailer·標頭·偏移表錯誤,XML 以手構規範文字驗 dict·array·純量·自閉合·實體·空字串·缺根、
+  parsePlistText 三格式偵測,esbuild 打包後跑,併入 npm test)。Vue 端遞迴元件 PlistTree + 結構樹/JSON 雙檢視 +
+  BigInt 安全序列化。與 cbor-decode、msgpack-decode、bencode-decode、asn1-decode 互補;零相依、不上傳;
+  type-check + 全測試 + build 通過 — 2026-06-21
 - PHP serialize() 解碼器(php-serialize,category=workshop):貼上 WordPress(wp_options / postmeta)、
   Laravel(session / cache)、Drupal 資料庫裡那一坨 PHP serialize() 字串(a:2:{…}、O:8:"stdClass":…),
   拆成可讀結構樹並可一鍵轉乾淨 JSON。引擎 src/features/phpSerialize.ts(純函式無 DOM:parsePhpInput 辨識純文字 /
