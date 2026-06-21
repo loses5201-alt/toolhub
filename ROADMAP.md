@@ -22,6 +22,16 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
+- EXE / DLL 檢視器(pe-inspect,category=workshop):下載到 .exe / .dll 先別執行,先看清楚它是什麼 —— 32/64
+  位元、目標 CPU(x86/x64/ARM)、編譯時間、GUI 還是命令列、ASLR/DEP/CFG 防護、是否帶數位簽章、會呼叫哪些
+  系統 DLL(import,可推測程式行為),並標出「可寫+可執行」等加殼/自我修改可疑特徵。引擎 src/features/pe.ts
+  (純函式無 DOM:解 DOS 標頭 MZ/e_lfanew、PE 簽章、COFF、Optional Header(PE32 與 PE32+ 分支:magic/
+  entryPoint/imageBase/subsystem/DllCharacteristics/NumberOfRvaAndSizes)、資料目錄(Import=1、Certificate=4
+  判簽章)、區段表屬性旗標、以 RVA→檔案偏移走訪 Import 目錄列 DLL)+ 回歸測試 scripts/test-pe.mjs(以測試內
+  獨立 PE 組裝器 buildPe 依規範手寫 DOS/PE/Optional/區段/Import 組合法 PE 為 oracle,PE32+ 與 PE32 兩種、
+  machine/subsystem/簽章/防護/imports/區段旗標/timestamp 0/ARM64/錯誤路徑,併入 npm test)。Vue 端檔案上傳 +
+  概要/安全防護/匯入 DLL/區段四區塊 + 不驗證簽章有效性的安全提醒;不是防毒、只幫「執行前先看清楚」;零相依、
+  不上傳、不執行;type-check + 全測試 + build 通過 — 2026-06-21
 - 字型檔檢視器(font-inspect,category=workshop):打開 .ttf / .otf / .ttc 不必裝軟體,即可看字型家族 /
   樣式 / 完整名稱、版本、製造商 / 設計師、著作權與授權、是否允許嵌入(fsType,做 PDF / 網頁前先確認授權)、
   字重 / 寬度 / 斜體 / 等寬、每 em 單位、字符數、建立 / 修改日期、cmap 編碼表數、資料表清單,並用 FontFace
