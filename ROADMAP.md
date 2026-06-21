@@ -22,6 +22,14 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
+- vCard 通訊錄檢視 / 分割器(vcf-viewer,category=workshop):開啟 Google 通訊錄 / iCloud / Android 匯出的
+  .vcf(常一個檔含上百張名片),列成一張張看得懂的名片(姓名/電話/Email/公司/職稱/地址/生日/備註),可搜尋,
+  單張另存 .vcf 或整批匯出成 CSV(含 BOM 供 Excel)。引擎 src/features/vcardParse.ts(純函式無 DOM:unfoldLines
+  依 RFC 6350 移除單一前導空白且不補空格、parseLine 去 group 前綴/解 TYPE 與 vCard 2.1 簡寫/CHARSET+ENCODING=
+  QUOTED-PRINTABLE 解碼、splitEscaped 以未跳脫分隔切割、unescapeText 還原 \\n \\, \\;、N 缺 FN 時由 prefix/given/
+  family 推導、ORG/ADR 結構合併)+ 回歸測試 scripts/test-vcardparse.mjs(26 筆:折行/parseLine 各情境/QP/跳脫/
+  單張多欄/多張/由 N 推導 FN/折行 NOTE/邊界,手構 vCard 為 oracle,esbuild 打包後跑,併入 npm test)。
+  與 vcard-maker(產生)、mail-merge 互補;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-21
 - X.509 憑證檢視器(cert-viewer,category=workshop):貼上 PEM / .crt / .cer 憑證,翻成白話欄位 —— 主體 /
   簽發者 DN、有效期與到期狀態(已過期 / 快到期 <30 天 / 還有幾天)、SAN 適用網域、公鑰型別與長度(EC 曲線 /
   RSA 模數位數)、簽章演算法、各擴充(basicConstraints / keyUsage / extKeyUsage 等含 critical 標示),Vue 端以
