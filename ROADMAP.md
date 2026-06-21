@@ -1908,6 +1908,18 @@
   同鍵不產 CodingKeys 與有 rename 列全鍵/null·缺鍵→optional/巢狀葉節點在前/[T] 陣列/衝突→AnyCodable 與說明註解/
   關鍵字反引號含改名後 CodingStateKeys/空 struct/根陣列·純量提示/同名不同結構加序號,esbuild 打包後跑,併入
   npm test)。零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-21
+- RSS / Atom / RDF 訂閱源檢視器(feed-viewer,category=workshop):開啟存下來的 feed XML,離線就能讀文章清單
+  (標題 / 連結 / 發布日期 / 作者 / 摘要 / 分類),可關鍵字搜尋、依日期排序、匯出 Markdown。摘要一律轉乾淨純文字
+  並過濾標籤,不載入內嵌遠端追蹤圖片或廣告,適合連去原站前先看內容或封存喜歡的部落格 / 新聞 / Podcast。引擎
+  src/features/feed.ts(純函式無 DOM、不用 DOMParser:自寫小型 XML 取值工具含 CDATA 還原 stripCdata、自閉合標籤
+  容忍、忽略命名空間前綴;detectKind 辨識 RSS 2.0 / Atom / RSS 1.0·RDF;RSS 解 pubDate·dc:creator·
+  content:encoded·category·guid、Atom 解 entry·alternate link·author/name·summary/content·term、RDF 的 item
+  為 channel 兄弟故對整份取 item;toIso 把 RFC822/ISO 字串轉 ISO 8601 解析失敗保留原字串;摘要先 decodeEntities
+  再 htmlToText 兼容 type=html 跳脫內容)+ 回歸測試 scripts/test-feed.mjs(手構符規範三格式 feed 為 oracle,
+  40 筆:kind 偵測 / 頻道與文章各欄位 / 實體解碼 / CDATA / content:encoded 優先 / Atom alternate link 與自閉合 /
+  RDF 兄弟 item / dc:date / 壞日期保留 / 空頻道 / unknown / Markdown 輸出,esbuild 打包後跑,併入 npm test)。
+  Vue 端文章清單/Markdown 雙檢視 + 搜尋排序;與 eml-viewer、epub-viewer、bookmarks-clean 同屬「打開檔案看內容」
+  家族;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-21
 
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
