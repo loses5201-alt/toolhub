@@ -71,6 +71,14 @@
   地址/簡單信/multipart-alternative 含 CRLF 與 preamble/multipart-mixed 附件,base64 以 Buffer 即時產生為 oracle,
   esbuild 打包後跑,併入 npm test)。Vue 端以 readAsArrayBuffer 保留原始位元組;與 email-check、ics-viewer 互補;
   零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-21
+- JSON Schema 轉範例 JSON(schema-sample,category=workshop):補上 json-schema 的反向。貼上 JSON Schema
+  (draft-07 等)產生一筆符合結構的範例 JSON,用於 API mock、測試假資料、看懂 schema。引擎
+  src/features/schemaSample.ts(純函式無 DOM:支援 type 含 nullable 陣列型別、properties/required 可選
+  requiredOnly、items 含 tuple + minItems/maxItems、$ref 本地 #/definitions·#/$defs 遞迴守衛 depth>8 截斷、
+  allOf 合併物件、anyOf/oneOf 取第一個、const/default/examples/enum 優先序、字串依 format 給代表值、
+  數字取 minimum/multipleOf、arrayCount 設定筆數)+ 回歸測試 scripts/test-schemasample.mjs(38 筆,esbuild
+  打包後跑,併入 npm test)。Vue 端可切 requiredOnly 與陣列筆數;與 json-schema(反向)、fake-data 互補;
+  零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-21
 - JSON 轉 Protobuf(json-to-proto,category=workshop):補齊 json-to-X 家族的 gRPC/protobuf。貼上 JSON 推斷
   proto3 message 定義 —— 欄位採 snake_case 並依序編號,巢狀物件各自成 message、陣列轉 repeated,snake_case 與原鍵
   不同時自動補 [json_name]。整數→int64、含小數→double(混用也→double)、布林→bool、字串→string,型別衝突或全
