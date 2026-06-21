@@ -757,6 +757,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/json-to-python/Index.vue'),
   },
   {
+    id: 'json-to-rust',
+    name: 'JSON 轉 Rust',
+    category: 'workshop',
+    description: '貼上 API 回應或任何 JSON,自動推斷出 Rust struct —— serde 樣式自動加 #[derive(Serialize, Deserialize)] 與 rename,巢狀物件各自成 struct、陣列合併欄位、缺鍵或 null 自動 Option。寫 Rust 後端/CLI 免手刻型別。與 JSON 轉 TypeScript / Go / Python 互補;全程在你瀏覽器,含密鑰回應不上傳。',
+    keywords: ['json', 'rust', 'serde', 'struct', 'derive', '型別', 'type', 'json轉rust', 'json to rust', '產生結構', 'deserialize', 'serialize', 'option', 'vec', 'api', '回應', '後端', '結構'],
+    icon: '🦀',
+    loader: () => import('@/tools/json-to-rust/Index.vue'),
+  },
+  {
     id: 'big5-convert',
     name: 'Big5 ↔ UTF-8 文字檔轉換',
     category: 'workshop',
