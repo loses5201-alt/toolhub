@@ -1580,6 +1580,16 @@
   τ(12)=6/σ(28)=56/φ(12)=4/φ(p)=p−1、divisors(28)、nextPrime/prevPrime、完美數 6/28 與虧 8/盈 12、
   上標格式,併入 npm test)。Vue 端純顯示。與 combinatorics、fraction 互補;零相依、不上傳;
   type-check + 全測試 + build 通過 — 2026-06-21
+- Identicon 頭像產生器(identicon,category=workshop):輸入暱稱/Email/任意 ID,決定性產生 GitHub
+  風格的對稱像素頭像(相同輸入永遠同一張),當預設大頭貼、留言頭像、區別帳號用;可調格數(5/7/9)、
+  底色,下載 SVG(向量)或 PNG(256/512)。引擎 src/features/identicon.ts(純函式無 DOM:hashString
+  FNV-1a 32 位元用 Math.imul、identiconData 取高位元算 HSL 色相、低位元決定左半格子再左右鏡射成對稱、
+  位元不足時以 text+'#'+salt 衍生雜湊補、identiconSvg 輸出向量含 0.5px 重疊防縫隙)+ 回歸測試
+  scripts/test-identicon.mjs(以 FNV-1a 公認測試向量 ""=0x811c9dc5、"a"=0xe40c292c、"foobar"=0xbf9cf968
+  為 oracle,加決定性/左右對稱/偶數格數自動補奇/顏色 hsl 範圍/300 組皆對稱且幾乎不空白/SVG 結構與
+  rect 數=開啟格+背景/自訂尺寸背景,28 筆,併入 npm test)。明確標註純視覺辨識用途非加密、相同輸入同頭像;
+  與 favicon-gen、placeholder-image 互補;v-html 僅渲染本地產生的 SVG;零相依、不上傳;
+  type-check + 全測試 + build 通過 — 2026-06-21
 
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
