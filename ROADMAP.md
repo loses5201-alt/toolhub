@@ -1536,6 +1536,17 @@
   調色盤常數/256 色純紅綠藍與灰階夾鉗/strip 各類 CSI 與 OSC(BEL 與 ST)且保留正文括號/span 切分與合併/
   高亮與 256/真彩前後景/關閉屬性 22/39/空 SGR reset/各文字裝飾/HTML 跳脫/strip==spans 接合,併入 npm test)。
   與 big5-convert、mojibake-fix、escape-text、ascii-art 互補;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-21
+- APCA 對比檢測(apca-contrast,category=workshop):用 WCAG 3 草案採用的 APCA(Accessible
+  Perceptual Contrast Algorithm)模型檢測文字/背景可讀性,算出更貼近人眼的「Lc 值」(約 -108 ~ +106),
+  並區分深字淺底(正)/淺字深底(負)的明暗極性 —— 這是傳統 WCAG 2 對比比值算不出來的;依字級/字重
+  給達標建議。引擎 src/features/apca.ts(純函式無 DOM,APCA-W3 0.1.9 G-4g 常數:sRGBtoY 採 2.4 次方
+  曲線無低端線性段、apcaContrastY 含黑階軟鉗 blkThrs/blkClmp、deltaYmin 與 loClip 低對比鉗位、
+  normal/reverse 兩極性各自的指數與 offset、apcaContrast、describeLc 白話七級;複用 contrast.ts 的
+  parseColor/RGB 避免重複)+ 回歸測試 scripts/test-apca.mjs(以手算驗證過的公認參考值
+  #888/#fff=63.06、#fff/#888=-68.54、#000/#fff=106.04、#fff/#000≈-107.88 為 oracle,加 Y 值/
+  正負極性符號/同色與近似色鉗為 0/對白底與黑底的單調性/describeLc 等級與內文門檻,30 筆,併入 npm test)。
+  與 contrast-check(WCAG 2)、color-blind 互補;明確標註 WCAG 3 仍草案、要符合現行法規仍以 WCAG 2 為準;
+  零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-21
 
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,
