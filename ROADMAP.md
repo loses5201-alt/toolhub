@@ -22,6 +22,17 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
+- CBOR 解碼器(cbor-decode,category=workshop):貼上 hex / base64 的 CBOR(RFC 8949)二進位,拆成可讀
+  結構樹(整數 / byte / text / 陣列 / map / tag / 浮點 / 布林 / null)。WebAuthn / passkey 認證、COSE、CTAP、
+  IoT 常用。引擎 src/features/cbor.ts(純函式無 DOM:parseCborInput 辨識 hex/base64、readArgument 處理 ai
+  0..23/24/25/26/27 與不定長 0x1f、readItem 遞迴解八種 major type —— uint、nint(-1-n)、byte/text string
+  (含不定長 chunk 串接、UTF-8)、array、map(key→value 配對)、tag(well-known 標名稱、tag 2/3 bignum 還原
+  整數)、major7(false/true/null/undefined/簡單值/float16 手解·float32·float64 big-endian);CborError
+  邊界檢查;頂層支援 CBOR 序列多項目;部分失敗回已解析 + error)+ 回歸測試 scripts/test-cbor.mjs(50 筆,
+  oracle = RFC 8949 Appendix A 標準測試向量:整數/大數/浮點含 NaN·Infinity·float16·float32/簡單值/字串/UTF-8/
+  巢狀陣列/map/不定長陣列·map·bytes·text/tag 0·1·2·3/截斷與項目不足錯誤路徑/CBOR 序列/hex·base64,esbuild
+  打包後跑,併入 npm test)。Vue 端遞迴元件 CborTree(陣列/tag 用 children、map 用 entries 配對)。與 protobuf-decode、
+  asn1-decode 互補;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-21
 - Protobuf 二進位解碼器(protobuf-decode,category=workshop):貼上 hex / base64 的 Protobuf 位元組,
   沒有 .proto schema 也能依 wire format 拆成「欄位編號 + wire type + 值」的結構樹,等同 protoc --decode_raw、
   免裝 protoc。引擎 src/features/protobuf.ts(純函式無 DOM:parseProtoInput 辨識 hex/base64(含 base64url)、
