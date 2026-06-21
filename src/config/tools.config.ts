@@ -2662,6 +2662,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/sms-check/Index.vue'),
   },
   {
+    id: 'qr-scam-check',
+    name: 'QR 詐騙安全檢查',
+    category: 'anti-scam',
+    description: '上傳含 QR 的圖片或貼上掃到的內容,先判讀它要帶你做什麼(開網址 / 連 Wi-Fi / 轉加密貨幣 / 撥電話 / 發簡訊),並針對 QR 釣魚(quishing)手法給警示。掃路邊、帳單、菜單上的 QR 前先過這一關;全程在你瀏覽器解碼判讀、不上傳。',
+    keywords: ['qr', 'qrcode', 'qr code', 'qr詐騙', 'quishing', 'qr釣魚', '掃描', '掃碼', '二維碼', '條碼', '詐騙', '釣魚', '停車', '罰單', '繳費', '假qr', '惡意qr', '網址', 'wifi', '加密貨幣', '防詐'],
+    icon: '🔍',
+    loader: () => import('@/tools/qr-scam-check/Index.vue'),
+  },
+  {
     id: 'email-check',
     name: '郵件來源檢視 / 防冒名',
     category: 'anti-scam',
