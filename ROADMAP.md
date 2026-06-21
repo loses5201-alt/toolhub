@@ -22,6 +22,17 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
+- Protobuf 二進位解碼器(protobuf-decode,category=workshop):貼上 hex / base64 的 Protobuf 位元組,
+  沒有 .proto schema 也能依 wire format 拆成「欄位編號 + wire type + 值」的結構樹,等同 protoc --decode_raw、
+  免裝 protoc。引擎 src/features/protobuf.ts(純函式無 DOM:parseProtoInput 辨識 hex/base64(含 base64url)、
+  readVarint 以 BigInt 讀最多 10 位元組 64-bit varint、parseMessage 遞迴解析四種 wire type —— varint(0,同時
+  給二補數有號 int64 / zigzag sint / bool 詮釋)、64-bit(1,uint64/int64/double LE)、length-delimited(2,先
+  試遞迴解成巢狀訊息且需完整消耗+欄位編號≥1,失敗才以 fatal UTF-8 判斷當字串、再退回 bytes,可解的情況兩種都列)、
+  32-bit(5,uint32/int32/float LE);group(3/4)明確報不支援;部分解析失敗回已成功節點 + error)+ 回歸測試
+  scripts/test-protobuf.mjs(35 筆,測試內自帶標準 wire format 編碼器 encodeVarint/tag/fixed 為 oracle:varint/
+  最大值有號/zigzag/bool、字串/空字串/巢狀訊息/非 UTF-8 bytes/fixed64 double/fixed32 float/多欄位/截斷與部分解析
+  錯誤路徑/hex 與 base64 一致,esbuild 打包後跑,併入 npm test)。Vue 端遞迴元件 ProtoTree 顯示結構樹。與 asn1-decode、
+  json-to-proto 互補;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-21
 - 拼讀 / 電話報號助手(phonetic-spell,category=life):把帳號/確認碼/訂單號逐字拆成「怎麼念」,電話報給
   銀行客服不會把 B/D、M/N、1/7 聽錯。台灣電話報號口語(0洞1么2兩7拐9勾)與國際 NATO(Alpha/Bravo)兩種,
   並能反向把對方念的「Alpha Bravo」或「洞么拐」還原回字串。引擎 src/features/phonetic.ts(純函式無 DOM:
