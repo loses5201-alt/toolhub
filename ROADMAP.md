@@ -52,6 +52,17 @@
   地址/簡單信/multipart-alternative 含 CRLF 與 preamble/multipart-mixed 附件,base64 以 Buffer 即時產生為 oracle,
   esbuild 打包後跑,併入 npm test)。Vue 端以 readAsArrayBuffer 保留原始位元組;與 email-check、ics-viewer 互補;
   零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-21
+- JSON 轉 Dart class(json-to-dart,category=workshop):補齊 json-to-X 家族的 Flutter/Dart。貼上 JSON 推斷 Dart
+  class,兩種序列化模式 —— plain 自帶 fromJson 工廠 + toJson(免 codegen 直接可用)、json_serializable 產生
+  @JsonSerializable + @JsonKey(name:) 搭配 build_runner。屬性 lowerCamelCase,巢狀物件各自成 class、陣列合併欄位、
+  整數+小數混用→double、缺鍵或 null 自動可空(建構子改非 required)、型別衝突/全 null→dynamic(永不加 ? 因 Dart 不
+  允許 dynamic?)、撞 Dart 關鍵字補底線(plain 模式 fromJson/toJson 仍以原鍵存取)。引擎 src/features/jsonToDart.ts
+  (純函式無 DOM:結構化 TRef scalar/class/list/dynamic 同時產出顯示型別與 fromJson/toJson 表達式,fromJsonExpr 遞迴
+  處理巢狀陣列與可空巢狀物件三元判斷、needsToJson 判斷 scalar-list 免 .map、同名同結構重用否則加序號、根陣列/純量
+  輸出註解提示)+ 回歸測試 scripts/test-jsontodart.mjs(63 筆:命名/關鍵字底線/int·double·bool·String/混合→double/
+  缺鍵·null→可空/全 null→dynamic 不轉型/巢狀 fromJson·toJson 與葉節點在前/可空巢狀三元/純量與物件陣列/巢狀陣列/
+  改名鍵 plain 用原鍵/serializable 模式 import·part·@JsonKey/根陣列·純量註解/空物件無參數建構子/壞 JSON 報錯,
+  esbuild 打包後跑,併入 npm test)。Vue 端可切換序列化模式;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-21
 - .gitignore 測試器(gitignore-tester,category=workshop):貼上 .gitignore 與要測路徑,逐一判定是否被 git 忽略並
   指出「最後命中(last match wins)」規則。比 glob-tester 更貼近 git 真實語意:! 反向、結尾 / 只比對目錄、開頭/中間 /
   錨定根、* 不跨 /、? / [abc] / **(**/、/**、/**/),且逐層評估「父目錄被忽略時無法用 ! 重新納入其下檔案」的陷阱。
