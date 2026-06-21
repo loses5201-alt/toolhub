@@ -1590,6 +1590,16 @@
   rect 數=開啟格+背景/自訂尺寸背景,28 筆,併入 npm test)。明確標註純視覺辨識用途非加密、相同輸入同頭像;
   與 favicon-gen、placeholder-image 互補;v-html 僅渲染本地產生的 SVG;零相依、不上傳;
   type-check + 全測試 + build 通過 — 2026-06-21
+- 雜湊類型識別(hash-identify,category=workshop):貼上一段雜湊值,依長度/字元集/特殊前綴推測它是哪種
+  演算法 —— MD5/SHA-1/SHA-224/256/384/512、bcrypt、Argon2id/i/d、scrypt、md5crypt/sha256crypt/
+  sha512crypt(Unix $1$/$5$/$6$)、LDAP {SSHA}/{SHA}、MySQL 4.1+ (* 開頭)、NTLM、CRC-32 等,列出候選與
+  高/中/低信心。引擎 src/features/hashIdentify.ts(純函式無 DOM:PREFIX_RULES 先比對有結構的格式即高信心、
+  HEX_LENGTH_MAP 純十六進位依長度查表、detectCharset 分 hex/base64/other、base64ByteLength 依 padding
+  估解碼位元組;明確「只看格式不還原原文、同長度演算法無法區分」)+ 回歸測試 scripts/test-hashidentify.mjs
+  (以各演算法長度/字元集/前綴定義與公認範例為 oracle 27 筆:32→MD5 含 NTLM/40→SHA-1/56/64/96/128、
+  CRC-32、bcrypt $2a$與$2b$、md5crypt $1$、sha256/512crypt、Argon2id/i、{SSHA}、MySQL *、scrypt、
+  charset 偵測、base64 位元組長度、空字串與非雜湊,併入 npm test)。Vue 端純顯示+範例按鈕。與 text-hash、
+  hmac、password-strength 互補;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-21
 
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,

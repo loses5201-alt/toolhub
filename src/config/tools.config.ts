@@ -959,6 +959,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/text-hash/Index.vue'),
   },
   {
+    id: 'hash-identify',
+    name: '雜湊類型識別',
+    category: 'workshop',
+    description: '貼上一段雜湊值,推測它是哪種演算法 —— 依長度、字元集、特殊前綴判斷 MD5 / SHA 系列 / bcrypt / Argon2 / sha512crypt / NTLM / MySQL 等。看 log、資料庫欄位、設定檔裡的雜湊是什麼、評估密碼儲存是否夠安全用。只看格式不還原原文;全程在你瀏覽器計算,不連網、不上傳。',
+    keywords: ['雜湊', '雜湊識別', '識別', '辨識', 'hash', 'hash identify', 'identify', 'hashid', 'hash-identifier', 'md5', 'sha1', 'sha256', 'sha512', 'bcrypt', 'argon2', 'ntlm', 'mysql', 'crypt', '密碼雜湊', '什麼雜湊', '哪種雜湊', '判斷', 'digest', '摘要'],
+    icon: '🕵️',
+    loader: () => import('@/tools/hash-identify/Index.vue'),
+  },
+  {
     id: 'cidr-calc',
     name: 'CIDR / 子網計算機',
     category: 'workshop',
