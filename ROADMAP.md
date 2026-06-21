@@ -1610,6 +1610,16 @@
   連結圖片/有序無序巢狀清單/引言/程式碼圍欄/分隔線/br 硬換行/表格/丟棄 script-style/忽略註解 doctype/
   空白收斂/未閉合容忍/巢狀強調/真實 div 片段,併入 npm test)。html-to-text 只去標籤、這支產 Markdown;
   與 markdown-preview(反向)互補;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-21
+- 血型遺傳計算(blood-type,category=life):輸入父母雙方 ABO 與 Rh 血型,依孟德爾遺傳法則算出子女
+  「可能/不可能」的血型,父母基因型可確定時(含 AB 或 O 型)再給精確機率(龐尼特方格)。引擎
+  src/features/bloodType.ts(純函式無 DOM:ABO_GENOTYPES/RH_GENOTYPES 表現型→基因型、abacoPhenotypeOf、
+  crossGenotypes 配子組合各 1/4、aboPhenotypeDist/rhPhenotypeDist 指定基因型機率分布、possibleABO/possibleRh
+  只知表現型時的可能集合、isABOPossible、summarizeABO 回 possible/impossible/meanDist、pct;A、B 帶隱性
+  O 無法分辨故只列可能性)+ 回歸測試 scripts/test-bloodtype.mjs(以孟德爾法則手算為 oracle 33 筆:
+  基因型→表現型、AB×O→A½B½、AB×AB→A¼AB½B¼、AO×BO→四型各¼、Rh Dd×Dd→+¾−¼、可能集合 A×B→全四型/
+  O×AB→{A,B}/O×O→{O}、AB×O 不可能生 O 或 AB、Rh−×−→只有−、impossible 集合與機率和=1,併入 npm test)。
+  明確標註不含 cis-AB/孟買型特例、血型不符不代表非親生請以 DNA 為準;與 combinatorics 互補;零相依、
+  不上傳;type-check + 全測試 + build 通過 — 2026-06-21
 
 ## 進行中 / 待辦(優先序)
 - [x] 圖片去背評估:@imgly/background-removal 拉進 102 套件且 runtime 需從外部 CDN 下載 ~40MB 模型,

@@ -3180,6 +3180,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/number-theory/Index.vue'),
   },
   {
+    id: 'blood-type',
+    name: '血型遺傳計算',
+    category: 'life',
+    description: '輸入父母雙方的血型(ABO 與 Rh),依孟德爾遺傳法則算出子女「可能 / 不可能」的血型,父母基因型可確定時(含 AB 或 O 型)還給精確機率。例如 A 型 × B 型可能生出 A、B、AB、O 四種血型;兩位 Rh− 的父母孩子必為 Rh−。教育、好奇用;不含罕見特例,血型不符不代表非親生,請以 DNA 鑑定為準。全程在你瀏覽器計算,不連網、不上傳。',
+    keywords: ['血型', '血型遺傳', '遺傳', '小孩血型', '子女血型', '寶寶血型', 'abo', 'rh', '父母血型', 'a型', 'b型', 'ab型', 'o型', '孟德爾', '顯性', '隱性', '基因', '親子', '可能血型', 'blood type', '生物', '遺傳學'],
+    icon: '🩸',
+    loader: () => import('@/tools/blood-type/Index.vue'),
+  },
+  {
     id: 'num-to-chinese',
     name: '金額大寫互轉',
     category: 'life',
