@@ -22,6 +22,13 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
+- JSON 轉 Rust struct(json-to-rust,category=workshop):補齊 json-to-ts/go/python 缺的 Rust。貼上 JSON 推斷
+  struct,serde 樣式自動加 #[derive(Debug, Clone, Serialize, Deserialize)] 與 #[serde(rename)],純結構樣式只
+  derive Debug/Clone 並用註解標原鍵,可選欄位加 pub。引擎 src/features/jsonToRust.ts(純函式無 DOM:
+  structNameFromKey/fieldNameFromKey 含 camelCase/縮寫/kebab/Rust 關鍵字加底線/數字開頭 n_/非識別字 fallback、
+  scalarUnion i64+f64→f64 衝突→serde_json::Value、null→Option、陣列合併欄位缺鍵→Option、同名同結構重用否則加序號、
+  根陣列/純量→pub type 別名)+ 回歸測試 scripts/test-jsontorust.mjs(46 筆,esbuild 打包後跑,併入 npm test)。
+  零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-21
 - SVG 最佳化 / 壓縮(svg-optimize,category=workshop):把 Inkscape / Illustrator 匯出的 SVG 瘦身,
   只做「不改變畫面」的安全瘦身 —— 移除註解、<metadata>、編輯器專屬命名空間與屬性(inkscape/sodipodi/
   rdf/dc/cc)、<?xml?> 宣告與 <!DOCTYPE>、標籤間排版縮排,可選移除 title/desc 或把幾何數值小數四捨五入。
