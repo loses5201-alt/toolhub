@@ -22,6 +22,16 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
+- ELF 執行檔檢視器(elf-inspect,category=workshop):pe-inspect 的 Linux 對應版。拿到來路不明的 Linux /
+  BSD 執行檔或 .so 不必在機器上跑,即可看 32/64 位元、大小端、CPU(x86-64/ARM64/RISC-V…)、執行檔還是
+  共享函式庫、是否 PIE、NX/RELRO 防護(等同 checksec)、動態/靜態連結、會用到哪些共享函式庫(DT_NEEDED)、
+  動態載入器、SONAME/RUNPATH、有沒有被 strip,並標 RWX 段。引擎 src/features/elf.ts(純函式無 DOM,依
+  EI_CLASS/EI_DATA 同時支援 32/64 與大小端:解 ELF 標頭、程式標頭(LOAD/INTERP/DYNAMIC/GNU_STACK→NX/
+  GNU_RELRO)、動態區段(DT_NEEDED/DT_STRTAB/DT_FLAGS·FLAGS_1·BIND_NOW→完整 RELRO)、vaddr→偏移解字串、
+  區段標頭經 shstrtab 取名、無 .symtab 判 strip)+ 回歸測試 scripts/test-elf.mjs(以測試內獨立 ELF 組裝器
+  buildElf 依 ELF64 規範手寫、恆等位址對映組合法 ELF 為 oracle:PIE/EXEC/strip/可執行堆疊/靜態/32 位元/大端/
+  AArch64/錯誤路徑,併入 npm test;另以真實 /bin/ls 與 node 驗證與 readelf·checksec 一致)。Vue 端概要/安全
+  防護/共享函式庫/段/區段五區塊;與 pe-inspect 互補;零相依、不上傳、不執行;type-check + 全測試 + build 通過 — 2026-06-21
 - EXE / DLL 檢視器(pe-inspect,category=workshop):下載到 .exe / .dll 先別執行,先看清楚它是什麼 —— 32/64
   位元、目標 CPU(x86/x64/ARM)、編譯時間、GUI 還是命令列、ASLR/DEP/CFG 防護、是否帶數位簽章、會呼叫哪些
   系統 DLL(import,可推測程式行為),並標出「可寫+可執行」等加殼/自我修改可疑特徵。引擎 src/features/pe.ts
