@@ -22,6 +22,19 @@
 - 無障礙:鍵盤 focus-visible 焦點框、prefers-reduced-motion、跳至主要內容 — 2026-06-15
 
 ## 處理工坊(2026-06 新方向:純前端、不上傳、無廣告、無浮水印、可批次)
+- PHP serialize() 解碼器(php-serialize,category=workshop):貼上 WordPress(wp_options / postmeta)、
+  Laravel(session / cache)、Drupal 資料庫裡那一坨 PHP serialize() 字串(a:2:{…}、O:8:"stdClass":…),
+  拆成可讀結構樹並可一鍵轉乾淨 JSON。引擎 src/features/phpSerialize.ts(純函式無 DOM:parsePhpInput 辨識純文字 /
+  base64 包裝、以 UTF-8 位元組(TextEncoder/Decoder)解析確保「位元組長度」正確中文不錯位、readValue 遞迴解
+  N/b/i/d/s/a/O/C/R/r 各型別 —— string 以位元組長度切割、array/object 鍵值對、object 屬性以 \0*\0 / \0Class\0
+  前綴判 protected/private 可見性並還原乾淨名稱、custom(Serializable)、reference;readEntries 容器內部分失敗
+  仍保留已解析節點並標 error、decodePhp 回頂層節點 + 偵測尾端多餘位元組;phpToJson 連續整數鍵→JSON 陣列否則
+  →物件、物件附 __class__)+ 回歸測試 scripts/test-phpserialize.mjs(50 筆,以 PHP serialize() 官方格式手構為
+  oracle:純量/位元組長度字串含中文與內含分號雙引號/array 連續與關聯/空/巢狀/object 含 protected·private 可見性/
+  reference/custom/尾端多餘/截斷·未知標記·缺分號·bool 非 0-1·整數欄位非數字錯誤路徑/容器部分失敗/phpToJson 各型別與
+  巢狀/base64 包裝偵測,esbuild 打包後跑,併入 npm test)。Vue 端遞迴元件 PhpTree + 結構樹/JSON 雙檢視可複製。
+  序列化內容常含帳號·密碼雜湊·個資,線上解碼器卻要你上傳;這支全程在你瀏覽器解析,不連網、不上傳。與 json-repair、
+  json-yaml、cbor-decode、msgpack-decode 互補;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-21
 - GPX / KML 軌跡分析(gpx-analyze,category=workshop):開啟 Garmin/Strava/Komoot/手機運動 App 或 Google Earth
   匯出的 .gpx / .kml,一眼看到總距離、累計爬升/下降、海拔範圍、總時間、配速、均速/最高速度,並畫出路線形狀與
   海拔剖面 SVG 預覽。可調海拔雜訊過濾排除 GPS 抖動。軌跡是高度敏感的位置紀錄,全程在瀏覽器、不上傳、不連網。
