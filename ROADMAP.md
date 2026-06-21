@@ -35,6 +35,14 @@
   巢狀/base64 包裝偵測,esbuild 打包後跑,併入 npm test)。Vue 端遞迴元件 PhpTree + 結構樹/JSON 雙檢視可複製。
   序列化內容常含帳號·密碼雜湊·個資,線上解碼器卻要你上傳;這支全程在你瀏覽器解析,不連網、不上傳。與 json-repair、
   json-yaml、cbor-decode、msgpack-decode 互補;零相依、不上傳;type-check + 全測試 + build 通過 — 2026-06-21
+- 瀏覽器書籤整理(bookmarks-clean,category=workshop):開啟 Chrome/Edge/Firefox/Safari「匯出書籤」的 .html,
+  把巢狀資料夾攤成清晰清單(標題/網域/資料夾/加入日期),一鍵找出重複網址(忽略尾斜線/錨點/大小寫網域)、
+  關鍵字搜尋,並匯出 Markdown(貼筆記)或 CSV(Excel 備份)。書籤屬個人資料,全程在瀏覽器、不上傳。引擎
+  src/features/bookmarks.ts(純函式無 DOM:parseBookmarks 以堆疊解 Netscape 巢狀 DL/DT/H3/A、ADD_DATE 秒/毫秒/
+  微秒正規化、flattenBookmarks 帶資料夾路徑、countNodes、normalizeUrl、findDuplicates、toMarkdown、toCsv 含 BOM)
+  + 回歸測試 scripts/test-bookmarks.mjs(手構 Netscape 書籤 HTML 為 oracle,31 筆,併入 npm test)。Vue 端複用
+  htmlToText decodeEntities;與 vcf-viewer、eml-viewer 同屬「打開檔案看內容」家族;零相依、不上傳;
+  type-check + 全測試 + build 通過 — 2026-06-21
 - GPX / KML 軌跡分析(gpx-analyze,category=workshop):開啟 Garmin/Strava/Komoot/手機運動 App 或 Google Earth
   匯出的 .gpx / .kml,一眼看到總距離、累計爬升/下降、海拔範圍、總時間、配速、均速/最高速度,並畫出路線形狀與
   海拔剖面 SVG 預覽。可調海拔雜訊過濾排除 GPS 抖動。軌跡是高度敏感的位置紀錄,全程在瀏覽器、不上傳、不連網。
