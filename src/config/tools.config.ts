@@ -1254,6 +1254,15 @@ export const tools: ToolDef[] = [
     loader: () => import('@/tools/chmod-calc/Index.vue'),
   },
   {
+    id: 'schema-sample',
+    name: 'JSON Schema 轉範例 JSON',
+    category: 'workshop',
+    description: '貼上 JSON Schema(draft-07 等),自動產生一筆符合 schema 的範例 JSON —— 支援 properties / required / items(含 tuple)、$ref(本地 definitions / $defs)、allOf 合併、anyOf / oneOf、const / default / examples / enum,字串依 format(email / date / uri / uuid…)給代表值。用於 API mock、測試假資料、快速看懂 schema。與 JSON Schema 產生器(反向)互補;全程在你瀏覽器,不上傳。',
+    keywords: ['json schema', 'schema', '範例', 'sample', 'mock', '假資料', 'example', 'fake', 'api', 'draft-07', '$ref', 'json', 'schema轉json', 'schema to json', '產生範例', '測試資料', 'stub', 'fixture'],
+    icon: '🧪',
+    loader: () => import('@/tools/schema-sample/Index.vue'),
+  },
+  {
     id: 'json-schema',
     name: 'JSON Schema 產生器',
     category: 'workshop',
