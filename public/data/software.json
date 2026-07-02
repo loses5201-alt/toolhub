@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-30",
+  "updated": "2026-07-02",
   "software": [
     {
       "id": "line",
@@ -49,7 +49,7 @@
       "icon": "🔒",
       "official": "https://signal.org/",
       "download": "https://signal.org/download/",
-      "version": "8.16.0",
+      "version": "8.17.0",
       "github": "signalapp/Signal-Desktop",
       "note": "官方網域 signal.org,注重隱私的加密通訊。"
     },
@@ -271,7 +271,7 @@
       "icon": "🧑‍💻",
       "official": "https://code.visualstudio.com/",
       "download": "https://code.visualstudio.com/download",
-      "version": "1.126.0",
+      "version": "1.127.0",
       "github": "microsoft/vscode",
       "note": "官方網域 code.visualstudio.com。"
     },
