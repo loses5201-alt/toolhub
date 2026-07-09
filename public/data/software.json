@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-03",
+  "updated": "2026-07-09",
   "software": [
     {
       "id": "line",
@@ -271,7 +271,7 @@
       "icon": "🧑‍💻",
       "official": "https://code.visualstudio.com/",
       "download": "https://code.visualstudio.com/download",
-      "version": "1.127.0",
+      "version": "1.128.0",
       "github": "microsoft/vscode",
       "note": "官方網域 code.visualstudio.com。"
     },
@@ -293,7 +293,7 @@
       "icon": "🟩",
       "official": "https://nodejs.org/",
       "download": "https://nodejs.org/en/download",
-      "version": "26.4.0",
+      "version": "26.5.0",
       "github": "nodejs/node",
       "note": "官方網域 nodejs.org。"
     },
