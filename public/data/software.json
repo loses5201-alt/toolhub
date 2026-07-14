@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-10",
+  "updated": "2026-07-14",
   "software": [
     {
       "id": "line",
@@ -345,7 +345,7 @@
       "icon": "📄",
       "official": "https://notepad-plus-plus.org/",
       "download": "https://notepad-plus-plus.org/downloads/",
-      "version": "8.9.6.4",
+      "version": "8.9.7",
       "note": "免費的純文字/程式碼編輯器,開大檔、轉編碼、批次取代很方便。官方網域 notepad-plus-plus.org,別從廣告下載站安裝。",
       "github": "notepad-plus-plus/notepad-plus-plus"
     },
