@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-16",
+  "updated": "2026-07-18",
   "software": [
     {
       "id": "line",
@@ -18,7 +18,7 @@
       "icon": "✈️",
       "official": "https://telegram.org/",
       "download": "https://desktop.telegram.org/",
-      "version": "7.0.1",
+      "version": "7.0.2",
       "github": "telegramdesktop/tdesktop",
       "note": "官方網域 telegram.org。"
     },
@@ -271,7 +271,7 @@
       "icon": "🧑‍💻",
       "official": "https://code.visualstudio.com/",
       "download": "https://code.visualstudio.com/download",
-      "version": "1.129.0",
+      "version": "1.129.1",
       "github": "microsoft/vscode",
       "note": "官方網域 code.visualstudio.com。"
     },
