@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-19",
+  "updated": "2026-07-22",
   "software": [
     {
       "id": "line",
@@ -18,7 +18,7 @@
       "icon": "✈️",
       "official": "https://telegram.org/",
       "download": "https://desktop.telegram.org/",
-      "version": "7.0.3",
+      "version": "7.0.4",
       "github": "telegramdesktop/tdesktop",
       "note": "官方網域 telegram.org。"
     },
@@ -140,7 +140,7 @@
       "icon": "📹",
       "official": "https://obsproject.com/",
       "download": "https://obsproject.com/download",
-      "version": "32.1.2",
+      "version": "32.2.0",
       "github": "obsproject/obs-studio",
       "note": "官方網域 obsproject.com,免費直播/錄影。"
     },
