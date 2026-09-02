@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-28",
+  "updated": "2026-09-02",
   "software": [
     {
       "id": "line",
@@ -18,7 +18,7 @@
       "icon": "✈️",
       "official": "https://telegram.org/",
       "download": "https://desktop.telegram.org/",
-      "version": "7.1.3",
+      "version": "7.1.4",
       "github": "telegramdesktop/tdesktop",
       "note": "官方網域 telegram.org。"
     },
@@ -377,7 +377,7 @@
       "icon": "🎵",
       "official": "https://www.audacityteam.org/",
       "download": "https://www.audacityteam.org/download/",
-      "version": "Audacity-3.7.8",
+      "version": "Audacity-3.7.9",
       "note": "免費開源的錄音與音訊編輯軟體,剪音檔、去雜訊、轉格式都行。官方網域 audacityteam.org,別裝到夾廣告的仿冒版。",
       "github": "audacity/audacity"
     },
