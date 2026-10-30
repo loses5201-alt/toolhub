@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-29",
+  "updated": "2026-10-30",
   "software": [
     {
       "id": "line",
@@ -140,7 +140,7 @@
       "icon": "📹",
       "official": "https://obsproject.com/",
       "download": "https://obsproject.com/download",
-      "version": "33.0.0",
+      "version": "33.0.1",
       "github": "obsproject/obs-studio",
       "note": "官方網域 obsproject.com,免費直播/錄影。"
     },
