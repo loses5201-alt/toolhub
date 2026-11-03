@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-30",
+  "updated": "2026-11-03",
   "software": [
     {
       "id": "line",
@@ -377,7 +377,7 @@
       "icon": "🎵",
       "official": "https://www.audacityteam.org/",
       "download": "https://www.audacityteam.org/download/",
-      "version": "Audacity-4.0.1",
+      "version": "Audacity-4.0.2",
       "note": "免費開源的錄音與音訊編輯軟體,剪音檔、去雜訊、轉格式都行。官方網域 audacityteam.org,別裝到夾廣告的仿冒版。",
       "github": "audacity/audacity"
     },
