@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-11",
+  "updated": "2026-11-12",
   "software": [
     {
       "id": "line",
@@ -49,7 +49,7 @@
       "icon": "🔒",
       "official": "https://signal.org/",
       "download": "https://signal.org/download/",
-      "version": "8.34.0",
+      "version": "8.35.0",
       "github": "signalapp/Signal-Desktop",
       "note": "官方網域 signal.org,注重隱私的加密通訊。"
     },
@@ -271,7 +271,7 @@
       "icon": "🧑‍💻",
       "official": "https://code.visualstudio.com/",
       "download": "https://code.visualstudio.com/download",
-      "version": "1.145.3",
+      "version": "1.146.0",
       "github": "microsoft/vscode",
       "note": "官方網域 code.visualstudio.com。"
     },
@@ -293,7 +293,7 @@
       "icon": "🟩",
       "official": "https://nodejs.org/",
       "download": "https://nodejs.org/en/download",
-      "version": "26.13.0",
+      "version": "26.13.1",
       "github": "nodejs/node",
       "note": "官方網域 nodejs.org。"
     },
@@ -345,7 +345,7 @@
       "icon": "📄",
       "official": "https://notepad-plus-plus.org/",
       "download": "https://notepad-plus-plus.org/downloads/",
-      "version": "8.9.9",
+      "version": "8.9.9.1",
       "note": "免費的純文字/程式碼編輯器,開大檔、轉編碼、批次取代很方便。官方網域 notepad-plus-plus.org,別從廣告下載站安裝。",
       "github": "notepad-plus-plus/notepad-plus-plus"
     },
