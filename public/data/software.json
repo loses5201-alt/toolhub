@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-13",
+  "updated": "2026-11-14",
   "software": [
     {
       "id": "line",
@@ -18,7 +18,7 @@
       "icon": "✈️",
       "official": "https://telegram.org/",
       "download": "https://desktop.telegram.org/",
-      "version": "7.4.3",
+      "version": "7.4.4",
       "github": "telegramdesktop/tdesktop",
       "note": "官方網域 telegram.org。"
     },
