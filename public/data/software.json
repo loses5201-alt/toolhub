@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-14",
+  "updated": "2026-11-17",
   "software": [
     {
       "id": "line",
@@ -293,7 +293,7 @@
       "icon": "🟩",
       "official": "https://nodejs.org/",
       "download": "https://nodejs.org/en/download",
-      "version": "27.0.0-alpha.0.1.0",
+      "version": "27.0.0-alpha.0.1.1",
       "github": "nodejs/node",
       "note": "官方網域 nodejs.org。"
     },
