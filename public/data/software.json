@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-24",
+  "updated": "2026-11-25",
   "software": [
     {
       "id": "line",
@@ -271,7 +271,7 @@
       "icon": "🧑‍💻",
       "official": "https://code.visualstudio.com/",
       "download": "https://code.visualstudio.com/download",
-      "version": "1.147.0",
+      "version": "1.148.0",
       "github": "microsoft/vscode",
       "note": "官方網域 code.visualstudio.com。"
     },
